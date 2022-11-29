@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;EEventType</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>EEventType</h1>
+<p>Die <b>EEventType</b>-Enumeration zählt die Kennungen der Ereignisarten auf.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public enum <b>EEventType</b>
+</pre>
+<!--- ------------ --->
+<!--- Beschreibung --->
+<!--- ------------ --->
+<h3>Beschreibung</h3>
+<p>Zur Bestimmung der Ereignisausnahme wird der Term cos(H) herangezogen. In Abhängigkeit des Betrages wird die entsprechende Kennung als Rückgabewert verwendet.</p>
+<table>
+	<tr>
+		<td class="Title">Konstante</td>
+		<td class="Title">Wert</td>
+		<td class="Title">Beschreibung</td>
+	</tr>
+	<tr>
+		<td valign="top">Normal</td>
+		<td align="right">0</td>
+		<td>Das Ereignis findet statt.</td>
+	</tr><tr>
+		<td valign="top">NoEvent</td>
+		<td align="right">1</td>
+		<td>Das Ereignis findet nicht statt, weil das Objekt an diesem Tag nicht auf- oder untergeht bzw. transitiert.</td>
+	</tr><tr>
+		<td valign="top">AlwaysAboveHorizon</td>
+		<td align="right">2</td>
+		<td>Das Ereignis findet nicht statt, weil das Objekt sich immer oberhalb des Horizonts befindet.</td>
+	</tr><tr>
+		<td valign="top">AlwaysAboveHorizon</td>
+		<td align="right">3</td>
+		<td>Das Ereignis findet nicht statt, weil das Objekt sich immer unterhalb des Horizonts befindet.</td>
+	</tr><tr>
+		<td valign="top">DualEvent</td>
+		<td align="right">4</td>
+		<td>Das Ereignis findet doppelt statt, weil das Objekt an diesem Tag zweimal auf- bzw. untergeht.</td>
+	</tr>
+</table>
+<!--- ---------- --->
+<!--- Verwendung --->
+<!--- ---------- --->
+<h3>Verwendung</h3>
+<ul>
+	<li><a href="MSun.htm#Dawn">MSun.Dawn</a></li>
+	<li><a href="MSun.htm#Dusk">MSun.Dusk</a></li>
+	<li><a href="Rise.htm">Rise</a></li>
+	<li><a href="Set.htm">Set</a></li>
+	<li><a href="Transit.htm">Transit</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-01</p>
+</div></body>
+</html>

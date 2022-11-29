@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;EEclipseType</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>EEclipseType</h1>
+<p>Die <b>EEclipseType</b>-Enumeration zählt die Kennungen der Finsternisabschätzungen auf.</p>
+<hr>
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public enum <b>EEclipseType</b>
+</pre>
+<!--- ------------ --->
+<!--- Beschreibung --->
+<!--- ------------ -->
+<h3>Beschreibung</h3>
+<p>Zur Bestimmung der Finsternisabschätzung wird die ekliptikale Breite (&beta;) des Mondes zum Zeitpunkt des Neu- bzw. Vollmondes herangezogen. In Abhängigkeit des Betrages wird die entsprechende Kennung als Rückgabewert verwendet.</p>
+<table>
+	<tr><td class="Title" colspan="4">Neumond</td></tr>
+	<tr>
+		<td class="Title">Konstante</td>
+		<td class="Title">Wert</td>
+		<td class="Title">Breite</td>
+		<td class="Title">Beschreibung</td>
+	</tr>
+	<tr>
+		<td>SunNoEclipse</td>
+		<td align="right">1</td>
+		<td align="right">&#0124;&beta;&#0124; &gt 1&deg; 34&prime; 50&Prime;</td>
+		<td>Eine Sonnenfinsternis ist nicht möglich.</td>
+	</tr><tr>
+		<td>SunPartialPotential</td>
+		<td align="right">2</td>
+		<td align="right">&#0124;&beta;&#0124; &lt 1&deg; 34&prime; 50&Prime;</td>
+		<td>Eine partielle Sonnenfinsternis ist möglich.</td>
+	</tr><tr>
+		<td>SunPartialDefinite</td>
+		<td align="right">3</td>
+		<td align="right">&#0124;&beta;&#0124; &lt 1&deg; 24&prime; 33&Prime;</td>
+		<td>Eine partielle Sonnenfinsternis ist sicher.</td>
+	</tr><tr>
+		<td>SunCentralPotential</td>
+		<td align="right">4</td>
+		<td align="right">&#0124;&beta;&#0124; &lt 1&deg; 02&prime; 36&Prime;</td>
+		<td>Eine totale Sonnenfinsternis ist möglich.</td>
+	</tr><tr>
+		<td>SunCentralDefinite/td>
+		<td align="right">5</td>
+		<td align="right">&#0124;&beta;&#0124; &lt 0&deg; 52&prime; 20&Prime;</td>
+		<td>Eine totale Sonnenfinsternis ist sicher.</td>
+	</tr>
+	<tr><td class="Title" colspan="4">Vollmond</td></tr>
+	<tr>
+		<td class="Title">Konstante</td>
+		<td class="Title">Wert</td>
+		<td class="Title">Breite</td>
+		<td class="Title">Beschreibung</td>
+	</tr>
+	<tr>
+		<td>MoonNoEclipse</td>
+		<td align="right">6</td>
+		<td align="right">&#0124;&beta;&#0124; &gt; 1&deg; 36&prime; 43&Prime;</td>
+		<td>Eine Mondfinsternis ist nicht möglich.</tr>
+	</tr><tr>
+		<td>MoonPenumbralPotential</td>
+		<td align="right">7</td>
+		<td align="right">&#0124;&beta;&#0124; &lt; 1&deg; 36&prime; 43&Prime;</td>
+		<td>Eine penumbrale Mondfinsternis ist möglich.</tr>
+	</tr><tr>
+		<td>MoonPenumbralDefinite</td>
+		<td align="right">8</td>
+		<td align="right">&#0124;&beta;&#0124; &lt; 1&deg; 26&prime; 15&Prime;</td>
+		<td>Eine penumbrale Mondfinsternis ist sicher.</tr>
+	</tr><tr>
+		<td>MoonPartialPotential</td>
+		<td align="right">9</td>
+		<td align="right">&#0124;&beta;&#0124; &lt; 1&deg; 03&prime; 50&Prime;</td>
+		<td>Eine partielle Mondfinsternis ist möglich.</tr>
+	</tr><tr>
+		<td>MoonPartialDefinite</td>
+		<td align="right">10</td>
+		<td align="right">&#0124;&beta;&#0124; &lt; 0&deg; 53&prime; 24&Prime;</td>
+		<td>Eine partielle Mondfinsternis ist sicher.</tr>
+	</tr><tr>
+		<td>MoonTotalPotential</td>
+		<td align="right">11</td>
+		<td align="right">&#0124;&beta;&#0124; &lt; 0&deg; 32&prime; 14&Prime;</td>
+		<td>Eine totale Mondfinsternis ist möglich.</tr>
+	</tr><tr>
+		<td>MoonTotalDefinite</td>
+		<td align="right">12</td>
+		<td align="righ">&#0124;&beta;&#0124; &lt; 0&deg; 21&prime; 50&Prime;</td>
+		<td>Eine totale Mondfinsternis ist sicher.</tr>
+	</tr>
+</table>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Die Finsternisabschätzung erfolgt nach Kriterien von <a href="Quellen#MontenbruckI">Montenbruck I</a> Kapitel 9.1 &#0150; <i>Mondphasen und Finsternisse</i>.</p>
+<!--- ---------- --->
+<!--- Verwendung --->
+<!--- ---------- --->
+<h3>Verwendung</h3>
+<ul>
+	<li><a href="MMoon.htm#FullMoon">MMoon.FullMoon</a></li>
+	<li><a href="MMoon.htm#NewMoon">MMoon.NewMoon</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-13</p>
+</div></body>
+</html>

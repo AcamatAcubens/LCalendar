@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;ConjunctionInferior</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>ConjunctionInferior</h1>
+<p>Die <b>ConjunctionInferior</b>-Funktion liefert die julianische Tageszahl des nächsten Durchgangs durch die untere Konjunktion mit der Sonne nach der julianischen Tageszahl.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public static double <b>ConjunctionInferior</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<!--- --------- --->
+<!--- Argumente --->
+<!--- --------- --->
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<!--- ------------- --->
+<!--- Rückgabewerte --->
+<!--- ------------- --->
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ConjunctionInferior</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Stunden. Als Zeitmaß findet TDB Anwendung.</p>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Die Berechnung erfolgt nach den Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 36 &#0150; <i>Planetary Phenomena</i>.</p>
+<!--- ------------- --->
+<!--- Verfügbarkeit --->
+<!--- ------------- --->
+<h3>Verfügbarkeit</h3>
+<ul>
+	<li><a href="MMercury.htm#ConjunctionInferior">MMercury</a></li>
+	<li><a href="MVenus.htm#ConjunctionInferior">MVenus</a></li>
+</ul>
+<!--- ---------- --->
+<!--- Siehe auch --->
+<!--- ---------- --->
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="Conjunction.htm">Conjunction</a></li>
+	<li><a href="ConjunctionSuperior.htm">ConjunctionSuperior</a></li>
+	<li><a href="GreatestEasternElongation.htm">GreatestEasternElongation</a></li>
+	<li><a href="GreatestWesternElongation.htm">GreatestWesternElongation</a></li>
+	<li><a href="Opposition.htm">Opposition</a></li>
+	<li><a href="RegressionEnd.htm">RegressionEnd</a></li>
+	<li><a href="RegressionStart.htm">RegressionStart</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-04-26</p>
+</div></body>
+</html>

@@ -1,0 +1,37 @@
+=== ================ ===
+=== AnomalisticMonth ===
+=== ================ ===
+
+27.55455
+
+Quelle: Astronomical Almanach Table 15.3
+
+
+
+=== ============= ===
+=== DraconicMonth ===
+=== ============= ===
+
+27.21222
+
+Quelle: Astronomical Almanach Table 15.3
+
+
+
+=== ============= ===
+=== SiderealMonth ===
+=== ============= ===
+
+27.32166
+
+Quelle: Astronomical Almanach Table 15.3
+
+
+
+=== ============= ===
+=== TropicalMonth ===
+=== ============= ===
+
+27.32158
+
+Quelle: Astronomical Almanach Table 15.3

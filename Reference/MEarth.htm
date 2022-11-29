@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;MEarth</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="Head">MEarth</h1>
+<p>Die <b>MEarth</b>-Klasse bündelt Berechnungen zur Erde.</p>
+<!--- --------- --->
+<!--- Übersicht --->
+<!--- --------- --->
+<h3>Übersicht</h3>
+<ul>
+	<li><a href="#AnomalisticYear">AnomalisticYear</a></li>
+	<li><a href="#Aphelion">Aphelion</a></li>
+	<li><a href="#Direction">Direction</a></li>
+	<li><a href="#Distance">Distance</a></li>
+	<li><a href="#DistanceFromCenter">DistanceFromCenter</a></li>
+	<li><a href="#DraconicYear">DraconicYear</a></li>
+	<li><a href="#Eccentricity">Eccentricity</a></li>
+	<li><a href="#GeocentricLatitude">GeocentricLatitude</a></li>
+	<li><a href="#Latitude">Latitude</a></li>
+	<li><a href="#LengthOfLatitude">LengthOfLatitude</a></li>
+	<li><a href="#LengthOfLongitude">LengthOfLongitude</a></li>
+	<li><a href="#LinearVelocity">LinearVelocity</a></li>
+	<li><a href="#Longitude">Longitude</a></li>
+	<li><a href="#LongitudeOfPerihelion">LongitudeOfPerihelion</a></li>
+	<li><a href="#MeanAnomaly">MeanAnomaly</a></li>
+	<li><a href="#MeanLongitude">MeanLongitude</a></li>
+	<li><a href="#ParallelOfLatitude">ParallelOfLatitude</a></li>
+	<li><a href="#Perihelion">Perihelion</a></li>
+	<li><a href="#PositionEcliptical">PositionEcliptical</a></li>
+	<li><a href="#Radius">Radius</a></li>
+	<li><a href="#RadiusOfCurvature">RadiusOfCurvature</a></li>
+	<li><a href="#SemimajorAxis">SemimajorAxis</a></li>
+	<li><a href="#SideralYear">SideralYear</a></li>
+</ul>
+<hr />
+<!--- --------------- --->
+<!--- AnomalisticYear --->
+<!--- --------------- --->
+<h2 id="AnomalisticYear">AnomalisticYear</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AnomalisticYear</b>-Funktion liefert die Dauer des anomalistischen Jahres.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>AnomalisticYear</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AnomalisticYear</b>-Funktion die Dauer des anomalistischen Jahres in Tagen.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für das anomalistische Jahr wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge durch das Perihel.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="#TropicalYear">MEarth.TropicalYear</a></li>
+	<li><a href="MMoon.htm#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="MMoon.htm#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="MMoon.htm#SiderealMonth">MMoon.SiderealMonth</a></li>
+	<li><a href="MMoon.htm#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="MMoon.htm#TropicalMonth">MMoon.TropicalMonth</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Aphelion --->
+<!--- -------- --->
+<h2 id="Aphelion">Aphelion</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Aphelion</b>-Funktion liefert die julianische Tageszahl des nächsten Durchgangs der Erde durch das Aphel nach der julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Aphelion.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr>
+<!--- --------- --->
+<!--- Direction --->
+<!--- --------- --->
+<h2 id="Direction">Direction</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Direction</b>-Funktion liefert die geographische Richtung zweier Orte auf der Erdoberfläche. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Direction</b>(
+   <i><a class="code" href="CPolar.htm">CPolar</a> positionA</i>   // Geographische Position des Ortes A.
+   <i><a class="code" href="CPolar.htm">CPolar</a> positionB</i>   // Geographische Position des Ortes B.
+)
+
+public static double <b>Direction</b>(
+   <i>double lambdaA</i>   // Geographische L�nge des Ortes A.
+   <i>double phiA   </i>   // Geographische Breite des Ortes A.
+   <i>double lambdaB</i>   // Geographische L�nge des Ortes B.
+   <i>double phiB   </i>   // Geographische Breite des Ortes B.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>positionA</i></td>
+		<td class="Argument">Gibt die geographische Position des Ortes A an.</td>
+	</tr><tr>
+		<td class="Argument"><i>positionB</i></td>
+		<td class="Argument">Gibt die geographische Position des Ortes B an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambdaA</i></td>
+		<td class="Argument">Gibt die geographische Länge des Ortes A in Bogenmaß an. Orte westlich von Greenwich haben eine positve Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phiA</i></td>
+		<td class="Argument">Gibt die geographische Breite des Ortes A in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambdaB</i></td>
+		<td class="Argument">Gibt die geographische Länge des Ortes B in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phiB</i></td>
+		<td class="Argument">Gibt die geographische Breite des Ortes B in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Direction</b>-Funktion enthält die Richtung in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formeln 12.4 und 12.5 von <a href="Quellen.htm#Reingold">Reingold</a> Kapitel 12.1 &#0150; <i>Position</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#Distance">Distance</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Distance --->
+<!--- -------- --->
+<h2 id="Distance">Distance</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Distance</b>-Funktion liefert die geographische Entfernung zweier Punkte auf der Erdoberfläche.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Distance</b>(
+   <i>double lambdaA</i>   // Geographische Länge des ersten Ortes.
+   <i>double phiA   </i>   // Geographische Breite des ersten Ortes.
+   <i>double lambdaB</i>   // Geographische Länge des zweiten Ortes.
+   <i>double phiB   </i>   // Geographische Breite des zweiten Ortes.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>lambdaA</i></td>
+		<td class="Argument">Gibt die geographische Länge des ersten Ortes in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phiA</i></td>
+		<td class="Argument">Gibt die geographische Breite des ersten Ortes in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambdaB</i></td>
+		<td class="Argument">Gibt die geographische Länge des zweiten Ortes in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phiB</i></td>
+		<td class="Argument">Gibt die geographische Breite des zweiten Ortes in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Distance</b>-Funktion enthält Entfernung in Kilometern. Die Berechnungsgenauigkeit erreicht etwa &plusmn; 50 Meter.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formeln von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#Direction">Direction</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- DistanceFromCenter --->
+<!--- ------------------ --->
+<h2 id="DistanceFromCenter">DistanceFromCenter</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>DistanceFromCenter</b>-Funktion liefert die Entfernung der geographischen Breite vom Erdmittelpunkt auf Meeresniveau.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>DistanceFromCenter</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>DistanceFromCenter</b>-Funktion enthält Entfernung in Kilometern.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- DraconicYear --->
+<!--- ------------ --->
+<h2 id="DraconicYear">DraconicYear</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>DraconicYear</b>-Funktion liefert die Dauer des drakonischen Jahres.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>DraconicYear</b>()
+</pre>
+<h3>R�ckgabewerte</h3>
+<p>Der Rückgabewert der <b>DraconicYear</b>-Funktion die Dauer des drakonischen Jahres in Tagen.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für das drakonische Jahr wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge durch den Mondknoten. Eine alternative Bezeichnung ist das Finsternisjahr.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="#TropicalYear">MEarth.TropicalYear</a></li>
+	<li><a href="MMoon.htm#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="MMoon.htm#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="MMoon.htm#SiderealMonth">MMoon.SiderealMonth</a></li>
+	<li><a href="MMoon.htm#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="MMoon.htm#TropicalMonth">MMoon.TropicalMonth</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- Eccentricity --->
+<!--- ------------ --->
+<h2 id="Eccentricity">Eccentricity</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Eccentricity</b>-Funktion liefert die Exzentrizität der mittleren Erdbahn zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Eccentricity.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- GeocentricLatitude --->
+<!--- ------------------ --->
+<h2 id="GeocentricLatitude">GeocentricLatitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>GeocentricLatitude</b>-Funktion liefert die geozentrische Breite zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>GeocentricLatitude</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>GeocentricLatitude</b>-Funktion enthält die Breite in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Latitude --->
+<!--- -------- --->
+<h2 id="Latitude">Latitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Latitude</b>-Funktion liefert die heliozentrisch-ekliptikale Breite der Erde zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Latitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- LengthOfLatitude --->
+<!--- ---------------- --->
+<h2 id="LengthOfLatitude">LengthOfLatitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>LengthOfLatitude</b>-Funktion liefert die Länge des Breitengrades zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>LengthOfLatitude</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>LengthOfLatitude</b>-Funktion enthält die Länge in Kilometern.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#LengthOfLongitude">LengthOfLongitude</a></li>
+	<li><a href="#ParallelOfLatitude">ParallelOfLatitude</a></li>
+	<li><a href="#RadiusOfCurvature">RadiusOfCurvature</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------------- --->
+<!--- LengthOfLongitude --->
+<!--- ----------------- --->
+<h2 id="LengthOfLongitude">LengthOfLongitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>LengthOfLongitude</b>-Funktion liefert die Länge des Längengrades zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>LengthOfLongitude</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>LengthOfLongitude</b>-Funktion enthält die Länge in Kilometern.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#LengthOfLatitude">LengthOfLatitude</a></li>
+	<li><a href="#ParallelOfLatitude">ParallelOfLatitude</a></li>
+	<li><a href="#RadiusOfCurvature">RadiusOfCurvature</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- LinearVelocity --->
+<!--- -------------- --->
+<h2 id="LinearVelocity">LinearVelocity</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>LinearVelocity</b>-Funktion liefert die Lineargeschwindigkeit zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>LinearVelocity</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>LinearVelocity</b>-Funktion enthält die Geschwindigkeit in Kilometern pro Sekunde.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- Longitude --->
+<!--- --------- --->
+<h2 id="Longitude">Longitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Longitude</b>-Funktion liefert die heliozentrisch-ekliptikale Länge der Erde zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Longitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------- --->
+<!--- LongitudeOfPerihelion --->
+<!--- --------------------- --->
+<h2 id="LongitudeOfPerihelion">LongitudeOfPerihelion</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>LongitudeOfAscendingNode</b>-Funktion liefert die Länge des Perihels der mittleren Erdbahn zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="LongitudeOfPerihelion.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- MeanAnomaly --->
+<!--- ----------- --->
+<h2 id="MeanAnomaly">MeanAnomaly</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>MeanAnomaly</b>-Funktion liefert die mittlere Anomalie der mittleren Erdbahn zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="MeanAnomaly.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- MeanLongitude --->
+<!--- ------------- --->
+<h2 id="MeanLongitude">MeanLongitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>MeanLongitude</b>-Funktion liefert die mittlere Länge der mittleren Erdbahn zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="MeanLongitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- ParallelOfLatitude --->
+<!--- ------------------ --->
+<h2 id="ParallelOfLatitude">ParallelOfLatitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ParallelOfLatitude</b>-Funktion liefert den Radius des Breitenkreises zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>ParallelOfLatitude</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ParallelOfLatitude</b>-Funktion enthält den Radius in Kilometern.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#LengthOfLatitude">LengthOfLatitude</a></li>
+	<li><a href="#LengthOfLongitude">LengthOfLongitude</a></li>
+	<li><a href="#RadiusOfCurvature">RadiusOfCurvature</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- Perihelion --->
+<!--- ---------- --->
+<h2 id="Perihelion">Perihelion</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Perihelion</b>-Funktion liefert die julianische Tageszahl des nächsten Durchgangs der Erde durch das Perihel nach der julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Perihelion.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- PositionEcliptical --->
+<!--- ------------------ --->
+<h2 id="PositionEcliptical">PositionEcliptical</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>PositionEcliptical</b>-Funktion liefert die heliozentrisch-ekliptikale Position der Erde zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="PositionEcliptical.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- Radius --->
+<!--- ------ --->
+<h2 id="Radius">Radius</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Radius</b>-Funktion liefert den heliozentrischen-ekliptikalen Radiusvektor der Erde zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Radius.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------------- --->
+<!--- RadiusOfCurvature --->
+<!--- ----------------- --->
+<h2 id="RadiusOfCurvature">RadiusOfCurvature</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>RadiusOfCurvature</b>-Funktion liefert den Radius des Längenkreises zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>RadiusOfCurvature</b>(
+   <i>double phi</i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>phi</i></td>
+	<td class="Argument">Gibt die geographische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>RadiusOfCurvature</b>-Funktion enthält den Radius in Kilometern.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 11 &#0150; <i>The Earth’s Globe</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#LengthOfLatitude">LengthOfLatitude</a></li>
+	<li><a href="#LengthOfLongitude">LengthOfLongitude</a></li>
+	<li><a href="#ParallelOfLatitude">ParallelOfLatitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- SemimajorAxis --->
+<!--- ------------- --->
+<h2 id="SemimajorAxis">SemimajorAxis</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SemimajorAxis</b>-Funktion liefert die große Halbachse der mittleren Erdbahn. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="SemimajorAxis.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- SiderealYear --->
+<!--- ------------ --->
+<h2 id="SiderealYear">SiderealYear</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SiderealYear</b>-Funktion liefert die Dauer des siderischen Jahres.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SiderealYear</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SiderealYear</b>-Funktion die Dauer des siderischen Jahres in Tagen.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für das siderische Jahr wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und bezeichnet die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge an einem Fixstern.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="#TropicalYear">MEarth.TropicalYear</a></li>
+	<li><a href="MMoon.htm#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="MMoon.htm#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="MMoon.htm#SiderealMonth">MMoon.SiderealMonth</a></li>
+	<li><a href="MMoon.htm#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="MMoon.htm#TropicalMonth">MMoon.TropicalMonth</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- TropicalYear --->
+<!--- ------------ --->
+<h2 id="TropicalYear">TropicalYear</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>TropicalYear</b>-Funktion liefert die Dauer des tropischen Jahres zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>TropicalYear</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an, der für die Bestimmung des Jahrhundertbruchteiles verwendet wird. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>TropicalYear</b>-Funktion enthält Jahreslänge. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Kapitel 12.11 &#0150; <i>Astronomical Bases of Calendars</i> und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgenden Durchgänge durch den Frühlingspunkt.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MMoon.htm#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="MMoon.htm#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="MMoon.htm#SiderealMonth">MMoon.SiderealMonth</a></li>
+	<li><a href="MMoon.htm#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="MMoon.htm#TropicalMonth">MMoon.TropicalMonth</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-02</p>
+</div></body>
+</html>

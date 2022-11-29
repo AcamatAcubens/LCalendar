@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;MMoon</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="Head">MMoon</h1>
+<p>Die <b>MMoon</b>-Klasse bündelt Berechnungen zum Mond.</p>
+<!----------------->
+<!--- Übersicht --->
+<!----------------->
+<h3>�bersicht</h3>
+<ul>
+	<li><a href="#AnomalisticMonth">AnomalisticMonth</a></li>
+	<li><a href="#Apogee">Apogee</a></li>
+	<li><a href="#AscendingNode">AscendingNode</a></li>
+	<li><a href="#DescendingNode">DescendingNode</a></li>
+	<li><a href="#DraconicMonth">DraconicMonth</a></li>
+	<li><a href="#FirstQuarter">FirstQuarter</a></li>
+	<li><a href="#FullMoon">FullMoon</a></li>
+	<li><a href="#GreatestNorthernDeclination">GreatestNorthernDeclination</a></li>
+	<li><a href="#GreatestSouthernDeclination">GreatestSouthernDeclination</a></li>
+	<li><a href="#LastQuarter">LastQuarter</a></li>
+	<li><a href="#Latitude">Latitude</a></li>
+	<li><a href="#Longitude">Longitude</a></li>
+	<li><a href="#NewMoon">NewMoon</a></li>
+	<li><a href="#Perigee">Perigee</a></li>
+	<li><a href="#PhaseAngle">PhaseAngle</a></li>
+	<li><a href="#Position">Position</a></li>
+	<li><a href="#Radius">Radius</a></li>
+	<li><a href="#Rise">Rise</a></li>
+	<li><a href="#Set">Set</a></li>
+	<li><a href="#SiderealMonth">SiderealMonth</a></li>
+	<li><a href="#SynodicMonth">SynodicMonth</a></li>
+	<li><a href="#Transit">Transit</a></li>
+	<li><a href="#TropicalMonth">TropicalMonth</a></li>
+</ul>
+<hr />
+<!--- ---------------- --->
+<!--- AnomalisticMonth --->
+<!--- ---------------- --->
+<h2 id="AnomalisticMonth">AnomalisticMonth</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AnomalisticMonth</b>-Funktion die Dauer des anomalistischen Monats.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>AnomalisticMonth</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AnomalisticMonth</b>-Funktion enthält die Anzahl der Tage.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für den anomalistischen Monat wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge durch das Perigäum.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="#SideralMonth">MMoon.SideralMonth</a></li>
+	<li><a href="#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="#TropicalMonth">MMoon.TropicalMonth</a></li>
+	<li><a href="MEarth.htm#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="MEarth.htm#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="MEarth.htm#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MEarth.htm#TropicalYear">MEarth.TropicalYear</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- Apogee --->
+<!--- ------ --->
+<h2 id="Apogee">Apogee</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Apogee</b>-Funktion setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgangs des Mondes durch das Apogäum nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Apogee</b>(
+   <i>[    double jd      ]</i>   // Julianische Tageszahl.
+   <i>[ref double parallax]</i>   // Horizontparallaxe.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+	</tr><tr>
+		<td class="Argument"><i>parallax</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Horizontparallaxe in Gradmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Apogee</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &frac12; Zeit-Stunden. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 50 &#0150; <i>Perigee and Apogee of the Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="Aphelion.htm">Aphelion</a></li>
+	<li><a href="#Perigee">MMoon.Perigee</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- AscendingNode --->
+<!--- ------------- --->
+<h2 id="AscendingNode">AscendingNode</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AscendingNode</b>-Funktion liefert die julianische Tageszahl des nächsten Durchgangs des Mondes durch den aufsteigenden Knoten nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>AscendingNode</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AscendingNode</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 51 &#0150; <i>Moon through the Nodes</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#DescendingNode">MMoon.DescendingNode</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- DescendingNode --->
+<!--- -------------- --->
+<h2 id="DescendingNode">DescendingNode</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>DescendingNode</b>-Funktion liefert die julianische Tageszahl des nächsten Durchgangs des Mondes durch den absteigenden Knoten nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>DescendingNode</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i>></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>DescendingNode</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 51 &#0150; <i>Moon through the Nodes</i>.
+</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#AscendingNode">MMoon.AscendingNode</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- DraconicMonth --->
+<!--- ------------- --->
+<h2 id="DraconicMonth">DraconicMonth</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>DraconicMonth</b>-Funktion die Dauer des drakonischen Monats.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>DraconicMonth</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>DraconicMonth</b>-Funktion enthält die Anzahl der Tage.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für den drakonischen Monat wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgenden Durchgängen durch den Mondknoten.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="#SideralMonth">MMoon.SideralMonth</a></li>
+	<li><a href="#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="#TropicalMonth">MMoon.TropicalMonth</a></li>
+	<li><a href="MEarth.htm#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="MEarth.htm#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="MEarth.htm#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MEarth.htm#TropicalYear">MEarth.TropicalYear</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- FirstQuarter --->
+<!--- ------------ --->
+<h2 id="FirstQuarter">FirstQuarter</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>FirstQuarter</b>-Funktion liefert die julianische Tageszahl des n�chsten ersten Viertels nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>FirstQuarter</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>FirstQuarter</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 49 &#0150; <i>Phases of the Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#FullMoon">MMoon.FullMoon</a></li>
+	<li><a href="#LastQuarter">MMoon.LastQuarter</a></li>
+	<li><a href="#NewMoon">MMoon.NewMoon</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- FullMoon --->
+<!--- -------- --->
+<h2 id="FullMoon">FullMoon</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>FullMoon</b>-Funktion setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>FullMoon</b>(
+   <i>[    double       jd  ]</i>   // Julianische Tageszahl.
+   <i>[ref <a class="code" href="EEclipseType.htm" >EEclipseType</a> type]</i>   // Kennung der Finsternisabschätzung.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+	</tr><tr>
+		<td class="Argument"><i>type</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Kennung der <a href="EEclipseType.htm">Finsternisabschätzung</a>.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>FullMoon</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 49 &#0150; <i>Phases of the Moon</i>. Für die Finsternisabschätzung werden die Kriterien von <a href="Quellen.htm#MontenbruckI">Montenbruck I</a> Tabelle 9.1 angewendet.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#FirstQuarter">MMoon.FirstQuarter</a></li>
+	<li><a href="#LastQuarter">MMoon.LastQuarter</a></li>
+	<li><a href="#NewMoon">MMoon.NewMoon</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------------- --->
+<!--- GreatestNorthernDeclination --->
+<!--- --------------------------- --->
+<h2 id="GreatestNorthernDeclination">GreatestNorthernDeclination</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>GreatestNorthernDeclination</b>-Funktion setzt die Deklination und liefert die julianische Tageszahl der nächsten nördlichen Mondwende nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>GreatestNorthernDeclination</b>(
+   <i>[    double jd         ]</i>   // Julianische Tageszahl.
+   <i>[ref double declination]</i>   // Deklination.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><p><i>jd</i></p></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+	</tr><tr>
+		<td class="Argument"><i>declination</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Deklination des Mondes in Gradmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>GreatestNorthernDeclination</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 52 &#0150; <i>Maximum Declinations of Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#GreatestSouthernDeclination">MMoon.GreatestSouthernDeclination</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------------- --->
+<!--- GreatestSouthernDeclination --->
+<!--- --------------------------- --->
+<h2 id="GreatestSouthernDeclination">GreatestSouthernDeclination</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>GreatestSouthernDeclination</b>-Funktion setzt die Deklination und liefert die julianische Tageszahl der nächsten südlichen Mondwende nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>GreatestSouthernDeclination</b>(
+   <i>[    double jd         ]</i>   // Julianische Tageszahl.
+   <i>[ref double declination]</i>   // Deklination.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+	</tr><tr>
+		<td class="Argument"><i>declination</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Deklination des Mondes in Gradmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>GreatestSouthernDeclination</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 52 &#0150; <i>Maximum Declinations of Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#GreatestNorthernDeclination">MMoon.GreatestNorthernDeclination</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- LastQuarter --->
+<!--- ----------- --->
+<h2 id="LastQuarter">LastQuarter</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>LastQuarter</b>-Funktion liefert die julianische Tageszahl des nächsten letzten Viertels nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>LastQuarter</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>LastQuarter</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 49 &#0150; <i>Phases of the Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#FirstQuarter">MMoon.FirstQuarter</a></li>
+	<li><a href="#FullMoon">MMoon.FullMoon</a></li>
+	<li><a href="#NewMoon">MMoon.NewMoon</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Latitude --->
+<!--- -------- --->
+<h2 id="Latitude">Latitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Latitude</b>-Funktion liefert die geozentrisch-ekliptikale Breite des Mondes zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Latitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- Longitude --->
+<!--- --------- --->
+<h2 id="Longitude">Longitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Longitude</b>-Funktion liefert die geozentrisch-ekliptikale Länge des Mondes zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Longitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- NewMoon --->
+<!--- ------- --->
+<h2 id="NewMoon">NewMoon</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>NewMoon</b>-Funktion setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>NewMoon</b>(
+   <i>[    double jd        ]</i>   // Julianische Tageszahl.
+   <i>[ref <a class="code" href="EEclipseType.htm" >EEclipseType</a> type]</i>   // Kennung der Finsternisabschätzung.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+	</tr><tr>
+		<td class="Argument"><i>type</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Kennung der <a href="EEclipseType.htm">Finsternisabschätzung</a>.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>NewMoon</b>-Funktion enthült den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 49 &#0150; <i>Phases of the Moon</i>. Für die Finsternisabschätzung werden die Kriterien von <a href="Quellen.htm#MontenbruckI">Montenbruck I</a> Tabelle 9.1 angewendet.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#FirstQuarter">MMoon.FirstQuarter</a></li>
+	<li><a href="#FullMoon">MMoon.FullMoon</a></li>
+	<li><a href="#LastQuarter">MMoon.LastQuarter</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- Perigee --->
+<!--- ------- --->
+<h2 id="Perigee">Perigee</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Perigee</b>-Funktion setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgangs des Mondes durch das Perigäum nach der julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Perigee</b>(
+   <i>[    double jd      ]</i>   // Julianische Tageszahl.
+   <i>[ref double parallax]</i>   // Horizontparallaxe.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+	</tr><tr>
+		<td class="Argument"><i>parallax</i></td>
+		<td class="Argument">Enthält, falls angegeben, die Horizontparallaxe in Gradmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Perigee</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac14; Zeit-Minuten. Als Zeitmaß findet TDB Anwendung.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 50 &#0150; <i>Perigee and Apogee of the Moon</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#Apogee">MMoon.Apogee</a></li>
+	<li><a href="Perihelion.htm">Perihelion</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- PhaseAngle --->
+<!--- ---------- --->
+<h2 id="PhaseAngle">PhaseAngle</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>PhaseAngle</b>-Funktion liefert den Phasenwinkel zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>PhaseAngle</b>(
+   <i>[    double jd   ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>PhaseAngle</b>-Funktion liefert den Phasenwinkel in Gradma�.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung des Phasenwinkels verwendet die Formel 48.4 aus <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 48  &#0150; <i>Illuminated Fraction of Moon</i>. Aus dem Phasenwinkel lässt sich durch k = (1 + cos(i)) / 2 der [?: Korrekter Fachbegriff: beleuchtete Mondfläche :?] leicht ableiten.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Position --->
+<!--- -------- --->
+<h2 id="Position">Position</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Position</b>-Funktion liefert die geozentrisch-ekliptikale Position des Mondes zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Position.htm">Beschreibung</a> erfolgt an anderer Stelle.
+</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- Radius --->
+<!--- ------ --->
+<h2 id="Radius">Radius</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Radius</b>-Funktion liefert den geozentrisch-ekliptikalen Radiusvektor des Mondes zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Radius.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Rise --->
+<!--- ---- --->
+<h2 id="Rise">Rise</h2>
+<h3>Beschreibung</h3>
+<p>
+Die <b>Rise</b>-Funktion setzt die julianische Tageszahl des Mondaufgangs und die Morgenweite am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Rise.htm">Beschreibung</a> erfolgt an anderer Stelle.
+</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --- --->
+<!--- Set --->
+<!--- --- --->
+<h2 id="Set">Set</h2>
+<h3>Beschreibung</h3>
+<p>
+Die <b>Set</b>-Funktion setzt die julianische Tageszahl des Monduntergangs und die Abendweite am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Set.htm">Beschreibung</a> erfolgt an anderer Stelle.
+</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- SiderealMonth --->
+<!--- ------------- --->
+<h2 id="SiderealMonth">SiderealMonth</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SideralMonth</b>-Funktion die Dauer des siderischen Monats.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SiderealMonth</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SiderealMonth</b>-Funktion enthält die Anzahl der Tage.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für den siderischen Monat wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge an einem Fixstern.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="#TropicalMonth">MMoon.TropicalMonth</a></li>
+	<li><a href="MEarth.htm#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="MEarth.htm#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="MEarth.htm#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MEarth.htm#TropicalYear">MEarth.TropicalYear</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- SynodicMonth --->
+<!--- ------------ --->
+<h2 id="SynodicMonth">SynodicMonth</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SynodicMonth</b>-Funktion liefert die Dauer des tropischen Jahres zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SynodicMonth</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an, der für die Bestimmung des Jahrhundertbruchteiles verwendet wird. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SynodicMonth</b>-Funktion enthält Monatslänge. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Kapitel 12.11 &#0150; <i>Astronimical Bases of Calendars</i> und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgenden Durchgänge durch die Konjunktion mit der Sonne.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="#SideralMonth">MMoon.SideralMonth</a></li>
+	<li><a href="#TropicalMonth">MMoon.TropicalMonth</a></li>
+	<li><a href="MEarth.htm#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="MEarth.htm#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="MEarth.htm#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MEarth.htm#TropicalYear">MEarth.TropicalYear</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--------------->
+<!--- Transit --->
+<!--------------->
+<h2 id="Transit">Transit</h2>
+<h3>Beschreibung</h3>
+<p>
+Die <b>Transit</b>-Funktion setzt die horizontale Höhe und liefert den Zeitpunkt des Meridian-Durchgangs des Mondes am geographischen Ort und zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Transit.htm">Beschreibung</a> erfolgt an anderer Stelle.
+</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- TropicalMonth --->
+<!--- ------------- --->
+<h2 id="TropicalMonth">TropicalMonth</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>TropicalMonth</b>-Funktion die Dauer des tropischen Monats.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>TropicalMonth</b>()
+</pre>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>TropicalMonth</b>-Funktion enthält die Anzahl der Tage.</p>
+<h3>Bemerkungen</h3>
+<p>Der Wert für den tropischen Monat wurde dem <a href="Quellen.htm#AstronomicalAlmanac">Astronomical Almanac</a> Tabelle 15.3 &#0150; <i>Time and Standard Epochs</i> entnommen und beschreibt die mittlere Zeitspanne zwischen zwei aufeinanderfolgende Durchgänge durch den Frühlingspunkt.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#AnomalisticMonth">MMoon.AnomalisticMonth</a></li>
+	<li><a href="#DraconicMonth">MMoon.DraconicMonth</a></li>
+	<li><a href="#SynodicMonth">MMoon.SynodicMonth</a></li>
+	<li><a href="#SidericMonth">MMoon.SidericMonth</a></li>
+	<li><a href="MEarth.htm#AnomalisticYear">MEarth.AnomalisticYear</a></li>
+	<li><a href="MEarth.htm#DraconicYear">MEarth.DraconicYear</a></li>
+	<li><a href="MEarth.htm#SideralYear">MEarth.SideralYear</a></li>
+	<li><a href="MEarth.htm#TropicalYear">MEarth.TropicalYear</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-02</p>
+</div></body>
+</html>

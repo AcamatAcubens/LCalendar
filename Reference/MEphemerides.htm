@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;MEphemerides</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="Head">MEphemerides</h1>
+<p>Die <b>MEphemerides</b>-Klasse bündelt ephemeridale Funktionen.</p>
+<!--- --------- --->
+<!--- Übersicht --->
+<!--- --------- --->
+<h3>Übersicht</h3>
+<ul>
+	<li><a href="#AberrationEcliptical">AberrationEcliptical</a></li>
+	<li><a href="#AberrationEquatorial">AberrationEquatorial</a></li>
+	<li><a href="#AngleOfDiurnalPath">AngleOfDiurnalPath</a></li>
+	<li><a href="#AngularSeparation">AngularSeparation</a></li>
+	<li><a href="#ApparentPosition">ApparentPosition</a></li>
+	<li><a href="#CenturyFragment">CenturyFragment</a></li>
+	<li><a href="#EquationOfTime">EquationOfTime</a></li>
+	<li><a href="#Gast">Gast</a></li>
+	<li><a href="#Gmst">Gmst</a></li>
+	<li><a href="#HeightOfEcliptic">HeightOfEcliptic</a></li>
+	<li><a href="#Last">Last</a></li>
+	<li><a href="#Lmst">Lmst</a></li>
+	<li><a href="#LocalHourAngle">LocalHourAngle</a></li>
+	<li><a href="#LongitudeOfEcliptic">LongitudeOfEcliptic</a></li>
+	<li><a href="#NutationInLongitude">NutationInLongitude</a></li>
+	<li><a href="#NutationInObliquity">NutationInObliquity</a></li>
+	<li><a href="#ObliquityMean">ObliquityMean</a></li>
+	<li><a href="#ObliquityTrue">ObliquityTrue</a></li>
+	<li><a href="#ParallacticAngle">ParallacticAngle</a></li>
+	<li><a href="#PrecessionEcliptical">PrecessionEcliptical</a></li>
+	<li><a href="#PrecessionEquatorial">PrecessionEquatorial</a></li>
+	<li><a href="#ProperMotion">ProperMotion</a></li>
+	<li><a href="#Rise">Rise</a></li>
+	<li><a href="#SemidialArc">SemidialArc</a></li>
+	<li><a href="#Set">Set</a></li>
+	<li><a href="#ToAlpha">ToAlpha</a></li>
+	<li><a href="#ToAzimuth">ToAzimuth</a></li>
+	<li><a href="#ToBeta">ToBeta</a></li>
+	<li><a href="#ToDelta">ToDelta</a></li>
+	<li><a href="#ToGeocentric">ToGeocentric</a></li>
+	<li><a href="#ToHeight">ToHeight</a></li>
+	<li><a href="#ToLambda">ToLambda</a></li>
+	<li><a href="#ToSideralTime">ToSideralTime</a></li>
+	<li><a href="#ToSolarTime">ToSolarTime</a></li>
+	<li><a href="#ToZodiac">ToZodiac</a></li>
+	<li><a href="#Transit">Transit</a></li>
+	<li><a href="#YearFragment">YearFragment</a></li>
+</ul>
+<hr />
+<!--- -------------------- --->
+<!--- AberrationEcliptical --->
+<!--- -------------------- --->
+<h2 id="AberrationEcliptical">AberrationEcliptical</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AberrationEcliptical</b>-Prozedur wendet die Aberration auf die ekliptikale Position zur julianischen Tageszahl an. Die <b>AberrationEcliptical</b>-Funktion liefert die um die Aberration korrigierte Position zur ekliptikalen Position und julianischer Tageszahl. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="CPolar.htm">CPolar</a> <b>AberrationEcliptical</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a> position </i>  // Ekliptikale Position.
+   <i>[double jd]</i>        // Julianische Tageszahl.
+)
+
+public static void <b>AberrationEcliptical</b>(
+   <i> ref double lambda</i>  // Ekliptikale Länge.
+   <i> ref double beta  </i>  // Ekliptikale Breite.
+   <i>[    double jd    ]</i> // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die ekliptikale Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die zu korrigierende ekliptikale Länge in Bogenmaß an und enthält den um die Aberration korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>beta</i></td>
+		<td class="Argument">Gibt die zu korrigierende ekliptikale Breite in Bogenmaß an und enthält den um die Aberration korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AberrationEquatorial</b>-Funktion enthält die um die Aberration korrigierte Position.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel 23.2 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 23 &#0150; <i>Apparent Place of a Star</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#AberrationEquatorial">MEphemerides.AberrationEquatorial</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------------- --->
+<!--- AberrationEquatorial --->
+<!--- -------------------- --->
+<h2 id="AberrationEquatorial">AberrationEquatorial</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AberrationEquatorial</b>-Prozedur wendet die Aberration auf die äquatoriale Position zur julianischen Tageszahl an. Die <b>AberrationEquatorial</b>-Funktion liefert die um die Aberration korrigierte Position zur äquatoriale Position und julianischer Tageszahl. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="CPolar.htm">CPolar</a> <b>AberrationEquatorial</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a> position </i>   // Äquatoriale Position.
+   <i>[double jd]</i>         // Julianische Tageszahl.
+)
+
+public static void <b>AberrationEquatorial</b>(
+   <i> ref double alpha</i>  // Äquatoriale Länge.
+   <i> ref double delta</i>  // Äquatoriale Breite.
+   <i>[    double jd   ]</i> // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>pos</i></td>
+		<td class="Argument">Gibt die ekliptikale Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>alpha</i></td>
+		<td class="Argument">Gibt die zu korrigierende äquatoriale Länge in Bogenmaß an und enthält den um die Aberration korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>delta</i></td>
+		<td class="Argument">Gibt die zu korrigierende äquatoriale Breite in Bogenmaß an und enthält den um die Aberration korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitma� findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AberrationEquatorial</b>-Funktion enthält die um die Aberration korrigierte Position.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Formel 23.2 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 23 &#0150; <i>Apparent Place of a Star</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#AberrationEcliptical">MEphemerides.AberrationEcliptical</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- AngleOfDiurnalPath --->
+<!--- ------------------ --->
+<h2 id="AngleOfDiurnalPath">AngleOfDiurnalPath</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AngleOfDiurnalPath</b>-Funktion liefert den Winkel des Tagbogens zur Deklination und geographischer Breite zum Zeitpunkt des Horizontdurchganges.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>AngleOfDiurnalPath</b>(
+   <i>double delta</i>   // Deklination.
+   <i>double phi  </i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>delta</i></td>
+		<td class="Argument">Gibt die äquatoriale Breite in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die geographische Breite des Beobachters in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AngleOfDiurnalPath</b>-Funktion enthält den Winkel in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 14 &#0150; <i>The Parallactic Angle</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#HeightOfEcliptic">MEphemerides.HeightOfEcliptic</a></li>
+	<li><a href="#LongitudeOfEcliptic">MEphemerides.LongitudeOfEcliptic</a></li>
+	<li><a href="#ParallaticAngle">MEphemerides.ParallacticAngle</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------------- --->
+<!--- AngularSeparation --->
+<!--- ----------------- --->
+<h2 id="AngularSeparation">AngularSeparation</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>AngularSeparation</b>-Funktion setzt den Positionswinkel und liefert den Winkelabstand zweier äquatorialer Positionen. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>AngularSeparation</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a>     positionA </i>   // Position A.
+   <i> <a class="code" href="CPolar.htm">CPolar</a>     positionB </i>   // Position B.
+   <i>[ref double angle]</i>       // Positionswinkel.
+)
+
+public static double <b>AngularSeparation</b>(
+   <i>     double alphaA </i>   // Rektaszenstion zur Position A.
+   <i>     double deltaA </i>   // Deklination zur Position A.
+   <i>     double alphaB </i>   // Rektaszension zur Position B.
+   <i>     double deltaB </i>   // Deklination zur Position B.
+   <i>[ref double angle ]</i>   // Positionswinkel.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>positionA</i></td>
+		<td class="Argument">Gibt die äquatoriale Position A an.</td>
+	</tr><tr>
+		<td class="Argument"><i>positionB</i></td>
+		<td class="Argument">Gibt die äquatoriale Position B an.</td>
+	</tr><tr>
+		<td class="Argument"><i>alphaA</i></td>
+		<td class="Argument">Gibt die äquatoriale Länge der Position A in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>deltaA</i></td>
+		<td class="Argument">Gibt die äquatoriale Breite der Position A in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>alphaB</i></td>
+		<td class="Argument">Gibt die äquatoriale Länge der Position B in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>deltaB</i></td>
+		<td class="Argument">Gibt die äquatoriale Breite der Position B in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>angle</i></td>
+		<td class="Argument">Enthält die Positionwinkel in Bogenmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>AngularSeparation</b>-Funktion enthält den Winkel in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 17 &#0150; <i>Angular Separation</i>.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- ApparentPosition --->
+<!--- ---------------- --->
+<h2 id="ApparentPosition">ApparentPosition</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ApparentPosition</b>-Prozedur setzt die scheinbare Position der äquatorialen Position zur julianischen Tageszahl. Die <b>ApparentPosition</b>-Funktion liefert die scheinbare Position zur äquatorialen Position und julianischer Tageszahl. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="CPolar.htm">CPolar</a> <b>ApparentPosition</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a> position </i>   // Äquatoriale Position.
+   <i>[double jd]</i>         // Julianische Tageszahl.
+)
+
+public static void <b>ApparentPosition</b>(
+   <i> ref double alpha</i>  // Äquatoriale Länge.
+   <i> ref double delta</i>  // Äquatoriale Breite.
+   <i>[    double jd   ]</i> // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die äquatoriale Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>alpha</i></td>
+		<td class="Argument">Gibt die zu korrigierende äqutatoriale Länge in Bogenmaß an und enthält den korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>delta</i></td>
+		<td class="Argument">Gibt die zu korrigierende äqutatoriale Breite in Bogenmaß an und enthält den korrigierten Wert.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ApparentPosition</b>-Funktion enthält die um die Aberration korrigierte Position.</p>
+<h3>Bemerkungen</h3>
+<p>[?: Welche Korrekturen werden durchgeführt? :?] Die Berechnung verwendet die Formel 23.2 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 23 &#0150; <i>Apparent Place of a Star</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+<p>[?: Liste der semantischen Partner erstellen. :?]</a>
+</ul>
+<hr />
+<!--- --------------- --->
+<!--- CenturyFragment --->
+<!--- --------------- --->
+<h2 id="CenturyFragment">CenturyFragment</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>CenturyFragment</b>-Funktion liefert den Jahrhundertbruchteil zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>CenturyFragment</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>CenturyFragment</b>-Funktion enthält den Jahrhundertbruchteil bezogen auf die Epoche J2000.0.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="#YearFragment">MEphemerides.YearFragment</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- EquationOfTime --->
+<!--- -------------- --->
+<h2 id="EquationOfTime">EquationOfTime</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>EquationOfTime</b>-Funktion liefert die Zeitdifferenz zwischen mittleren und scheinbaren Sonnentransit zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>EquationOfTime</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>EquationOfTime</b>-Funktion enthält die Zeitdifferenz als Winkel in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 28 &#0150; <i>Equation of Time</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Gast --->
+<!--- ---- --->
+<h2 id="Gast">Gast</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Gast</b>-Funktion liefert die scheinbare Sternzeit zum Nullmeridian und zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Gast</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet UT Anwendung.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Gast</b>-Funktion enthült die scheinbare Sternzeit für den Meridian von Greenwich in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,1 Sternzeit-Sekunden.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 12 &#0150; <i>Sideral Time at Greenwich</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#Gmst">MEphemerides.Gmst</a></li>
+	<li><a href="#Last">MEphemerides.Last</a></li>
+	<li><a href="#Lmst">MEphemerides.Lmst</a></li>
+	<li><a href="#ToSolarTime">MEphemerides.ToSolarTime</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Gmst --->
+<!--- ---- --->
+<h2 id="Gmst">Gmst</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Gmst</b>-Funktion liefert die mittlere Sternzeit zum Nullmeridian zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double<b> Gmst</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet UT Anwendung.</td>
+</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Gmst</b>-Funktion enthält die mittlere Sternzeit für den Meridian von Greenwich in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,1 Sternzeit-Sekunden.
+</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 12 &#0150; <i>Sideral Time at Greenwich</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#Gast">MEphemerides.Gast</a></li>
+	<li><a href="#Last">MEphemerides.Last</a></li>
+	<li><a href="#Lmst">MEphemerides.Lmst</a></li>
+	<li><a href="#ToSolarTime">MEphemerides.ToSolarTime</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- HeightOfEcliptic --->
+<!--- ---------------- --->
+<h2 id="HeightOfEcliptic">HeightOfEcliptic</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>HeightOfEcliptic</b>-Funktion den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und julianischer Tageszahl. Die Methode kennt zwei Überladungslinien</p>
+<h3>Definition</h3>
+<pre>
+public static double<b> HeightOfEcliptic</b>(
+   <i> <a href="CPolar.htm">CPolar</a> position </i>  // Geographischer Ort.
+   <i>[double jd]</i>        // Julianische Tageszahl.
+)
+
+public static double<b> HeightOfEcliptic</b>(
+   <i> double lamda </i>   // Geographische Länge.
+   <i> double phi   </i>   // Geographische Breite.
+   <i>[double jd   ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geographische Position des Beobachters an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die geographische Breite des Beobachters in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet UT Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>HeightOfEcliptic</b>-Funktion enthält die Höhe in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 14 &#0150; <i>The Parallatic Angle</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#AngleOfDiurnalPath">MEphemerides.AngleOfDiurnalPath</a></li>
+	<li><a href="#LongitudeOfEcliptic">MEphemerides.LongitudeOfEcliptic</a></li>
+	<li><a href="#ParallaticAngle">MEphemerides.ParallacticAngle</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Last --->
+<!--- ---- --->
+<h2 id="Last">Last</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Last</b>-Funktion liefert die scheinbare Sternzeit zur julianischen Tageszahl und geographischer Länge.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>Last</b>(
+   <i>double jd   </i>   // Julianische Tageszahl.
+   <i>double lamda</i>   // Geographische L�nge.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet UT Anwendung.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Last</b>-Funktion enthält die scheinbare Sternzeit für die geographische Länge in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,1 Sternzeit-Sekunden.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 12 &#0150; <i>Sideral Time at Greenwich</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#Gast">CEphemerides.Gast</a></li>
+	<li><a href="#Gmst">CEphemerides.Gmst</a></li>
+	<li><a href="#Lmst">CEphemerides.Lmst</a></li>
+	<li><a href="#ToSolarTime">CEphemerides.ToSolarTime</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Lmst --->
+<!--- ---- --->
+<h2 id="Lmst">Lmst</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Lmst</b>-Funktion liefert die mittlere Sternzeit zur julianischen Tageszahl und geographischer Länge.</p>
+<h3>Definition</h3>
+<pre>
+public static double<b> Lmst</b>(
+   <i>double jd   </i>   // Julianische Tageszahl.
+   <i>double lamda</i>   // Geographische L�nge.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet UT Anwendung.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Lmst</b>-Funktion enthält die mittlere Sternzeit für die geographische Länge in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,1 Sternzeit-Sekunden.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet den Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 12 &#0150; <i>Sideral Time at Greenwich</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#Gast">MEphemerides.Gast</a></li>
+	<li><a href="#Gmst">MEphemerides.Gmst</a></li>
+	<li><a href="#Last">MEphemerides.Last</a></li>
+	<li><a href="#ToSolarTime">MEphemerides.ToSolarTime</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- LocalHourAngle --->
+<!--- -------------- --->
+<h2 id="LocalHourAngle">LocalHourAngle</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- LongitudeOfEcliptic --->
+<!--- ------------------- --->
+<h2 id="LongitudeOfEcliptic">LongitudeOfEcliptic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- NutationInLongitude --->
+<!--- ------------------- --->
+<h2 id="NutationInLongitude">NutationInLongitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>NutationInLongitude</b>-Funktion liefert die Nutation der Länge zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>NutationInLongitude</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>NutationInLongitude</b>-Funktion enthält die Nutation der Länge in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,005&Prime;.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 22 &#0150; <i>Nutation and Obliquity</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#NutationInObliquity">MEphmerides.NutationInObliquity</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- NutationInObliquity --->
+<!--- ------------------- --->
+<h2 id="NutationInObliquity">NutationInObliquity</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>NutationInObliquity</b>-Funktion liefert die Nutation der Ekliptikschiefe, also die Winkeldifferenz zwischen mittlerer und wahrer Ekliptikschiefe, zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>NutationInObliquity</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>NutationInObliquity</b>-Funktion enthält die Nutation der Ekliptikschiefe in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,005&Prime;.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 22 &#0150; <i>Nutation and Obliquity</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#NutationInLongitude">MEphemerides.NutationInLongitude</a></li>
+	<li><a href="#ObliquityMean">MEphemerides.ObliquityMean</a></li>
+	<li><a href="#ObliquityTrue">MEphemerides.ObliquityTrue</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- ObliquityMean --->
+<!--- ------------- --->
+<h2 id="ObliquityMean">ObliquityMean</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ObliquityMean</b>-Funktion liefert die mittlere Ekliptikschiefe zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>ObliquityMean</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ObliquityMean</b>-Funktion enthält die mittlere Ekliptikschiefe in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,001&Prime;.
+</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 22 &#0150; <i>Nutation and Obliquity</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#NutationInObliquity">MEphemerides.NutationInObliquity</a></li>
+	<li><a href="#ObliquityTrue">MEphemerides.ObliquityTrue</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- ObliquityTrue --->
+<!--- ------------- --->
+<h2 id="ObliquityTrue">ObliquityTrue</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ObliquityTrue</b>-Funktion liefert die wahre Ekliptikschiefe zur julianischen Tageszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>ObliquityTrue</b>(
+   <i>[double jd]</i>   //   Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ObliquityTrue</b>-Funktion enthält die wahre Ekliptikschiefe in Bogenmaß. Die Berechnungsgenauigkeit liegt bei etwa &plusmn;&#0160;0,001&Prime;.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet die Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 22 &#0150; <i>Nutation and Obliquity</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="#NutationInObliquity">MEphemerides.NutationInObliquity</a></li>
+	<li><a href="#ObliquityMean">MEphemerides.ObliquityMean</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- ParallacticAngle --->
+<!--- ---------------- --->
+<h2 id="ParallacticAngle">ParallacticAngle</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------------- --->
+<!--- PrecessionEcliptical --->
+<!--- -------------------- --->
+<h2 id="PrecessionEcliptical">PrecessionEcliptical</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------------- --->
+<!--- PrecessionEquatorial --->
+<!--- -------------------- --->
+<h2 id="PrecessionEquatorial">PrecessionEquatorial</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- ProperMotion --->
+<!--- ------------ --->
+<h2 id="ProperMotion">ProperMotion</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Rise --->
+<!--- ---- --->
+<h2 id="Rise">Rise</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- SemidialArc --->
+<!--- ----------- --->
+<h2 id="SemidialArc">SemidialArc</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SemidialArc</b>-Funktion liefert den halben Tagbogen zur Deklination und zur geographischen Breite.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SemidialArc</b>(
+   <i>double delta</i>   // Deklination.
+   <i>double phi  </i>   // Geographische Breite.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>delta</i></td>
+		<td class="Argument">Gibt die Deklination in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die georgraphische Breite in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SemidialArc</b>-Funktion enthält den Winkel in Bogenmaß und in Sonnenzeit.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="#ToSideralTime">MEphemerides.ToSideralTime</a></li>
+	<li><a href="#Transit">MEphemerides.Transit</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --- --->
+<!--- Set --->
+<!--- --- --->
+<h2 id="Set">Set</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- ToAlpha --->
+<!--- ------- --->
+<h2 id="ToAlpha">ToAlpha</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ToAlpha</b>-Funktion liefert die (mittlere bzw. scheinbare) Rektaszension der geozentrisch-ekliptikalen Position zum �quinoktium der julianischen Tageszahl. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>ToAlpha</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a>     position </i>    // Geozentrisch-ekliptikale Position.
+   <i> <a class="code" href="EObliquity.htm">EObliquity</a> obliquity </i>   // Kennung zum Ekliptikschiefenmodus.
+   <i>[double     jd       ]</i>   // Julianische Tageszahl.
+)
+
+public static double <b>ToAlpha</b>(
+   <i> double     lambda    </i>   // Geozentrisch-ekliptikale Länge.
+   <i> double     beta      </i>   // Geozentrisch-ekliptikale Breite.
+   <i> <a class="code" href="EObliquity.htm">EObliquity</a> obliquity </i>   // Kennung zum Ekliptikschiefenmodus.
+   <i>[double     jd       ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Länge in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>beta</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Breite in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>obliquity</i></td>
+		<td class="Argument">Gibt die Kennung zum Ekliptikschiefenmodus an.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung die julianische Tageszahl der Epoche 2000 verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ToAlpha</b>-Funktion enthält die Rektaszension in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Abgesehen von der Koordinatentransformation werden keinerlei Korrekturen an den Koordinaten vorgenommen. Die Korrekturen für Lichtlaufzeit, Aberration, Nutation oder Präzession müssen vor der Koordinatentransformation vorgenommen werden. Die Berechnung verwendet die Formel 13.3 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 13 &#0150; <i>Transformation of Coordinates</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="#ToDelta">MEphemerides.ToDelta</a></li>
+	<li><a href="#ToGeocentric">MEphemerides.ToGeocentric</a></li>
+	<li><a href="#ToLambda">MEphemerides.ToLambda</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- ToAzimuth --->
+<!--- --------- --->
+<h2 id="ToAzimuth">ToAzimuth</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- ToBeta --->
+<!--- ------ --->
+<h2 id="ToBeta">ToBeta</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- ToDelta --->
+<!--- ------- --->
+<h2 id="ToDelta">ToDelta</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ToDelta</b>-Funktion liefert die (mittlere bzw. scheinbare) Deklination der geozentrisch-ekliptikalen Position zum �quinoktium der julianischen Tageszahl. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>ToDelta</b>(
+   <i> <a class="code" href="CPolar.htm">CPolar</a>     position </i>    // Geozentrisch-ekliptikale Position.
+   <i> <a class="code" href="EObliquity.htm">EObliquity</a> obliquity </i>   // Kennung zum Ekliptikschiefenmodus.
+   <i>[double     jd       ]</i>   // Julianische Tageszahl.
+)
+
+public static double <b>ToDelta</b>(
+   <i> double     lambda    </i>   // Geozentrisch-ekliptikale Länge.
+   <i> double     beta      </i>   // Geozentrisch-ekliptikale Breite.
+   <i> <a class="code" href="EObliquity.htm">EObliquity</a> obliquity </i>   // Kennung zum Ekliptikschiefenmodus.
+   <i>[double     jd       ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Länge in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>beta</i></td>
+		<td class="Argument">Gibt die geozentrisch-ekliptikate Breite in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>obliquity</i></td>
+		<td class="Argument">Gibt die Kennung zum Ekliptikschiefenmodus an.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung die julianische Tageszahl der Epoche 2000 verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ToDelta</b>-Funktion enthält die Deklination in Bogenmaß.</p>
+<h3>Bemerkungen</h3>
+<p>Abgesehen von der Koordinatentransformation werden keinerlei Korrekturen an den Koordinaten vorgenommen. Die Korrekturen für Lichtlaufzeit, Aberration, Nutation oder Präzession müssen vor der Koordinatentransformation vorgenommen werden. Die Berechnung verwendet die Formel 13.4 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 13 &#0150; <i>Transformation of Coordinates</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="#ToAlpha">MEphemerides.ToAlpha</a></li>
+	<li><a href="#ToBeta">MEphemerides.ToBeta</a></li>
+	<li><a href="#ToGeocentric">MEphemerides.ToGeocentric</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- ToGeocentric --->
+<!--- ------------ --->
+<h2 id="ToGeocentric">ToGeocentric</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ToGeocentric</b>-Funktion setzt die geozentrisch-ekliptikale Position zur heliozentrisch-ekliptikalen Position und julianischer Tageszahl und liefert die Lichtlaufzeit. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a href="CPolar.htm" class="code">CPolar</a> <b>ToGeocentric</b>(
+   <i><a href="CPolar.htm" class="code">CPolar</a>     position</i>    // Heliozentrische Position.
+   <i>double     jd</i>          // Julianische Tageszahl.
+   <i><a href="EPrecision.htm" class="code">EPrecision</a> precision</i>   // Genauigkeitskennung.
+)
+
+public static double <b>ToGeocentric</b>(
+   <i>    double     lambdaHeliocentric</i>   // Heliozentrische Länge.
+   <i>    double     betaHeliocentric  </i>   // Heliozentrische Breite.
+   <i>    double     radiusHeliocentric</i>   // Heliozentrischer Radiusvektor.
+   <i>    double     jd                </i>   // Julianische Tageszahl.
+   <i>ref double     lambdaGeocentric  </i>   // Geozentrische Länge.
+   <i>ref double     betaGeocentric    </i>   // Geozentrische Breite.
+   <i>ref double     radiusGeocentric  </i>   // Geozentrischer Radiusvektor.
+   <i>    <a href="EPrecision.htm" class="code">EPrecision</a> precision</i>            // Genauigkeitskennung.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>pos</i></td>
+		<td class="Argument">Gibt die heliozentrisch-eklitikale Position an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambdaHeliocentric</i></td>
+		<td class="Argument">Gibt die heliozentrisch-eklitikale Länge in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>betaHeliocentric</i></td>
+		<td class="Argument">Gibt die heliozentrisch-ekliptikale Breite in Bogenmaß an.</td>
+	</tr><tr>
+		<td class="Argument"><i>radiusHeliocentric</i></td>
+		<td class="Argument">Gibt den heliozentrisch-ekliptikalen Radiusvektor in Astronomischen Einheiten an.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambdaGeocentric</i></td>
+		<td class="Argument">Enthält die geozentrisch-ekliptikale Länge in Bogenmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr><tr>
+		<td class="Argument"><i>betaGeocentric</i></td>
+		<td class="Argument">Enthält die geozentrisch-ekliptikale Breite in Bogenmaß. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr><tr>
+		<td class="Argument"><i>radiusGeocentric</i></td>
+		<td class="Argument">Enthält den geozentrisch-ekliptikalen Radiusvektor in Astronomischen Einheiten. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Wert überschrieben.</td>
+	</tr><tr>
+		<td class="Argument"><i>precision</i></td>
+		<td class="Argument">Gibt die Kennung der Berechnungsgenauigkeit an.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>ToGeocentric</b>-Funktion enthält die geozentrisch-ekliptikale Position oder die Dauer der Lichtlaufzeit in Tagesbruchteilen.</p>
+<h3>Bemerkungen</h3>
+<p>Abgesehen von der Koordinatentransformation werden keinerlei Korrekturen an den Koordinaten vorgenommen. Die Korrekturen für Lichtlaufzeit, Aberration, Nutation oder Präzession müssen vor der Koordinatentransformation vorgenommen werden. Die Berechnung verwendet die Formeln 33.1 - 33.4 von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 33 &#0150; <i>Elliptic Motion</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="#ToAlpha">MEphemerides.ToAlpha</a></li>
+	<li><a href="#ToDelta">MEphemerides.ToDelta</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+	<li><a href="Position.htm">Position</a></li>
+	<li><a href="Radius.htm">Radius</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToHeight --->
+<!--- -------- --->
+<h2 id="ToHeight">ToHeight</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToLambda --->
+<!--- -------- --->
+<h2 id="ToLambda">ToLambda</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- ToSideralTime --->
+<!--- ------------- --->
+<h2 id="ToSideralTime">ToSideralTime</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- ToSolarTime --->
+<!--- ----------- --->
+<h2 id="ToSolarTime">ToSolarTime</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToZodiac --->
+<!--- -------- --->
+<h2 id="ToZodiac">ToZodiac</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>ToZodiac</b>-Funktion liefert die ekliptikale Länge in Tierkreisnotation.</p>
+<h3>Definition</h3>
+<pre>
+public static string <b>ToZodiac</b>(
+   <i>double lambda</i>   // Ekliptikale Länge.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>lambda</i></td>
+	<td class="Argument">Gibt die ekliptikate Länge in Bogenmaß an.</td>
+</tr></table>
+<h3>R�ckgabewerte</h3>
+<p>Der Rückgabewert der <b>ToZodiac</b>-Funktion enthält die Tierkreisnotation als Zeichenkette.</p>
+<h3>Siehe auch</h3>
+<ul>
+<li><a href="#ToGeocentric">MEphemerides.ToGeocentric</a></li>
+<li><a href="Longitude.htm">Longitude</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- Transit --->
+<!--- ------- --->
+<h2 id="Transit">Transit</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- YearFragment --->
+<!--- ------------ --->
+<h2 id="YearFragment">YearFragment</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-02</p>
+</div></body>
+</html>

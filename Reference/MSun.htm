@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;MSun</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="Head">MSun</h1>
+<p>Die <b>MSun</b>-Klasse bündelt Berechnungen zur Sonne.</p>
+<!--- --------- --->
+<!--- �bersicht --->
+<!--- --------- --->
+<h3>Übersicht</h3>
+<ul>
+	<li><a href="#Dawn">Dawn</a></li>
+	<li><a href="#Dusk">Dusk</a></li>
+	<li><a href="#EquinoxOfAutumn">EquinoxOfAutumn</a></li>
+	<li><a href="#EquinoxOfSpring">EquinoxOfSpring</a></li>
+	<li><a href="#Latitude">Latitude</a></li>
+	<li><a href="#Longitude">Longitude</a></li>
+	<li><a href="#Position">Position</a></li>
+	<li><a href="#Radius">Radius</a></li>
+	<li><a href="#Rise">Rise</a></li>
+	<li><a href="#Set">Set</a></li>
+	<li><a href="#SolsticeOfSummer">SolsticeOfSummer</a></li>
+	<li><a href="#SolsticeOfWinter">SolcticeOfWinter</a></li>
+	<li><a href="#Transit">Transit</a></li>
+</ul>
+<hr />
+<!--- ---- --->
+<!--- Dawn --->
+<!--- ---- --->
+<h2 id="Dawn">Dawn</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Dawn</b>-Funktion setzt die julianische Tageszahl der Morgendämmerung am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung. Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Dawn</b>(
+   <i>     <a class="code" href="CPolar.htm">CPolar</a> position  </i> // Geographische Position.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Morgendämmerung.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[    double height ]</i>   // Geozentrische H�he.
+)
+
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Dawn</b>(
+   <i>     double lambda  </i>   // Geographische Länge zum Beobachter.
+   <i>     double phi     </i>   // Geographische Breite zum Beobachter.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Morgendämmerung.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[    double height ]</i>   // Geozentrische Höhe.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geographische Position des Beobachters an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die geographische Breite des Beobachters in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>jdEvent</i></td>
+		<td class="Argument">Enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Zeitpunkt überschrieben. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac12; Zeit-Minuten.</p></td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Für dieses Argument wird der gegebenfalls angegebene Tagesbruchteil verworfen und 00:00 GMT verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+	</tr><tr>
+		<td class="Argument"><i>height</i></td>
+		<td class="Argument">Gibt die geozentrische Höhe, also den Winkel des Sonnenstandes unterhalb des Horizonts an. Einige gebräuchliche Werte sind:</td>
+	</tr><tr>
+		<td class="Argument" />
+		<td class="Argument"><table>
+			<tr>
+				<td class="Title" width="90px">Gradmaß</td>
+				<td class="Title" width="90px">Bogenmaß</td>
+				<td class="Title">Konstante</td>
+				<td class="Title">Beschreibung</td>
+			</tr><tr>
+				<td align="right">-20&deg; 00&prime;</td>
+				<td align="right">-0,34907</td>
+				<td />
+				<td>Beginn der alternativen jüdische Dämmerung</td>
+			</tr><tr>
+				<td align="right" rowspan="2" valign="top">-18&deg; 00&prime;</td>
+				<td align="right" rowspan="2" valign="top">-0,31416</td>
+				<td rowspan="2" valign="top">MEphmerides.GeocentricHeight_TwilightAstronomical</td>
+				<td>Beginn der astronomischen Dämmerung</td>
+			</tr><tr>
+				<td>Beginn der islamischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-16&deg; 00&prime;</td>
+				<td align="right">-0,27925</td>
+				<td />
+				<td>Beginn der jüdischen Morgendämmerung</td>
+			</tr><tr>
+				<td align="right">-15&deg; 00&prime;</td>
+				<td align="right">-0,26180</td>
+				<td />
+				<td>Beginn der alternativen islamischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-12&deg; 00&prime;</td>
+				<td align="right">-0,20944</td>
+				<td>MEphmerides.GeocentricHeight_TwilightNautical</td>
+				<td>Beginn der nautischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-6&deg; 00&prime;</td>
+				<td align="right">-0,10472</td>
+				<td>MEphmerides.GeocentricHeight_TwilightCivil</td>
+				<td>Beginn der bürgerlichen Dämmerung</td>
+			</tr>
+		</table></td>
+	</tr><tr>
+		<td class="Argument" />
+		<td class="Argument">Wird das Argument nicht angegeben, wird zur Berechnung die geozentrische Höhe für die bürgerliche Dämmerung verwendet.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Dawn</b>-Funktion enthält die Kennung des <a href="EEventType.htm">Ereignistyps</a>.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung basiert auf dem Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 15 &#0150; <i>Rising, Transit, and Setting</i>. Die Interpolation der Ereigniszeit erfolgt durch Besselsche Interpolation unter Verwedung von drei Werten.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#Dusk">MSun.Dusk</a></li>
+	<li><a href="Rise.htm">Rise</a></li>
+	<li><a href="Set.htm">Set</a></li>
+	<li><a href="Transit.htm">Transit</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Dusk --->
+<!--- ---- --->
+<h2 id="Dusk">Dusk</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Dusk</b>-Funktion setzt die julianische Tageszahl der Abenddämmerung am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung.  Die Methode kennt zwei Überladungslinien.</p>
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Dusk</b>(
+   <i>     <a class="code" href="CPolar.htm">CPolar</a> position  </i> // Geographische Position.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Abenddämmerung.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[    double height ]</i>   // Geozentrische Höhe.
+)
+
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Dusk</b>(
+   <i>     double lambda  </i>   // Geographische Länge zum Beobachter.
+   <i>     double phi     </i>   // Geographische Breite zum Beobachter.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Abendd�mmerung.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[    double height ]</i>   // Geozentrische Höhe.
+</pre>
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geographische Position des Beobachters an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die geographische Breite des Beobachters in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>jdEvent</i></td>
+		<td class="Argument">Enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Zeitpunkt überschrieben. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac12; Zeit-Minuten.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Für dieses Argument wird der gegebenfalls angegebene Tagesbruchteil verworfen und 00:00 GMT verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+	</tr><tr>
+		<td class="Argument"><i>height</i></td>
+		<td class="Argument">Gibt die geozentrische Höhe, also den Winkel des Sonnenstandes unterhalb des Horizonts an. Einige gebräuchliche Werte sind:</td>
+	</tr><tr>
+		<td class="Argument" />
+		<td class="Argument"><table>
+			<tr>
+				<td class="Title" width="90px">Gradmaß</td>
+				<td class="Title" width="90px">Bogenmaß</td>
+				<td class="Title">Konstante</td>
+				<td class="Title">Beschreibung</td>
+			</tr><tr>
+				<td align="right">-20&deg; 00&prime;</td>
+				<td align="right">-0,34907</td>
+				<td />
+				<td>Beginn der alternativen jüdische Dämmerung</td>
+			</tr><tr>
+				<td align="right" rowspan="2" valign="top">-18&deg; 00&prime;</td>
+				<td align="right" rowspan="2" valign="top">-0,31416</td>
+				<td rowspan="2" valign="top">MEphmerides.GeocentricHeight_TwilightAstronomical</td>
+				<td>Beginn der astronomischen Dämmerung</td>
+			</tr><tr>
+				<td>Beginn der islamischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-16&deg; 00&prime;</td>
+				<td align="right">-0,27925</td>
+				<td />
+				<td>Beginn der jüdischen Morgendämmerung</td>
+			</tr><tr>
+				<td align="right">-15&deg; 00&prime;</td>
+				<td align="right">-0,26180</td>
+				<td />
+				<td>Beginn der alternativen islamischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-12&deg; 00&prime;</td>
+				<td align="right">-0,20944</td>
+				<td>MEphmerides.GeocentricHeight_TwilightNautical</td>
+				<td>Beginn der nautischen Dämmerung</td>
+			</tr><tr>
+				<td align="right">-6&deg; 00&prime;</td>
+				<td align="right">-0,10472</td>
+				<td>MEphmerides.GeocentricHeight_TwilightCivil</td>
+				<td>Beginn der bürgerlichen Dämmerung</td>
+			</tr>
+		</table></td>
+	</tr><tr>
+		<td class="Argument" />
+		<td class="Argument">Wird das Argument nicht angegeben, wird zur Berechnung die geozentrische Höhe für die bürgerliche Dämmerung verwendet.</td>
+	</tr>
+</table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>Dusk</b>-Funktion enthält die Kennung des <a href="EEventType.htm">Ereignistyps</a>.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung basiert auf dem Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 15 &#0150; <i>Rising, Transit, and Setting</i>. Die Interpolation der Ereigniszeit erfolgt durch Besselsche Interpolation unter Verwedung von drei Werten.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#Dawn">MSun.Dawn</a></li>
+	<li><a href="Rise.htm">Rise</a></li>
+	<li><a href="Set.htm">Set</a></li>
+	<li><a href="Transit.htm">Transit</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------- --->
+<!--- EquinoxOfAutumn --->
+<!--- --------------- --->
+<h2 id="EquinoxOfAutumn">EquinoxOfAutumn</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>EquinoxOfAutumn</b>-Funktion liefert die julianische Tageszahl des astronomischen Herbstanfangs zur Jahreszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>EquinoxOfAutumn</b>(
+   <i>[int year]</i>   // Jahreszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>year</i></td>
+	<td class="Argument">Gibt das Berechnungsjahr an. Wird das Argument nicht angegegen, wird zur Berechnung das aktuelle Jahr verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>EquinoxOfAutumn</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 27 &#0150; <i>Equinoxes and Solstices</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#GregorianYear">MCalendar.GregorianYear</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#EquinoxOfSpring">MSun.EquinoxOfSpring</a></li>
+	<li><a href="#SolsticeOfSummer">MSun.SolsticeOfSummer</a></li>
+	<li><a href="#SolsticeOfWinter">MSun.SolsticeOfWinter</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------- --->
+<!--- EquinoxOfSpring --->
+<!--- --------------- --->
+<h2 id="EquinoxOfSpring">EquinoxOfSpring</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>EquinoxOfSpring</b>-Funktion liefert die julianische Tageszahl des astronomischen Fr�hlingsanfangs zur Jahreszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>EquinoxOfSpring</b>(
+   <i>[int year]</i>   // Jahreszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>year</i></td>
+	<td class="Argument">Gibt das Berechnungsjahr an. Wird das Argument nicht angegegen, wird zur Berechnung das aktuelle Jahr verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>EquinoxOfSpring</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 27 &#0150; <i>Equinoxes and Solstices</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#GregorianYear">MCalendar.GregorianYear</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#EquinoxOfAutumn">MSun.EquinoxOfAutumn</a></li>
+	<li><a href="#SolsticeOfSummer">MSun.SolsticeOfSummer</a></li>
+	<li><a href="#SolsticeOfWinter">MSun.SolsticeOfWinter</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Latitude --->
+<!--- -------- --->
+<h2 id="Latitude">Latitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Latitude</b>-Funktion liefert die geozentrisch-ekliptikale Breite der Sonne zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Latitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- Longitude --->
+<!--- --------- --->
+<h2 id="Longitude">Longitude</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Longitude</b>-Funktion liefert die geozentrisch-ekliptikale Länge der Sonne zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Longitude.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- Position --->
+<!--- -------- --->
+<h2 id="Position">Position</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Position</b>-Funktion liefert die geozentrisch-ekliptikale Position der Sonne zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Position.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- Radius --->
+<!--- ------ --->
+<h2 id="Radius">Radius</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Radius</b>-Funktion liefert den geozentrisch-ekliptikalen Radiusvektor der Sonne zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Radius.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---- --->
+<!--- Rise --->
+<!--- ---- --->
+<h2 id="Rise">Rise</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Rise</b>-Funktion setzt die julianische Tageszahl des Sonnenaufgangs und die Morgenweite am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Rise.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --- --->
+<!--- Set --->
+<!--- --- --->
+<h2 id="Set">Set</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Set</b>-Funktion setzt die julianische Tageszahl des Sonnenuntergangs und die Abendweite am geographischen Ort und julianischer Tageszahl und liefert die Ereigniskennung. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Set.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- SolsticeOfSummer --->
+<!--- ---------------- --->
+<h2 id="SolsticeOfSummer">SolsticeOfSummer</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SolsticeOfSummer</b>-Funktion liefert die julianische Tageszahl des astronomischen Sommeranfangs zur Jahreszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SolsticeOfSummer</b>(
+   <i>[int year]</i>   // Jahreszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>year</i></td>
+	<td class="Argument">Gibt das Berechnungsjahr an. Wird das Argument nicht angegegen, wird zur Berechnung das aktuelle Jahr verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SolsticeOfSummer</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 27 &#0150; <i>Equinoxes and Solstices</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#GregorianYear">MCalendar.GregorianYear</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#EquinoxOfAutumn">MSun.EquinoxOfAutumn</a></li>
+	<li><a href="#EquinoxOfSpring">MSun.EquinoxOfSpring</a></li>
+	<li><a href="#SolsticeOfWinter">MSun.SolsticeOfWinter</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- SolsticeOfWinter --->
+<!--- ---------------- --->
+<h2 id="SolsticeOfWinter">SolsticeOfWinter</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>SolsticeOfWinter</b>-Funktion liefert die julianische Tageszahl des astronomischen Winteranfangs zur Jahreszahl.</p>
+<h3>Definition</h3>
+<pre>
+public static double <b>SolsticeOfWinter</b>(
+   <i>[int year]</i>   // Jahreszahl.
+)
+</pre>
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>year</i></td>
+	<td class="Argument">Gibt das Berechnungsjahr an. Wird das Argument nicht angegegen, wird zur Berechnung das aktuelle Jahr verwendet.</td>
+</tr></table>
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SolsticeOfWinter</b>-Funktion enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Die Berechnungsgenauigkeit erreicht mindestens &plusmn;&#0160;&frac12; Zeit-Minuten.</p>
+<h3>Bemerkungen</h3>
+<p>Die Berechnung verwendet Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 27 &#0150; <i>Equinoxes and Solstices</i>.</p>
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#GregorianYear">MCalendar.GregorianYear</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="#EquinoxOfAutumn">MSun.EquinoxOfAutumn</a></li>
+	<li><a href="#EquinoxOfSpring">MSun.EquinoxOfSpring</a></li>
+	<li><a href="#SolsticeOfSummer">MSun.SolsticeOfSummer</a></li>
+</ul>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- Transit --->
+<!--- ------- --->
+<h2 id="Transit">Transit</h2>
+<h3>Beschreibung</h3>
+<p>Die <b>Transit</b>-Funktion setzt die horizontale Höhe und liefert den Zeitpunkt des Meridian-Durchgangs der Sonne am geographischen Ort und zur julianischen Tageszahl. Diese Funktion wird von mehreren Klassen implementiert. Die ausführliche <a href="Transit.htm">Beschreibung</a> erfolgt an anderer Stelle.</p>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-02</p>
+</div></body>
+</html>

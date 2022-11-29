@@ -1,0 +1,181 @@
+gita
+{
+	color: #408080;
+	font-family: UbuntuRegular;
+}
+
+a:visited
+{
+	color: #878787;
+	font-family: UbuntuRegular;
+}
+
+a.code
+{
+	color: #408080;
+	font-family: UbuntuMono;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 24px;
+}
+
+a.code:visited
+{
+	color: #808080;
+	font-family: UbuntuMono;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 24px;
+}
+
+body
+{
+	background-color: #C3C3C3;
+	margin: 18px;
+}
+
+@font-face
+{
+	font-family: UbuntuCondensed;
+	src: local('Ubuntu Condensed'), url('UbuntuCondensed.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: UbuntuMono;
+	src: local('Ubuntu Mono'), url('UbuntuMono.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face
+{
+	font-family: UbuntuRegular;
+	src: local('Ubuntu'), url('UbuntuRegular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1
+{
+	color: #408080;
+	font-family: UbuntuRegular;
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 48px;
+}
+
+h2
+{
+	color: #408080;
+	font-family: UbuntuRegular;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 16px;
+}
+
+h3
+{
+	color: #FFF078;
+	font-family: UbuntuRegular;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+li
+{
+	color: #A5A5A5;
+	font-family: UbuntuRegular;
+	font-size: 12pt;
+	line-height: 18pt;
+	list-style-type: square;
+}
+
+li.Text
+{
+	color: #A5A5A5;
+	font-family: UbuntuRegular;
+	font-size: 12pt;
+	line-height: 24pt;
+	list-style-type: square;
+}
+
+p
+{
+	font-family: UbuntuRegular;
+	font-size: 12pt;
+	line-height: 15pt;
+}
+
+p.Version
+{
+	font-family: UbuntuCondensed;
+	font-size: 9pt;
+}
+
+pre
+{
+	color: #373737;
+	font-family: UbuntuMono;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+table
+{
+	background-color: #C3C3C3;
+	border: 2px solid;
+	border-color: #4B4B4B;
+}
+
+table.Argument
+{
+	border: 0px;
+	margin-left: 18px;
+	margin-top: 12px;
+}
+
+td
+{
+	background-color: #D2D2D2;
+	color: #000000;
+	font-family: UbuntuRegular;
+	font-size: 10pt;
+	padding: 4pt;
+}
+
+td.Argument
+{
+	background-color: #C3C3C3;
+	font-size: 12pt;
+	padding: 4pt;
+}
+
+td.Header
+{
+	background-color: #787878;
+	color: #FFA51E;
+	font-size: 30pt;
+	padding: 15pt;
+	text-align: center;
+}
+
+td.SubHeader
+{
+	background-color: #a9a9a9;
+	color: #0d89a6;
+	font-size: 21pt;
+	padding: 9pt;
+	text-align: center;
+}
+
+td.Title
+{
+	background-color: #787878;
+	color: #FFA51E;
+	font-size: 12pt;
+	padding: 9pt;
+	text-align: center;
+}

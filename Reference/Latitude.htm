@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;Latitude</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Latitude</h1>
+<p>Die <b>Latitude</b>-Funktion liefert die heliozentrisch-ekliptikale Breite zur julianischen Tageszahl.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public static double <b>Latitude</b>(
+   <i> <a class="code" href="EPrecision.htm">EPrecision</a> value</i>    // Genauigkeitskennung.
+   <i>[double     jd   ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<!--- --------- --->
+<!--- Argumente --->
+<!--- --------- --->
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>value</i></td>
+		<td class="Argument">Gibt die Kennung der Berechnungsgenauigkeit an.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<!--- ------------- --->
+<!--- Rückgabewerte --->
+<!--- ------------- --->
+<h3>R�ckgabewerte</h3>
+<p>Der Rückgabewert der <b>Latitude</b>-Funktion enthält die heliozentrisch-ekliptikale Breite in Bogenmaß und bezieht sich auf das Äquinoktium des Datums. Die Berechnungsgenauigkeit erreicht maximal etwa &plusmn; 0.1&Prime;.</p>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Zur Berechnung wird die <a href="Quellen.htm#Vsop87">Vsop87</a>-Theorie bzw. verwendet, wobei die Genauigkeitskennung für die Aufsummierung der Störungsterme bestimmt, welche Terme berücksichtigt werden. Bei geringer Genauigkeit wird die Berechnung bei Termen &lt;=&#0160;0,0005, bei mittlerer Genauigkeit bei Termen &lt;=&#0160;0,0000005 abgebrochen. Eine Umrechnung auf das Standard Fk5-System findet nicht statt. Im Falle des Mondes wird die <a href="Quellen.htm#Elp2000">Elp2000</a>-Theorie verwendet.</p>
+<p>Für <a href="MSun.htm#Latitude">MSun</a> und <a href="MMoon.htm">MMoon</a> liefert die <b>Latitude</b>-Funktion die <i>geozentrisch-ekliptikale</i> Breite der Sonne bzw. des Mondes.</p>
+<p>Im Falle des Mondes wird für die Berechnung mit niedriger Genauigkeit (&beta;&#0160;&plusmn;&#0160;0.2&deg;) der Algortihmus nach <a href="Quellen.htm#AstronomicalAlmanac1987">The Astronomical Almanac 1987</a> Abschnitt D &#0150; <i>Low-precision formulae for geocentric coordinates of the Moon</i> und für die mit mittlerer Genauigkeit (&beta;&#0160;&plusmn;&#0160;4&Prime;) die verkürzte <a href="Quellen.htm#Elp2000">Elp2000</a>-Theorie nach <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 47 &#0150; <i>Position of the Moon</i>, ansonsten die vollständige <a href="Quellen.htm#Elp2000">Elp2000</a>-Theorie verwendet.</p>
+<!--- ------------- --->
+<!--- Verfügbarkeit --->
+<!--- ------------- --->
+<h3>Verfügbarkeit</h3>
+<ul>
+	<li><a href="MSun.htm#Latitude">MSun</a></li>
+	<li><a href="MEarth.htm#Latitude">MEarth</a></li>
+	<li><a href="MMoon.htm#Latitude">MMoon</a></li>
+	<li><a href="MMercury.htm#Latitude">MMercury</a></li>
+	<li><a href="MVenus.htm#Latitude">MVenus</a></li>
+	<li><a href="MMars.htm#Latitude">MMars</a></li>
+	<li><a href="MJupiter.htm#Latitude">MJupiter</a></li>
+	<li><a href="MSaturn.htm#Latitude">MSaturn</a></li>
+	<li><a href="MUranus.htm#Latitude">MUranus</a></li>
+	<li><a href="MNeptune.htm#Latitude">MNeptune</a></li>
+</ul>
+<!--- ---------- --->
+<!--- Siehe auch --->
+<!--- ---------- --->
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="MEphemerides.htm#ToGeocentric">MEphemerides.ToGeocentric</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+	<li><a href="Position.htm">Position</a></li>
+	<li><a href="Radius.htm">Radius</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-01</p>
+</div></body>
+</html>

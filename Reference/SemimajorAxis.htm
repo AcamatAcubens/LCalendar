@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;SemimajorAxis</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>SemimajorAxis</h1>
+<p>Die <b>SemimajorAxis</b>-Funktion liefert die große Halbachse der mittleren Planetenbahn zur julianischen Tageszahl.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public static double<b> SemimajorAxis</b>(
+   <i>[double jd]</i>   // Julianische Tageszahl.
+)
+</pre>
+<!--- --------- --->
+<!--- Argumente --->
+<!--- --------- --->
+<h3>Argumente</h3>
+<table class="Argument"><tr>
+	<td class="Argument"><i>jd</i></td>
+	<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Das Argument steht für <a href="MMercury.htm">MMercury</a>, <a href="MVenus.htm">MVenus</a>, <a href="MEarth.htm">MEarth</a> und <a href="MMars.htm">MMars</a> nicht zur Verfügung.</td>
+</tr></table>
+<!--- ------------- --->
+<!--- Rückgabewerte --->
+<!--- ------------- --->
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der <b>SemimajorAxis</b>-Funktion enthält die große Halbachse in Astronomischen Einheiten.</p>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Die Berechnung erfolgt nach den Algorithmen von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 31 &#0150; <i>Elements of the Planetary Orbits</i>.</p>
+<!--- ------------- --->
+<!--- Verfügbarkeit --->
+<!--- ------------- --->
+<h3>Verfügbarkeit</h3>
+<ul>
+	<li><a href="MMercury.htm#SemimajorAxis">MMercury</a></li>
+	<li><a href="MVenus.htm#SemimajorAxis">MVenus</a></li>
+	<li><a href="MEarth.htm#SemimajorAxis">MEarth</a></li>
+	<li><a href="MMars.htm#SemimajorAxis">MMars</a></li>
+	<li><a href="MJupiter.htm#SemimajorAxis">MJupiter</a></li>
+	<li><a href="MSaturn.htm#SemimajorAxis">MSaturn</a></li>
+	<li><a href="MUranus.htm#SemimajorAxis">MUranus</a></li>
+	<li><a href="MNeptune.htm#SemimajorAxis">MNeptune</a></li>
+</ul>
+<!--- ---------- --->
+<!--- Siehe auch --->
+<!--- ---------- --->
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="Eccentricity.htm">Eccentricity</a></li>
+	<li><a href="Inclination.htm">Inclination</a></li>
+	<li><a href="LongitudeOfAscendingNode.htm">LongitudeOfAscendingNode</a></li>
+	<li><a href="LongitudeOfPerihelion.htm">LongitudeOfPerihelion</a></li>
+	<li><a href="MeanAnomaly.htm">MeanAnomaly</a></li>
+	<li><a href="MeanLongitude.htm">MeanLongitude</a></li>
+	<li><a href="SideralPeriod.htm">SideralPeriod</a></li>
+	<li><a href="SynodicPeriod.htm">SynodicPeriod</a></li>
+	<li><a href="TropicalPeriod.htm">TropicalPeriod</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-16</p>
+</div></body>
+</html>

@@ -1,0 +1,22 @@
+=== 
+=== Osterdatum (GregorianEaster)
+=== 
+Zur Bestimmung des Osterdatums für das Jahr X berechne man der Reihe nach folgende Größen:
+ 1. » Säkularzahl                              » K(X) = X div 100                              »  20
+ 2. » Säkulare Mondschaltung                   » M(K) = 15 + (3K + 3) div 4 − (8K + 13) div 25 »  24
+ 3. » Säkulare Sonnenschaltung                 » S(K) = 2 − (3K + 3) div 4                     » -13
+ 4. » Mondparameter                            » A(X) = X mod 19                               »   8
+ 5. » Keim für den ersten Vollmond im Frühling » D(A,M) = (19A + M) mod 30                     »  26
+ 6. » Kalendarische Korrekturgröße             » R(D,A) = (D + A div 11) div 29                »   0
+ 7. » Ostergrenze                              » OG(D,R) = 21 + D − R                          »  47
+ 8. » Ersten Sonntag im März                   » SZ(X,S) = 7 − (X + X div 4 + S) mod 7         »   6
+ 9. » Osterentfernung in Tagen¹                » OE(OG,SZ) = 7 − (OG − SZ) mod 7               »   1
+10. » Datum des Ostersonntags als Märzdatum²   » OS = OG + OE                                  »  48 --> 17.04.2022
+
+¹ die Entfernung des Ostersonntags von der Ostergrenze
+² 32. März = 1. April usw.
+
+=== 
+=== Pessach (HebrewPassover)
+=== 
+https://de.wikipedia.org/wiki/Gau%C3%9Fsche_Pessach-Formel

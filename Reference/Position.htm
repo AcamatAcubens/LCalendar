@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UFT-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;Position</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Position</h1>
+<p>Die <b>Position</b>-Funktion liefert die geozentrisch-ekliptikale Position zur julianischen Tageszahl.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="CPolar.htm">CPolar</a> <b>Position</b>(
+   <i> <a class="code" href="EPrecision.htm">EPrecision</a> value</i>    // Genauigkeitskennung.
+   <i>[double     jd   ]</i>   // Julianische Tageszahl.
+)
+</pre>
+<!--- --------- --->
+<!--- Argumente --->
+<!--- --------- --->
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>value</i></td>
+		<td class="Argument">Gibt die Kennung der Berechnungsgenauigkeit an.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungszeitpunktes an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Als Zeitmaß findet TDB Anwendung.</td>
+	</tr>
+</table>
+<!--- ------------- --->
+<!--- Rückgabewerte --->
+<!--- ------------- --->
+<h3>Rückgabewerte</h3>
+<p>Der Rückgabewert der Longitude-Funktion enthält die geozentrisch-ekliptikale Position und bezieht sich auf das Äquinoktium des Datums. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;0.1&Prime; bzw. etwa &plusmn;&#0160;0,0000001 Astronomische Einheiten.</p>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Zur Berechnung für <a href="MSun.htm#Position">MSun</a> wird die <a href="Quellen.htm#Vsop87">Vsop87</a>-Theorie verwendet, wobei die Genauigkeitskennung für die Aufsummierung der Störungsterme bestimmt, welche Terme berücksichtigt werden. Bei geringer Genauigkeit wird die Berechnung bei Termen <=&#0160;0,0005, bei mittlerer Genauigkeit bei Termen <=&#0160;0,0000005 abgebrochen. Eine Umrechnung auf das Standard Fk5-System findet nicht statt.</p>
+<p>Für <a href="MMoon.htm#Position">MMoon</a> wird für die Berechnung mit niedriger Genauigkeit (&lambda;&#0160;&plusmn;&#0160;0,3&deg;, &beta;&#0160;&plusmn;&#0160;0.2&deg;, r&#0160;&plusmn;&#0160;0.2) der Algortihmus nach <a href="Quellen.htm#AstronomicalAlmanac1987">The Astronomical Almanac 1987</a> Abschnitt D &#0150; <i>Low-precision formulae for geocentric coordinates of the Moon</i> und für die mit mittlerer Genauigkeit (&lambda;&#0160;&plusmn;&#0160;10&Prime;, &beta;&#0160;&plusmn;&#0160;4&Prime;) die verkürzte <a href="Quellen.htm#Elp2000">Elp2000</a>-Theorie nach <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 47 - <i>Position of the Moon</i>, ansonsten die vollständige <a href="Quellen.htm#Elp2000">Elp2000</a>-Theorie verwendet.</p>
+<!--- ------------- --->
+<!--- Verf�gbarkeit --->
+<!--- ------------- --->
+<h3>Verf�gbarkeit</h3>
+<ul>
+	<li><a href="MSun.htm#Position">MSun</a></li>
+	<li><a href="MEarth.htm#Position">MEarth</a></li>
+</ul>
+<!--- ---------- --->
+<!--- Siehe auch --->
+<!--- ---------- --->
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#FromDateTime">MCalendar.FromDateTime</a></li>
+	<li><a href="Latitude.htm">Latitude</a></li>
+	<li><a href="Longitude.htm">Longitude</a></li>
+	<li><a href="Radius.htm">Radius</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-16</p>
+</div></body>
+</html>

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;MCalendar</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1 id="Head">MCalendar</h1>
+<p>Die <b>MCalendar</b>-Klasse bündelt kalendarische Funktionen.</p>
+<!--- --------- --->
+<!--- Übersicht --->
+<!--- --------- --->
+<h3>übersicht</h3>
+<ul>
+	<li><a href="#DayAfter">DayAfter</a></li>
+	<li><a href="#DayBefore">DayBefore</a></li>
+	<li><a href="#DayFragment">DayFragment</a></li>
+	<li><a href="#DayNearest">DayNearest</a></li>
+	<li><a href="#DayOfWeek">DayOfWeek</a></li>
+	<li><a href="#DayOfYear">DayOfYear</a></li>
+	<li><a href="#DayOnOrAfter">DayOnOrAfter</a></li>
+	<li><a href="#DayOnOnBefore">DayOnOrBefore</a></li>
+	<li><a href="#DaysElapsed">DaysElapsed</a></li>
+	<li><a href="#DaysInYear">DaysInYear</a></li>
+	<li><a href="#DaysRemaining">DaysRemaining</a></li>
+	<li><a href="#FromArmenian">FromArmenian</a></li>
+	<li><a href="#FromCoptic">FromCoptic</a></li>
+	<li><a href="#FromDate">FromDate</a></li>
+	<li><a href="#FromDateTime">FromDateTime</a></li>
+	<li><a href="#FromEgyptian">FromEgyptian</a></li>
+	<li><a href="#FromEthiopic">FromEthiopic</a></li>
+	<li><a href="#FromGregorian">FromGregorian</a></li>
+	<li><a href="#FromHebrew">FromHebrew</a></li>
+	<li><a href="#FromIslamic">FromIslamic</a></li>
+	<li><a href="#FromJulian">FromJulian</a></li>
+	<li><a href="#FromYazdegerd">FromYazdegerd</a></li>
+	<li><a href="#FromZoroastrian">FromZoroastrian</a></li>
+	<li><a href="#GregorianFromArmenian">GregorianFromArmenian</a></li>
+	<li><a href="#GregorianFromCoptic">GregorianFromCoptic</a></li>
+	<li><a href="#GregorianFromEthiopic">GregorianFromEthiopic</a></li>
+	<li><a href="#GregorianFromHebrew">GregorianFromHebrew</a></li>
+	<li><a href="#GregorianFromHebrewBirthday">GregorianFromHebrewBirthday</a></li>
+	<li><a href="#GregorianFromHebrewYahrzeit">GregorianFromHebrewYahrzeit</a></li>
+	<li><a href="#GregorianFromIslamic">GregorianFromIslamic</a></li>
+	<li><a href="#GregorianFromJulian">GregorianFromJulian</a></li>
+	<li><a href="#GregorianYear">GregorianYear</a></li>
+	<li><a href="#HebrewBirthday">HebrewBirthday</a></li>
+	<li><a href="#HebrewDaysElapsed">HebrewDaysElapsed</a></li>
+	<li><a href="#HebrewDaysInYear">HebrewDaysInYear</a></li>
+	<li><a href="#HebrewIsLongMarheshvan">HebrewIsLongMarheshvan</a></li>
+	<li><a href="#HebrewIsShortKislev">HebrewIsShortKislev</a></li>
+	<li><a href="#HebrewLastDayOfMonth">HebrewLastDayOfMonth</a></li>
+	<li><a href="#HebrewLastMonthOfYear">HebrewLastMonthOfYear</a></li>
+	<li><a href="#HebrewMolad">HebrewMolad</a></li>
+	<li><a href="#HebrewNewYear">HebrewNewYear</a></li>
+	<li><a href="#HebrewNewYearDelay">HebrewNewYearDelay</a></li>
+	<li><a href="#HebrewYahrzeit">HebrewYahrzeit</a></li>
+	<li><a href="#IsLeapYear">IsLeapYear</a></li>
+	<li><a href="#IsLeapYearCoptic">IsLeapYearCoptic</a></li>
+	<li><a href="#IsLeapYearEthiopic">IsLeapYearEthiopic</a></li>
+	<li><a href="#IsLeapYearHebrew">IsLeapYearHebrew</a></li>
+	<li><a href="#IsLeapYearIslamic">IsLeapYearIslamic</a></li>
+	<li><a href="#IsLeapYearJulian">IsLeapYearJulian</a></li>
+	<li><a href="#IsoCalendarWeek">IsoCalendarWeek</a></li>
+	<li><a href="#IsoDaysInYear">IsoDaysInYear</a></li>
+	<li><a href="#IsoNewYear">IsoNewYear</a></li>
+	<li><a href="#LastDayOfMonth">LastDayOfMonth</a></li>
+	<li><a href="#NewYear">NewYear</a></li>
+	<li><a href="#ToArmenian">ToArmenian</a></li>
+	<li><a href="#ToCoptic">ToCoptic</a></li>
+	<li><a href="#ToDate">ToDate</a></li>
+	<li><a href="#ToDateTime">ToDateTime</a></li>
+	<li><a href="#ToEgytian">ToEgytian</a></li>
+	<li><a href="#ToEthiopic">ToEthiopic</a></li>
+	<li><a href="#ToGregorian">ToGregorian</a></li>
+	<li><a href="#ToHebrew">ToHebrew</a></li>
+	<li><a href="#ToIslamic">ToIslamic</a></li>
+	<li><a href="#ToJulian">ToJulian</a></li>
+	<li><a href="#ToTime">ToTime</a></li>
+	<li><a href="#ToYazdegerd">ToYazdegerd</a></li>
+	<li><a href="#ToZoroastrian">ToZoroastrian</a></li>
+</ul>
+<hr />
+<!--- -------- --->
+<!--- DayAfter --->
+<!--- -------- --->
+<h2 id="DayAfter">DayAfter</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- DayBefore --->
+<!--- --------- --->
+<h2 id="DayBefore">DayBefore</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- DayFragment --->
+<!--- ----------- --->
+<h2 id="DayFragment">DayFragment</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- DayNearest --->
+<!--- ---------- --->
+<h2 id="DayNearest">DayNearest</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- DayOfWeek --->
+<!--- --------- --->
+<h2 id="DayOfWeek">DayOfWeek</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- DayOfYear --->
+<!--- --------- --->
+<h2 id="DayOfYear">DayOfYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- DayOnOrAfter --->
+<!--- ------------ --->
+<h2 id="DayOnOrAfter">DayOnOrAfter</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- DayOnOrBefore --->
+<!--- ------------- --->
+<h2 id="DayOnOrBefore">DayOnOrBefore</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- DaysElapsed --->
+<!--- ----------- --->
+<h2 id="DaysElapsed">DaysElapsed</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- DaysInYear --->
+<!--- ---------- --->
+<h2 id="DaysInYear">DaysInYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- DaysRemaining --->
+<!--- ------------- --->
+<h2 id="DaysRemaining">DaysRemaining</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- FromArmenian --->
+<!--- ------------ --->
+<h2 id="FromArmenian">FromArmenian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- FromCoptic --->
+<!--- ---------- --->
+<h2 id="FromCoptic">FromCoptic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- FromDate --->
+<!--- -------- --->
+<h2 id="FromDate">FromDate</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- FromDateTime --->
+<!--- ------------ --->
+<h2 id="FromDateTime">FromDateTime</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- FromEgyptian --->
+<!--- ------------ --->
+<h2 id="FromEgyptian">FromEgyptian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------ --->
+<!--- FromEthiopic --->
+<!--- ------------ --->
+<h2 id="FromEthiopic">FromEthiopic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- FromGregorian --->
+<!--- ------------- --->
+<h2 id="FromGregorian">FromGregorian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- FromHebrew --->
+<!--- ---------- --->
+<h2 id="FromHebrew">FromHebrew</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- FromIslamic --->
+<!--- ----------- --->
+<h2 id="FromIslamic">FromIslamic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- FromJulian --->
+<!--- ---------- --->
+<h2 id="FromJulian">FromJulian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- FromYazdegerd --->
+<!--- ------------- --->
+<h2 id="FromYazdegerd">FromYazdegerd</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------- --->
+<!--- FromZoroastrian --->
+<!--- --------------- --->
+<h2 id="FromZoroastrian">FromZoroastrian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------- --->
+<!--- GregorianFromArmenian --->
+<!--- --------------------- --->
+<h2 id="GregorianFromArmenian">GregorianFromArmenian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- GregorianFromCoptic --->
+<!--- ------------------- --->
+<h2 id="GregorianFromCoptic">GregorianFromCoptic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------- --->
+<!--- GregorianFromEthiopic --->
+<!--- --------------------- --->
+<h2 id="GregorianFromEthiopic">GregorianFromEthiopic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- GregorianFromHebrew --->
+<!--- ------------------- --->
+<h2 id="GregorianFromHebrew">GregorianFromHebrew</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------------- --->
+<!--- GregorianFromHebrewBirthday --->
+<!--- --------------------------- --->
+<h2 id="GregorianFromHebrewBirthday">GregorianFromHebrewBirthday</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------------- --->
+<!--- GregorianFromHebrewYahrzeit --->
+<!--- --------------------------- --->
+<h2 id="GregorianFromHebrewYahrzeit">GregorianFromHebrewYahrzeit</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------------- --->
+<!--- GregorianFromIslamic --->
+<!--- -------------------- --->
+<h2 id="GregorianFromIslamic">GregorianFromIslamic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- GregorianFromJulian --->
+<!--- ------------------- --->
+<h2 id="GregorianFromJulian">GregorianFromJulian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- GregorianYear --->
+<!--- ------------- --->
+<h2 id="GregorianYear">GregorianYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- HebrewBirthday --->
+<!--- -------------- --->
+<h2 id="HebrewBirthday">HebrewBirthday</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------------- --->
+<!--- HebrewDaysElapsed --->
+<!--- ----------------- --->
+<h2 id="HebrewDaysElapsed">HebrewDaysElapsed</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- HebrewDaysInYear --->
+<!--- ---------------- --->
+<h2 id="HebrewDaysInYear">HebrewDaysInYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------------- --->
+<!--- HebrewIsLongMarheshvan --->
+<!--- ---------------------- --->
+<h2 id="HebrewIsLongMarheshvan">HebrewIsLongMarheshvan</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------- --->
+<!--- HebrewIsShortKislev --->
+<!--- ------------------- --->
+<h2 id="HebrewIsShortKislev">HebrewIsShortKislev</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------------- --->
+<!--- HebrewLastDayOfMonth --->
+<!--- -------------------- --->
+<h2 id="HebrewLastDayOfMonth">HebrewLastDayOfMonth</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------------- --->
+<!--- HebrewLastMonthOfYear --->
+<!--- --------------------- --->
+<h2 id="HebrewLastMonthOfYear">HebrewLastMonthOfYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- HebrewMolad --->
+<!--- ----------- --->
+<h2 id="HebrewMolad">HebrewMolad</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- HebrewNewYear --->
+<!--- ------------- --->
+<h2 id="HebrewNewYear">HebrewNewYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- HebrewNewYearDelay --->
+<!--- ------------------ --->
+<h2 id="HebrewNewYearDelay">HebrewNewYearDelay</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- HebrewYahrzeit --->
+<!--- -------------- --->
+<h2 id="HebrewYahrzeit">HebrewYahrzeit</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- IsLeapYear --->
+<!--- ---------- --->
+<h2 id="IsLeapYear">IsLeapYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- IsLeapYearCoptic --->
+<!--- ---------------- --->
+<h2 id="IsLeapYearCoptic">IsLeapYearCoptic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------------ --->
+<!--- IsLeapYearEthiopic --->
+<!--- ------------------ --->
+<h2 id="IsLeapYearEthiopic">IsLeapYearEthiopic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- IsLeapYearHebrew --->
+<!--- ---------------- --->
+<h2 id="IsLeapYearHebrew">IsLeapYearHebrew</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------------- --->
+<!--- IsLeapYearIslamic --->
+<!--- ----------------- --->
+<h2 id="IsLeapYearIslamic">IsLeapYearIslamic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------------- --->
+<!--- IsLeapYearJulian --->
+<!--- ---------------- --->
+<h2 id="IsLeapYearJulian">IsLeapYearJulian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------------- --->
+<!--- IsoCalendarWeek --->
+<!--- --------------- --->
+<h2 id="IsoCalendarWeek">IsoCalendarWeek</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- IsoDaysInYear --->
+<!--- ------------- --->
+<h2 id="IsoDaysInYear">IsoDaysInYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- IsoNewYear --->
+<!--- ---------- --->
+<h2 id="IsoNewYear">IsoNewYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------------- --->
+<!--- LastDayOfMonth --->
+<!--- -------------- --->
+<h2 id="LastDayOfMonth">LastDayOfMonth</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------- --->
+<!--- NewYear --->
+<!--- ------- --->
+<h2 id="NewYear">NewYear</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- ToArmenian --->
+<!--- ---------- --->
+<h2 id="ToArmenian">ToArmenian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToCoptic --->
+<!--- -------- --->
+<h2 id="ToCoptic">ToCoptic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- ToDate --->
+<!--- ------ --->
+<h2 id="ToDate">ToDate</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- ToDateTime --->
+<!--- ---------- --->
+<h2 id="ToDateTime">ToDateTime</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- ToEgytian --->
+<!--- --------- --->
+<h2 id="ToEgytian">ToEgytian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ---------- --->
+<!--- ToEthiopic --->
+<!--- ---------- --->
+<h2 id="ToEthiopic">ToEthiopic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- ToGregorian --->
+<!--- ----------- --->
+<h2 id="ToGregorian">ToGregorian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToHebrew --->
+<!--- -------- --->
+<h2 id="ToHebrew">ToHebrew</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- --------- --->
+<!--- ToIslamic --->
+<!--- --------- --->
+<h2 id="ToIslamic">ToIslamic</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- -------- --->
+<!--- ToJulian --->
+<!--- -------- --->
+<h2 id="ToJulian">ToJulian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------ --->
+<!--- ToTime --->
+<!--- ------ --->
+<h2 id="ToTime">ToTime</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ----------- --->
+<!--- ToYazdegerd --->
+<!--- ----------- --->
+<h2 id="ToYazdegerd">ToYazdegerd</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<hr />
+<!--- ------------- --->
+<!--- ToZoroastrian --->
+<!--- ------------- --->
+<h2 id="ToZoroastrian">ToZoroastrian</h2>
+<a href="#Head">Zum Seitenanfang</a>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-01</p>
+</div></body>
+</html>

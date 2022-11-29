@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>LCalendar&#0160;&#0150;&#0160;Rise</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Rise</h1>
+<p>Die <b>Rise</b>-Funktion setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung. Die Methode kennt zwei Überladungslinien.</p>
+<hr />
+<!--- ---------- --->
+<!--- Definition --->
+<!--- ---------- --->
+<h3>Definition</h3>
+<pre>
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Rise</b>(
+   <i>     <a class="code" href="CPolar.htm">CPolar</a> position  </i> // Geographische Position.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Aufgangs.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[ref double azimuth]</i>   // Morgenweite.
+)
+
+public static <a class="code" href="EEventType.htm">EEventType</a> <b>Rise</b>(
+   <i>     double lambda  </i>   // Geographische Länge zum Beobachter.
+   <i>     double phi     </i>   // Geographische Breite zum Beobachter.
+   <i> ref double jdEvent </i>   // Julianische Tageszahl der Aufgangs.
+   <i>[    double jd     ]</i>   // Julianische Tageszahl.
+   <i>[ref double azimuth]</i>   // Morgenweite.
+)
+</pre>
+<!--- --------- --->
+<!--- Argumente --->
+<!--- --------- --->
+<h3>Argumente</h3>
+<table class="Argument">
+	<tr>
+		<td class="Argument"><i>position</i></td>
+		<td class="Argument">Gibt die geographische Position des Beobachters an.</td>
+	</tr><tr>
+		<td class="Argument"><i>lambda</i></td>
+		<td class="Argument">Gibt die geographische Länge des Beobachters in Bogenmaß an. Orte westlich von Greenwich haben eine positive Länge, Orte östlich eine negative Länge.</td>
+	</tr><tr>
+		<td class="Argument"><i>phi</i></td>
+		<td class="Argument">Gibt die geographische Breite des Beobachters in Bogenmaß an. Orte nördlich des Äquators haben eine positive Breite, Orte südlich eine negative Breite.</td>
+	</tr><tr>
+		<td class="Argument"><i>jdEvent</i></td>
+		<td class="Argument">Enthält den Zeitpunkt des Ereignisses als julianische Tageszahl. Der bei der Übergabe enthaltene Wert wird verworfen und mit dem berechneten Zeitpunkt überschrieben. Die Berechnungsgenauigkeit erreicht etwa &plusmn;&#0160;&frac12; Zeit-Minuten.</td>
+	</tr><tr>
+		<td class="Argument"><i>jd</i></td>
+		<td class="Argument">Gibt die julianische Tageszahl des Berechnungstages an. Wird das Argument nicht angegeben, wird zur Berechnung das aktuelle Systemdatum verwendet. Für dieses Argument wird der gegebenfalls angegebene Tagesbruchteil verworfen und 00:00 GMT verwendet. Der ursprüngliche Wert bleibt erhalten.</td>
+	</tr><tr>
+		<td class="Argument"><i>azimuth</i></td>
+		<td class="Argument">Enthält die Morgenweite in Bogenmaß. Der bei der übergabe enthaltene Wert wird verworfen und mit dem berechneten Zeitpunkt überschrieben.</td>
+	</tr>
+</table>
+<!--- ------------- --->
+<!--- Rückgabewerte --->
+<!--- ------------- --->
+<h3>R�ckgabewerte</h3>
+<p>Der Rückgabewert der <b>Rise</b>-Funktion enthält die Kennung des <a href="EEventType.htm">Ereignistyps</a>.</p>
+<!--- ----------- --->
+<!--- Bemerkungen --->
+<!--- ----------- --->
+<h3>Bemerkungen</h3>
+<p>Die Berechnung basiert auf dem Algorithmus von <a href="Quellen.htm#Meeus">Meeus</a> Kapitel 15 &#0150; <i>Rising, Transit, and Setting</i>. Die Interpolation der Ereigniszeit erfolgt durch Besselsche Interpolation unter Verwedung von drei Werten.</p>
+<!--- ------------- --->
+<!--- Verfügbarkeit --->
+<!--- ------------- --->
+<h3>Verfügbarkeit</h3>
+<ul>
+	<li><a href="MSun.htm#Rise">MSun</a></li>
+	<li><a href="MMoon.htm#Rise">MMoon</a></li>
+	<li><a href="MMercury.htm#Rise">MMercury</a></li>
+	<li><a href="MVenus.htm#Rise">MVenus</a></li>
+	<li><a href="MMars.htm#Rise">MMars</a></li>
+	<li><a href="MJupiter.htm#Rise">MJupiter</a></li>
+	<li><a href="MSaturn.htm#Rise">MSaturn</a></li>
+	<li><a href="MUranus.htm#Rise">MUranus</a></li>
+	<li><a href="MNeptune.htm#Rise">MNeptune</a></li>
+</ul>
+<!--- ---------- --->
+<!--- Siehe auch --->
+<!--- ---------- --->
+<h3>Siehe auch</h3>
+<ul>
+	<li><a href="MCalendar.htm#FromDate">MCalendar.FromDate</a></li>
+	<li><a href="MCalendar.htm#ToDateTime">MCalendar.ToDateTime</a></li>
+	<li><a href="MEphemerides.htm#Rise">MEphemerides.Rise</a></li>
+	<li><a href="MEphemerides.htm#Set">MEphemerides.Set</a></li>
+	<li><a href="MEphemerides.htm#Transit">MEphemerides.Transit</a></li>
+	<li><a href="CSun.htm#Dawn">CSun.Dawn</a></li>
+	<li><a href="CSun.htm#Dusk">CSun.Dusk</a></li>
+	<li><a href="Set.htm">Set</a></li>
+	<li><a href="Transit.htm">Transit</a></li>
+</ul>
+<!--- ------ --->
+<!--- Footer --->
+<!--- ------ --->
+<div align="center">
+<div style="height: 18px;"></div>
+<hr />
+<p>Fehlerhinweise, Kommentare und Anregungen sind <a href="mailto:acamat@web.de">mir</a> herzlich willkommen.</p>
+<div style="height: 6px;"></div>
+<p class="Version">Last Update: 2021-05-16</p>
+</div></body>
+</html>
