@@ -573,14 +573,11 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		CDate  Y     = MCalendar.ToArmenian(Jan01)                     // Armentische Datum zum Jahresbeginn
-		int    Y     = 0;                                              // Armenische Jahreszahl
-		int    M     = 0;                                              // Armenische Monatszahl
-		int    D     = 0;                                              // Armenische Tageszahl
+		CDate  Y     = MCalendar.ToArmenian(Jan01);                    // Armentische Datum zum gregorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.FromArmenian(D.Year    , monthArmenian, dayArmenian);
-		double D2 = MCalendar.FromArmenian(D.Year + 1, monthArmenian, dayArmenian);
+		double D1 = MCalendar.FromArmenian(Y.Year    , monthArmenian, dayArmenian);
+		double D2 = MCalendar.FromArmenian(Y.Year + 1, monthArmenian, dayArmenian);
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
@@ -608,7 +605,7 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		CDate  D     = MCalendar.ToCoptic(Jan01);                      // Koptisches Datum zum Jahresbeginn
+		CDate  D     = MCalendar.ToCoptic(Jan01);                      // Koptisches Datum zum gregorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
 		double D1 = MCalendar.FromCoptic(D.Year,     monthCoptic, dayCoptic); // Erstes mögliche Datum
@@ -639,16 +636,11 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		int    Y     = 0;                                              // Ethiopische Jahreszahl
-		int    M     = 0;                                              // Ethiopische Monatszahl
-		int    D     = 0;                                              // Ethiopische Tageszahl
-
-		// Ethiopisches Datum des Jahresbeginn berechnen
-		MCalendar.ToEthiopic(Jan01, ref Y, ref M, ref D);
+		CDate  Y     = MCalendar.ToEthiopic(Jan01);                    // Ethiopisches Datum zum gregorianen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.FromEthiopic(Y,     monthEthiopic, dayEthiopic); // Erstes mögliche Datum
-		double D2 = MCalendar.FromEthiopic(Y + 1, monthEthiopic, dayEthiopic); // ZWeites mögliche Datum
+		double D1 = MCalendar.FromEthiopic(Y.Year,     monthEthiopic, dayEthiopic); // Erstes mögliche Datum
+		double D2 = MCalendar.FromEthiopic(Y.Year + 1, monthEthiopic, dayEthiopic); // ZWeites mögliche Datum
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
@@ -664,27 +656,22 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrew(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum des jüdischen Datums zum gregorianischen Jahr.
+	/// Liefert das hebräische Datum des jüdischen Datums zum gregorianischen Jahr.
 	/// </summary>
-	/// <param name="monthHebrew">Jüdische Monatszahl.</param>
-	/// <param name="dayHebrew">Jüdische Tageszahl.</param>
+	/// <param name="monthHebrew">Hebräische Monatszahl.</param>
+	/// <param name="dayHebrew">Hebräische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahrezahl.</param>
-	/// <returns>Julianisches Datum des jüdischen Datums zum gregorianischen Jahr.</returns>
+	/// <returns>Hebräisches Datum des jüdischen Datums zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrew(int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		int    Y     = 0;                                              // Jüdische Jahreszahl
-		int    M     = 0;                                              // Jüdische Monatszahl
-		int    D     = 0;                                              // Jüdische Tageszahl
-
-		// Jüdisches Datum des Jahresbeginn berechnen
-		MCalendar.ToHebrew(Jan01, ref Y, ref M, ref D);
+		CDate  Y     = MCalendar.ToHebrew(Jan01);                      // Hebräische Datum zum gregorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.FromHebrew(Y,     monthHebrew, dayHebrew); // Erstes mögliche Datum
-		double D2 = MCalendar.FromHebrew(Y + 1, monthHebrew, dayHebrew); // Zweites mögliche Datum
+		double D1 = MCalendar.FromHebrew(Y.Year,     monthHebrew, dayHebrew); // Erstes mögliche Datum
+		double D2 = MCalendar.FromHebrew(Y.Year + 1, monthHebrew, dayHebrew); // Zweites mögliche Datum
 
 		// Zutreffende Tageszahl zurückgeben
 		if(Jan01 <= D1 && D1 <= Dec31)
@@ -694,28 +681,23 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrewBirthday(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum jüdischen Geburtstag und zum gregorianischen Jahr.
+	/// Liefert das julianische Datum zum hebräischen Geburtstag und zum gregorianischen Jahr.
 	/// </summary>
-	/// <param name="yearHebrew">Jüdische Jahreszahl.</param>
-	/// <param name="monthHebrew">Jüdische Monatszahl.</param>
-	/// <param name="dayHebrew">Jüdische Tageszahl.</param>
+	/// <param name="yearHebrew">Hebräische Jahreszahl.</param>
+	/// <param name="monthHebrew">Hebräische Monatszahl.</param>
+	/// <param name="dayHebrew">Hebräische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Julianische Datum zum jüdischen Geburtstag und zum gregorianischen Jahr.</returns>
+	/// <returns>Julianische Datum zum hebräischen Geburtstag und zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrewBirthday(int yearHebrew, int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		int    Y     = 0;                                              // Jüdische Jahreszahl
-		int    M     = 0;                                              // Jüdische Monatszahl
-		int    D     = 0;                                              // Jüdische Tageszahl
-
-		// Jüdischews Datum des Jahresbeginn berechnen
-		MCalendar.ToHebrew(Jan01, ref Y, ref M, ref D);
+		CDate  Y     = MCalendar.ToHebrew(Jan01);                      // Hebräische Datum zum gregorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.HebrewBirthday(yearHebrew, monthHebrew, dayHebrew, Y);     // Erstes mögliche Datum
-		double D2 = MCalendar.HebrewBirthday(yearHebrew, monthHebrew, dayHebrew, Y + 1); // Zweites mögliche Datum
+		double D1 = MCalendar.HebrewBirthday(yearHebrew, monthHebrew, dayHebrew, Y.Year);     // Erstes mögliche Datum
+		double D2 = MCalendar.HebrewBirthday(yearHebrew, monthHebrew, dayHebrew, Y.Year + 1); // Zweites mögliche Datum
 
 		// Zutreffende Tageszahl zurückgeben
 		if(Jan01 <= D1 && D1 <= Dec31)
@@ -725,28 +707,23 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrewYahrzeit(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum jüdischen Todestag und zum gregorianischen Jahr.
+	/// Liefert das julianische Datum zum hebräische Todestag und zum gregorianischen Jahr.
 	/// </summary>
 	/// <param name="yearHebrew">Jüdische Jahreszahl.</param>
 	/// <param name="monthHebrew">Jüdische Monatszahl.</param>
 	/// <param name="dayHebrew">Jüdische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl</param>
-	/// <returns>Julianische Datum zum jüdischen Todestag und zum gregorianischen Jahr.</returns>
+	/// <returns>Julianische Datum zum hebräischen Todestag und zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrewYahrzeit(int yearHebrew, int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		int    Y     = 0;                                              // Jüdische Jahreszahl
-		int    M     = 0;                                              // Jüdische Monatszahl
-		int    D     = 0;                                              // Jüdische Tageszahl
-
-		// Jüdisches Datum des Jahresbeginn berechnen
-		MCalendar.ToHebrew(Jan01, ref Y, ref M, ref D);
+		CDate  Y     = MCalendar.ToHebrew(Jan01);                      // Hebräisches Datum zum greogorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.HebrewYahrzeit(yearHebrew, monthHebrew, dayHebrew, Y);     // Erstes mögliche Datum
-		double D2 = MCalendar.HebrewYahrzeit(yearHebrew, monthHebrew, dayHebrew, Y + 1); // Zweites mögliche Datum
+		double D1 = MCalendar.HebrewYahrzeit(yearHebrew, monthHebrew, dayHebrew, Y.Year);     // Erstes mögliche Datum
+		double D2 = MCalendar.HebrewYahrzeit(yearHebrew, monthHebrew, dayHebrew, Y.Year + 1); // Zweites mögliche Datum
 
 		// Zutreffende Tageszahl zurückgeben
 		if(Jan01 <= D1 && D1 <= Dec31)
@@ -756,7 +733,7 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromIslamic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die julianischen Daten zum islamischen Datum und zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die hebräischen Daten zum islamischen Datum und zum gregorianischen Jahr.
 	/// /// </summary>
 	/// <param name="monthIslamic">Islamische Monatszahl.</param>
 	/// <param name="dayIslamic">Islamische Tageszahl.</param>
@@ -769,18 +746,13 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGreogorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGreogorian, 12, 31); // Jahresende
-		int    Y     = 0;                                               // Islamische Jahreszahl
-		int    M     = 0;                                               // Islamische Monatszahl
-		int    D     = 0;                                               // Islamische Tageszahl
+		CDate  Y     = MCalendar.ToIslamic(Jan01);                      // Islamische Datum zum gregorianischen Jahresbeginn
 		int    N     = 0;                                               // Anzahl der Ereignisse
 
-		// Islamisches Datum des Jahresbeginn berechnen
-		MCalendar.ToIslamic(Jan01, ref Y, ref M, ref D);
-
 		// Lokale Felder einrichten
-		double D1 = MCalendar.FromIslamic(Y,     monthIslamic, dayIslamic); // Erstes mögliche Datum
-		double D2 = MCalendar.FromIslamic(Y + 1, monthIslamic, dayIslamic); // Zweites mögliche Datum
-		double D3 = MCalendar.FromIslamic(Y + 2, monthIslamic, dayIslamic); // Drittes mögliche Datum
+		double D1 = MCalendar.FromIslamic(Y.Year,     monthIslamic, dayIslamic); // Erstes mögliche Datum
+		double D2 = MCalendar.FromIslamic(Y.Year + 1, monthIslamic, dayIslamic); // Zweites mögliche Datum
+		double D3 = MCalendar.FromIslamic(Y.Year + 2, monthIslamic, dayIslamic); // Drittes mögliche Datum
 
 		// Rückgabewerte einrichten
 		double jd1 = 0.0;
@@ -821,7 +793,7 @@ public static class MCalendar
 		}
 
 		// Rückgabe
-		return(M, jd1, jd2);
+		return(N, jd1, jd2);
 	}
 
 	// MCalendar.GregorianFromJulian(int, int, int)
@@ -837,16 +809,11 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
 		double Dec31 = MCalendar.FromGregorian(yearGregorian, 12, 31); // Jahresende
-		int    Y     = 0;                                              // Julianische Jahreszahl
-		int    M     = 0;                                              // Julianische Monatszahl
-		int    D     = 0;                                              // Julianische Tageszahl
-
-		// Julianisches Datum des Jahresbeginn berechnen
-		MCalendar.ToJulian(Jan01, ref Y, ref M, ref D);
+		CDate  Y     = MCalendar.ToJulian(Jan01);                      // Julianische Datum zum gregorianischen Jahresbeginn
 
 		// Lokale Felder einrichten
-		double D1 = MCalendar.FromJulian(Y,                   monthJulian, dayJulian); // Erstes mögliche Datum
-		double D2 = MCalendar.FromJulian(Y == -1 ? 1 : Y + 1, monthJulian, dayJulian); // Zweites mögliche Datum
+		double D1 = MCalendar.FromJulian(Y.Year,                        monthJulian, dayJulian); // Erstes mögliche Datum
+		double D2 = MCalendar.FromJulian(Y.Year == -1 ? 1 : Y.Year + 1, monthJulian, dayJulian); // Zweites mögliche Datum
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)

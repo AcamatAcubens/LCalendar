@@ -1,5 +1,6 @@
 ﻿using Acamat.LCore;
 using Acamat.LMath;
+using Acamat.LMath.Geometry;
 using System;
 using System.Text;
 
