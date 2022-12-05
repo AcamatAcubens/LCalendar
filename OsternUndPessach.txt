@@ -16,7 +16,20 @@ Zur Bestimmung des Osterdatums für das Jahr X berechne man der Reihe nach folge
 ¹ die Entfernung des Ostersonntags von der Ostergrenze
 ² 32. März = 1. April usw.
 
+// Hilfsgrößen berechnen
+int K  = year / 100;                              // Säkularzahl
+int M  = 15 + (3 * K + 3) / 4 - (8 * K +13) / 25; // Säkulare Mondschaltung
+int S  = 2 - (3 * K + 3) / 4;                     // Säkulare Sonnenschaltung
+int A  = year % 19;                               // Mondparameter 
+int D  = (19 * A + M) % 30;                       // Keim für den erstenl Vollmond im Frühling
+int R  = (D + A / 11) / 29;                       // Kalendarische Korrekturgröße
+int OG = 21 + D - R;                              // Ostergrenze
+int SZ = 7 - (year + year / 4 + S) % 7;           // Erster Sonntag im März
+int OE = 7 - (OG - SZ) % 7;                       // Osterentfernung in Tagen
+int OS = OG + OE;                                 // Datum des Ostersonntags als Märzdatum
+
 === 
 === Pessach (HebrewPassover)
 === 
 https://de.wikipedia.org/wiki/Gau%C3%9Fsche_Pessach-Formel
+

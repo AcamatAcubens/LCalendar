@@ -106,7 +106,7 @@ public class CDate : CListItem
 	public CDate(double jd)
 	{
 		// Felder einrichten
-		DateTime itm = MCalendar.ToDate(jd);
+		DateTime itm = MCalendar.ToDateTime(jd);
 		this.Day   = itm.Day;
 		this.Month = itm.Month;
 		this.Year  = itm.Year;
@@ -134,6 +134,13 @@ public class CDate : CListItem
 	/// Liefert oder übernimmt die Monatszahl.
 	/// </summary>
 	public int Month{ get;  set; }
+
+	// CDate.ToJdn()
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum gregorianischen Datum.
+	/// </summary>
+	/// <returns>Julianische Tageszahl zum gregorianischen Datum.</returns>
+	public double ToJdn(){ return MCalendar.FromGregorian(this.Year, this.Month, this.Day); }
 
 	// CDate.ToString()
 	/// <summary>

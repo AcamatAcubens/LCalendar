@@ -152,65 +152,65 @@ public static class MCalendar
 
 	// MCalendar.DayBefore(double, EWeekDay, int)
 	/// <summary>
-	/// Liefert das julianische Datum des n-ten Wochentages vor der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des n-ten Wochentages vor der julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="weekDay">Kennung zum Wochentag.</param>
 	/// <param name="n">Ordinalzahl.</param>
-	/// <returns>Julianisches Datum des n-ten Wochentages vor der julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl des n-ten Wochentages vor der julianischen Tageszahl.</returns>
 	public static double DayBefore(double jd, EWeekDay weekDay, int n){ return jd + MMod.Mod(weekDay - MCalendar.DayOfWeek(jd), 7.0) - 7.0 * n; }
 
 	// MCalendar.DayNearest(double, EWeekDayList)
 	/// <summary>
-	/// Liefert das julianische Datum des nächstgelegenen Wochentages zur julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächstgelegenen Wochentages zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="weekDay">Kennung des Wochentags.</param>
-	/// <returns>Julianisches Datum des nächstgelegenen Wochentages zur julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl des nächstgelegenen Wochentages zur julianischen Tageszahl.</returns>
 	public static double DayNearest(double jd, EWeekDay weekDay){ return MCalendar.DayOnOrBefore(jd + 3.0, weekDay, 1); }
 
 	// MCalendar.DayOfWeek(double)
 	/// <summary>
-	/// Liefert die Kennung zum Wochentag zum julianischen Datum.
+	/// Liefert die Kennung zum Wochentag zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Kennung des Wochentags zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Kennung des Wochentags zur julianischen Tageszahl.</returns>
 	public static EWeekDay DayOfWeek(double jd){ return (EWeekDay)((int)jd % 7); }
 
 	// MCalendar.DayOfYear(double)
 	/// <summary>
-	/// Liefert die Tageszahl im gregorianischen Jahr zum julianischen Datum.
+	/// Liefert die Tageszahl im gregorianischen Jahr zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Tageszahl im gregorianischen Jahr zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Tageszahl im gregorianischen Jahr zur julianischen Tageszahl.</returns>
 	public static double DayOfYear(double jd){ return MCalendar.DaysElapsed(jd) + 1.0; }
 
 	// MCalendar.DayOnOrAfter(double, EWeekDayList, int)
 	/// <summary>
-	/// Liefert das julianische Datum des n-ten Wochentages zur oder nach dem julianischen Datum.
+	/// Liefert die julianische Tageszahl des n-ten Wochentages zur oder nach dem julianischen Datum.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="weekDay">Kennung des Wochentags.</param>
 	/// <param name="n">Anzahl.</param>
-	/// <returns>Julianisches Datum des n-ten Wochentages zur oder nach dem julianischen Datum.</returns>
+	/// <returns>Julianische Tageszahl des n-ten Wochentages zur oder nach dem julianischen Datum.</returns>
 	public static double DayOnOrAfter(double jd, EWeekDay weekDay, int n){ return jd + MMod.Mod(weekDay - MCalendar.DayOfWeek(jd), 7.0) + 7.0 * (n - 1); }
 
 	// MCalendar.DayOnOrBefore(double, EWeekDayList, int)
 	/// <summary>
-	/// Liefert das julianische Datum des n-ten Wochentages zur oder vor dem julianischen Datum.
+	/// Liefert die julianische Tageszahl des n-ten Wochentages zur oder vor dem julianischen Datum.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="weekDay">Kennung des Wochentags.</param>
 	/// <param name="n">Anzahl.</param>
-	/// <returns>Julianisches Datum des n-ten Wochentages zur oder vor dem julianischen Datum.</returns>
+	/// <returns>Julianische Tageszahl des n-ten Wochentages zur oder vor dem julianischen Datum.</returns>
 	public static double DayOnOrBefore(double jd, EWeekDay weekDay, int n){ return jd - MMod.Mod(MCalendar.DayOfWeek(jd) - weekDay, 7.0) - 7.0 * (n - 1); }
 
 	// MCalendar.DaysElapsed(double)
 	/// <summary>
-	/// Liefert die Anzahl der verstrichenen Tage im gregorianischen Jahr zum julianischen Datum.
+	/// Liefert die Anzahl der verstrichenen Tage im gregorianischen Jahr zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Anzahl der verstrichenen Tage im gregorianischen Jahr zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Anzahl der verstrichenen Tage im gregorianischen Jahr zur julianischen Tageszahl.</returns>
 	public static double DaysElapsed(double jd)
 	{
 		// Anzahl berechnen
@@ -228,10 +228,10 @@ public static class MCalendar
 
 	// MCalendar.DaysRemaining(double)
 	/// <summary>
-	/// Liefert die Anzahl der verbleibenden Tage im gregorianischen Jahr zum julianischen Datum.
+	/// Liefert die Anzahl der verbleibenden Tage im gregorianischen Jahr zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Anzahl der verbleibenden Tage im gregorianischen Jahr zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Anzahl der verbleibenden Tage im gregorianischen Jahr zur julianischen Tageszahl.</returns>
 	public static double DaysRemaining(double jd)
 	{
 		// Anzahl berechnen
@@ -241,132 +241,132 @@ public static class MCalendar
 
 	// MCalendar.FromArmenian(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum armenischen Datum.
+	/// Liefert die julianische Tageszahl zum armenischen Datum.
 	/// </summary>
 	/// <param name="date">Armenisches Datum.</param>
-	/// <returns>Julianisches Datum zum armenischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum armenischen Datum.</returns>
 	public static double FromArmenian(CDate date){ return MCalendar.FromArmenian(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromArmenian(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des armenischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des armenischen Jahres.
 	/// </summary>
 	/// <param name="year">Armenische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des armenischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des armenischen Jahres.</returns>
 	public static double FromArmenian(int year){ return MCalendar.FromArmenian(year, 1, 1); }
 
 	// MCalendar.FromArmenian(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum armenischen Datum.
+	/// Liefert die julianische Tageszahl zum armenischen Datum.
 	/// </summary>
 	/// <param name="year">Armenische Jahreszahl.</param>
 	/// <param name="month">Armenische Monatszahl.</param>
 	/// <param name="day">Armenische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum armenischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum armenischen Datum.</returns>
 	public static double FromArmenian(int year, int month, int day){ return MCalendar.EpochArmenian + (double)(365 * (year - 1)) + (double)(30 * (month - 1)) + (double)(day - 1); }
 
 	// MCalendar.FromCoptic(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum koptischen Datum.
+	/// Liefert die julianische Tageszahl zum koptischen Datum.
 	/// </summary>
 	/// <param name="date">Koptisches Datum.</param>
-	/// <returns>Julianisches Datum zum koptischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum koptischen Datum.</returns>
 	public static double FromCoptic(CDate date){ return MCalendar.FromCoptic(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromCoptic(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des koptischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des koptischen Jahres.
 	/// </summary>
 	/// <param name="year">Koptische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des koptischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des koptischen Jahres.</returns>
 	public static double FromCoptic(int year){ return MCalendar.FromCoptic(year, 1, 1); }
 
 	// MCalendar.FromCoptic(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum koptischen Datum.
+	/// Liefert die julianische Tageszahl zum koptischen Datum.
 	/// </summary>
 	/// <param name="year">Koptische Jahreszahl.</param>
 	/// <param name="month">Koptische Monatszahl.</param>
 	/// <param name="day">Koptische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum koptischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum koptischen Datum.</returns>
 	public static double FromCoptic(int year, int month, int day){ return MCalendar.EpochCoptic + (double)(365 * (year - 1)) + MMath.Floor(year / 4.0) + (double)(30 * (month - 1)) + (double)(day - 1); }
 
 	// MCalendar.FromEgyptian(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum ägyptischen Datum.
+	/// Liefert die julianische Tageszahl zum ägyptischen Datum.
 	/// </summary>
 	/// <param name="date">Ägyptisches Datum.</param>
-	/// <returns>Julianisches Datum zum ägyptischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum ägyptischen Datum.</returns>
 	public static double FromEgyptian(CDate date){ return MCalendar.FromEgyptian(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromEgyptian(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des ägyptischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des ägyptischen Jahres.
 	/// </summary>
 	/// <param name="year">Ägyptische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des ägyptischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des ägyptischen Jahres.</returns>
 	public static double FromEgyptian(int year){ return MCalendar.FromEgyptian(year, 1, 1); }
 
 	// MCalendar.FromEgyptian(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum ägyptischen Datum.
+	/// Liefert die julianische Tageszahl zum ägyptischen Datum.
 	/// </summary>
 	/// <param name="year">Ägyptische Jahreszahl.</param>
 	/// /// <param name="month">Ägyptische Monatszahl.</param>
 	/// <param name="day">Ägyptische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum ägyptischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum ägyptischen Datum.</returns>
 	public static double FromEgyptian(int year, int month, int day){ return MCalendar.EpochEgyptian + (double)(365 * (year - 1)) + (double)(30 * (month - 1)) + (double)(day - 1); }
 
 	// MCalendar.FromEthiopic(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum äthiopischen Datum.
+	/// Liefert die julianische Tageszahl zum äthiopischen Datum.
 	/// </summary>
 	/// <param name="date">Äthiopischen Datum.</param>
-	/// <returns>Julianisches Datum zum äthiopischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum äthiopischen Datum.</returns>
 	public static double FromEthiopic(CDate date){ return MCalendar.FromEthiopic(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromEthiopic(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des äthiopischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des äthiopischen Jahres.
 	/// </summary>
 	/// <param name="year">Äthiopische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des äthiopischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des äthiopischen Jahres.</returns>
 	public static double FromEthiopic(int year){ return MCalendar.FromEthiopic(year, 1, 1); }
 
 	// MCalendar.FromEthiopic(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum äthiopischen Datum.
+	/// Liefert die julianische Tageszahl zum äthiopischen Datum.
 	/// </summary>
 	/// <param name="year">Äthiopische Jahreszahl.</param>
 	/// <param name="month">Äthiopische Monatszahl.</param>
 	/// <param name="day">Äthiopische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum äthiopischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum äthiopischen Datum.</returns>
 	public static double FromEthiopic(int year, int month, int day){ return MCalendar.EpochEthiopic + (double)(365 * (year - 1)) + MMath.Floor(year / 4.0) + (double)(30 * (month - 1)) + (double)(day - 1); 	}
 
 	// MCalendar.FromGregorian(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum gregorianischen Datum.
+	/// Liefert die julianische Tageszahl zum gregorianischen Datum.
 	/// </summary>
 	/// <param name="date">Gregorianisches Datum.</param>
-	/// <returns>Julianisches Datum zum gregorianischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum gregorianischen Datum.</returns>
 	public static double FromGregorian(CDate date){ return MCalendar.FromGregorian(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromGregorian(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des greogorianischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des greogorianischen Jahres.
 	/// </summary>
 	/// <param name="year">Gregorianische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des greogorianischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des greogorianischen Jahres.</returns>
 	public static double FromGregorian(int year){ return MCalendar.FromGregorian(year, 1, 1); }
 
 	// MCalendar.FromGregorian(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum greogorianischen Datum.
+	/// Liefert die julianische Tageszahl zum greogorianischen Datum.
 	/// </summary>
 	/// <param name="year">Gregorianische Jahreszahl.</param>
 	/// <param name="month">Gregorianische Monatszahl.</param>
 	/// <param name="day">Gregorianische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum greogorianischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum greogorianischen Datum.</returns>
 	public static double FromGregorian(int year, int month, int day)
 	{
 		// Lokale Felder einrichten
@@ -386,28 +386,28 @@ public static class MCalendar
 
 	// MCalendar.FromHebrew(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum jüdischen Datum.
+	/// Liefert die julianische Tageszahl zum jüdischen Datum.
 	/// </summary>
 	/// <param name="date">Jüdisches Datum.</param>
-	/// <returns>Julianisches Datum zum jüdischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum jüdischen Datum.</returns>
 	public static double FromHebrew(CDate date){ return MCalendar.FromHebrew(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromHebrew(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des jüdischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des jüdischen Jahres.
 	/// </summary>
 	/// <param name="year">Jüdische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des jüdischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des jüdischen Jahres.</returns>
 	public static double FromHebrew(int year){ return MCalendar.FromHebrew(year, 1, 1); }
 
 	// MCalendar.FromHebrew(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum jüdischen Datum.
+	/// Liefert die julianische Tageszahl zum jüdischen Datum.
 	/// </summary>
 	/// <param name="year">Jüdische Jahreszahl.</param>
 	/// <param name="month">Jüdische Monatszahl.</param>
 	/// <param name="day">Jüdische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum jüdischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum jüdischen Datum.</returns>
 	public static double FromHebrew(int year, int month, int day)
 	{
 		// Lokale Felder einrichten
@@ -432,28 +432,28 @@ public static class MCalendar
 
 	// MCalendar.FromIslamic(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum islamischen Datum.
+	/// Liefert die julianische Tageszahl zum islamischen Datum.
 	/// </summary>
 	/// <param name="date">Islamisches Datum.</param>
-	/// <returns>Julianisches Datum zum islamischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum islamischen Datum.</returns>
 	public static double FromIslamic(CDate date){ return MCalendar.FromIslamic(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromIslamic(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des islamischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des islamischen Jahres.
 	/// </summary>
 	/// <param name="year">Islamische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des islamischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des islamischen Jahres.</returns>
 	public static double FromIslamic(int year){ return MCalendar.FromIslamic(year, 1, 1); }
 
 	// MCalendar.FromIslamic(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum islamischen Datum.
+	/// Liefert die julianische Tageszahl zum islamischen Datum.
 	/// </summary>
 	/// <param name="year">Islamische Jahreszahl.</param>
 	/// <param name="month">Islamische Monatszahl.</param>
 	/// <param name="day">Islamische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum islamischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum islamischen Datum.</returns>
 	public static double FromIslamic(int year, int month, int day)
 	{
 		// Lokale Felder einrichten
@@ -469,28 +469,28 @@ public static class MCalendar
 
 	// MCalendar.FromJulian(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum julianischen Datum.
+	/// Liefert die julianische Tageszahl zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="date">Julianisches Datum.</param>
-	/// <returns>Julianisches Datum zum julianischen Datum.</returns>
+	/// <param name="date">Julianische Tageszahl.</param>
+	/// <returns>Julianische Tageszahl zur julianischen Tageszahl.</returns>
 	public static double FromJulian(CDate date){ return MCalendar.FromJulian(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromJulian(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des julianischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des julianischen Jahres.
 	/// </summary>
 	/// <param name="year">Julianische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des julianischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des julianischen Jahres.</returns>
 	public static double FromJulian(int year){ return MCalendar.FromJulian(year, 1, 1);	}
 
 	// MCalendar.FromJulian(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum julianischen Datum.
+	/// Liefert die julianische Tageszahl zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="year">Julianische Jahreszahl.</param>
 	/// <param name="month">Julianische Monatszahl.</param>
 	/// <param name="day">Julianische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum julianischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zur julianischen Tageszahl.</returns>
 	public static double FromJulian(int year, int month, int day)
 	{
 		// Lokale Felder einrichten
@@ -510,64 +510,64 @@ public static class MCalendar
 
 	// MCalendar.FromYazdegerd(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum yazdegerdischen Datum.
+	/// Liefert die julianische Tageszahl zum yazdegerdischen Datum.
 	/// </summary>
 	/// <param name="date">Yazdegerdischen Datum.</param>
-	/// <returns>Julianisches Datum zum yazdegerdischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum yazdegerdischen Datum.</returns>
 	public static double FromYazdegerd(CDate date){ return MCalendar.FromYazdegerd(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromYazdegerd(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des yazdegerdischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des yazdegerdischen Jahres.
 	/// </summary>
 	/// <param name="year">Yazdegerdische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des yazdegerdischen Jahres.</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des yazdegerdischen Jahres.</returns>
 	public static double FromYazdegerd(int year){ return MCalendar.FromYazdegerd(year, 1, 1); }
 
 	// MCalendar.FromYazdegerd(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum yazdegerdischen Datum.
+	/// Liefert die julianische Tageszahl zum yazdegerdischen Datum.
 	/// </summary>
 	/// <param name="year">Yazdegerdische Jahreszahl.</param>
 	/// <param name="month">Yazdegerdische Monatszahl.</param>
 	/// <param name="day">Yazdegerdische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum yazdegerdischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum yazdegerdischen Datum.</returns>
 	public static double FromYazdegerd(int year, int month, int day){ return MCalendar.EpochYazdegerd + (double)(365 * (year - 1)) + (double)(30 * (month - 1)) + (double)(day - 1); }
 
 	// MCalendar.FromZoroastrian(CDate)
 	/// <summary>
-	/// Liefert das julianische Datum zum zoroastrischen Datum.
+	/// Liefert die julianische Tageszahl zum zoroastrischen Datum.
 	/// </summary>
 	/// <param name="date">Zoroastrisches Datum.</param>
-	/// <returns>Julianisches Datum zum zoroastrischen Datum.</returns>
+	/// <returns>Julianische Tageszahl zum zoroastrischen Datum.</returns>
 	public static double FromZoroastrian(CDate date){ return MCalendar.FromZoroastrian(date.Year, date.Month, date.Day); }
 
 	// MCalendar.FromZoroastrian(int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Jahresbeginn des zoroastrischen Jahres.
+	/// Liefert die julianische Tageszahl zum Jahresbeginn des zoroastrischen Jahres.
 	/// </summary>
 	/// <param name="year">Zoroastrische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Jahresbeginn des zoroastrischen Jahres</returns>
+	/// <returns>Julianische Tageszahl zum Jahresbeginn des zoroastrischen Jahres</returns>
 	public static double FromZoroastrian(int year){ return MCalendar.FromZoroastrian(year, 1, 1); }
 
 	// MCalendar.FromZoroastrian(int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum zoroastrischem Datum.
+	/// Liefert die julianische Tageszahl zum zoroastrischem Datum.
 	/// </summary>
 	/// <param name="year">Zoroastrische Jahreszahl.</param>
 	/// <param name="month">Zoroastrische Monatszahl.</param>
 	/// <param name="day">Zoroastrische Tageszahl.</param>
-	/// <returns>Julianisches Datum zum zoroastrischem Datum.</returns>
+	/// <returns>Julianische Tageszahl zum zoroastrischem Datum.</returns>
 	public static double FromZoroastrian(int year, int month, int day){ return MCalendar.EpochZoroastrian + (double)(365 * (year - 1)) + (double)(30 * (month - 1)) + (double)(day - 1); }
 
 	// MCalendar.GregorianFromArmenian(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und das julianische Datum zum Ereignis zum armenischen Datum und zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum armenischen Datum und zum gregorianischen Jahr.
 	/// </summary>
 	/// <param name="monthArmenian">Armenische Monatszahl.</param>
 	/// <param name="dayArmenian">Armenische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und das julianische Datum zum Ereignis des armenischen Datums und zum gregorianischen Jahr.</returns>
+	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis des armenischen Datums und zum gregorianischen Jahr.</returns>
 	public static (int count, double jd) GregorianFromArmenian(int monthArmenian, int dayArmenian, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -593,13 +593,13 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromCoptic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und das julianische Datum zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.
 	/// /// </summary>
 	/// <param name="monthCoptic">Koptische Monatszahl.</param>
 	/// <param name="dayCoptic">Koptische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Anzahl der Ereignisse und das julianische Datum zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.</returns>
+	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.</returns>
 	public static (int count, double jd) GregorianFromCoptic(int monthCoptic, int dayCoptic, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -625,12 +625,12 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromEthiopic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und das julianische Datum zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.
 	/// /// </summary>
 	/// <param name="monthEthiopic">Äthiopisches Monatszahl.</param>
 	/// <param name="dayEthiopic">Äthiopisches Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und das julianische Datum zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.</returns>
+	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.</returns>
 	public static (int count, double jd) GregorianFromEthiopic(int monthEthiopic, int dayEthiopic, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -656,12 +656,12 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrew(int, int, int)
 	/// <summary>
-	/// Liefert das hebräische Datum des jüdischen Datums zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum hebräischen Datum und zum gregorianischen Jahr.
 	/// </summary>
 	/// <param name="monthHebrew">Hebräische Monatszahl.</param>
 	/// <param name="dayHebrew">Hebräische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahrezahl.</param>
-	/// <returns>Hebräisches Datum des jüdischen Datums zum gregorianischen Jahr.</returns>
+	/// <returns>Julianische Tageszahl zum hebräischen Datum zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrew(int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -681,13 +681,13 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrewBirthday(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum hebräischen Geburtstag und zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum hebräischen Geburtstag zum gregorianischen Jahr.
 	/// </summary>
 	/// <param name="yearHebrew">Hebräische Jahreszahl.</param>
 	/// <param name="monthHebrew">Hebräische Monatszahl.</param>
 	/// <param name="dayHebrew">Hebräische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Julianische Datum zum hebräischen Geburtstag und zum gregorianischen Jahr.</returns>
+	/// <returns>Julianische Tageszahl zum hebräischen Geburtstag und zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrewBirthday(int yearHebrew, int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -707,13 +707,13 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromHebrewYahrzeit(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum hebräische Todestag und zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum hebräische Todestag und zum gregorianischen Jahr.
 	/// </summary>
 	/// <param name="yearHebrew">Jüdische Jahreszahl.</param>
 	/// <param name="monthHebrew">Jüdische Monatszahl.</param>
 	/// <param name="dayHebrew">Jüdische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl</param>
-	/// <returns>Julianische Datum zum hebräischen Todestag und zum gregorianischen Jahr.</returns>
+	/// <returns>Julianische Tageszahl zum hebräischen Todestag und zum gregorianischen Jahr.</returns>
 	public static double GregorianFromHebrewYahrzeit(int yearHebrew, int monthHebrew, int dayHebrew, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -733,14 +733,14 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromIslamic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die hebräischen Daten zum islamischen Datum und zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die julianischen Tageszahlen zum islamischen Datum und zum gregorianischen Jahr.
 	/// /// </summary>
 	/// <param name="monthIslamic">Islamische Monatszahl.</param>
 	/// <param name="dayIslamic">Islamische Tageszahl.</param>
 	/// <param name="yearGreogorian">Gregorianische Jahreszahl.</param>
 	/// <param name="jd1">Julianische Tageszahl der ersten Ereignisses.</param>
 	/// <param name="jd2">Julianische Tageszahl des zweiten Ereignisses.</param>
-	/// <returns>Anzahl der Ereignisse.</returns>
+	/// <returns>Anzahl der Ereignisse und die julianischen Tageszahlen zum islamischen Datum und zum gregorianischen Jahr.</returns>
 	public static (int count, double jd1, double jd2) GregorianFromIslamic(int monthIslamic, int dayIslamic, int yearGreogorian)
 	{
 		// Lokale Felder einrichten
@@ -798,12 +798,12 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromJulian(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und das juliansische Datum zum Eregnis zum gregorianischen Jahr.
+	/// Liefert die Anzahl der Ereignisse und die juliansische Tageszahl zum Eregnis zum gregorianischen Jahr.
 	/// /// </summary>
 	/// <param name="monthJulian">Julianische Tageszahl.</param>
 	/// <param name="dayJulian">Julianische Monatszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und das juliansische Datum zum Eregnis zum gregorianischen Jahr.</returns>
+	/// <returns>Anzahl der Ereignisse und die julianissche Tageszahl zum Eregnis zum gregorianischen Jahr.</returns>
 	public static (int count, double jd) GregorianFromJulian(int monthJulian, int dayJulian, int yearGregorian)
 	{
 		// Lokale Felder einrichten
@@ -829,10 +829,10 @@ public static class MCalendar
 
 	// MCalendar.GregorianYear(double)
 	/// <summary>
-	/// Liefert die gregorianische Jahreszahl zum julianischen Datum.
+	/// Liefert die gregorianische Jahreszahl zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Gregorianische Jahreszahl zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Gregorianische Jahreszahl zur julianischen Tageszahl.</returns>
 	public static int GregorianYear(double jd)
 	{
 		// Lokale Felder einrichten
@@ -851,13 +851,13 @@ public static class MCalendar
 
 	// MCalendar.HebrewBirthday(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Geburtstag zum jüdischen Datum und zum jüdischen Jahr.
+	/// Liefert die julianische Tageszahl zum Geburtstag zum jüdischen Datum und zum jüdischen Jahr.
 	/// </summary>
 	/// <param name="year">Jüdische Jahreszahl des Geburtstages.</param>
 	/// <param name="month">Jüdische Monatszahl des Geburtstages.</param>
 	/// <param name="day">Jüdische Tageszahl des Geburtstages.</param>
 	/// <param name="yearHebrew">Jüdische Jahreszahl.</param>
-	/// <returns>Julianisches Datum zum Geburtstag zum jüdischen Datum und zum jüdischen Jahr.</returns>
+	/// <returns>Julianische Tageszahl zum Geburtstag zum jüdischen Datum und zum jüdischen Jahr.</returns>
 	public static double HebrewBirthday(int year, int month, int day, int yearHebrew)
 	{
 		// Tageszahl berechnen
@@ -1004,7 +1004,7 @@ public static class MCalendar
 
 	// MCalendar.HebrewYahrzeit(int, int, int, int)
 	/// <summary>
-	/// Liefert das julianische Datum zum Todestages zum jüdischen Datum und zur jüdischen Jahreszahl.
+	/// Liefert die julianische Tageszahl zum Todestages zum jüdischen Datum und zur jüdischen Jahreszahl.
 	/// </summary>
 	/// <param name="year">Jüdische Jahreszahl des Todestages.</param>
 	/// <param name="month">Jüdische Monatszahl des Todestages.</param>
@@ -1075,10 +1075,10 @@ public static class MCalendar
 
 	// MCalendar.IsoCalendarWeek(double)
 	/// <summary>
-	/// Liefert die Kalenderwoche zum julianischen Datum.
+	/// Liefert die Kalenderwoche zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Kalenderwoche zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Kalenderwoche zur julianischen Tageszahl.</returns>
 	public static int IsoCalendarWeek(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1110,10 +1110,10 @@ public static class MCalendar
 
 	// MCalendar.IsoNewYear(int)
 	/// <summary>
-	/// Liefert das julianische Datum des Jahresbeginns zur gregorianischen Jahreszahl.
+	/// Liefert die julianische Tageszahl des Jahresbeginns zur gregorianischen Jahreszahl.
 	/// </summary>
 	/// <param name="year">Gregorianische Jahreszahl.</param>
-	/// <returns>Julianisches Datum des Jahresbeginns zur gregorianischen Jahreszahl.</returns>
+	/// <returns>Julianische Tageszahl des Jahresbeginns zur gregorianischen Jahreszahl.</returns>
 	public static double IsoNewYear(int year){ return MCalendar.DayOnOrAfter((MCalendar.FromGregorian(year - 1, 12, 29)), EWeekDay.Monday, 1); }
 
 	// MCalendar.LastDayOfMonth(int, int)
@@ -1147,7 +1147,7 @@ public static class MCalendar
 
 	// MCalendar.NewYear(int)
 	/// <summary>
-	/// Liefert das julianische Datum des Jahresbeginns zur gregorianischen Jahreszahl.
+	/// Liefert die julianische Tageszahl des Jahresbeginns zur gregorianischen Jahreszahl.
 	/// </summary>
 	/// <param name="year">Gregorianische Jahreszahl</param>
 	/// <returns>Julianische Datum des Jahresbeginns zur gregorianischen Jahreszahl.</returns>
@@ -1162,10 +1162,10 @@ public static class MCalendar
 
 	// MCalendar.ToArmenian(double)
 	/// <summary>
-	/// Liefert das armenische Datum zum julianischen Datum.
+	/// Liefert das armenische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Armenische Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Armenische Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToArmenian(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1187,9 +1187,9 @@ public static class MCalendar
 
 	// MCalendar.ToCoptic(double)
 	/// <summary>
-	/// Liefert das koptische Datum zum julianischen Datum.
+	/// Liefert das koptische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Koptisches Datum zur julianischen Datum.</returns>
 	public static CDate ToCoptic(double jd)
 	{
@@ -1204,12 +1204,11 @@ public static class MCalendar
 
 	// MCalendar.ToDate(double)
 	/// <summary>
-	/// Liefert das DateTime zum julianischen Datum.
+	/// Liedert das Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Datumswert zur julianischen Tageszahl.</returns>
-	/// <exception cref="System.ArgumentOutOfRangeException">Wird ausgelöst, falls die julianischen Tageszahl außerhalb des Gültigkeitszeitraumes ist.</exception>
-	public static DateTime ToDate(double jd)
+	/// <param name="jd">Juliansiche Tageszahl.</param>
+	/// <returns>Datum zur julianischen Tageszahl.</returns>
+	public static DateOnly ToDate(double jd)
 	{
 		// Gültige Tageszahl sicherstellen
 		if(jd - Dbl_SystemDateTimeMin < 0)
@@ -1224,6 +1223,29 @@ public static class MCalendar
 		return new(D.Year, D.Month, D.Day);
 	}
 
+	// MCalendar.ToDateTime(double)
+	/// <summary>
+	/// Liefert das DateTime zur julianischen Tageszahl.
+	/// </summary>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Datumswert zur julianischen Tageszahl.</returns>
+	/// <exception cref="System.ArgumentOutOfRangeException">Wird ausgelöst, falls die julianischen Tageszahl außerhalb des Gültigkeitszeitraumes ist.</exception>
+	public static DateTime ToDateTime(double jd)
+	{
+		// Gültige Tageszahl sicherstellen
+		if(jd - Dbl_SystemDateTimeMin < 0)
+			throw new System.ArgumentOutOfRangeException("Die julianischen Tageszahl liegt vor dem Beginn des Gültigkeitszeitraumes.");
+
+		// Gültige Tageszahl sicherstellen
+		if(Dbl_SystemDateTimeMax - jd < 0)
+			throw new System.ArgumentOutOfRangeException("Die julianischen Tageszahl liegt nach dem Ende des Gültigkeitszeitraumes.");
+
+		// Lokale Felder einrichten
+		CDate    D = MCalendar.ToGregorian(jd);
+		TimeOnly T = MCalendar.ToTime(jd);
+		return new(D.Year, D.Month, D.Day, T.Hour, T.Minute, T.Second);
+	}
+
 	// MCalendar.ToEgytian()
 	/// <summary>
 	/// Liefert das ägyptische Datum zum heutigen Tag.
@@ -1233,10 +1255,10 @@ public static class MCalendar
 
 	// MCalendar.ToEgytian(double)
 	/// <summary>
-	/// Liefert das ägyptische Datum zum julianischen Datum.
+	/// Liefert das ägyptische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Ägyptisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Ägyptisches Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToEgytian(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1258,10 +1280,10 @@ public static class MCalendar
 
 	// MCalendar.ToEthiopic(double)
 	/// <summary>
-	/// Liefert das äthiopische Datum zum julianischen Datum.
+	/// Liefert das äthiopische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Äthiopisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Äthiopisches Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToEthiopic(double jd)
 	{
 		// Lokalen Felder einrichten
@@ -1312,9 +1334,9 @@ public static class MCalendar
 
 	// MCalendar.ToHebrew(double)
 	/// <summary>
-	/// Liefert das jüdische Datum zum julianischen Datum.
+	/// Liefert das jüdische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Jüdisches Datum zur julianischen Datum.</returns>
 	public static CDate ToHebrew(double jd)
 	{
@@ -1341,10 +1363,10 @@ public static class MCalendar
 
 	// MCalendar.ToIslamic(double)
 	/// <summary>
-	/// Liefert das islamische Datum zum julianischen Datum.
+	/// Liefert das islamische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Islamisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Islamisches Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToIslamic(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1357,19 +1379,27 @@ public static class MCalendar
 		return new(Y, M, D);
 	}
 
+	// MCalendar.ToJdn(this DateOnly)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum Datum.
+	/// </summary>
+	/// <param name="value">Datum.</param>
+	/// <returns>Julianische Tageszahl zum Datum.</returns>
+	public static double ToJdn(this DateOnly value){ return MCalendar.FromGregorian(value.Year, value.Month, value.Day); }
+
 	// MCalendar.ToJulian()
 	/// <summary>
-	/// Liefert das julianische Datum zum heutigen Tag.
+	/// Liefert die julianische Tageszahl zum heutigen Tag.
 	/// </summary>
-	/// <returns>Julianisches Datum zum heutigen Tag.</returns>
+	/// <returns>Julianische Tageszahl zum heutigen Tag.</returns>
 	public static CDate ToJulian(){ return MCalendar.ToJulian(MCalendar.FromGregorian(new CDate(DateTime.Today)));	}
 
 	// MCalendar.ToJulian(double)
 	/// <summary>
-	/// Liefert das julianische Datum zum julianischen Datum.
+	/// Liefert die julianische Tageszahl zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Julianisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Julianische Tageszahl zur julianischen Tageszahl.</returns>
 	public static CDate ToJulian(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1390,10 +1420,10 @@ public static class MCalendar
 
 	// MCalendar.ToTime(double)
 	/// <summary>
-	/// Liefert die Zeit zum julianischen Datum.
+	/// Liefert die Zeit zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Zeit zum julianischen Datum..</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Zeit zur julianischen Tageszahl..</returns>
 	public static TimeOnly ToTime(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1416,10 +1446,10 @@ public static class MCalendar
 
 	// MCalendar.ToYazdegerd(double)
 	/// <summary>
-	/// Liefert das yazdegerdische Datum zum julianischen Datum.
+	/// Liefert das yazdegerdische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Yazdegerdisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Yazdegerdisches Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToYazdegerd(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1441,10 +1471,10 @@ public static class MCalendar
 
 	// MCalendar.ToZoroastrian(double)
 	/// <summary>
-	/// Liefert das zoroastrische Datum zum julianischen Datum.
+	/// Liefert das zoroastrische Datum zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Zoroastrisches Datum zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Zoroastrisches Datum zur julianischen Tageszahl.</returns>
 	public static CDate ToZoroastrian(double jd)
 	{
 		// Lokale Felder einrichten
@@ -1471,10 +1501,10 @@ public static class MCalendar
 
 	// MCalendar.YearFragment(double)
 	/// <summary>
-	/// Liefert den Jahresbruchteil zum julianischen Datum.
+	/// Liefert den Jahresbruchteil zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	/// <returns>Jahresbruchteil zum julianischen Datum.</returns>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Jahresbruchteil zur julianischen Tageszahl.</returns>
 	public static double YearFragment(double jd)
 	{
 		// Lokale Felder einrichten
