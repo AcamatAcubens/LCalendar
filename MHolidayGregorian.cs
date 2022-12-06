@@ -2,13 +2,6 @@ using System;
 
 namespace Acamat.LCalendar;
 
-// 1. Sonntag der Passionszeit (Invovabit)
-// 2. Sonntag der Passionszeit (Reminiscere)
-// 3. Sonntag der Passionszeit (Oculi)
-// 4. Sonntag der Passionszeit (Laetare)
-// 5. Sonntag der Passionszeit (Judica)
-// 6. Sonntag der Passionszeit (Palmarum) = Palmsonntag
-
 /// <summary>
 /// Bündelt Methoden zu den beweglichen gregorianischen Feiertagen.
 /// </summary>
@@ -128,6 +121,30 @@ public static class MHolidayGregorian
 	/// <returns>Julianische Tageszahl zum Karfreitag zur gregorianischen Jahreszahl.</returns>
 	public static double GoodFriday(int year){ return MHolidayGregorian.EasterSunday(year) - 2.0; }
 
+	// MHolidayGregorian.Invovabit(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum 1. Sonntag der Passionszeit zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum 1. Sonntag der Passionszeit zur gregorianischen Jahreszahl.</returns>
+	public static double Invovabit(int year){ return MHolidayGregorian.EasterSunday(year) - 42.0; }
+
+	// MHolidayGregorian.Judica(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum 5. Sonntag der Passionszeit zur gregorianischen Jahreszahl,
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum 5. Sonntag der Passionszeit zur gregorianischen Jahreszahl,</returns>
+	public static double Judica(int year){ return MHolidayGregorian.EasterSunday(year) - 14.0; }
+
+	// MHolidayGregorian.Laetare(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum 4. Sonntag der Passionszeit zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Grgorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum 4. Sonntag der Passionszeit zur gregorianischen Jahreszahl.</returns>
+	public static double Laetare(int year){ return MHolidayGregorian.EasterSunday(year) - 21.0; }
+
 	// MHolidayGreogorian.MaundyThursday(int)
 	/// <summary>
 	/// Liefert die julianische Tageszahl zum Gründonnerstag zur gregorianischen Jahreszahl.
@@ -135,6 +152,14 @@ public static class MHolidayGregorian
 	/// <param name="year">Gregorianische Jahreszahl.</param>
 	/// <returns>Julianische Tageszahl zum Gründonnerstag zur gregorianischen Jahreszahl.</returns>
 	public static double MaundyThursday(int year){ return MHolidayGregorian.EasterSunday(year) - 3.0; }
+
+	// MHolidayGregorian.Oculi(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum 3. Sonntag der Passionszeit zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum 3. Sonntag der Passionszeit zur gregorianischen Jahreszahl.</returns>
+	public static double Oculi(int year){ return MHolidayGregorian.EasterSunday(year) - 28.0; }
 
 	// MHolidayGregorian.PalmSunday(int)
 	/// <summary>
@@ -159,6 +184,14 @@ public static class MHolidayGregorian
 	/// <param name="year">Gregorianische Jahreszahl.</param>
 	/// <returns>Julianische Tageszahl zum Volkstrauertag zur gregorianischen Jahreszahl.</returns>
 	public static double PeoplesDayOfMourning(int year){ return MHolidayGregorian.Advent(year) - 14.0; }
+
+	// MHolidayGregorian.Reminiscere(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum 2. Sonntag der Passionszeit zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum 2. Sonntag der Passionszeit zur gregorianischen Jahreszahl.</returns>
+	public static double Reminiscere(int year){ return MHolidayGregorian.EasterSunday(year) - 35.0; }
 
 	// MHolidayGregorian.ShroveMonday(int)
 	/// <summary>
