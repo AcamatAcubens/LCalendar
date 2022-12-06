@@ -15,12 +15,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.</returns>
-	public static double Aphelion()
-	{
-		// Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Aphelion(jd);
-	}
+	public static double Aphelion(){ return MJupiter.Aphelion(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Aphelion(double)
 	/// <summary>
@@ -50,12 +45,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double Conjunction()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Conjunction(jd);
-	}
+	public static double Conjunction(){ return MJupiter.Conjunction(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Conjuction(double)
 	/// <summary>
@@ -103,12 +93,7 @@ public static partial class MJupiter
 	/// Liefert die Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
-	public static double Eccentricity()
-	{
-		// Lokale Felder einrichten und Exzentrizität berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Eccentricity(jd);
-	}
+	public static double Eccentricity(){ return MJupiter.Eccentricity(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Eccentricity(double)
 	/// <summary>
@@ -129,12 +114,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <returns>Neigung der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double Inclination()
-	{
-		// Lokale Felder einrichten und Bahnneigung berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Inclination(jd);
-	}
+	public static double Inclination(){ return MJupiter.Inclination(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Inclination(double)
 	/// <summary>
@@ -161,12 +141,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <returns>Länge des aufsteigenden Knotens der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfAscendingNode()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.LongitudeOfAscendingNode(jd);
-	}
+	public static double LongitudeOfAscendingNode(){ return MJupiter.LongitudeOfAscendingNode(DateTime.Now.ToJdn()); }
 
 	// MJupiter.LongitudeOfAscendingNode(double)
 	/// <summary>
@@ -188,12 +163,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <returns>Länge des Perihels der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfPerihelion()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.LongitudeOfPerihelion(jd);
-	}
+	public static double LongitudeOfPerihelion(){ return MJupiter.LongitudeOfPerihelion(DateTime.Now.ToJdn()); }
 
 	// MJupiter.LongitudeOfPerihelion(double)
 	/// <summary>
@@ -215,12 +185,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly()
-	{
-		// Lokale Felder einrichten und Anomalie berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.MeanAnomaly(jd);
-	}
+	public static double MeanAnomaly(){ return MJupiter.MeanAnomaly(DateTime.Now.ToJdn());	}
 
 	// MJupiter.MeanAnomaly(double)
 	/// <summary>
@@ -237,12 +202,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <returns>Mittlere Länge der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanLongitude()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.MeanLongitude(jd);
-	}
+	public static double MeanLongitude(){ return MJupiter.MeanLongitude(DateTime.Now.ToJdn()); }
 
 	// MJupiter.MeanLongitude(double)
 	/// <summary>
@@ -263,12 +223,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Opposition mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Opposition mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double Opposition()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Opposition(jd);
-	}
+	public static double Opposition(){ return MJupiter.Opposition(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Opposition(double)
 	/// <summary>
@@ -315,12 +270,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.</returns>
-	public static double Perihelion()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Perihelion(jd);
-	}
+	public static double Perihelion(){ return MJupiter.Perihelion(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Perihelion(double)
 	/// <summary>
@@ -351,12 +301,7 @@ public static partial class MJupiter
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Heliozentrisch-ekliptikale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEcliptical(EPrecision value)
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.PositionEcliptical(value, jd);
-	}
+	public static CPolar PositionEcliptical(EPrecision value){ return MJupiter.PositionEcliptical(value, DateTime.Now.ToJdn()); }
 
 	// MJupiter.PositionEcliptical(EPrecision, double)
 	/// <summary>
@@ -380,12 +325,7 @@ public static partial class MJupiter
 	/// Liefert die (scheinbare) geozentrisch-äquatoriale Position zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Geozentrisch-äquatoriale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEquatorial()
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.PositionEquatorial(jd);
-	}
+	public static CPolar PositionEquatorial(){ return MJupiter.PositionEquatorial(DateTime.Now.ToJdn()); }
 
 	// MJupiter.PositionEquatorial(double)
 	/// <summary>
@@ -455,12 +395,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl des Rückläufigkeitsendes nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des Rückläufigkeitsendes nach der aktuellen Systemzeit.</returns>
-	public static double RegressionEnd()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.RegressionEnd(jd);
-	}
+	public static double RegressionEnd(){ return MJupiter.RegressionEnd(DateTime.Now.ToJdn()); }
 
 	// MJupiter.RegressionEnd(double)
 	/// <summary>
@@ -508,12 +443,7 @@ public static partial class MJupiter
 	/// Liefert die julianische Tageszahl der Rückläufigkeitsanfangs nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der Rückläufigkeitsanfangs nach der aktuellen Systemzeit.</returns>
-	public static double RegressionStart()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.RegressionStart(jd);
-	}
+	public static double RegressionStart(){ return MJupiter.RegressionStart(DateTime.Now.ToJdn()); }
 
 	// MJupiter.RegressionStart(double)
 	/// <summary>
@@ -664,12 +594,7 @@ public static partial class MJupiter
 	/// Liefert die große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
-	public static double SemimajorAxis()
-	{
-		// Lokale Felder einrichten und große Halbachse bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.SemimajorAxis(jd);
-	}
+	public static double SemimajorAxis(){ return MJupiter.SemimajorAxis(DateTime.Now.ToJdn()); }
 
 	// MJupiter.SemimajorAxis(double)
 	/// <summary>
@@ -797,24 +722,24 @@ public static partial class MJupiter
 
 	// MJupiter.Transit(CPolar)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
 	public static (double jd, double height) Transit(CPolar position){ return MJupiter.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Transit(CPolar, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
 	public static (double jd, double height) Transit(CPolar position, double jd){ return MJupiter.Transit(position.Longitude, position.Latitude, jd); }
 
 	// MJupiter.Transit(double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
@@ -824,12 +749,12 @@ public static partial class MJupiter
 	// MJupiter.Transit(double, double, double)
 	/// <summary>
 	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
 	public static (double jd, double height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
