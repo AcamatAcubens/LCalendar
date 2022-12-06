@@ -4,9 +4,17 @@ namespace Acamat.LCalendar;
 
 // Buß- und Bettag (DayOfRepentanceAndPrayer): 11. Tag vor dem ersten Adventssonntag
 // Der vierte Advent ist der letzte Sonntag vor dem 25.12.
+// 1. Sonntag der Passionszeit (Invovabit)
+// 2. Sonntag der Passionszeit (Reminiscere)
+// 3. Sonntag der Passionszeit (Oculi)
+// 4. Sonntag der Passionszeit (Laetare)
+// 5. Sonntag der Passionszeit (Judica)
+// 6. Sonntag der Passionszeit (Palmarum) = Palmsonntag
+// Totensonntag (SundayOfTheDead): Letzte Sonntag vor dem ersten Advent
+// Volkstrauertag (PeoplesDayOfMourning): Zweite Sonntag vor dem ersten Advent
 
 /// <summary>
-/// Bündelt Methoden zur gregorianischen Feiertagen.
+/// Bündelt Methoden zu den beweglichen gregorianischen Feiertagen.
 /// </summary>
 public static class MHolidayGregorian
 {

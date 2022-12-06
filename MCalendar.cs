@@ -562,13 +562,13 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromArmenian(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum armenischen Datum und zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum Ereignis zum armenischen Datum und zum gregorianischen Jahr oder NULL, falls kein Ereignis stattfindet.
 	/// </summary>
 	/// <param name="monthArmenian">Armenische Monatszahl.</param>
 	/// <param name="dayArmenian">Armenische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis des armenischen Datums und zum gregorianischen Jahr.</returns>
-	public static (int count, double jd) GregorianFromArmenian(int monthArmenian, int dayArmenian, int yearGregorian)
+	/// <returns>julianische Tageszahl zum Ereignis zum armenischen Datum und zum gregorianischen Jahr oder NULL, falls kein Ereignis stattfindet.</returns>
+	public static double? GregorianFromArmenian(int monthArmenian, int dayArmenian, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
@@ -581,26 +581,26 @@ public static class MCalendar
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
-			return(1, D1);
+			return D1;
 
 		// Zweites Datum verarbeiten
 		if(Jan01 <= D2 && D2 <= Dec31)
-			return(1, D2);
+			return D2;
 
 		// Kein Ereignis im gregorianischen Jahr
-		return(0, 0.0);
+		return null;
 	}
 
 	// MCalendar.GregorianFromCoptic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr oder NULL, wenn falls Ereignis stattfindet.
 	/// /// </summary>
 	/// <param name="monthCoptic">Koptische Monatszahl.</param>
 	/// <param name="dayCoptic">Koptische Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr.</returns>
-	public static (int count, double jd) GregorianFromCoptic(int monthCoptic, int dayCoptic, int yearGregorian)
+	/// <returns>julianische Tageszahl zum Ereignis zum koptischen Datum und zum gregorianischen Jahr oder NULL, falls kein Ereignis stattfindet.</returns>
+	public static double? GregorianFromCoptic(int monthCoptic, int dayCoptic, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
@@ -613,25 +613,25 @@ public static class MCalendar
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
-			return(1, D1);
+			return D1;
 
 		// Zweites Datum verarbeiten
 		if(Jan01 <= D2 && D2 <= Dec31)
-			return(1, D2);
+			return D2;
 
 		// Kein Ereignis im gregorianischen Jahr
-		return(0, 0.0);
+		return null;
 	}
 
 	// MCalendar.GregorianFromEthiopic(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.
+	/// Liefert die julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr oder NULL, falls das Ereignis nicht stattfindet.
 	/// /// </summary>
 	/// <param name="monthEthiopic">Äthiopisches Monatszahl.</param>
 	/// <param name="dayEthiopic">Äthiopisches Tageszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und die julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr.</returns>
-	public static (int count, double jd) GregorianFromEthiopic(int monthEthiopic, int dayEthiopic, int yearGregorian)
+	/// <returns>Julianische Tageszahl zum Ereignis zum äthiopischen Datum und zum gregorianischen Jahr oder NULL, falls das Ereignis nicht stattfindet.</returns>
+	public static double? GregorianFromEthiopic(int monthEthiopic, int dayEthiopic, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
@@ -644,14 +644,14 @@ public static class MCalendar
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
-			return(1, D1);
+			return D1;
 
 		// Zweites Datum verarbeiten
 		if(Jan01 <= D2 && D2 <= Dec31)
-			return(1, D2);
+			return D2;
 
 		// Kein Ereignis im gregorianischen Jahr
-		return(0, 0.0);
+		return null;
 	}
 
 	// MCalendar.GregorianFromHebrew(int, int, int)
@@ -798,13 +798,13 @@ public static class MCalendar
 
 	// MCalendar.GregorianFromJulian(int, int, int)
 	/// <summary>
-	/// Liefert die Anzahl der Ereignisse und die juliansische Tageszahl zum Eregnis zum gregorianischen Jahr.
+	/// Liefert die julianissche Tageszahl zum Ereignis zum gregorianischen Jahr oder NULL, falls das Ereignis nicht stattfindet.
 	/// /// </summary>
 	/// <param name="monthJulian">Julianische Tageszahl.</param>
 	/// <param name="dayJulian">Julianische Monatszahl.</param>
 	/// <param name="yearGregorian">Gregorianische Jahreszahl.</param>
-	/// <returns>Anzahl der Ereignisse und die julianissche Tageszahl zum Eregnis zum gregorianischen Jahr.</returns>
-	public static (int count, double jd) GregorianFromJulian(int monthJulian, int dayJulian, int yearGregorian)
+	/// <returns>Julianissche Tageszahl zum Ereignis zum gregorianischen Jahr oder NULL, falls das Ereignis nicht stattfindet.</returns>
+	public static double? GregorianFromJulian(int monthJulian, int dayJulian, int yearGregorian)
 	{
 		// Lokale Felder einrichten
 		double Jan01 = MCalendar.FromGregorian(yearGregorian);         // Jahresbeginn
@@ -817,14 +817,14 @@ public static class MCalendar
 
 		// Erstes Datum verarbeiten
 		if(Jan01 <= D1 && D1 <= Dec31)
-			return(1, D1);
+			return D1;
 
 		// Zweites Datum verarbeiten
 		if(Jan01 <= D2 && D2 <= Dec31)
-			return(1, D2);
+			return D2;
 
 		// Kein Ereignis im gregorianischen Jahr
-		return(0, 0.0);
+		return null;
 	}
 
 	// MCalendar.GregorianYear(double)
