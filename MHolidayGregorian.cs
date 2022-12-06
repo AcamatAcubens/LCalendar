@@ -2,22 +2,50 @@ using System;
 
 namespace Acamat.LCalendar;
 
-// Buß- und Bettag (DayOfRepentanceAndPrayer): 11. Tag vor dem ersten Adventssonntag
-// Der vierte Advent ist der letzte Sonntag vor dem 25.12.
 // 1. Sonntag der Passionszeit (Invovabit)
 // 2. Sonntag der Passionszeit (Reminiscere)
 // 3. Sonntag der Passionszeit (Oculi)
 // 4. Sonntag der Passionszeit (Laetare)
 // 5. Sonntag der Passionszeit (Judica)
 // 6. Sonntag der Passionszeit (Palmarum) = Palmsonntag
-// Totensonntag (SundayOfTheDead): Letzte Sonntag vor dem ersten Advent
-// Volkstrauertag (PeoplesDayOfMourning): Zweite Sonntag vor dem ersten Advent
 
 /// <summary>
 /// Bündelt Methoden zu den beweglichen gregorianischen Feiertagen.
 /// </summary>
 public static class MHolidayGregorian
 {
+	// MHolidayGregorian.Advent(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum Advent zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum Advent zur gregorianischen Jahreszahl.</returns>
+	public static double Advent(int year){ return MCalendar.DayBefore(new DateOnly(year, 12, 25).ToJdn(), EWeekDay.Sunday, 4); }
+
+	// MHolidayGregorian.AdventFourth(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum vierten Advent zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum vierten Advent zur gregorianischen Jahreszahl.</returns>
+	public static double AdventFourth(int year){ return MHolidayGregorian.Advent(year) + 21.0; }
+
+	// MHolidayGregorian.AdventSecond(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum zweiten Advent zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum zweiten Advent zur gregorianischen Jahreszahl.</returns>
+	public static double AdventSecond(int year){ return MHolidayGregorian.Advent(year) + 7.0; }
+
+	// MHolidayGregorian.AdventThird(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum dritten Advent zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum dritten Advent zur gregorianischen Jahreszahl.</returns>
+	public static double AdventThird(int year){ return MHolidayGregorian.Advent(year) + 14.0; }
+
 	// MHolidayGregorian.AscensionDay(int)
 	/// <summary>
 	/// Liefert die julianische Tageszahl zu Christi Himmelfahrt zur gregorianischen Jahreszahl.
@@ -41,6 +69,14 @@ public static class MHolidayGregorian
 	/// <param name="year">Gregorianische Jahreszahl.</param>
 	/// <returns>Julianische Tageszahl zu Fronleichnam zur gregorianischen Jahreszahl.</returns>
 	public static double CorpusChristi(int year){ return MHolidayGregorian.EasterSunday(year) + 60.0; }
+
+	// MHolidayGregorian.DayOfRepentanceAndPrayer(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum Buß- und Bettag zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum Buß- und Bettag zur gregorianischen Jahreszahl.</returns>
+	public static double DayOfRepentanceAndPrayer(int year){ return MHolidayGregorian.Advent(year) - 11.0; }
 
 	// MHolidayGregorian.EasterMonday(int)
 	/// <summary>
@@ -116,6 +152,14 @@ public static class MHolidayGregorian
 	/// <returns>Julianische Tageszahl zum Pfingstsonntag zur gregorianischen Jahreszahl.</returns>
 	public static double Pentecost(int year){ return MHolidayGregorian.EasterSunday(year) + 49.0; }
 
+	// MHolidayGregorian.PeoplesDayOfMourning(int)
+	/// <summary>
+	/// Liefert die julianische Tageszahl zum Volkstrauertag zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Julianische Tageszahl zum Volkstrauertag zur gregorianischen Jahreszahl.</returns>
+	public static double PeoplesDayOfMourning(int year){ return MHolidayGregorian.Advent(year) - 14.0; }
+
 	// MHolidayGregorian.ShroveMonday(int)
 	/// <summary>
 	/// Liefert die julianische Tageszahl zum Rosenmontag zur gregorianischen Jahreszahl.
@@ -139,6 +183,14 @@ public static class MHolidayGregorian
 	/// <param name="year">Gregorianische Jahreszahl.</param>
 	/// <returns>Julianische Tageszahl zum Karmittwoch zur gregorianischen Jahreszahl.</returns>
 	public static double SpyWednesday(int year){ return MHolidayGregorian.EasterSunday(year) - 4.0; }
+
+	// MHolidayGregorian.SundayOfTheDead(int)
+	/// <summary>
+	/// Liefert die juliansiche Tageszahl zum Totensonntag zur gregorianischen Jahreszahl.
+	/// </summary>
+	/// <param name="year">Gregorianische Jahreszahl.</param>
+	/// <returns>Juliansiche Tageszahl zum Totensonntag zur gregorianischen Jahreszahl.</returns>
+	public static double SundayOfTheDead(int year){ return MHolidayGregorian.Advent(year) - 7.0; }
 
 	// MHolidayGregorian.WhitMonday(int)
 	/// <summary>
