@@ -556,90 +556,41 @@ public static partial class MJupiter
 		return j;
 	}
 
-	// MJupiter.Rise(CPolar, ref double)
+	// MJupiter.Rise(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MJupiter.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur aktuellen Systemzeit.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MJupiter.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MJupiter.Rise(CPolar, ref double, double)
+	// MJupiter.Rise(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert den Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zut julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MJupiter.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zu julianischen Tageszahl.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MJupiter.Rise(position.Longitude, position.Latitude, jd); }
 
-	// MJupiter.Rise(CPolar, ref double, double, ref double)
+	// MJupiter.Rise(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MJupiter.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MJupiter.Rise(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuellen Systemzeit. 
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MJupiter.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi){ return MJupiter.Rise(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MJupiter.Rise(double, double, ref double, double)
+	// MJupiter.Rise(double, double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MJupiter.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MJupiter.Rise(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur julianischen Tageszahl.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -664,19 +615,22 @@ public static partial class MJupiter
 		l = MJupiter.Longitude(EPrecision.Low, jdn);
 		b = MJupiter.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MJupiter.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MJupiter.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -686,7 +640,8 @@ public static partial class MJupiter
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
+		if(m < 0.0)
+			m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -700,10 +655,8 @@ public static partial class MJupiter
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MJupiter.SemimajorAxis()
@@ -730,90 +683,43 @@ public static partial class MJupiter
 		return MMath.Polynome(t, 5.202603209, 0.0000001913);
 	}
 
-	// MJupiter.Set(CPolar, ref double)
+	// MJupiter.Set(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MJupiter.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zur aktuellen Systemzeit.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MJupiter.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MJupiter.Set(CPolar, ref double, double)
+	// MJupiter.Set(CPolar, double)
 	/// <summary>
 	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MJupiter.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MJupiter.Set(position.Longitude, position.Latitude, jd); }
 
-	// MJupiter.Set(CPolar, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MJupiter.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MJupiter.Set(double, double, ref double)
+	// MJupiter.Set(double, double)
 	/// <summary>
 	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort zu aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MJupiter.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort zu aktuellen Systemzeit.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi){ return MJupiter.Set(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MJupiter.Set(double, double, ref double, double)
+	// MJupiter.Set(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MJupiter.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MJupiter.Set(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -838,19 +744,22 @@ public static partial class MJupiter
 		l = MJupiter.Longitude(EPrecision.Low, jdn);
 		b = MJupiter.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MJupiter.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MJupiter.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -860,7 +769,8 @@ public static partial class MJupiter
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
+		if(m < 0.0)
+			m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -874,10 +784,8 @@ public static partial class MJupiter
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MJupiter.SynodicPeriod()
@@ -889,89 +797,46 @@ public static partial class MJupiter
 
 	// MJupiter.Transit(CPolar)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(CPolar position)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static (double jd, double height) Transit(CPolar position){ return MJupiter.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Transit(CPolar, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MJupiter.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
-
-	// MJupiter.Transit(CPolar, double, ref double)
-	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd, ref double height){ return MJupiter.Transit(position.Longitude, position.Latitude, jd, ref height); }
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
+	public static (double jd, double height) Transit(CPolar position, double jd){ return MJupiter.Transit(position.Longitude, position.Latitude, jd); }
 
 	// MJupiter.Transit(double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(double lambda, double phi)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MJupiter.Transit(lambda, phi, jd, ref h);
-	}
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static (double jd, double height) Transit(double lambda, double phi){ return MJupiter.Transit(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Transit(double, double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MJupiter.Transit(lambda, phi, jd, ref h);
-	}
-
-	// MJupiter.Transit(double, double, double, ref double)
-	/// <summary>
 	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd, ref double height)
+	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
+	public static (double jd, double height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
 		double l   = 0.0;                         // Geozentrische Länge
 		double b   = 0.0;                         // Geozentrische Breite
 		double a   = 0.0;                         // Rektaszension
-		double d   = 0.0;                         // Deklination
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
@@ -984,14 +849,16 @@ public static partial class MJupiter
 		l = MJupiter.Longitude(EPrecision.Low, jdn);
 		b = MJupiter.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MJupiter.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MJupiter.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// ------------------- //
@@ -1001,7 +868,8 @@ public static partial class MJupiter
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
+		if(m < 0.0)
+			m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1009,14 +877,13 @@ public static partial class MJupiter
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);
 			dm = MMath.Div((a + lambda - t0 - 6.300388093 * m) / MMath.Pi2);
-			if(MMath.Abs(dm) > 0.5) dm -= MMath.Sgn(dm);
+			if(MMath.Abs(dm) > 0.5)
+				dm -= MMath.Sgn(dm);
 			m += dm;
 		}
 
-		// Iteration anwenden, Höhe berechnen und Rückgabewert setzen
-		d = MMath.Bessel(m, dM, d0, dP);
-		height = MEphemerides.ToHeight(0.0, d, phi);
-		return jd + m;
+		// Rückgabe
+		return(jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 
 	// MJupiter.TropicalPeriod()
