@@ -4,6 +4,13 @@ using Acamat.LMath.Geometry;
 using System;
 using System.Text;
 
+// HeliacalRise
+// HeliacalSet
+// HeliacalConjunction
+// HeliacalOpposition
+// IsCirumpolar
+//    δ + ϕ ≥ 90°
+
 namespace Acamat.LCalendar;
 
 /// <summary>

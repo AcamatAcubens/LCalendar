@@ -7,12 +7,6 @@ namespace Acamat.LCalendar;
 /// </summary>
 public enum EEclipseType
 {
-	// EEclipseType.None
-	/// <summary>
-	/// Die Finsternisabschätzung ist nicht genannt.
-	/// </summary>
-	None = 0,
-
 	// EEclipseType.SunNoEclipse
 	/// <summary>
 	/// Eine Sonnenfinsternis ist nicht möglich.

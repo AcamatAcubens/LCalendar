@@ -17,12 +17,7 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl des nächsten ersten Viertels nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten ersten Viertels nach der aktuellen Systemzeit.</returns>
-	public static double FirstQuarter()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.FirstQuarter(jd);
-	}
+	public static double FirstQuarter(){ return MMoon.FirstQuarter(DateTime.Now.ToJdn()); }
 
 	// MMoon.FirstQuarter(double)
 	/// <summary>
@@ -108,67 +103,37 @@ public static partial class MMoon
 			// Korrekturen anwenden
 			j += h;
 		}
+
+		// Rückgabe
 		return j;
 	}
 
 	// MMoon.FullMoon()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Vollmondes nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Vollmondes und die Kennung der Finsternisabschätzung nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Liefert die julianische Tageszahl des nächsten Vollmondes nach der aktuellen Systemzeit.</returns>
-	public static double FullMoon()
-	{
-		// Private Felder einrichten und Ereigniszeit berechnen
-		EEclipseType t  = EEclipseType.None;
-		double       jd = DateTime.Now.ToJdn();
-		return MMoon.FullMoon(jd, ref t);
-	}
-
-	// MMoon.FullMoon(ref EEclipseType)
-	/// <summary>
-	/// Setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Vollmondes nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="type">Kennung der Finsternisabschätzung.</param>
-	/// <returns>Julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.</returns>
-	public static double FullMoon(ref EEclipseType type)
-	{
-		// Private Felder einrichten und Eregniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.FullMoon(jd, ref type);
-	}
+	/// <returns>Julianische Tageszahl des nächsten Vollmondes und die Kennung der Finsternisabschätzung nach der aktuellen Systemzeit.</returns>
+	public static (double jd, EEclipseType type) FullMoon(){ return MMoon.FullMoon(DateTime.Now.ToJdn()); }
 
 	// MMoon.FullMoon(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Vollmondes und die Kennung der Finsternisabschätzung nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.</returns>
-	public static double FullMoon(double jd)
-	{
-		// Private Felder einrichten und Ereigniszeit berechnen
-		EEclipseType t = EEclipseType.None;
-		return MMoon.FullMoon(jd, ref t);
-	}
-
-	// MMoon.FullMoon(double, ref EEclipseType)
-	/// <summary>
-	/// Setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="type">Kennung der Finsternisabschätzung.</param>
-	/// <returns>Julianische Tageszahl des nächsten Vollmondes nach der julianischen Tageszahl.</returns>
-	public static double FullMoon(double jd, ref EEclipseType type)
+	public static (double jd, EEclipseType type) FullMoon(double jd)
 	{
 		// Lokale Felder einrichten
-		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
-		double k = MMath.Floor(12.3685 * (y - 2000.0)) - 1.5;
-		double j = 0.0;
+		double       y  = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
+		double       k  = MMath.Floor(12.3685 * (y - 2000.0)) - 1.5;
+		double       j  = 0.0;
+		EEclipseType et = EEclipseType.MoonNoEclipse;
 
 		// Berechnungschleife
 		while(j <= jd)
 		{
 			// Lunation inkrementieren und lokale Felder einrichten
-						k += 1.0;
+					 k += 1.0;
 			double t  = k / 1236.85;
 
 			// Näherung berechnen und Hilfsfelder einrichten
@@ -230,14 +195,15 @@ public static partial class MMoon
 
 		// Ekliptikale Breite berechnen und Finsterniseinschätzung bestimmen
 		double  b = MMath.Abs(MMoon.Latitude(EPrecision.Medium, j));
-		if     (b < 0.006351) type = EEclipseType.MoonTotalDefinite;
-		else if(b < 0.009376) type = EEclipseType.MoonTotalPotential;
-		else if(b < 0.015533) type = EEclipseType.MoonPartialDefinite;
-		else if(b < 0.018568) type = EEclipseType.MoonPartialPotential;
-		else if(b < 0.025089) type = EEclipseType.MoonPenumbralDefinite;
-		else if(b < 0.028134) type = EEclipseType.MoonPenumbralPotential;
-		else                  type = EEclipseType.MoonNoEclipse;
-		return j;
+		if(b < 0.006351) et = EEclipseType.MoonTotalDefinite;
+		if(b < 0.009376) et = EEclipseType.MoonTotalPotential;
+		if(b < 0.015533) et = EEclipseType.MoonPartialDefinite;
+		if(b < 0.018568) et = EEclipseType.MoonPartialPotential;
+		if(b < 0.025089) et = EEclipseType.MoonPenumbralDefinite;
+		if(b < 0.028134) et = EEclipseType.MoonPenumbralPotential;
+		
+		// Rückgabe
+		return(j, et);
 	}
 
 	// MMoon.LastQuarter()
@@ -245,12 +211,7 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl des nächsten letzten Viertels nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Liefert die julianische Tageszahl des nächsten letzten Viertels nach der aktuellen Systemzeit.</returns>
-	public static double LastQuarter()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.LastQuarter(jd);
-	}
+	public static double LastQuarter(){ return MMoon.LastQuarter(DateTime.Now.ToJdn()); }
 
 	// MMoon.LastQuarter(double)
 	/// <summary>
@@ -343,62 +304,30 @@ public static partial class MMoon
 
 	// MMoon.NewMoon()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Neumondes nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Neumondes und die Kennung der Finsternisabschätzung nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Neumondes nach der aktuellen Systemzeit.</returns>
-	public static double NewMoon()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		EEclipseType t  = EEclipseType.None;
-		double       jd = DateTime.Now.ToJdn();
-		return MMoon.NewMoon(jd, ref t);
-	}
-
-	// MMoon.NewMoon(ref EEclipseType)
-	/// <summary>
-	/// Setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Neumondes nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="type">Kennung der Finsternisabschätzung.</param>
-	/// <returns>Julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.</returns>
-	public static double NewMoon(ref EEclipseType type)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.NewMoon(jd, ref type);
-	}
+	/// <returns>Julianische Tageszahl des nächsten Neumondes und die Kennung der Finsternisabschätzung nach der aktuellen Systemzeit.</returns>
+	public static (double jd, EEclipseType type) NewMoon(){ return MMoon.NewMoon(DateTime.Now.ToJdn()); }
 
 	// MMoon.NewMoon(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Neumondes und die Kennung der Finsternisabschätzung nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.</returns>
-	public static double NewMoon(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		EEclipseType t = EEclipseType.None;
-		return MMoon.NewMoon(jd, ref t);
-	}
-
-	// MMoon.NewMoon(double, ref EEclipseType)
-	/// <summary>
-	/// Setzt die Kennung der Finsternisabschätzung und liefert die julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="type">Kennung der Finsternisabschätzung.</param>
-	/// <returns>Julianische Tageszahl des nächsten Neumondes nach der julianischen Tageszahl.</returns>
-	public static double NewMoon(double jd, ref EEclipseType type)
+	/// <returns>Julianische Tageszahl des nächsten Neumondes und die Kennung der Finsternisabschätzung nach der julianischen Tageszahl.</returns>
+	public static (double jd, EEclipseType type) NewMoon(double jd)
 	{
 		// Lokale Felder einrichten und Ereigniszeit berechen
-		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
-		double k = MMath.Floor(12.3685 * (y - 2000.0)) - 1.0;
-		double j = 0.0;
+		double       y  = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
+		double       k  = MMath.Floor(12.3685 * (y - 2000.0)) - 1.0;
+		double       j  = 0.0;
+		EEclipseType et = EEclipseType.MoonNoEclipse;
 
 		// Berechnungsschleife
 		while(j <= jd)
 		{
 			// Lunation inkrementieren und lokale Felder einrichten
-						k += 1.0;
+					 k += 1.0;
 			double t  = k / 1236.85;
 
 			// Näherung berechnen und Hilfsfelder einrichten
@@ -460,12 +389,13 @@ public static partial class MMoon
 
 		// Ekliptikale Breite berechnen und Finsternisabschätzung bestimmen
 		double  b = MMath.Abs(MMoon.Latitude(EPrecision.Medium, j));
-		if     (b < 0.015223) type = EEclipseType.SunCentralDefinite;
-		else if(b < 0.018210) type = EEclipseType.SunCentralPotential;
-		else if(b < 0.024595) type = EEclipseType.SunPartialDefinite;
-		else if(b < 0.027586) type = EEclipseType.SunPartialPotential;
-		else                  type = EEclipseType.SunNoEclipse;
-		return j;
+		if(b < 0.015223) et = EEclipseType.SunCentralDefinite;
+		if(b < 0.018210) et = EEclipseType.SunCentralPotential;
+		if(b < 0.024595) et = EEclipseType.SunPartialDefinite;
+		if(b < 0.027586) et = EEclipseType.SunPartialPotential;
+
+		// Rückgabe
+		return(j, et);
 	}
 
 	// MMoon.PhaseAngle()
@@ -473,12 +403,7 @@ public static partial class MMoon
 	/// Liefert den Phasenwinkel zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Phasenwinkel zur aktuellen Systemzeit.</returns>
-	public static double PhaseAngle()
-	{
-		// Phasenwinkel berechnen
-		double jdn = DateTime.Now.ToJdn();
-		return MMoon.PhaseAngle(jdn);
-	}
+	public static double PhaseAngle(){ return MMoon.PhaseAngle(DateTime.Now.ToJdn()); }
 
 	// MMoon.PhaseAngle(double)
 	/// <summary>

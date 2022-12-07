@@ -90,9 +90,9 @@ public static partial class MJupiter
 
 	// MJupiter.Eccentricity()
 	/// <summary>
-	/// Liefert die Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die Exzentrizität der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Exzentrizität der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	public static double Eccentricity(){ return MJupiter.Eccentricity(DateTime.Now.ToJdn()); }
 
 	// MJupiter.Eccentricity(double)
@@ -110,9 +110,9 @@ public static partial class MJupiter
 
 	// MJupiter.Inclination()
 	/// <summary>
-	/// Liefert die Neigung der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die Neigung der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Neigung der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Neigung der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
 	public static double Inclination(){ return MJupiter.Inclination(DateTime.Now.ToJdn()); }
 
@@ -137,9 +137,9 @@ public static partial class MJupiter
 
 	// MJupiter.LongitudeOfAscendingNode()
 	/// <summary>
-	/// Liefert die Länge des aufsteigenden Knotens der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die Länge des aufsteigenden Knotens der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Länge des aufsteigenden Knotens der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Länge des aufsteigenden Knotens der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
 	public static double LongitudeOfAscendingNode(){ return MJupiter.LongitudeOfAscendingNode(DateTime.Now.ToJdn()); }
 
@@ -159,9 +159,9 @@ public static partial class MJupiter
 
 	// MJupiter.LongitudeOfPerihelion()
 	/// <summary>
-	/// Liefert die Länge des Perihels der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die Länge des Perihels der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Länge des Perihels der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Länge des Perihels der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
 	public static double LongitudeOfPerihelion(){ return MJupiter.LongitudeOfPerihelion(DateTime.Now.ToJdn()); }
 
@@ -181,9 +181,9 @@ public static partial class MJupiter
 
 	// MJupiter.MeanAnomaly()
 	/// <summary>
-	/// Liefert die mittlere Anomalie der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die mittlere Anomalie der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
 	public static double MeanAnomaly(){ return MJupiter.MeanAnomaly(DateTime.Now.ToJdn());	}
 
@@ -198,9 +198,9 @@ public static partial class MJupiter
 
 	// MJupiter.MeanLongitude()
 	/// <summary>
-	/// Liefert die mittlere Länge der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die mittlere Länge der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Mittlere Länge der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Mittlere Länge der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
 	public static double MeanLongitude(){ return MJupiter.MeanLongitude(DateTime.Now.ToJdn()); }
 
@@ -297,10 +297,10 @@ public static partial class MJupiter
 
 	// MJupiter.PositionEcliptical(EPrecision)
 	/// <summary>
-	/// Liefert die heliozentrisch-ekliptikale Position zur aktuellen Systemzeit.
+	/// Liefert die heliozentrisch-ekliptikale Position zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
-	/// <returns>Heliozentrisch-ekliptikale Position zur aktuellen Systemzeit.</returns>
+	/// <returns>Heliozentrisch-ekliptikale Position zum aktuellen Systemdatum.</returns>
 	public static CPolar PositionEcliptical(EPrecision value){ return MJupiter.PositionEcliptical(value, DateTime.Now.ToJdn()); }
 
 	// MJupiter.PositionEcliptical(EPrecision, double)
@@ -322,9 +322,9 @@ public static partial class MJupiter
 
 	// MJupiter.PositionEquatorial()
 	/// <summary>
-	/// Liefert die (scheinbare) geozentrisch-äquatoriale Position zur aktuellen Systemzeit.
+	/// Liefert die (scheinbare) geozentrisch-äquatoriale Position zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Geozentrisch-äquatoriale Position zur aktuellen Systemzeit.</returns>
+	/// <returns>Geozentrisch-äquatoriale Position zum aktuellen Systemdatum.</returns>
 	public static CPolar PositionEquatorial(){ return MJupiter.PositionEquatorial(DateTime.Now.ToJdn()); }
 
 	// MJupiter.PositionEquatorial(double)
@@ -488,24 +488,24 @@ public static partial class MJupiter
 
 	// MJupiter.Rise(CPolar)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur aktuellen Systemzeit.</returns>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zum aktuellen Systemdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MJupiter.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Rise(CPolar, double)
 	/// <summary>
-	/// Liefert den Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zut julianischen Tageszahl.
+	/// Liefert den Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zu julianischen Tageszahl.</returns>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MJupiter.Rise(position.Longitude, position.Latitude, jd); }
 
 	// MJupiter.Rise(double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuellen Systemzeit. 
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum. 
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
@@ -514,12 +514,12 @@ public static partial class MJupiter
 
 	// MJupiter.Rise(double, double, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zur julianischen Tageszahl.</returns>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
@@ -595,9 +595,9 @@ public static partial class MJupiter
 
 	// MJupiter.SemimajorAxis()
 	/// <summary>
-	/// Liefert die große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.
+	/// Liefert die große Halbachse der mittleren Planetenbahn zum aktuellen Systemdatum.
 	/// </summary>
-	/// <returns>Große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
+	/// <returns>Große Halbachse der mittleren Planetenbahn zum aktuellen Systemdatum.</returns>
 	public static double SemimajorAxis(){ return MJupiter.SemimajorAxis(DateTime.Now.ToJdn()); }
 
 	// MJupiter.SemimajorAxis(double)
@@ -614,25 +614,24 @@ public static partial class MJupiter
 
 	// MJupiter.Set(CPolar)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zur aktuellen Systemzeit.</returns>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geograpischen Ort und zum aktuellen Systemdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MJupiter.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Set(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.</returns>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MJupiter.Set(position.Longitude, position.Latitude, jd); }
 
 	// MJupiter.Set(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zum aktuellen Systemdatum und liefert die Ereigniskennung.
 	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort zu aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
@@ -642,12 +641,12 @@ public static partial class MJupiter
 
 	// MJupiter.Set(double, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl.</returns>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
@@ -730,40 +729,39 @@ public static partial class MJupiter
 
 	// MJupiter.Transit(CPolar)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static (double jd, double height) Transit(CPolar position){ return MJupiter.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position){ return MJupiter.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Transit(CPolar, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static (double jd, double height) Transit(CPolar position, double jd){ return MJupiter.Transit(position.Longitude, position.Latitude, jd); }
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MJupiter.Transit(position.Longitude, position.Latitude, jd); }
 
 	// MJupiter.Transit(double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static (double jd, double height) Transit(double lambda, double phi){ return MJupiter.Transit(lambda, phi, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi){ return MJupiter.Transit(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MJupiter.Transit(double, double, double)
 	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static (double jd, double height) Transit(double lambda, double phi, double jd)
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
@@ -801,8 +799,6 @@ public static partial class MJupiter
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0)
-			m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -815,8 +811,12 @@ public static partial class MJupiter
 			m += dm;
 		}
 
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
 		// Rückgabe
-		return(jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
+		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 
 	// MJupiter.TropicalPeriod()

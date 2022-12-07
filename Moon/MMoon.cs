@@ -25,51 +25,18 @@ public static partial class MMoon
 
 	// MMoon.Apogee()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum und die Horizontparalaxxe nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der aktuellen Systemzeit.</returns>
-	public static double Apogee()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double  p = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Apogee(jd, ref p);
-	}
-
-	// MMoon.Apogee(ref double)
-	/// <summary>
-	/// Setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="parallax">Horizontparallaxe.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der aktuellen Systemzeit.</returns>
-	public static double Apogee(ref double parallax)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Apogee(jd, ref parallax);
-	}
+	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum und die Horizontparallaxe nach der aktuellen Systemzeit.</returns>
+	public static (double jd, double parallax) Apogee(){ return MMoon.Apogee(DateTime.Now.ToJdn()); }
 
 	// MMoon.Apogee(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum und die Horizontparallaxe nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der julianischen Tageszahl.</returns>
-	public static double Apogee(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double p = 0.0;
-		return MMoon.Apogee(jd, ref p);
-	}
-
-	// MMoon.Apogee(double, ref double)
-	/// <summary>
-	/// Setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="parallax">Horizontparallaxe.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum nach der julianischen Tageszahl.</returns>
-	public static double Apogee(double jd, ref double parallax)
+	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Apogäum und die Horizontparallaxe nach der julianischen Tageszahl.</returns>
+	public static (double jd, double parallax) Apogee(double jd)
 	{
 		// Lokale Felder einrichten
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -158,9 +125,8 @@ public static partial class MMoon
 		h +=    0.014 * MMath.Cos(6.0 * d -       m          );
 		h +=    0.010 * MMath.Cos(8.0 * d                    );
 
-		// Parallaxe berechnen und Rückgabewert setzen
-		parallax = h / 3600.0;
-		return j;
+		// Rückgabe
+		return(j, h / 3600.0);
 	}
 
 	// MMoon.AscendingNode()
@@ -168,12 +134,7 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch den aufsteigenden Knoten nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch den aufsteigenden Knoten nach der aktuellen Systemzeit.</returns>
-	public static double AscendingNode()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.AscendingNode(jd);
-	}
+	public static double AscendingNode(){ return MMoon.AscendingNode(DateTime.Now.ToJdn()); }
 
 	// MMoon.AscendingNode(double)
 	/// <summary>
@@ -239,12 +200,7 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch den absteigenden Knoten nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch den absteigenden Knoten nach der aktuellen Systemzeit.</returns>
-	public static double DescendingNode()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.DescendingNode(jd);
-	}
+	public static double DescendingNode(){ return MMoon.DescendingNode(DateTime.Now.ToJdn());	}
 
 	// MMoon.DescendingNode(double)
 	/// <summary>
@@ -323,50 +279,16 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl der nächsten nördlichen Mondwende nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der nächsten nördlichen Mondwende nach der aktuellen Systemzeit.</returns>
-	public static double GreatestNorthernDeclination()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double  d = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.GreatestNorthernDeclination(jd, ref d);
-	}
+	public static (double jd, double declination) GreatestNorthernDeclination(){ return MMoon.GreatestNorthernDeclination(DateTime.Now.ToJdn()); }
 
-	// MMoon.GreatesNorthernDeclination(ref double)
+	// MMoon.GreatesNorthernDeclination(double)
 	/// <summary>
-	/// Setzt die Deklination und liefert die julianische Tageszahl der nächsten nördlichen Mondwende nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="declination">Deklination.</param>
-	/// <returns>Julianische Tageszahl der nächsten nördlichen Mondwende nach der aktuellen Systemzeit.</returns>
-	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestNorthernDeclination(ref double declination)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.GreatestNorthernDeclination(jd, ref declination);
-	}
-
-	// MMoon.GreatestNorthernDeclination(double)
-	/// <summary>
-	/// Liefert die julianische Tageszahl der nächsten nördlichen Mondwende nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl der nächsten nördlichen Mondwende und die Deklination nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl der nächsten nördlichen Mondwende nach der julianischen Tageszahl.</returns>
-	public static double GreatestNorthernDeclination(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double d = 0.0;
-		return MMoon.GreatestNorthernDeclination(jd, ref d);
-	}
-
-	// MMoon.GreatesNorthernDeclination(double, ref double)
-	/// <summary>
-	/// Setzt die Deklination und liefert die julianische Tageszahl der nächsten nördlichen Mondwende nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="declination">Deklination.</param>
-	/// <returns>Julianische Tageszahl der nächsten nördlichen Mondwende nach der julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl der nächsten nördlichen Mondwende und die Deklination nach der julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestNorthernDeclination(double jd, ref double declination)
+	public static (double jd, double declination) GreatestNorthernDeclination(double jd)
 	{
 		// Lokale Felder einrichten
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -490,9 +412,8 @@ public static partial class MMoon
 		h += -0.0010     * MMath.Sin(                               2.0 * f);
 		h +=  0.0006     * MMath.Sin(                           a +       f);
 
-		// Deklination berechnen und Rückgabewert setzen
-		declination = 23.6961 - 0.013004 * t + h;
-		return j;
+		// Rückgabe
+		return(j, 23.6961 - 0.013004 * t + h);
 	}
 
 	// MMoon.GreatestSouthernDeclination()
@@ -500,49 +421,16 @@ public static partial class MMoon
 	/// Liefert die julianische Tageszahl der nächsten südlichen Mondwende nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der nächsten südlichen Mondwende nach der aktuellen Systemzeit.</returns>
-	public static double GreatestSouthernDeclination()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double  d = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.GreatestSouthernDeclination(jd, ref d);
-	}
+	public static (double jd, double declination) GreatestSouthernDeclination(){ return MMoon.GreatestSouthernDeclination(DateTime.Now.ToJdn()); }
 
-	// MMoon.GreatestSouthernDeclination(ref double)
-	/// <summary>
-	/// Setzt die Deklination und liefert die julianische Tageszahl der nächsten südlichen Mondwende nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="declination">Deklination.</param>
-	/// <returns>Julianische Tageszahl der nächsten südlichen Mondwende nach der aktuellen Systemzeit.</returns>
-	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestSouthernDeclination(ref double declination)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.GreatestSouthernDeclination(jd, ref declination);
-	}
 	// MMoon.GreatestSouthernDeclination(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl der nächsten südlichen Mondwende nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl der nächsten südlichen Mondwende und die Deklination nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl der nächsten südlichen Mondwende nach der julianischen Tageszahl.</returns>
-	public static double GreatestSouthernDeclination(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double d = 0.0;
-		return MMoon.GreatestSouthernDeclination(jd, ref d);
-	}
-
-	// MMoon.GreatestSouthernDeclination(double, ref double)
-	/// <summary>
-	/// Setzt die Deklination und liefert die julianische Tageszahl der nächsten südlichen Mondwende nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="declination">Deklination.</param>
-	/// <returns>Julianische Tageszahl der nächsten südlichen Mondwende nach der julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl der nächsten südlichen Mondwende und die Deklination nach der julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestSouthernDeclination(double jd, ref double declination)
+	public static (double jd, double declination) GreatestSouthernDeclination(double jd)
 	{
 		// Lokale Felder einrichten
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -666,9 +554,8 @@ public static partial class MMoon
 		h += -0.0010     * MMath.Sin(                               2.0 * f);
 		h +=  0.0037     * MMath.Sin(                           a +       f);
 
-		// Deklination berechnen und Rückgabewert setzen
-		declination = -23.6961 - 0.013004 * t - h;
-		return j;
+		// Rückgabe
+		return(j, -23.6961 - 0.013004 * t - h);
 	}
 
 	// MMoon.Latitude(EPrecision)
@@ -677,12 +564,7 @@ public static partial class MMoon
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikale Breite zur aktuellen Systemzeit.</returns>
-	public static double Latitude(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Latitude(value, jd);
-	}
+	public static double Latitude(EPrecision value){ return MMoon.Latitude(value, DateTime.Now.ToJdn()); }
 
 	// MMoon.Latitude(EPrecision, double)
 	/// <summary>
@@ -708,12 +590,7 @@ public static partial class MMoon
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikale Breite zur aktuellen Systemzeit.</returns>
-	public static double Longitude(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Longitude(value, jd);
-	}
+	public static double Longitude(EPrecision value){ return MMoon.Longitude(value, DateTime.Now.ToJdn()); }
 
 	// MMoon.Longitude(EPrecision, double)
 	/// <summary>
@@ -736,51 +613,18 @@ public static partial class MMoon
 
 	// MMoon.Perigee()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum und die Horizontparallaxe nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der aktuellen Systemzeit.</returns>
-	public static double Perigee()
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double  p = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Perigee(jd, ref p);
-	}
-
-	// MMoon.Perigee(ref double)
-	/// <summary>
-	/// Setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="parallax">Horizontparallaxe.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der aktuellen Systemzeit.</returns>
-	public static double Perigee(ref double parallax)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Perigee(jd, ref parallax);
-	}
+	/// <returns>Julianische Tageszahl des nächsten Durchgang durch das Perigäum und die Horizontparallaxe nach der aktuellen Systemzeit.</returns>
+	public static (double jd, double parallax) Perigee(){ return MMoon.Perigee(DateTime.Now.ToJdn()); }
 
 	// MMoon.Perigee(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum und die Horizontparallaxe nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der julianischen Tageszahl.</returns>
-	public static double Perigee(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit berechnen
-		double p = 0.0;
-		return MMoon.Perigee(jd, ref p);
-	}
-
-	// MMoon.Perigee(double, ref double)
-	/// <summary>
-	/// Setzt die Horizontparallaxe und liefert die julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="parallax">Horizontparallaxe.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgang durch das Perigäum nach der julianischen Tageszahl.</returns>
-	public static double Perigee(double jd, ref double parallax)
+	public static (double jd, double parallax) Perigee(double jd)
 	{
 		// Deklaration der lokalen Felder
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -926,9 +770,8 @@ public static partial class MMoon
 		h +=    0.010 * MMath.Cos( 5.0 * d +       m          );
 		h +=   -0.010 * MMath.Cos(20.0 * d                    );
 
-		// Parallaxe berechnen und Rückgabewert setzen
-		parallax = h / 3600.0;
-		return j;
+		// Rückgabe
+		return(j, h / 3600.0);
 	}
 
 	// MMoon.Position(EPrecision)
@@ -937,12 +780,7 @@ public static partial class MMoon
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar Position(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Position(value, jd);
-	}
+	public static CPolar Position(EPrecision value){ return MMoon.Position(value, DateTime.Now.ToJdn()); }
 
 	// MMoon.Position(EPrecision, double)
 	/// <summary>
@@ -973,12 +811,7 @@ public static partial class MMoon
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikalen Radiusvektor zur aktuellen Systemzeit.</returns>
-	public static double Radius(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.Radius(value, jd);
-	}
+	public static double Radius(EPrecision value){ return MMoon.Radius(value, DateTime.Now.ToJdn()); }
 
 	// MMoon.Radius(EPrecision, double)
 	/// <summary>
@@ -994,75 +827,40 @@ public static partial class MMoon
 		throw new NotImplementedException("Die Methode ist für diese Genauigkeitskennung nicht implementiert.");
 	}
 
-	// MMoon.Rise(CPolar, ref double, double)
+	// MMoon.Rise(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
+	/// </summary>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MMoon.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
+
+	// MMoon.Rise(CPolar, double)
+	/// <summary>
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MMoon.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MMoon.Rise(position.Longitude, position.Latitude, jd); }
 
-	// MMoon.Rise(CPolar, ref double, double, ref double)
+	// MMoon.Rise(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MMoon.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MMoon.Rise(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereignisskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MMoon.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereignisskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi){ return MMoon.Rise(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MMoon.Rise(double, double, ref double, double)
+	// MMoon.Rise(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdastum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MMoon.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MMoon.Rise(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -1084,18 +882,21 @@ public static partial class MMoon
 		// Position für gegebenen Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn + 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -1119,102 +920,49 @@ public static partial class MMoon
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
-	// MMoon.Set(CPolar, ref double)
+	// MMoon.Set(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MMoon.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MMoon.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MMoon.Set(CPolar, ref double, double)
+	// MMoon.Set(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MMoon.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
-
-	// MMoon.Set(CPolar, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd, ref double azimuth)
-	{
-		// Rückgabe
-		return MMoon.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth);}
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MMoon.Set(position.Longitude, position.Latitude, jd); }
 
-	// MMoon.Set(double, double, ref double)
+	// MMoon.Set(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MMoon.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi){ return MMoon.Set(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MMoon.Set(double, double, ref double, double)
+	// MMoon.Set(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MMoon.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MMoon.Set(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -1236,18 +984,21 @@ public static partial class MMoon
 		// Position für gegebenen Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -1271,13 +1022,12 @@ public static partial class MMoon
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MMoon.SiderealMonth()
@@ -1292,12 +1042,7 @@ public static partial class MMoon
 	/// Liefert die Dauer des synodischen Monats zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Dauer des synodischen Monats zur aktuellen Systemzeit.</returns>
-	public static double SynodicMonth()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MMoon.SynodicMonth(jd);
-	}
+	public static double SynodicMonth(){ return MMoon.SynodicMonth(DateTime.Now.ToJdn()); }
 
 	// MMoon.SynodicMonth(double)
 	/// <summary>
@@ -1312,96 +1057,46 @@ public static partial class MMoon
 		return MMath.Polynome(t, 29.5305888531, +0.00000021621, -0.000000000364);
 	}
 
-	// MMoon.Transit(CPolar, ref double)
+	// MMoon.Transit(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zum aktuellen Systemdatum und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		double h  = 0.0;
-		return MMoon.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position){ return MMoon.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MMoon.Transit(CPolar, ref double, double)
+	// MMoon.Transit(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MMoon.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MMoon.Transit(position.Longitude, position.Latitude, jd); }
 
-	// MMoon.Transit(CPolar, ref double, double, ref double)
+	// MMoon.Transit(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="pos">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent, double jd, ref double height){ return MMoon.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref height); }
-
-	// MMoon.Transit(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		double h  = 0.0;
-		return MMoon.Transit(lambda, phi, ref jdEvent, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi){ return MMoon.Transit(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MMoon.Transit(double, double, ref double, double)
+	// MMoon.Transit(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MMoon.Transit(lambda, phi, ref jdEvent, jd, ref h);
-	}
-
-	// MMoon.Transit(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent, double jd, ref double height)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
 		double l   = 0.0;                         // Geozentrische Länge
 		double a   = 0.0;                         // Rektaszension
-		double d   = 0.0;                         // Deklination
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
@@ -1412,13 +1107,15 @@ public static partial class MMoon
 		// Position für gegebenen Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MMoon.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// ------------------- //
@@ -1428,7 +1125,6 @@ public static partial class MMoon
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1440,16 +1136,12 @@ public static partial class MMoon
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Höhe berechnen
-		d = MMath.Bessel(m, dM, d0, dP);
-		height = MEphemerides.ToHeight(0.0, d, phi);
-
-		// Iteration anwenden und Rückgabewert setzen
-		jdEvent = jd + m;
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 
 	// MMoon.TropicalMonth()
