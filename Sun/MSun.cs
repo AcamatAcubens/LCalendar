@@ -13,78 +13,52 @@ public static partial class MSun
 	// ------------------- //
 	// Felder und Methoden //
 	// ------------------- //
-	// MSun.Dawn(CPolar, ref double)
+	// MSun.Dawn(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Dawn(position.Longitude, position.Latitude, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil);
-	}
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd) Dawn(CPolar position){ return MSun.Dawn(position.Longitude, position.Latitude, DateTime.Now.ToJdn(), MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dawn(CPolar, ref double, double)
+	// MSun.Dawn(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(CPolar position, ref double jdEvent, double jd){ return MSun.Dawn(position.Longitude, position.Latitude, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd) Dawn(CPolar position, double jd){ return MSun.Dawn(position.Longitude, position.Latitude, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dawn(CPolar, ref double, double)
+	// MSun.Dawn(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
+	/// <param name="lambda">Geographische Länge.</param>
+	/// <param name="phi">Geographische Breite</param>
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd) Dawn(double lambda, double phi){ return MSun.Dawn(lambda, phi, DateTime.Now.ToJdn(), MEphemerides.GeocentricHeight_TwilightCivil); }
+
+	// MSun.Dawn(double, double, double)
+	/// <summary>
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum julianischen Tagesdatum.
+	/// </summary>
+	/// <param name="lambda">Geographische Länge.</param>
+	/// <param name="phi">Geographische Breite</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd) Dawn(double lambda, double phi, double jd){ return MSun.Dawn(lambda, phi, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
+
+	// MSun.Dawn(double, double, double, double)
+	/// <summary>
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der Morgendämmerung am geographischen Ort, zum julianischen Tagesdatum und zur geozentrischen Höhe.
+	/// </summary>
+	/// <param name="lambda">Geographische Länge.</param>
+	/// <param name="phi">Geographische Breite</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="height">Geozentrische Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(CPolar position, ref double jdEvent, double jd, double height){ return MSun.Dawn(position.Longitude, position.Latitude, ref jdEvent, jd, height); }
-
-	// MSun.Dawn(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Dawn(lambda, phi, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil);
-	}
-
-	// MSun.Dawn(double, double, ref double, double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(double lambda, double phi, ref double jdEvent, double jd){ return MSun.Dawn(lambda, phi, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
-
-	// MSun.Dawn(double, double, ref double, double, double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl der Morgendämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Morgendämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Geozentrische Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dawn(double lambda, double phi, ref double jdEvent, double jd, double height)
+	/// <returns>Ereigniskennung und die julianische Tageszahl der Morgendämmerung am geographischen Ort, zum julianischen Tagesdatum und zur geozentrischen Höhe.</returns>
+	public static (EEventType type, double? jd) Dawn(double lambda, double phi, double jd, double height)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
@@ -105,18 +79,21 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jd);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = MMath.ArcCos(cosH);
 
 		// -------------//
@@ -126,7 +103,6 @@ public static partial class MSun
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -140,86 +116,60 @@ public static partial class MSun
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null);
 
-		// Iteration anwenden und Rückgabewert setzen
-		jdEvent = jd + m;
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m);
 	}
 
-	// MSun.Dusk(CPolar, ref double)
+	// MSun.Dusk(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Dusk(position.Longitude, position.Latitude, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil);
-	}
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd) Dusk(CPolar position){ return MSun.Dusk(position.Longitude, position.Latitude, DateTime.Now.ToJdn(), MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dusk(CPolar, ref double, double)
+	// MSun.Dusk(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(CPolar position, ref double jdEvent, double jd){ return MSun.Dusk(position.Longitude, position.Latitude, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd) Dusk(CPolar position, double jd){ return MSun.Dusk(position.Longitude, position.Latitude, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dusk(CPolar, ref double, double)
+	// MSun.Dusk(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Geozentrische Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(CPolar position, ref double jdEvent, double jd, double height){ return MSun.Dusk(position.Longitude, position.Latitude, ref jdEvent, jd, height); }
-
-	// MSun.Dusk(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Dusk(lambda, phi, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil);
-	}
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd) Dusk(double lambda, double phi){ return MSun.Dusk(lambda, phi, DateTime.Now.ToJdn(), MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dusk(double, double, ref double, double)
+	// MSun.Dusk(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Georgraphische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(double lambda, double phi, ref double jdEvent, double jd){ return MSun.Dusk(lambda, phi, ref jdEvent, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung und die julianische Tageszahl der bürgerlichen Abenddämmerung am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd) Dusk(double lambda, double phi, double jd){ return MSun.Dusk(lambda, phi, jd, MEphemerides.GeocentricHeight_TwilightCivil); }
 
-	// MSun.Dusk(double, double, ref double, double, double)
+	// MSun.Dusk(double, double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl der Abenddämmerung am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung und die julianische Tageszahl der Abenddämmerung am geographischen Ort, zum julianischen Tagesdatum und zur geozentrischen Höhe.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Georgraphische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl der Abenddämmerung.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="height">Geozentrische Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Dusk(double lambda, double phi, ref double jdEvent, double jd, double height)
+	/// <returns>Ereigniskennung und die julianische Tageszahl der Abenddämmerung am geographischen Ort, zum julianischen Tagesdatum und zur geozentrischen Höhe.</returns>
+	public static (EEventType type, double? jd) Dusk(double lambda, double phi, double jd, double height)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
@@ -240,18 +190,21 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn + 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -261,7 +214,6 @@ public static partial class MSun
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m  = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -275,12 +227,12 @@ public static partial class MSun
 			m  += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null);
 
-		// Iteration anwenden und Rückgabewert setzen
-		jdEvent = jd + m;
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m);
 	}
 
 	// MSun.EquinoxOfAutumn()
@@ -288,12 +240,7 @@ public static partial class MSun
 	/// Liefert die julianische Tageszahl des Herbstäquinoktiums zum aktuellen Jahr.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des Herbstäquinoktiums zum aktuellen Jahr.</returns>
-	public static double EquinoxOfAutumn()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		int y = MCalendar.GregorianYear(DateTime.Now.ToJdn());
-		return MSun.EquinoxOfAutumn(y);
-	}
+	public static double EquinoxOfAutumn(){ return MSun.EquinoxOfAutumn(MCalendar.GregorianYear(DateTime.Now.ToJdn())); }
 
 	// MSun.EquinoxOfAutumn(int)
 	/// <summary>
@@ -329,12 +276,7 @@ public static partial class MSun
 	/// Liefert die julianische Tageszahl des Frühlingsäquinoktiums zur aktuellen Jahreszahl.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des Frühlingsäquinoktiums zur aktuellen Jahreszahl.</returns>
-	public static double EquinoxOfSpring()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		int y = MCalendar.GregorianYear(DateTime.Now.ToJdn());
-		return MSun.EquinoxOfSpring(y);
-	}
+	public static double EquinoxOfSpring(){ return MSun.EquinoxOfSpring(MCalendar.GregorianYear(DateTime.Now.ToJdn())); }
 
 	// MSun.EquinoxOfSpring(int)
 	/// <summary>
@@ -371,12 +313,7 @@ public static partial class MSun
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Heliozentrisch-ekliptikale Breite zur aktuellen Systemzeit.</returns>
-	public static double Latitude(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Latitude(value, jd);
-	}
+	public static double Latitude(EPrecision value){ return MSun.Latitude(value, DateTime.Now.ToJdn()); }
 
 	// MSun.Latitude(EPrecision, double)
 	/// <summary>
@@ -393,12 +330,7 @@ public static partial class MSun
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikale Länge zur aktuellen Systemzeit.</returns>
-	public static double Longitude(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Longitude(value, jd);
-	}
+	public static double Longitude(EPrecision value){ return MSun.Longitude(value, DateTime.Now.ToJdn()); }
 
 	// MSun.Longitude(EPrecision, double)
 	/// <summary>
@@ -490,12 +422,7 @@ public static partial class MSun
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Geozentrisch-ekliptikalen Radius zur aktuellen Systemzeit.</returns>
-	public static double Radius(EPrecision value)
-	{
-		// Lokale Felder einrichten
-		double jd = DateTime.Now.ToJdn();
-		return MSun.Radius(value, jd);
-	}
+	public static double Radius(EPrecision value){ return MSun.Radius(value, DateTime.Now.ToJdn()); }
 
 	// MSun.Radius(EPrecision, double)
 	/// <summary>
@@ -506,90 +433,41 @@ public static partial class MSun
 	/// <returns>Geozentrisch-ekliptikalen Radius zur julianischen Tageszahl.</returns>
 	public static double Radius(EPrecision value, double jd){ return MEarth.Radius(value, jd); }
 
-	// MSun.Rise(CPolar, ref double)
+	// MSun.Rise(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemdatum und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MSun.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MSun.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MSun.Rise(CPolar, ref double, double)
+	// MSun.Rise(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MSun.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MSun.Rise(position.Longitude, position.Latitude, jd); }
 
-	// MSun.Rise(CPolar, ref double, double, ref double)
+	// MSun.Rise(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MSun.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MSun.Rise(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MSun.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi){ return MSun.Rise(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MSun.Rise(double, double, ref double, double)
+	// MSun.Rise(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MSun.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MSun.Rise(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;       // Tageszahl um Mitternacht
@@ -611,18 +489,21 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn + 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -632,7 +513,6 @@ public static partial class MSun
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m  = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -646,99 +526,49 @@ public static partial class MSun
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
-	// MSun.Set(CPolar, ref double)
+	// MSun.Set(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MSun.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MSun.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); 	}
 
-	// MSun.Set(CPolar, ref double, double)
+	// MSun.Set(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MSun.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MSun.Set(position.Longitude, position.Latitude, jd); }
 
-	// MSun.Set(CPolar, ref double, double, ref double)
+	// MSun.Set(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MSun.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-	
-	// MSun.Set(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MSun.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi){ return MSun.Set(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MSun.Set(double, double, ref double, double)
+	// MSun.Set(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MSun.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MSun.Set(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;       // Tageszahl um Mitternacht
@@ -760,18 +590,20 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0) return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -781,7 +613,6 @@ public static partial class MSun
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -795,13 +626,12 @@ public static partial class MSun
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MSun.SolsticeOfSummer()
@@ -809,12 +639,7 @@ public static partial class MSun
 	/// Liefert die julianische Tageszahl der Sommersonnenwende zur aktuellen Jahreszahl.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der Sommersonnenwende zur aktuellen Jahreszahl.</returns>
-	public static double SolsticeOfSummer()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		int y = MCalendar.GregorianYear(DateTime.Now.ToJdn());
-		return MSun.SolsticeOfSummer(y);
-	}
+	public static double SolsticeOfSummer(){ return MSun.SolsticeOfSummer(MCalendar.GregorianYear(DateTime.Now.ToJdn())); }
 
 	// MSun.SolsticeOfSummer(int)
 	/// <summary>
@@ -850,12 +675,7 @@ public static partial class MSun
 	/// Liefert die julianische Tageszahl der Wintersonnenwende zur aktuellen Jahreszahl.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der Wintersonnenwende zur aktuellen Jahreszahl.</returns>
-	public static double SolsticeOfWinter()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		int y = MCalendar.GregorianYear(DateTime.Now.ToJdn());
-		return MSun.SolsticeOfWinter(y);
-	}
+	public static double SolsticeOfWinter(){ return MSun.SolsticeOfWinter(MCalendar.GregorianYear(DateTime.Now.ToJdn())); }
 
 	// MSun.SolsticeOfWinter(int)
 	/// <summary>
@@ -886,96 +706,46 @@ public static partial class MSun
 		return jd + MSun.T27C(jd);
 	}
 
-	// MSun.Transit(CPolar, ref double)
+	// MSun.Transit(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zum aktuellen Systemdatum und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		double h  = 0.0;
-		return MSun.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position){ return MSun.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MSun.Transit(CPolar, ref double, double)
+	// MSun.Transit(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MSun.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref h);
-	}
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MSun.Transit(position.Longitude, position.Latitude, jd); }
 
-	// MSun.Transit(CPolar, ref double, double, ref double)
+	// MSun.Transit(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(CPolar position, ref double jdEvent, double jd, ref double height){ return MSun.Transit(position.Longitude, position.Latitude, ref jdEvent, jd, ref height); }
-
-	// MSun.Transit(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		double h  = 0.0;
-		return MSun.Transit(lambda, phi, ref jdEvent, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi){ return MSun.Transit(lambda, phi, DateTime.Now.ToJdn()); 	}
 
-	// MSun.Transit(double, double, ref double, double)
+	// MSun.Transit(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die goezentrische Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MSun.Transit(lambda, phi, ref jdEvent, jd, ref h);
-	}
-
-	// MSun.Transit(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Meridiandurchgangs und die Höhe am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Meridiandurchgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Transit(double lambda, double phi, ref double jdEvent, double jd, ref double height)
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die goezentrische Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
 		double l   = 0.0;                         // Geozentrische Länge
 		double a   = 0.0;                         // Rektaszension
-		double d   = 0.0;                         // Deklination
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
@@ -986,13 +756,15 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// ------------------- //
@@ -1002,7 +774,6 @@ public static partial class MSun
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1014,15 +785,11 @@ public static partial class MSun
 			m += dm;
 		}
 
-		// Ereigniszeit prüfen
-		if(m < 0.0 || m >= 1.0) return EEventType.NoEvent;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
-		// Höhe berechnen
-		d = MMath.Bessel(m, dM, d0, dP);
-		height = MEphemerides.ToHeight(0.0, d, phi);
-
-		// Iteration anwenden und Rückgabewert setzen
-		jdEvent = jd + m;
-		return EEventType.Normal;
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 }
