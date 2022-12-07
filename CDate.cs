@@ -100,17 +100,10 @@ public class CDate : CListItem
 
 	// CDate(double)
 	/// <summary>
-	/// Konstruktor eines gregorianischen Kalenders mit einer Angabe zum julianischen Datum.
+	/// Konstruktor eines gregorianischen Kalenders mit einer Angabe zur julianischen Tageszahl.
 	/// </summary>
-	/// <param name="jd">Julianisches Datum.</param>
-	public CDate(double jd)
-	{
-		// Felder einrichten
-		DateTime itm = MCalendar.ToDateTime(jd);
-		this.Day   = itm.Day;
-		this.Month = itm.Month;
-		this.Year  = itm.Year;
-	}
+	/// <param name="jd">Julianische Tageszahl.</param>
+	public CDate(double jd) : this(MCalendar.ToGregorian(jd)) { }
 
 	// CDate(double, int)
 	/// <summary>
@@ -153,5 +146,5 @@ public class CDate : CListItem
 	/// <summary>
 	/// Liefert oder übernimmt die Jahreszahl.
 	/// </summary>
-	public int Year{ get;  set; }
+	public int Year{ get; set; }
 }

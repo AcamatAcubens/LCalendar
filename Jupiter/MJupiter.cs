@@ -585,6 +585,10 @@ public static partial class MJupiter
 			m += dm;
 		}
 
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
 		// Rückgabe
 		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
@@ -708,6 +712,10 @@ public static partial class MJupiter
 			dm = (h - h0) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
 			m += dm;
 		}
+
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
 
 		// Rückgabe
 		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
