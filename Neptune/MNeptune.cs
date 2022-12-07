@@ -18,12 +18,7 @@ public partial class MNeptune
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.</returns>
-	public static double Aphelion()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Aphelion(jd);
-	}
+	public static double Aphelion(){ return MNeptune.Aphelion(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Aphelion(double)
 	/// <summary>
@@ -50,15 +45,10 @@ public partial class MNeptune
 
 	// MNeptune.Conjunction()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Konjunktion mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double Conjunction()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Conjunction(jd);
-	}
+	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Konjunktion mit der Sonne nach der aktuellen Systemzeit.</returns>
+	public static double Conjunction(){ return MNeptune.Conjunction(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Conjuction(double)
 	/// <summary>
@@ -105,12 +95,7 @@ public partial class MNeptune
 	/// Liefert die Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
-	public static double Eccentricity()
-	{
-		// Lokale Felder einrichten und Exzentrizität berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Eccentricity(jd);
-	}
+	public static double Eccentricity(){ return MNeptune.Eccentricity(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Eccentricity(double)
 	/// <summary>
@@ -131,12 +116,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <returns>Neigung der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double Inclination()
-	{
-		// Lokale Felder einrichten und Bahnneigung berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Inclination(jd);
-	}
+	public static double Inclination(){ return MNeptune.Inclination(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Inclination(double)
 	/// <summary>
@@ -163,12 +143,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <returns>Länge des aufsteigenden Knotens der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfAscendingNode()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.LongitudeOfAscendingNode(jd);
-	}
+	public static double LongitudeOfAscendingNode(){ return MNeptune.LongitudeOfAscendingNode(DateTime.Now.ToJdn()); }
 
 	// MNeptune.LongitudeOfAscendingNode(double)
 	/// <summary>
@@ -190,12 +165,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <returns>Länge des Perihels der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfPerihelion()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.LongitudeOfPerihelion(jd);
-	}
+	public static double LongitudeOfPerihelion(){ return MNeptune.LongitudeOfPerihelion(DateTime.Now.ToJdn()); }
 
 	// MNeptune.LongitudeOfPerihelion(double)
 	/// <summary>
@@ -217,12 +187,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly()
-	{
-		// Lokale Felder einrichten und Anomalie berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.MeanAnomaly(jd);
-	}
+	public static double MeanAnomaly(){ return MNeptune.MeanAnomaly(DateTime.Now.ToJdn()); }
 
 	// MNeptune.MeanAnomaly(double)
 	/// <summary>
@@ -239,12 +204,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <returns>Mittlere Länge der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanLongitude()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.MeanLongitude(jd);
-	}
+	public static double MeanLongitude(){ return MNeptune.MeanLongitude(DateTime.Now.ToJdn()); }
 
 	// MNeptune.MeanLongitude(double)
 	/// <summary>
@@ -265,12 +225,7 @@ public partial class MNeptune
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Opposition mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Opposition mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double Opposition()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Opposition(jd);
-	}
+	public static double Opposition(){ return MNeptune.Opposition(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Opposition(double)
 	/// <summary>
@@ -316,12 +271,7 @@ public partial class MNeptune
 	/// Liefert die julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.</returns>
-	public static double Perihelion()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Perihelion(jd);
-	}
+	public static double Perihelion(){ return MNeptune.Perihelion(DateTime.Now.ToJdn()); }
 
 	// MNeptune.Perihelion(double)
 	/// <summary>
@@ -352,12 +302,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Heliozentrisch-ekliptikale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEcliptical(EPrecision value)
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.PositionEcliptical(value, jd);
-	}
+	public static CPolar PositionEcliptical(EPrecision value){ return MNeptune.PositionEcliptical(value, DateTime.Now.ToJdn()); }
 
 	// MNeptune.PositionEcliptical(EPrecision, double)
 	/// <summary>
@@ -381,12 +326,7 @@ public partial class MNeptune
 	/// Liefert die (scheinbare) geozentrisch-äquatoriale Position zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Geozentrisch-äquatoriale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEquatorial()
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.PositionEquatorial(jd);
-	}
+	public static CPolar PositionEquatorial(){ return MNeptune.PositionEquatorial(DateTime.Now.ToJdn()); }
 
 	// MNeptune.PositionEquatorial(double)
 	/// <summary>
@@ -451,90 +391,41 @@ public partial class MNeptune
 	// MNeptune.Radius(EPrecision)         » MNeptune.Radius.cs
 	// MNeptune.Radius(EPrecision, double) » MNeptune.Radius.cs
 
-	// MNeptune.Rise(CPolar, ref double)
+	// MNeptune.Rise(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MNeptune.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MNeptune.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MNeptune.Rise(CPolar, ref double, double)
+	// MNeptune.Rise(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="pos">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MNeptune.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MNeptune.Rise(position.Longitude, position.Latitude, jd); }
 
-	// MNeptune.Rise(CPolar, ref double, double, ref double)
+	// MNeptune.Rise(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MNeptune.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MNeptune.Rise(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MNeptune.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi){ return MNeptune.Rise(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MNeptune.Rise(double, double, ref double, double)
+	// MNeptune.Rise(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MNeptune.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MNeptune.Rise(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -559,19 +450,22 @@ public partial class MNeptune
 		l = MNeptune.Longitude(EPrecision.Low, jdn);
 		b = MNeptune.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MNeptune.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MNeptune.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -580,8 +474,7 @@ public partial class MNeptune
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
+		double m  = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -595,10 +488,12 @@ public partial class MNeptune
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MNeptune.SemimajorAxis()
@@ -606,12 +501,7 @@ public partial class MNeptune
 	/// Liefert die große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Große Halbachse der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
-	public static double SemimajorAxis()
-	{
-		// Lokale Felder einrichten und große Halbachse bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.SemimajorAxis(jd);
-	}
+	public static double SemimajorAxis(){ return MNeptune.SemimajorAxis(DateTime.Now.ToJdn()); }
 
 	// MNeptune.SemimajorAxis(double)
 	/// <summary>
@@ -625,90 +515,41 @@ public partial class MNeptune
 		return MMath.Polynome(t, 30.110386869, -0.0000001663, 0.00000000069);
 	}
 
-	// MNeptune.Set(CPolar, ref double)
+	// MNeptune.Set(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MNeptune.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MNeptune.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MNeptune.Set(CPolar, ref double, double)
+	// MNeptune.Set(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MNeptune.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MNeptune.Set(position.Longitude, position.Latitude, jd); }
 
-	// MNeptune.Set(CPolar, ref double, double, ref double)
+	// MNeptune.Set(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MNeptune.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MNeptune.Set(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MNeptune.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi){ return MNeptune.Set(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MNeptune.Set(double, double, ref double, double)
+	// MNeptune.Set(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MNeptune.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MNeptune.Set(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -733,19 +574,22 @@ public partial class MNeptune
 		l = MNeptune.Longitude(EPrecision.Low, jdn);
 		b = MNeptune.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MNeptune.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MNeptune.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -755,7 +599,6 @@ public partial class MNeptune
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -769,10 +612,12 @@ public partial class MNeptune
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MNeptune.SynodicPeriod()
@@ -784,89 +629,45 @@ public partial class MNeptune
 
 	// MNeptune.Transit(CPolar)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(CPolar position)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position){ return MNeptune.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MNeptune.Transit(CPolar, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MNeptune.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
-
-	// MNeptune.Transit(CPolar, double, ref double)
-	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd, ref double height){ return MNeptune.Transit(position.Longitude, position.Latitude, jd, ref height); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MNeptune.Transit(position.Longitude, position.Latitude, jd); }
 
 	// MNeptune.Transit(double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(double lambda, double phi)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MNeptune.Transit(lambda, phi, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi){ return MNeptune.Transit(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MNeptune.Transit(double, double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die juliansiche Tageszahl der Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MNeptune.Transit(lambda, phi, jd, ref h);
-	}
-
-	// MNeptune.Transit(double, double, double, ref double)
-	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd, ref double height)
+	/// <returns>Ereigniskennung, die juliansiche Tageszahl der Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
 		double l   = 0.0;                         // Geozentrische Länge
 		double b   = 0.0;                         // Geozentrische Breite
 		double a   = 0.0;                         // Rektaszension
-		double d   = 0.0;                         // Deklination
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
@@ -879,14 +680,16 @@ public partial class MNeptune
 		l = MNeptune.Longitude(EPrecision.Low, jdn);
 		b = MNeptune.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MNeptune.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MNeptune.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// ------------------- //
@@ -896,7 +699,6 @@ public partial class MNeptune
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -908,10 +710,12 @@ public partial class MNeptune
 			m += dm;
 		}
 
-		// Iteration anwenden, Höhe berechnen und Rückgabewert setzen
-		d = MMath.Bessel(m, dM, d0, dP);
-		height = MEphemerides.ToHeight(0.0, d, phi);
-		return jd + m;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 
 	// MNeptune.TropicalPeriod()
