@@ -404,7 +404,7 @@ public partial class MNeptune
 	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="pos">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MNeptune.Rise(position.Longitude, position.Latitude, jd); }
 
@@ -423,7 +423,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
@@ -528,7 +528,7 @@ public partial class MNeptune
 	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MNeptune.Set(position.Longitude, position.Latitude, jd); }
 
@@ -547,7 +547,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
@@ -640,7 +640,7 @@ public partial class MNeptune
 	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MNeptune.Transit(position.Longitude, position.Latitude, jd); }
 
@@ -659,7 +659,7 @@ public partial class MNeptune
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die juliansiche Tageszahl der Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
 	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
