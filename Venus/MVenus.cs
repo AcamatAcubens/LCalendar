@@ -18,12 +18,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.</returns>
-	public static double Aphelion()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Aphelion(jd);
-	}
+	public static double Aphelion(){ return MVenus.Aphelion(DateTime.Now.ToJdn()); }
 
 	// MVenus.Aphelion(double)
 	/// <summary>
@@ -53,12 +48,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die untere Konjunktion mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die untere Konjunktion mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double ConjunctionInferior()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.ConjunctionInferior(jd);
-	}
+	public static double ConjunctionInferior(){ return MVenus.ConjunctionInferior(DateTime.Now.ToJdn()); }
 
 	// MVenus.ConjunctionInferior(double)
 	/// <summary>
@@ -103,12 +93,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die obere Konjunktion mit der Sonne nach der aktuellen Systemzeit.</returns>
-	public static double ConjunctionSuperior()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.ConjunctionSuperior(jd);
-	}
+	public static double ConjunctionSuperior(){ return MVenus.ConjunctionSuperior(DateTime.Now.ToJdn()); }
 
 	// MVenus.ConjunctionSuperior(double)
 	/// <summary>
@@ -153,12 +138,7 @@ public partial class MVenus
 	/// Liefert die Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Exzentrizität der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
-	public static double Eccentricity()
-	{
-		// Lokale Felder einrichten und Exzentrizität berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Eccentricity(jd);
-	}
+	public static double Eccentricity(){ return MVenus.Eccentricity(DateTime.Now.ToJdn()); }
 
 	// MVenus.Eccentricity(double)
 	/// <summary>
@@ -175,53 +155,19 @@ public partial class MVenus
 
 	// MVenus.GreatesEasternElongation()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Ostelongation und den Elongationswinkel nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der aktuellen Systemzeit.</returns>
-	public static double GreatestEasternElongation()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double  e = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.GreatestEasternElongation(jd, ref e);
-	}
-
-	// MVenus.GreatestEasternElongation(ref double)
-	/// <summary>
-	/// Setzt den Elongationswinkel und liefert die julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="elongation">Elongationswinkel.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der aktuellen Systemzeit.</returns>
-	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestEasternElongation(ref double elongation)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.GreatestEasternElongation(jd, ref elongation);
-	}
+	/// <returns>julianische Tageszahl des nächsten Durchgangs durch die Ostelongation und den Elongationswinkel nach der aktuellen Systemzeit</returns>
+	public static (double jd, double elongation) GreatestEasternElongation(){ return MVenus.GreatestEasternElongation(DateTime.Now.ToJdn()); }
 
 	// MVenus.GreatestEasternElongation(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Durchgang durch die Ostelongation und den Elongationswinkel nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der julianischen Tageszahl.</returns>
-	public static double GreatestEasternElongation(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double e = 0.0;
-		return MVenus.GreatestEasternElongation(jd, ref e);
-	}
-
-	// MVenus.GreatestEasternElongation(double, ref double)
-	/// <summary>
-	/// Setzt den Elongationswinkel und liefert die julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="elongation">Elongationswinkel.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Ostelongation nach der julianischen Tageszahl.</returns>
+	/// <returns>julianische Tageszahl des nächsten Durchgang durch die Ostelongation und den Elongationswinkel nach der julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestEasternElongation(double jd, ref double elongation)
+	public static (double jd, double elongation) GreatestEasternElongation(double jd)
 	{
 		// Lokale Felder einrichten
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -268,60 +214,26 @@ public partial class MVenus
 		h += MMath.Polynome(t,  0.0309, -0.0002) * MMath.Sin(2.0 * m);
 		h += MMath.Polynome(t,  0.0036, -0.0001) * MMath.Cos(2.0 * m);
 
-		// Rückgabewerte setzen
-		elongation = h;
-		return j;
+		// Rückgabe
+		return(j, h);
 	}
 
 	// MVenus.GreatesWesternElongation()
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der aktuellen Systemzeit.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation und den Elongationswinkel nach der aktuellen Systemzeit.
 	/// </summary>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der aktuellen Systemzeit.</returns>
-	public static double GreatestWesternElongation()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double  e = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.GreatestWesternElongation(jd, ref e);
-	}
-
-	// MVenus.GreatestWesternElongation(ref double)
-	/// <summary>
-	/// Setzt den Elongationswinkel und liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der aktuellen Systemzeit.
-	/// </summary>
-	/// <param name="elongation">Elongationswinkel.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der aktuellen Systemzeit.</returns>
-	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestWesternElongation(ref double elongation)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.GreatestWesternElongation(jd, ref elongation);
-	}
+	/// <returns>julianische Tageszahl des nächsten Durchgangs durch die Westelongation und den Elongationswinkel nach der aktuellen Systemzeit.</returns>
+	public static (double jd, double elongation) GreatestWesternElongation(){ return MVenus.GreatestWesternElongation(DateTime.Now.ToJdn()); }
 
 	// MVenus.GreatestWesternElongation(double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der julianischen Tageszahl.
-	/// </summary>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der julianischen Tageszahl.</returns>
-	public static double GreatestWesternElongation(double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double e = 0.0;
-		return MVenus.GreatestWesternElongation(jd, ref e);
-	}
-
-	// MVenus.GreatestWesternElongation(double, ref double)
-	/// <summary>
-	/// Setzt den Elongationswinkel und liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der julianischen Tageszahl.
+	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch die Westelongation und den Elongationswinkel nach der julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <param name="elongation">Elongationswinkel.</param>
-	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Westelongation nach der julianischen Tageszahl.</returns>
+	/// <returns>Julianische Tageszahl des nächsten Durchgangs durch die Westelongation und den Elongationswinkel nach der julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double GreatestWesternElongation(double jd, ref double elongation)
+	public static (double jd, double elongation) GreatestWesternElongation(double jd)
 	{
 		// Lokale Felder einrichten
 		double y = (double)MCalendar.GregorianYear(jd) + MCalendar.YearFragment(jd);
@@ -368,9 +280,8 @@ public partial class MVenus
 		h +=                   -0.0163                     * MMath.Sin(2.0 * m);
 		h += MMath.Polynome(t, -0.0075,  0.0001          ) * MMath.Cos(2.0 * m);
 
-		// Rückgabewerte setzen
-		elongation = h;
-		return j;
+		// Rückgabe
+		return(j, h);
 	}
 
 	// MVenus.Inclination()
@@ -379,12 +290,7 @@ public partial class MVenus
 	/// </summary>
 	/// <returns>Neigung der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double Inclination()
-	{
-		// Lokale Felder einrichten und Bahnneigung berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Inclination(jd);
-	}
+	public static double Inclination(){ return MVenus.Inclination(DateTime.Now.ToJdn()); }
 
 	// MVenus.Inclination(double)
 	/// <summary>
@@ -411,12 +317,7 @@ public partial class MVenus
 	/// </summary>
 	/// <returns>Länge des aufsteigenden Knotens der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfAscendingNode()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.LongitudeOfAscendingNode(jd);
-	}
+	public static double LongitudeOfAscendingNode(){ return MVenus.LongitudeOfAscendingNode(DateTime.Now.ToJdn()); }
 
 	// MVenus.LongitudeOfAscendingNode(double)
 	/// <summary>
@@ -438,12 +339,7 @@ public partial class MVenus
 	/// </summary>
 	/// <returns>Länge des Perihels der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double LongitudeOfPerihelion()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.LongitudeOfPerihelion(jd);
-	}
+	public static double LongitudeOfPerihelion(){ return MVenus.LongitudeOfPerihelion(DateTime.Now.ToJdn()); }
 
 	// MVenus.LongitudeOfPerihelion(double)
 	/// <summary>
@@ -465,12 +361,7 @@ public partial class MVenus
 	/// </summary>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly()
-	{
-		// Lokale Felder einrichten und Anomalie berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.MeanAnomaly(jd);
-	}
+	public static double MeanAnomaly(){ return MVenus.MeanAnomaly(DateTime.Now.ToJdn()); }
 
 	// MVenus.MeanAnomaly(double)
 	/// <summary>
@@ -487,12 +378,7 @@ public partial class MVenus
 	/// </summary>
 	/// <returns>Mittlere Länge der mittleren Planetenbahn zur aktuellen Systemzeit.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanLongitude()
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.MeanLongitude(jd);
-	}
+	public static double MeanLongitude(){ return MVenus.MeanLongitude(DateTime.Now.ToJdn()); }
 
 	// MVenus.MeanLongitude(double)
 	/// <summary>
@@ -513,12 +399,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der nächsten Durchgangs durch das Perihel nach der aktuellen Systemzeit.</returns>
-	public static double Perihelion()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Perihelion(jd);
-	}
+	public static double Perihelion(){ return MVenus.Perihelion(DateTime.Now.ToJdn()); }
 
 	// MVenus.Perihelion(double)
 	/// <summary>
@@ -549,12 +430,7 @@ public partial class MVenus
 	/// </summary>
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <returns>Heliozentrisch-ekliptikale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEcliptical(EPrecision value)
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.PositionEcliptical(value, jd);
-	}
+	public static CPolar PositionEcliptical(EPrecision value){ return MVenus.PositionEcliptical(value, DateTime.Now.ToJdn()); }
 
 	// MVenus.PositionEcliptical(EPrecisionList, double)
 	/// <summary>
@@ -578,12 +454,7 @@ public partial class MVenus
 	/// Liefert die (scheinbare) geozentrisch-äquatoriale Position zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Geozentrisch-äquatoriale Position zur aktuellen Systemzeit.</returns>
-	public static CPolar PositionEquatorial()
-	{
-		// Lokale Felder einrichten und Position berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.PositionEquatorial(jd);
-	}
+	public static CPolar PositionEquatorial(){ return MVenus.PositionEquatorial(DateTime.Now.ToJdn()); }
 
 	// MVenus.PositionEquatorial(double)
 	/// <summary>
@@ -653,12 +524,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl des Rückläufigkeitsendes nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl des Rückläufigkeitsendes nach der aktuellen Systemzeit.</returns>
-	public static double RegressionEnd()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.RegressionEnd(jd);
-	}
+	public static double RegressionEnd(){ return MVenus.RegressionEnd(DateTime.Now.ToJdn()); }
 
 	// MVenus.RegressionEnd(double)
 	/// <summary>
@@ -703,12 +569,7 @@ public partial class MVenus
 	/// Liefert die julianische Tageszahl der Rückläufigkeitsanfangs nach der aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Julianische Tageszahl der Rückläufigkeitsanfangs nach der aktuellen Systemzeit.</returns>
-	public static double RegressionStart()
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.RegressionStart(jd);
-	}
+	public static double RegressionStart(){ return MVenus.RegressionStart(DateTime.Now.ToJdn());	}
 
 	// MVenus.RegressionStart(double)
 	/// <summary>
@@ -748,90 +609,41 @@ public partial class MVenus
 		return j;
 	}
 
-	// MVenus.Rise(CPolar, ref double)
+	// MVenus.Rise(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MVenus.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position){ return MVenus.Rise(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MVenus.Rise(CPolar, ref double, double)
+	// MVenus.Rise(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereignislennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MVenus.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereignislennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(CPolar position, double jd){ return MVenus.Rise(position.Longitude, position.Latitude, jd); }
 
-	// MVenus.Rise(CPolar, ref double, double, ref double)
+	// MVenus.Rise(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur aktuekllen Systemzeit und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MVenus.Rise(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MVenus.Rise(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MVenus.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi){ return MVenus.Rise(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MVenus.Rise(double, double, ref double, double)
+	// MVenus.Rise(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MVenus.Rise(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MVenus.Rise(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Aufgangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Morgenweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Rise(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <returns>Ereigniskennung, julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -856,19 +668,22 @@ public partial class MVenus
 		l = MVenus.Longitude(EPrecision.Low, jdn);
 		b = MVenus.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MVenus.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MVenus.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -878,7 +693,6 @@ public partial class MVenus
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -892,10 +706,12 @@ public partial class MVenus
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MVenus.SemimajorAxis()
@@ -905,90 +721,41 @@ public partial class MVenus
 	/// <returns>Große Halbachse der mittleren Planetenbahn.</returns>
 	public static double SemimajorAxis(){ return 0.723329820; }
 
-	// MVenus.Set(CPolar, ref double)
+	// MVenus.Set(CPolar)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MVenus.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position){ return MVenus.Set(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MVenus.Set(CPolar, ref double, double)
+	// MVenus.Set(CPolar, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographisches Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MVenus.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azm);
-	}
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(CPolar position, double jd){ return MVenus.Set(position.Longitude, position.Latitude, jd); }
 
-	// MVenus.Set(CPolar, ref double, double, ref double)
+	// MVenus.Set(double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(CPolar position, ref double jdEvent, double jd, ref double azimuth){ return MVenus.Set(position.Longitude, position.Latitude, ref jdEvent, jd, ref azimuth); }
-
-	// MVenus.Set(double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur aktuellen Systemzeit und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double jd  = DateTime.Now.ToJdn();
-		double azm = 0.0;
-		return MVenus.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi){ return MVenus.Set(lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MVenus.Set(double, double, ref double, double)
+	// MVenus.Set(double, double, double)
 	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double azm = 0.0;
-		return MVenus.Set(lambda, phi, ref jdEvent, jd, ref azm);
-	}
-
-	// MVenus.Set(double, double, ref double, double, ref double)
-	/// <summary>
-	/// Setzt die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zur julianischen Tageszahl und liefert die Ereigniskennung.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jdEvent">Julianische Tageszahl des Untergangs.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="azimuth">Abendweite.</param>
-	/// <returns>Ereigniskennung.</returns>
-	public static EEventType Set(double lambda, double phi, ref double jdEvent, double jd, ref double azimuth)
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -1013,19 +780,22 @@ public partial class MVenus
 		l = MVenus.Longitude(EPrecision.Low, jdn);
 		b = MVenus.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MVenus.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MVenus.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0) return cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon;
+		if(MMath.Abs(cosH) > 1.0)
+			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
 		// ------------------- //
@@ -1034,8 +804,7 @@ public partial class MVenus
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
+		double m  = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1049,10 +818,12 @@ public partial class MVenus
 			m += dm;
 		}
 
-		// Iteration anwenden, Azimut berechnen und Rückgabewert setzen
-		jdEvent = jd + m;
-		azimuth = MEphemerides.ToAzimuth(H, d, phi);
-		return EEventType.Normal;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToAzimuth(H, d, phi));
 	}
 
 	// MVenus.SynodicPeriod()
@@ -1064,89 +835,45 @@ public partial class MVenus
 
 	// MVenus.Transit(CPolar)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(CPolar position)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position){ return MVenus.Transit(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MVenus.Transit(CPolar, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereignislennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MVenus.Transit(position.Longitude, position.Latitude, jd, ref h);
-	}
-
-	// MVenus.Transit(CPolar, double, ref double)
-	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="position">Geographische Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(CPolar position, double jd, ref double height){ return MVenus.Transit(position.Longitude, position.Latitude, jd, ref height); }
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereignislennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(CPolar position, double jd){ return MVenus.Transit(position.Longitude, position.Latitude, jd); }
 
 	// MVenus.Transit(double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur aktuellen Systemzeit.</returns>
-	public static double Transit(double lambda, double phi)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h  = 0.0;
-		double jd = DateTime.Now.ToJdn();
-		return MVenus.Transit(lambda, phi, jd, ref h);
-	}
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe am geographischen Ort und zum aktuellen Systemzeit.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi){ return MVenus.Transit(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MVenus.Transit(double, double, double)
 	/// <summary>
-	/// Liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe m geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd)
-	{
-		// Lokale Felder einrichten und Ereigniszeit bestimmen
-		double h = 0.0;
-		return MVenus.Transit(lambda, phi, jd, ref h);
-	}
-
-	// MVenus.Transit(double, double, double, ref double)
-	/// <summary>
-	/// Setzt die Höhe und liefert die julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Breite.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <param name="height">Höhe.</param>
-	/// <returns>Julianische Tageszahl des Meridiandurchgangs am geographischen Ort und zur julianischen Tageszahl.</returns>
-	public static double Transit(double lambda, double phi, double jd, ref double height)
+	/// <param name="jd">Julianisches Tagesdatum.</param>
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe m geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
 		double l   = 0.0;                         // Geozentrische Länge
 		double b   = 0.0;                         // Geozentrische Breite
 		double a   = 0.0;                         // Rektaszension
-		double d   = 0.0;                         // Deklination
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
@@ -1159,14 +886,16 @@ public partial class MVenus
 		l = MVenus.Longitude(EPrecision.Low, jdn);
 		b = MVenus.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0) a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
+		if(MMath.Abs(aP - a0) > 1.0)
+			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MVenus.Longitude(EPrecision.Low, jdn - 1.0);
 		b = MVenus.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0) aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
+		if(MMath.Abs(a0 - aM) > 1.0)
+			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// ------------------- //
@@ -1176,7 +905,6 @@ public partial class MVenus
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
 		double m = MMath.Div((aP + lambda - t0) / MMath.Pi2);
-		if(m < 0.0) m += 1.0;
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1188,10 +916,12 @@ public partial class MVenus
 			m += dm;
 		}
 
-		// Iteration anwenden, Höhe berechnen und Rückgabewert setzen
-		d = MMath.Bessel(m, dM, d0, dP);
-		height = MEphemerides.ToHeight(0.0, d, phi);
-		return jd + m;
+		// Kein Ereignis verarbeiten
+		if(m < 0.0 | m >= 1.0)
+			return(EEventType.NoEvent, null, null);
+
+		// Rückgabe
+		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, MMath.Bessel(m, dM, d0, dP), phi));
 	}
 
 	// MVenus.TropicalPeriod()
