@@ -32,7 +32,7 @@ public class CDate : CListItem
 
 	// CDate(CDate)
 	/// <summary>
-	/// Konstruktor mit einer Angabe zum Datum.
+	/// Kopierkonstruktor.
 	/// </summary>
 	/// <param name="item">Datum.</param>
 	public CDate(CDate item)
@@ -45,7 +45,7 @@ public class CDate : CListItem
 
 	// CDate(CDate, int)
 	/// <summary>
-	/// Konstruktor mit einer Angabe zum Datum und zur Identität.
+	/// Kopierkonstruktor mit einer Angabe zur Identität.
 	/// </summary>
 	/// <param name="item">Datum.</param>
 	/// <param name="id">Identität.</param>
