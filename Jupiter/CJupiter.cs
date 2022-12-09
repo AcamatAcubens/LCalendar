@@ -32,4 +32,10 @@ public class CJupiter : CPlanet
    /// <param name="jd">Julianische Tageszahl</param>
    /// <returns>ekliptikale Länge zur Präzessionskennung und zur julianischer Tageszahl.</returns>
    public override double Lambda(EPrecision precision, double jd){ return MJupiter.Latitude(precision, jd); }
+
+   // CJupiter.SiderealPeriod
+   /// <summary>
+   /// Liefert die siderische Periode.
+   /// </summary>
+   public override double SiderealPeriod{ get{ return MJupiter.SiderealPeriod();} }
 }

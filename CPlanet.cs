@@ -21,6 +21,9 @@ public abstract class CPlanet : IObservable
    // IObservable.Lambda(EPrecision, double)
    double IObservable.Lambda(EPrecision precision, double jd){ return this.Lambda(precision, jd); }
 
+   // IObservalble.SiderealPeriod
+   double IObservable.SiderealPeriod{ get{return this.SiderealPeriod;} }
+
    // ------------------- //
    // Felder und Methoden //
    // ------------------- //
@@ -41,4 +44,11 @@ public abstract class CPlanet : IObservable
    /// <param name="jd">Juliansiche Tageszahl</param>
    /// <returns>Ekliptikale Länge zur Präzessionskennung und julianischer Tageszahl.</returns>
    public abstract double Lambda(EPrecision precision, double jd);
+
+   // CPlanet.SiderealPeriod
+   /// <summary>
+   /// Liefert die siderische Periode.
+   /// </summary>
+   /// <value></value>
+   public abstract double SiderealPeriod{ get; }
 }

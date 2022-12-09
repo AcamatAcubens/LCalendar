@@ -128,7 +128,7 @@ public class CEvent : IEquatable<CEvent>, IComparable
    public bool Equals(CEvent? item)
    {
       // Vergleiche durchführen
-      if((object)item == null) return false;
+      if(item == null!) return false;
       return this.GetHashCode() == item.GetHashCode();
    }
 

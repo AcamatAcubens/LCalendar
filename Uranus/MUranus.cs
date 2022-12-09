@@ -412,17 +412,17 @@ public partial class MUranus
 		return MMath.Polynome(t, 19.218446062, -0.0000000372, 0.00000000098);
 	}
 
+	// MUranus.SiderealPeriod()
+	/// <summary>
+	/// Liefert die mittlere siderische Periode zur mittleren Planetenbahn.
+	/// </summary>
+	/// <returns>Mittlere siderische Periode zur mittleren Planetenbahn.</returns>
+	public static double SiderealPeriod(){ return 30588.740341; }
+
 	// MUranus.SynodicPeriod()
 	/// <summary>
 	/// Liefert die mittlere synodische Periode zur mittleren Planetenbahn.
 	/// </summary>
 	/// <returns>Mittlere synodische Periode zur mittleren Planetenbahn.</returns>
 	public static double SynodicPeriod(){ return 369.670550; }
-
-	// MUranus.TropicalPeriod()
-	/// <summary>
-	/// Liefert die mittlere tropische Periode zur mittleren Planetenbahn.
-	/// </summary>
-	/// <returns>Mittlere tropische Periode zur mittleren Planetenbahn.</returns>
-	public static double TropicalPeriod(){ return 30588.740341; }
 }

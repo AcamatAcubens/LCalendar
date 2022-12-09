@@ -656,17 +656,17 @@ public static partial class MMercury
 	/// <returns>Große Halbachse der mittleren Planetenbahn.</returns>
 	public static double SemimajorAxis(){ return 0.387098310; }
 
+	// MMercury.SiderealPeriod()
+	/// <summary>
+	/// Liefert die mittlere siderische Periode zur mittleren Planetenbahn.
+	/// </summary>
+	/// <returns>Mittlere siderische Periode zur mittleren Planetenbahn.</returns>
+	public static double SiderealPeriod(){ return 87.968435; }
+
 	// MMercury.SynodicPeriod()
 	/// <summary>
 	/// Liefert die mittlere synodische Periode zur mittleren Planetenbahn.
 	/// </summary>
 	/// <returns>Mittlere synodische Periode zur mittleren Planetenbahn.</returns>
 	public static double SynodicPeriod(){ return 115.877480; }
-
-	// MMercury.TropicalPeriod()
-	/// <summary>
-	/// Liefert die mittlere tropische Periode zur mittleren Planetenbahn.
-	/// </summary>
-	/// <returns>Mittlere tropische Periode zur mittleren Planetenbahn.</returns>
-	public static double TropicalPeriod(){ return 87.968435; }
 }

@@ -410,17 +410,17 @@ public partial class MNeptune
 		return MMath.Polynome(t, 30.110386869, -0.0000001663, 0.00000000069);
 	}
 
+	// MNeptune.SiderealPeriod()
+	/// <summary>
+	/// Liefert die mittlere siderische Periode zur mittleren Planetenbahn.
+	/// </summary>
+	/// <returns>Mittlere siderische Periode zur mittleren Planetenbahn.</returns>
+	public static double SiderealPeriod(){ return 59799.900444; }
+
 	// MNeptune.SynodicPeriod()
 	/// <summary>
 	/// Liefert die mittlere synodische Periode zur mittleren Planetenbahn.
 	/// </summary>
 	/// <returns>Mittlere synodische Periode zur mittleren Planetenbahn.</returns>
 	public static double SynodicPeriod(){ return 367.504368; }
-
-	// MNeptune.TropicalPeriod()
-	/// <summary>
-	/// Liefert die mittlere tropische Periode zur mittleren Planetenbahn.
-	/// </summary>
-	/// <returns>Mittlere tropische Periode zur mittleren Planetenbahn.</returns>
-	public static double TropicalPeriod(){ return 59799.900444; }
 }

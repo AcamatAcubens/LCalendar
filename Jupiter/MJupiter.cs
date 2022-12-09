@@ -505,17 +505,17 @@ public static partial class MJupiter
 		return MMath.Polynome(t, 5.202603209, 0.0000001913);
 	}
 
+	// MJupiter.SiderealPeriod()
+	/// <summary>
+	/// Liefert die mittlere siderische Periode zur mittleren Planetenbahn.
+	/// </summary>
+	/// <returns>Mittlere siderische Periode zur mittleren Planetenbahn.</returns>
+	public static double SiderealPeriod(){ return 4330.595764; }
+
 	// MJupiter.SynodicPeriod()
 	/// <summary>
 	/// Liefert die mittlere synodische Periode zur mittleren Planetenbahn.
 	/// </summary>
 	/// <returns>Mittlere synodische Periode zur mittleren Planetenbahn.</returns>
 	public static double SynodicPeriod(){ return 398.884047; }
-
-	// MJupiter.TropicalPeriod()
-	/// <summary>
-	/// Liefert die mittlere tropische Periode zur mittleren Planetenbahn.
-	/// </summary>
-	/// <returns>Mittlere tropische Periode zur mittleren Planetenbahn.</returns>
-	public static double TropicalPeriod(){ return 4330.595764; }
 }

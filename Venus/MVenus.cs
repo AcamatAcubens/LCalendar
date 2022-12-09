@@ -616,17 +616,17 @@ public partial class MVenus
 	/// <returns>Große Halbachse der mittleren Planetenbahn.</returns>
 	public static double SemimajorAxis(){ return 0.723329820; }
 
+	// MVenus.SiderealPeriod()
+	/// <summary>
+	/// Liefert die mittlere siderische Periode zur mittleren Planetenbahn.
+	/// </summary>
+	/// <returns>Mittlere siderische Periode zur mittleren Planetenbahn.</returns>
+	public static double SiderealPeriod(){ return 224.695434; }
+
 	// MVenus.SynodicPeriod()
 	/// <summary>
 	/// Liefert die mittlere synodische Periode zur mittleren Planetenbahn.
 	/// </summary>
 	/// <returns>Mittlere synodische Periode zur mittleren Planetenbahn.</returns>
 	public static double SynodicPeriod(){ return 583.921354; }
-
-	// MVenus.TropicalPeriod()
-	/// <summary>
-	/// Liefert die mittlere tropische Periode zur mittleren Planetenbahn.
-	/// </summary>
-	/// <returns>Mittlere tropische Periode zur mittleren Planetenbahn.</returns>
-	public static double TropicalPeriod(){ return 224.695434; }
 }

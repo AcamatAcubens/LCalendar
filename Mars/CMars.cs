@@ -32,4 +32,10 @@ public class CMars : CPlanet
    /// <param name="jd">Julianische Tageszahl</param>
    /// <returns>ekliptikale Länge zur Präzessionskennung und zur julianischer Tageszahl.</returns>
    public override double Lambda(EPrecision precision, double jd){ return MMars.Latitude(precision, jd); }
+
+   // CMars.SiderealPeriod
+   /// <summary>
+   /// Liefert die siderische Periode.
+   /// </summary>
+   public override double SiderealPeriod{ get{ return MMars.SiderealPeriod();} }
 }

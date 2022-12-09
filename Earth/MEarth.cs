@@ -435,7 +435,7 @@ public static partial class MEarth
 	/// <returns>Große Halbachse der mittleren Planetenbahn.</returns>
 	public static double SemimajorAxis(){ return 1.000001018; }
 
-	// MSun.SiderealYear()
+	// MEarth.SiderealYear()
 	/// <summary>
 	/// Liefert die Dauer des siderischen Jahres.
 	/// </summary>
