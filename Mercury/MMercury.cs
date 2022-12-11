@@ -13,6 +13,105 @@ public static partial class MMercury
 	// ------------------- //
 	// Felder und Methoden //
 	// ------------------- //
+	// MMercury.AppendEvent(List<CEvent>, double, double)
+	/// <summary>
+	/// Fügt die merkurbezogenen Eregnisse zum Zeitraum an die Liste an.
+	/// </summary>
+	/// <param name="list">Liste.</param>
+	/// <param name="jdMin">Beginn des Zeitraums.</param>
+	/// <param name="jdMax">Ende des Zeitraums.</param>
+	public static void AppendEvent(List<CEvent> list, double jdMin, double jdMax)
+	{
+		// Lokale Felder
+		double jdn = 0.0;
+		double d   = 0.0;
+		int    r   = 0;
+
+		// -------- //
+		// Aphelion //
+		// -------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMercury.Aphelion(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall bearbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall bearbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Merkur: Durchgang durch das Aphel"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------------------- //
+		// ConjunctionInferior //
+		// ------------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMercury.ConjunctionInferior(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall bearbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall bearbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Merkur: Durchgang durch die untere Konjunktion mit der Sonne"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------------------- //
+		// ConjunctionSuperior //
+		// ------------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMercury.ConjunctionSuperior(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall bearbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall bearbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Merkur: Durchgang durch die obere Konjunktion mit der Sonne"));
+				return;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+	}
+
 	// MMercury.Aphelion()
 	/// <summary>
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.
@@ -534,7 +633,7 @@ public static partial class MMercury
 		// ----------------------- //
 
 		// Aberation und Nutation anwenden
-		MEphemerides.AberrationEcliptical(ref lG, ref bG, jdn);
+		(lG, bG) = MEphemerides.AberrationEcliptical(lG, bG, jdn);
 		lG += MEphemerides.NutationInLongitude(jdn);
 		bG += MEphemerides.NutationInObliquity(jdn);
 

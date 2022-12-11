@@ -11,6 +11,12 @@ using System.Text;
 // IsCirumpolar
 //    δ + ϕ ≥ 90°
 
+// Aus Planetenmodule einlagern:
+// · CPolar PositionEcliptical(EPrecision value)
+// · CPolar PositionEcliptical(EPrecision value, double jd)
+// · CPolar PositionEquatorial()
+// · CPolar PositionEquatorial(double)
+
 namespace Acamat.LCalendar;
 
 /// <summary>
@@ -61,57 +67,46 @@ public static partial class MEphemerides
 	// ------------------- //
 	// MEphemerides.AberrationEcliptical(CPolar)
 	/// <summary>
-	/// Liefert die um die Aberration korrigierte Position zur ekliptikalen Position und aktuellen Systemzeit.
+	/// Liefert die um die Aberration ekliptikale korrigierte Position zur ekliptikalen Position und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Ekliptikale Position.</param>
-	/// <returns>Um die Aberration korrigierte Position zur ekliptikalen Position und aktuellen Systemzeit.</returns>
-	public static CPolar AberrationEcliptical(CPolar position)
-	{
-		// Lokale Felder einrichten und Aberration anwenden
-		double jd     = DateTime.Now.ToJdn();
-		double lambda = position.Longitude;
-		double beta   = position.Latitude;
-		MEphemerides.AberrationEcliptical(ref lambda, ref beta, jd);
-		return new CPolar(lambda, beta, 1.0);
-	}
-
-	// MEphemerides.AberrationEcliptical(ref double, ref double)
-	/// <summary>
-	/// Wendet die Aberration auf die ekliptikale Position zur aktuellen Systemzeit an.
-	/// </summary>
-	/// <param name="lambda">Ekliptikale Länge.</param>
-	/// <param name="beta">Ekliptikale Breite.</param>
-	public static void AberrationEcliptical(ref double lambda, ref double beta)
-	{
-		// Lokale Felder einrichten und Aberration anwenden
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.AberrationEcliptical(ref lambda, ref beta, jd);
-	}
+	/// <returns>Um die Aberration ekliptikale korrigierte Position zur ekliptikalen Position und zur aktuellen Systemzeit.</returns>
+	public static CPolar AberrationEcliptical(CPolar position){ return MEphemerides.AberrationEcliptical(position, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.AberrationEcliptical(CPolar, double)
 	/// <summary>
-	/// Liefert die um die Aberration korrigierte Position zur ekliptikalen Position und julianischer Tageszahl.
+	/// Liefert die um die Aberration korrigierte eklitikale Position zur eklipikalen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Ekliptikale Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Um die Aberration korrigierte Position zur ekliptikalen Position und julianischer Tageszahl.</returns>
+	/// <param name="jd">Julianische Tageszahl</param>
+	/// <returns>Um die Aberration korrigierte ekliptikale Position zur eklipikalen Position und zur julianischen Tageszahl.</returns>
 	public static CPolar AberrationEcliptical(CPolar position, double jd)
 	{
-		// Lokale Felder einrichten und Aberration anwenden
-		double lambda = position.Longitude;
-		double beta   = position.Latitude;
-		MEphemerides.AberrationEcliptical(ref lambda, ref beta, jd);
-		return new CPolar(lambda, beta, 1.0);
+		// Lokale Felder einrichten 
+		double l = position.Longitude;
+		double b = position.Longitude;
+		(l, b) = MEphemerides.AberrationEcliptical(l, b, jd);
+		return new CPolar(l, b, 1.0);
 	}
 
-	// MEphemerides.AberrationEcliptical(ref double, ref double, double)
+	// MEphemerides.AberrationEcliptical(double, double)
 	/// <summary>
-	/// Wendet die Aberration auf die ekliptikale Position zur julianischen Tageszahl an.
+	/// Liefert die um die Aberration korrigierte ekliptikale Position zur ekliptikalen Position und zur aktuellen Systemzeit.
+	/// </summary>
+	/// <param name="lambda">Ekliptikale Länge.</param>
+	/// <param name="beta">Ekliptikale Breite.</param>
+	/// <returns>Um die Aberration korrigierte ekliptikale Position zur ekliptikalen Position und zur aktuellen Systemzeit.</returns>
+	public static (double lambda, double beta) AberrationEcliptical(double lambda, double beta){ return MEphemerides.AberrationEcliptical(lambda, beta, DateTime.Now.ToJdn()); }
+
+	// MEphemerides.AberrationEcliptical(double, double, double)
+	/// <summary>
+	/// Liefert die um die Aberration korrigierte ekliptikale Postion zur ekliptikalen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Ekliptikale Länge.</param>
 	/// <param name="beta">Ekliptikale Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void AberrationEcliptical(ref double lambda, ref double beta, double jd)
+	/// <returns>Um die Aberration korrigierte ekliptikale Postion zur ekliptikalen Position und zur julianischen Tageszahl.</returns>
+	public static (double lambda, double beta) AberrationEcliptical(double lambda, double beta, double jd)
 	{
 		// Lokalen Felder einrichten
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
@@ -120,24 +115,31 @@ public static partial class MEphemerides
 		double p = MMath.ToRad(MMath.Polynome(t, 102.93735, 1.71946, 0.00046));
 		double l = MSun.Longitude(EPrecision.High, jd);
 
-		// Aberration berechnen und anwenden
-		lambda += (-k * MMath.Cos(l - lambda) + e * k * MMath.Cos(p - lambda)) / MMath.Cos(beta);
-		beta   +=  -k * MMath.Sin(beta) * (MMath.Sin(l - lambda) - e * MMath.Sin(p - lambda));;
+		// Rückgabe
+		return(lambda + (-k * MMath.Cos(l - lambda) + e * k * MMath.Cos(p - lambda)) / MMath.Cos(beta), beta - k * MMath.Sin(beta) * (MMath.Sin(l - lambda) - e * MMath.Sin(p - lambda)));
 	}
 
 	// MEphemerides.AberrationEquatorial(CPolar)
 	/// <summary>
-	/// Liefert die um die Aberration korrigierte Position zur äquatorialen Position und aktuellen Systemzeit.
+	/// Liefert die um die Aberration korrigierte äquatoriale Position zur äquatorialen Position und aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
-	/// <returns>Um die Aberration korrigierte Position zur äquatorialen Position und aktuellen Systemzeit.</returns>
-	public static CPolar AberrationEquatorial(CPolar position)
+	/// <returns>Um die Aberration korrigierte äquatoriale Position zur äquatorialen Position und aktuellen Systemzeit.</returns>
+	public static CPolar AberrationEquatorial(CPolar position){ return MEphemerides.AberrationEquatorial(position, DateTime.Now.ToJdn()); }
+
+	// MEphemerides.AberrationEquatorial(CPolar, double)
+	/// <summary>
+	/// Liefert die um die Aberration korrigierte äquatoriale Position zur äquatorialen Position und julianischer Tageszahl.
+	/// </summary>
+	/// <param name="position">Äquatoriale Position.</param>
+	/// <param name="jd">Julianische Tageszahl.</param>
+	/// <returns>Um die Aberration korrigierte äquatoriale Position zur äquatorialen Position und julianischer Tageszahl.</returns>
+	public static CPolar AberrationEquatorial(CPolar position, double jd)
 	{
 		// Lokale Felder einrichten und Aberration anwenden
-		double jd    = DateTime.Now.ToJdn();
 		double alpha = position.Longitude;
 		double delta = position.Latitude;
-		MEphemerides.AberrationEquatorial(ref alpha, ref delta, jd);
+		(alpha, delta) = MEphemerides.AberrationEquatorial(alpha, delta, jd);
 		return new CPolar(alpha, delta, 1.0);
 	}
 
@@ -147,37 +149,17 @@ public static partial class MEphemerides
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
-	public static void AberrationEquatorial(ref double alpha, ref double delta)
-	{
-		// Lokale Felder einrichten und Aberration anwenden
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.AberrationEquatorial(ref alpha, ref delta, jd);
-	}
+	public static (double alpha, double delta) AberrationEquatorial(double alpha, double delta){ return MEphemerides.AberrationEquatorial(alpha, delta, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.AberrationEquatorial(CPolar, double)
+	// MEphemerides.AberrationEquatorial(double, double, double)
 	/// <summary>
-	/// Liefert die um die Aberration korrigierte Position zur äquatorialen Position und julianischer Tageszahl.
-	/// </summary>
-	/// <param name="position">Äquatoriale Position.</param>
-	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Um die Aberration korrigierte Position zur äquatorialen Position und julianischer Tageszahl.</returns>
-	public static CPolar AberrationEquatorial(CPolar position, double jd)
-	{
-		// Lokale Felder einrichten und Aberration anwenden
-		double alpha = position.Longitude;
-		double delta = position.Latitude;
-		MEphemerides.AberrationEquatorial(ref alpha, ref delta, jd);
-		return new CPolar(alpha, delta, 1.0);
-	}
-
-	// MEphemerides.AberrationEquatorial(ref double, ref double, double)
-	/// <summary>
-	/// Wendet die Aberration auf die äquatoriale Position zur julianischen Tageszahl an.
+	/// Liefert die um die Aberration korrigierte äquatoriale Postion zur äquatorialen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void AberrationEquatorial(ref double alpha, ref double delta, double jd)
+	/// <returns>Um die Aberration korrigierte äquatoriale Postion zur äquatorialen Position und zur julianischen Tageszahl.</returns>
+	public static (double alpha, double delta) AberrationEquatorial(double alpha, double delta, double jd)
 	{
 		// Lokalen Felder einrichten
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
@@ -199,13 +181,12 @@ public static partial class MEphemerides
 		double tanE = MMath.Tan(e);
 		double h    = tanE * cosD - sinA * sinD;
 
-		// Aberration berechnen und anwenden
+		// Aberration berechnen und Rückgabe
 		double dA  =     -k * ((cosA * cosL * cosE + sinA * sinL) / cosD);
 				 dA +=  e * k * ((cosA * cosP * cosE + sinA * sinP) / cosD);
-		alpha     += dA;
 		double dD  =     -k * (cosL * cosE * h + cosA * sinD * sinL);
 				 dD +=  e * k * (cosP * cosE * h + cosA * sinD * sinP);
-		delta     += dD;
+		return(alpha + dA, delta + dD);
 	}
 
 	// MEphmerides.AngleOfDiurnalPath(double, double)
@@ -224,55 +205,23 @@ public static partial class MEphemerides
 
 	// MEphemerides.AngularSeparation(CPolar, CPolar)
 	/// <summary>
-	/// Liefert den Winkelabstand zweier äquatorialer Positionen.
+	/// Liefert den Winkelabstand und den Positionswinel zweier äquatorialer Positionen.
 	/// </summary>
 	/// <param name="positionA">Position A.</param>
 	/// <param name="positionB">Position B.</param>
-	/// <returns>Winkelabstand zweier äquatorialer Positionen.</returns>
-	public static double AngularSeparation(CPolar positionA, CPolar positionB)
-	{
-		// Lokale Felder einrichten und Winkelabstand berechnen
-		double angle = 0.0;
-		return MEphemerides.AngularSeparation(positionA.Longitude, positionA.Latitude, positionB.Longitude, positionB.Latitude, ref angle);
-	}
-
-	// MEphemerides.AngularSeparation(CPolar, CPolar, ref double)
-	/// <summary>
-	/// Setzt den Positionswinkel und liefert den Winkelabstand zweier äquatorialer Positionen.
-	/// </summary>
-	/// <param name="positionA">Position A.</param>
-	/// <param name="positionB">Position B.</param>
-	/// <param name="angle">Positionswinkel.</param>
-	/// <returns>Winkelabstand zweier äquatorialer Positionen.</returns>
-	public static double AngularSeparation(CPolar positionA, CPolar positionB, ref double angle){ return MEphemerides.AngularSeparation(positionA.Longitude, positionA.Latitude, positionB.Longitude, positionB.Latitude, ref angle); }
+	/// <returns>Winkelabstand und den Positionswinel zweier äquatorialer Positionen.</returns>
+	public static (double distance, double angle) AngularSeparation(CPolar positionA, CPolar positionB){ return MEphemerides.AngularSeparation(positionA.Longitude, positionA.Latitude, positionB.Longitude, positionB.Latitude); }
 
 	// MEphemerides.AngularSeparation(double, double, double, double)
 	/// <summary>
-	/// Liefert den Winkelabstand zweier äquatorialer Positionen.
+	/// Liefert den Winkelabstand und den Positionswinkel zweier äquatorialer Positionen.
 	/// </summary>
 	/// <param name="alphaA">Rektaszension zur Position A.</param>
 	/// <param name="deltaA">Deklination zur Position A.</param>
 	/// <param name="alphaB">Rektaszension zur Position B.</param>
 	/// <param name="deltaB">Deklination zur Position B.</param>
-	/// <returns>Winkelabstand zweier äquatorialer Positionen.</returns>
-	public static double AngularSeparation(double alphaA, double deltaA, double alphaB, double deltaB)
-	{
-		// Lokalen Felder einrichten und Winkelanstand berechnen
-		double angle = 0.0;
-		return MEphemerides.AngularSeparation(alphaA, deltaA, alphaB, deltaB, ref angle);
-	}
-
-	// MEphemerides.AngularSeparation(double, double, double, double, ref double)
-	/// <summary>
-	/// Setzt den Positionswinkel und liefert den Winkelabstand zweier äquatorialer Positionen.
-	/// </summary>
-	/// <param name="alphaA">Rektaszension zur Position A.</param>
-	/// <param name="deltaA">Deklination zur Position A.</param>
-	/// <param name="alphaB">Rektaszension zur Position B.</param>
-	/// <param name="deltaB">Deklination zur Position B.</param>
-	/// <param name="angle">Positionswinkel.</param>
-	/// <returns>Winkelabstand zweier äquatorialer Positionen.</returns>
-	public static double AngularSeparation(double alphaA, double deltaA, double alphaB, double deltaB, ref double angle)
+	/// <returns>Winkelabstand und den Positionswinkel zweier äquatorialer Positionen.</returns>
+	public static (double distance, double angle) AngularSeparation(double alphaA, double deltaA, double alphaB, double deltaB)
 	{
 		// Lokalen Felder einrichten
 		// TODO: MEphemerides.AngularSeparation(double, double, double, double, ref double): Verwendung der Winkelwandelungsfunktionen prüfen.
@@ -289,66 +238,53 @@ public static partial class MEphemerides
 		double y = cosD2 * sindA;
 		double z = sinD1 * sinD2 + cosD1 * cosD2 * cosdA;
 
-		// Winkel berechnen
-		angle = MMath.ArcTan(MMath.Sin(alphaA - alphaB), cosD2 * tanD1 - sinD2 * MMath.Cos(alphaA - alphaB));
-		return MMath.ArcTan(MMath.Sqr(x * x + y * y), z);
+		// Rückgabe
+		return(MMath.ArcTan(MMath.Sqr(x * x + y * y), z), MMath.ArcTan(MMath.Sin(alphaA - alphaB), cosD2 * tanD1 - sinD2 * MMath.Cos(alphaA - alphaB)));
 	}
 
 	// MEphemerids.ApparentPosition(CPolar)
 	/// <summary>
-	/// Liefert die scheinbare Position zur äquatorialen Position und aktueller Systemzeit.
+	/// Liefert die scheinbare äquatoriale Position zur äquatorialen Position und aktueller Systemzeit.
 	/// </summary>
-	/// <param name="pos">Äquatoriale Position.</param>
-	/// <returns>Scheinbare Position zur äquatorialen Position und aktueller Systemzeit.</returns>
-	public static CPolar ApparentPosition(CPolar pos)
-	{
-		// Lokale Felder einrichten
-		double jd    = DateTime.Now.ToJdn();
-		double alpha = pos.Longitude;
-		double delta = pos.Latitude;
-		MEphemerides.ApparentPosition(ref alpha, ref delta, jd);
-		return new CPolar(alpha, delta, 1.0);
-	}
+	/// <param name="position">Äquatoriale Position.</param>
+	/// <returns>Scheinbare äquatoriale Position zur äquatorialen Position und aktueller Systemzeit.</returns>
+	public static CPolar ApparentPosition(CPolar position){ return MEphemerides.ApparentPosition(position, DateTime.Now.ToJdn()); }
 
 	// MEphemerids.ApparentPosition(CPolar, double)
 	/// <summary>
-	/// Liefert die scheinbare Position zur äquatorialen Position und julianischer Tageszahl.
+	/// Liefert die scheinbare äquatoriale Position zur äquatorialen Position und julianischer Tageszahl.
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Scheinbare Position zur äquatorialen Position und julianischer Tageszahl.</returns>
+	/// <returns>Scheinbare äquatoriale Position zur äquatorialen Position und julianischer Tageszahl.</returns>
 	public static CPolar ApparentPosition(CPolar postion, double jd)
 	{
 		// Lokale Felder einrichten
 		double alpha = postion.Longitude;
 		double delta = postion.Latitude;
-		MEphemerides.ApparentPosition(ref alpha, ref delta, jd);
+		(alpha, delta) = MEphemerides.ApparentPosition(alpha, delta, jd);
 		return new CPolar(alpha, delta, 1.0);
 	}
 
-	// MEphemerides.ApparentPosition(ref double, ref double)
+	// MEphemerides.ApparentPosition(double, double)
 	/// <summary>
-	/// Setzt die scheinbare Position der äquatorialen Position zur aktuellen Systemzeit.
+	/// Setzt die scheinbare äquatoriale Position der äquatorialen Position zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
-	public static void ApparentPosition(ref double alpha, ref double delta)
-	{
-		// Lokalen Felder einrichten und Position wandeln
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.ApparentPosition(ref alpha, ref delta, jd);
-	}
+	/// <returns>Scheinbare äquatoriale Position zur äquatorialen Position und aktueller Systemzeit.</returns>
+	public static (double alpha, double delta) ApparentPosition(double alpha, double delta){ return MEphemerides.ApparentPosition(alpha, delta, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ApparentPosition(ref double, ref double, double)
 	/// <summary>
-	/// Setzt die scheinbare Position der äquatorialen Position zur julianischen Tageszahl.
+	/// Liefert die scheinbare äquatoriale Position der äquatorialen Position zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void ApparentPosition(ref double alpha, ref double delta, double jd)
+	public static (double alpha, double delta) ApparentPosition(double alpha, double delta, double jd)
 	{
-		// TODO: MEphemerides.ApparentPosition(ref double, ref double, double): Implemenation vervollständigen.
+		// TODO: MEphemerides.ApparentPosition(double, double, double): Implemenation vervollständigen.
 		throw new NotImplementedException("Methode ist nicht implementiert.");
 	}
 
@@ -357,12 +293,7 @@ public static partial class MEphemerides
 	/// Liefert die Zeitdifferenz zwischen mittleren und scheinbaren Sonnentransit zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Zeitdifferenz zwischen mittleren und scheinbaren Sonnentransit zur aktuellen Systemzeit.</returns>
-	public static double EquationOfTime()
-	{
-		// Lokalen Felder einrichten und Zeitdifferenz berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.EquationOfTime(jd);
-	}
+	public static double EquationOfTime(){ return MEphemerides.EquationOfTime(DateTime.Now.ToJdn()); }
 
 	// MEphemerides.EquationOfTime(double)
 	/// <summary>
@@ -397,12 +328,7 @@ public static partial class MEphemerides
 	/// Liefert die scheinbare Sternzeit zum Nullmeridian und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Scheinbare Sternzeit zum Nullmeridian und zur aktuellen Systemzeit.</returns>
-	public static double Gast()
-	{
-		// Lokalen Felder einrichten und Sternzeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.Gast(jd);
-	}
+	public static double Gast(){ return MEphemerides.Gast(DateTime.Now.ToJdn()); }
 
 	// MEphemerides.Gast(double)
 	/// <summary>
@@ -417,7 +343,7 @@ public static partial class MEphemerides
 		double dPsi = MEphemerides.NutationInLongitude(jd);
 		double cosE = MMath.Cos(MEphemerides.ObliquityTrue(jd));
 		
-		// Sternzeit berechnen
+		// Rückgabe
 		return gmst + dPsi * cosE;
 	}
 
@@ -426,12 +352,7 @@ public static partial class MEphemerides
 	/// Liefert die mittlere Sternzeit zum Nullmeridian und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Mittlere Sternzeit zum Nullmeridian und zur aktuellen Systemzeit.</returns>
-	public static double Gmst()
-	{
-		// Lokalen Felder einrichten und Sternzeit berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.Gmst(jd);
-	}
+	public static double Gmst(){ return MEphemerides.Gmst(DateTime.Now.ToJdn()); }
 
 	// MEphemerides.Gmst(double)
 	/// <summary>
@@ -446,45 +367,35 @@ public static partial class MEphemerides
 		double t0  = MCalendar.CenturyFragment(jd0);
 		double th0 = 360.0 * MMath.Polynome(t0, 24110.548410, 8640184.812866, 0.093104, -0.000006) / MCalendar.SecondsPerDay;
 
-		// Sternzeit berechnen
+		// Rückgabe
 		return MMath.ToRad(MMod.Mod(th0 + 1.00273790935 * 360.0 * (jd - jd0), 360.0));
 	}
 
 	// MEphemerides.HeightOfEcliptic(CPolar)
 	/// <summary>
-	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und aktueller Systemzeit.
+	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographischer Ort.</param>
-	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und aktueller Systemzeit.</returns>
-	public static double HeightOfEcliptic(CPolar position)
-	{
-		// Lokalen Felder einrichten und Winkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.HeightOfEcliptic(position.Longitude, position.Latitude, jd);
-	}
-
-	// MEphemerides.HeightOfEcliptic(double, double)
-	/// <summary>
-	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und aktueller Systemzeit.
-	/// </summary>
-	/// <param name="lambda">Geographische Länge.</param>
-	/// <param name="phi">Geographische Länge.</param>
-	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und aktueller Systemzeit.</returns>
-	public static double HeightOfEcliptic(double lambda, double phi)
-	{
-		// Lokalen Felder einrichten und Winkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.HeightOfEcliptic(lambda, phi, jd);
-	}
+	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static double HeightOfEcliptic(CPolar position){ return MEphemerides.HeightOfEcliptic(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.HeightOfEcliptic(CPolar, double)
 	/// <summary>
-	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und julianischer Tageszahl.
+	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographischer Ort.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und julianischer Tageszahl.</returns>
+	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur julianischen Tageszahl.</returns>
 	public static double HeightOfEcliptic(CPolar position, double jd){ return MEphemerides.HeightOfEcliptic(position.Longitude, position.Latitude, jd); }
+
+	// MEphemerides.HeightOfEcliptic(double, double)
+	/// <summary>
+	/// Liefert den Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur aktuellen Systemzeit.
+	/// </summary>
+	/// <param name="lambda">Geographische Länge.</param>
+	/// <param name="phi">Geographische Länge.</param>
+	/// <returns>Winkel zwischen Ekliptik und Horizont zum geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static double HeightOfEcliptic(double lambda, double phi){ return MEphemerides.HeightOfEcliptic(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.HeightOfEcliptic(double, double, double)
 	/// <summary>
@@ -522,18 +433,35 @@ public static partial class MEphemerides
 	/// <returns>Mittlere Sternzeit zur julianischen Tageszahl und geographischer Länge.</returns>
 	public static double Lmst(double jd, double lambda){ return MEphemerides.Gmst(jd) + lambda; }
 
+	// MEphemerides.ListEvent(double, double)
+	/// <summary>
+	/// Liefert die Liste der Ereignisse zum Zeitintervall.
+	/// </summary>
+	/// <param name="jdMin">Julianische Tageszahl zur unteren Intervallgrenze.</param>
+	/// <param name="jdMax">Julianische Tageszahl zur oberen Intervallgrenze.</param>
+	/// <returns>Liste der Ereignisse zum Zeitintervall.</returns>
+	public static List<CEvent> ListEvent(double jdMin, double jdMax)
+	{
+		// Lokale Felder
+		List<CEvent> rtn = new();
+
+		// Ereignisse anfügen
+		MEarth.AppendEvent(rtn, jdMin, jdMax);
+		MSun  .AppendEvent(rtn, jdMin, jdMax);
+		MMoon .AppendEvent(rtn, jdMin, jdMax);
+
+		// Liste sortieren und Rückgabe
+		rtn.Sort();
+		return rtn;
+	}
+
 	// MEphemerides.LocalHourAngle(double)
 	/// <summary>
 	/// Liefert den lokalen Stundenwinkel zur Rektaszension, Nullmeridian und aktueller Systemzeit.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <returns>Lokaler Stundenwinkel zur Rektaszension, Nullmeridian und aktueller Systemzeit.</returns>
-	public static double LocalHourAngle(double alpha)
-	{
-		// Lokalen Felder einrichten und Stundenwinkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.LocalHourAngle(alpha, 0.0, jd);
-	}
+	public static double LocalHourAngle(double alpha){ return MEphemerides.LocalHourAngle(alpha, 0.0, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.LocalHourAngle(double, double)
 	/// <summary>
@@ -542,12 +470,7 @@ public static partial class MEphemerides
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <returns>Lokaler Stundenwinkel zur Rektaszension, geographischer Länge und aktueller Systemzeit.</returns>
-	public static double LocalHourAngle(double alpha, double lambda)
-	{
-		// Lokalen Felder einrichten und Stundenwinkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.LocalHourAngle(alpha, lambda, jd);
-	}
+	public static double LocalHourAngle(double alpha, double lambda){ return MEphemerides.LocalHourAngle(alpha, lambda, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.LocalHourAngle(double, double, double)
 	/// <summary>
@@ -570,48 +493,38 @@ public static partial class MEphemerides
 
 	// MEphemerides.LongitudeOfEcliptic(CPolar)
 	/// <summary>
-	/// Liefert die ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und aktueller Systemzeit.
+	/// Liefert die ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Geographischer Ort.</param>
-	/// <returns>Ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und aktueller Systemzeit.</returns>
-	public static double LongitudeOfEcliptic(CPolar position)
-	{
-		// Lokale Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.LongitudeOfEcliptic(position.Longitude, position.Latitude, jd);
-	}
+	/// <returns>Ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur aktuellen Systemzeit.</returns>
+	public static double LongitudeOfEcliptic(CPolar position){ return MEphemerides.LongitudeOfEcliptic(position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.LongitudeOfEcliptic(CPolar, double)
 	/// <summary>
-	/// Liefert die ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und julianischer Tageszahl.
+	/// Liefert die ekliptikale Länge des Horizontdurchgangs zum geopraphischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Geographischer Ort.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und julianischer Tageszahl.</returns>
+	/// <returns>Ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur julianischen Tageszahl.</returns>
 	public static double LongitudeOfEcliptic(CPolar position, double jd) { return MEphemerides.LongitudeOfEcliptic(position.Longitude, position.Latitude, jd); }
 
-	// MEphemerides.LongitudeOfEcliptic(double, double, double)
+	// MEphemerides.LongitudeOfEcliptic(double, double)
 	/// <summary>
-	/// Liefert die ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und aktueller Systemzeit.
+	/// Liefert die ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und aktueller Systemzeit</returns>
-	public static double LongitudeOfEcliptic(double lambda, double phi)
-	{
-		// Lokalen Felder einrichten und Länge berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.LongitudeOfEcliptic(lambda, phi, jd);
-	}
+	/// <returns>Ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur aktuellen Systemzeit</returns>
+	public static double LongitudeOfEcliptic(double lambda, double phi){ return MEphemerides.LongitudeOfEcliptic(lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.LongitudeOfEcliptic(double, double, double)
 	/// <summary>
-	/// Liefert die ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und julianischer Tageszahl.
+	/// Liefert die ekliptikale Länge des Horizontdurchgangs am geopraphischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und julianischer Tageszahl.</returns>
+	/// <returns>Ekliptikale Länge des Horizontdurchgangs zur geopraphischen Ort und julianischen Tageszahl.</returns>
 	public static double LongitudeOfEcliptic(double lambda, double phi, double jd)
 	{
 		// Lokalen Felder einrichten
@@ -632,12 +545,7 @@ public static partial class MEphemerides
 	/// Liefert die mittlere Ekliptikschiefe zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Mittlere Ekliptikschiefe zur aktuellen Systemzeit.</returns>
-	public static double ObliquityMean()
-	{
-		// Lokalen Felder einrichten und Ekliptikschiefe berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ObliquityMean(jd);
-	}
+	public static double ObliquityMean(){ return MEphemerides.ObliquityMean(DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ObliquityMean(double)
 	/// <summary>
@@ -657,12 +565,7 @@ public static partial class MEphemerides
 	/// Liefert die wahre Ekliptikschiefe zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Wahre Exkliptikschiefe zur aktuellen Systemzeit.</returns>
-	public static double ObliquityTrue()
-	{
-		// Lokalen Felder einrichten und Ekliptikschiefe berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ObliquityTrue(jd);
-	}
+	public static double ObliquityTrue(){ return MEphemerides.ObliquityTrue(DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ObliquityTrue(double)
 	/// <summary>
@@ -674,43 +577,33 @@ public static partial class MEphemerides
 
 	// MEphemerides.ParallacticAngle(CPolar, CPolar)
 	/// <summary>
-	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und aktueller Systemzeit.
+	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="positionGeocentric">Geozentrische Position.</param>
 	/// <param name="positionGeographic">Geographischer Ort.</param>
-	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und aktueller Systemzeit.</returns>
-	public static double ParallacticAngle(CPolar positionGeocentric, CPolar positionGeographic)
-	{
-		// Lokalen Felder einrichten und Winkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ParallacticAngle(positionGeocentric.Longitude, positionGeocentric.Latitude, positionGeographic.Longitude, positionGeographic.Latitude, jd);
-	}
+	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static double ParallacticAngle(CPolar positionGeocentric, CPolar positionGeographic){ return MEphemerides.ParallacticAngle(positionGeocentric.Longitude, positionGeocentric.Latitude, positionGeographic.Longitude, positionGeographic.Latitude, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ParallacticAngle(CPolar, CPolar, double)
 	/// <summary>
-	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und julianischer Tageszahl.
+	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="positionGeocentric">Geozentrische Position.</param>
 	/// <param name="positionGeographic">Geographische Ort.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und julianischer Tageszahl.</returns>
+	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und zur julianischen Tageszahl.</returns>
 	public static double ParallacticAngle(CPolar positionGeocentric, CPolar positionGeographic, double jd){ return MEphemerides.ParallacticAngle(positionGeocentric.Longitude, positionGeocentric.Latitude, positionGeographic.Longitude, positionGeographic.Latitude); }
 
 	// MEphemerides.ParallacticAngle(double, double, double, double)
 	/// <summary>
-	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und aktueller Systemzeit.
+	/// Liefert den parallaktischen Winkel zur geozentrischen Position, zum geographischen Ort und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und aktueller Systemzeit.</returns>
-	public static double ParallacticAngle(double alpha, double delta, double lambda, double phi)
-	{
-		// Lokalen Felder einrichten und Winkel berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ParallacticAngle(alpha, delta, lambda, phi, jd);
-	}
+	/// <returns>Parallaktischer Winkel zur geozentrischen Position, zum geographischen Ort und zur aktuellen Systemzeit.</returns>
+	public static double ParallacticAngle(double alpha, double delta, double lambda, double phi){ return MEphemerides.ParallacticAngle(alpha, delta, lambda, phi, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ParallacticAngle(double, double, double, double, double)
 	/// <summary>
@@ -731,63 +624,52 @@ public static partial class MEphemerides
 
 	// MEphemerides.PrecessionEcliptical(CPolar)
 	/// <summary>
-	/// Liefert die um die Präzession korrigierte Position zur ekliptikalen Position und aktuellen Systemzeit.
+	/// Liefert die um die Präzession korrigierte ekliptikale Position zur ekliptikalen Position und zur aktuellen Systemzeit.
 	/// </summary>
-	/// <param name="pos">Ekliptikale Position.</param>
-	/// <returns>Um die Präzession korrigierte Position zur ekliptikalen Position und aktuellen Systemzeit.</returns>
-	public static CPolar PrecessionEcliptical(CPolar position)
-	{
-		// Lokale Felder einrichten und Präzession anwenden
-		double jd     = DateTime.Now.ToJdn();
-		double lambda = position.Longitude;
-		double beta   = position.Latitude;
-		MEphemerides.PrecessionEcliptical(ref lambda, ref beta, jd);
-		return new CPolar(lambda, beta, 1.0);
-	}
+	/// <param name="position">Ekliptikale Position.</param>
+	/// <returns>Um die Präzession korrigierte eklptikale Position zur ekliptikalen Position und zur aktuellen Systemzeit.</returns>
+	public static CPolar PrecessionEcliptical(CPolar position){ return MEphemerides.PrecessionEcliptical(position, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.PrecessionEcliptical(CPolar, double)
 	/// <summary>
-	/// Liefert die um die Präzession korrigierte Position zur ekliptikalen Position und julianischer Tageszahl.
+	/// Liefert die um die Präzession korrigierte ekliptiake Position zur ekliptikalen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Ekliptikale Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Um die Präzession korrigierte Position zur ekliptikalen Position und julianischer Tageszahl.</returns>
+	/// <returns>Um die Präzession korrigierte ekliptikale Position zur ekliptikalen Position und zur julianischen Tageszahl.</returns>
 	public static CPolar PrecessionEcliptical(CPolar position, double jd)
 	{
 		// Lokale Felder einrichten und Präzession anwenden
 		double lambda = position.Longitude;
 		double beta   = position.Latitude;
-		MEphemerides.PrecessionEcliptical(ref lambda, ref beta, jd);
+		(lambda, beta) = MEphemerides.PrecessionEcliptical(lambda, beta, jd);
 		return new CPolar(lambda, beta, 1.0);
 	}
 
-	// MEphemerides.PrecessionEcliptical(ref double, ref double)
+	// MEphemerides.PrecessionEcliptical(double, double)
 	/// <summary>
-	/// Wendet die Präzession auf die ekliptikale Position zur aktueller Systemzeit an.
+	/// Liefert die um die Präzession korrigierte ekliptikale Position zur ekliptikalen Position zur zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="lambda">Ekliptikale Länge.</param>
 	/// <param name="beta">Ekliptikale Breite.</param>
-	public static void PrecessionEcliptical(ref double lambda, ref double beta)
-	{
-		// Lokalen Felder einrichten und Präzession anwenden
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.PrecessionEcliptical(ref lambda, ref beta, jd);
-	}
+	/// <returns>Um die Präzession korrigierte ekliptikale Position zur ekliptikalen Position zur zur aktuellen Systemzeit.</returns>
+	public static (double lambda, double beta) PrecessionEcliptical(double lambda, double beta){ return MEphemerides.PrecessionEcliptical(lambda, beta, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.PrecessionEcliptical(ref double, ref double, double)
+	// MEphemerides.PrecessionEcliptical(double, double, double)
 	/// <summary>
-	/// Wendet die Präzession auf die ekliptikale Position zur julianischen Tageszahl an.
+	/// Liefert die um die Präzession korrigierte ekiptikale Position zur ekliptikale Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="lambda">Ekliptikale Länge.</param>
 	/// <param name="beta">Ekliptikale Breite.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void PrecessionEcliptical(ref double lambda, ref double beta, double jd)
+	/// <returns>Um die Präzession korrigierte ekiptikale Position zur ekliptikale Position und zur julianischen Tageszahl.</returns>
+	public static (double lambda, double beta) PrecessionEcliptical(double lambda, double beta, double jd)
 	{
 		// Lokalen Felder einrichten
 		double t = MCalendar.CenturyFragment(jd);
-		double x = MMath.ToRad(MMath.Polynome(t,   0.0,   47.0029, -0.03302,  0.000060) / 3600.0);
+		double x = MMath.ToRad(MMath.Polynome(t, 0.0, 47.0029, -0.03302,  0.000060) / 3600.0);
 		double y = MMath.ToRad(MMath.Polynome(t, 174.876384, -869.8089 / 3600.0,  0.03536 / 3600.0));
-		double z = MMath.ToRad(MMath.Polynome(t,   0.0, 5029.0966,  1.11113, -0.000006) / 3600.0);
+		double z = MMath.ToRad(MMath.Polynome(t, 0.0, 5029.0966,  1.11113, -0.000006) / 3600.0);
 
 		// Lokalen Hilsfelder einrichten
 		// TODO: MEphemerides.PrecessionEcliptical(ref double, ref double, double): Verwendung der Winkelwandelungsfunktionen prüfen.
@@ -803,64 +685,52 @@ public static partial class MEphemerides
 		double b = cosB * cosL;
 		double c = cosX * sinB + sinX * cosB * sinL;
 
-		// Position korrigieren
-		lambda = z + y - MMath.ArcTan(a, b);
-		beta   = MMath.ArcSin(c);
+		// Rückgabe
+		return(z + y - MMath.ArcTan(a, b), MMath.ArcSin(c));
 	}
 
 	// MEphemerides.PrecessionEquatorial(CPolar)
 	/// <summary>
-	/// Liefert die um die Präzession korrigierte Position zur äquatorialen Position und aktuellen Systemzeit.
+	/// Liefert die um die Präzession korrigierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Äquatorialen Position.</param>
-	/// <returns>Um die Präzession korrigierte Position zur äquatorialen Position und aktuellen Systemzeit.</returns>
-	public static CPolar PrecessionEquatorial(CPolar position)
-	{
-		// Lokale Felder einrichten und Präzession anwenden
-		double jd    = DateTime.Now.ToJdn();
-		double alpha = position.Longitude;
-		double delta = position.Latitude;
-		MEphemerides.PrecessionEquatorial(ref alpha, ref delta, jd);
-		return new CPolar(alpha, delta, 1.0);
-	}
+	/// <returns>Um die Präzession korrigierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzeit.</returns>
+	public static CPolar PrecessionEquatorial(CPolar position){ return MEphemerides.PrecessionEquatorial(position, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.PrecessionEquatorial(CPolar, double)
 	/// <summary>
-	/// Liefert die um die Präzession korrigierte Position zur äquatorialen Position und julianischer Tageszahl.
+	/// Liefert die um die Präzession korrigierte äquatoriale Position zur äquatorialen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Äquatorialen Position.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Um die Präzession korrigierte Position zur äquatorialen Position und julianischer Tageszahl.</returns>
+	/// <returns>Um die Präzession korrigierte äquatoriale Position zur äquatorialen Position und zur julianischen Tageszahl.</returns>
 	public static CPolar PrecessionEquatorial(CPolar position, double jd)
 	{
 		// Lokale Felder einrichten und Präzession anwenden
 		double alpha = position.Longitude;
 		double delta = position.Latitude;
-		MEphemerides.PrecessionEquatorial(ref alpha, ref delta, jd);
+		(alpha, delta) = MEphemerides.PrecessionEquatorial(alpha, delta, jd);
 		return new CPolar(alpha, delta, 1.0);
 	}
 
-	// MEphemerides.PrecessionEquatorial(ref double, ref double)
+	// MEphemerides.PrecessionEquatorial(double, double)
 	/// <summary>
-	/// Wendet die Präzession auf die äquatoriale Position zur aktuellen Systemzeit an.
+	/// Liefert die um die Präzession korrigierte äquatoriale Position zur die äquatoriale Position und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
-	public static void PrecessionEquatorial(ref double alpha, ref double delta)
-	{
-		// Lokalen Felder einrichten und Präzession anwenden
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.PrecessionEquatorial(ref alpha, ref delta, jd);
-	}
+	/// <returns>Um die Präzession korrigierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzeit.</returns>
+	public static (double alpha, double delta) PrecessionEquatorial(double alpha, double delta){ return MEphemerides.PrecessionEquatorial(alpha, delta, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.PrecessionEquatorial(ref double, ref double, double)
+	// MEphemerides.PrecessionEquatorial(double,double, double)
 	/// <summary>
-	/// Wendet die Präzession auf die äquatoriale Position zur julianischen Tageszahl an.
+	/// Liefert die um die Präzession korrigierte äquatoriale Position zur äquatorialen Position zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void PrecessionEquatorial(ref double alpha, ref double delta, double jd)
+	/// <returns>Um die Präzession korrigierte Position zur äquatorialen Position und julianischer Tageszahl.</returns>
+	public static (double alpha, double delta) PrecessionEquatorial(double alpha, double delta, double jd)
 	{
 		// Lokalen Felder einrichten
 		double t = MCalendar.CenturyFragment(jd);
@@ -882,44 +752,35 @@ public static partial class MEphemerides
 		double b = cosZ * cosD * cosA - sinZ * sinD;
 		double c = sinZ * cosD * cosA + cosZ * sinD;
 
-		// Position korrigieren
-		alpha = MMath.ArcTan(a, b) + y;
-		delta = MMath.ArcSin(c);
+		// Rückgabe
+		return(MMath.ArcTan(a, b) + y, MMath.ArcSin(c));
 	}
 
 	// MEphemerides.ProperMotion(CPolar, double, double)
 	/// <summary>
-	/// Liefert die um die Eigenbewegung korrigierte Position zur äquatorialen Position und aktueller Systemzeit.
+	/// Liefert die um die Eigenbewegung korrigierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzeit.
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
 	/// <param name="muAlpha">Eigenbewegung in Rektaszension.</param>
 	/// <param name="muDelta">Eigenbewegung in Deklination.</param>
-	/// <returns>Um die Eigenbewegung korrigierte Position zur äquatorialen Position und aktueller Systemzeit.</returns>
-	public static CPolar ProperMotion(CPolar position, double muAlpha, double muDelta)
-	{
-		// Lokale Felder einrichten und Eigenbewegung anwenden
-		double jd    = DateTime.Now.ToJdn();
-		double alpha = position.Longitude;
-		double delta = position.Latitude;
-		MEphemerides.ProperMotion(ref alpha, ref delta, muAlpha, muDelta, jd);
-		return new CPolar(alpha, delta, 1.0);
-	}
+	/// <returns>Um die Eigenbewegung korrigierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzeit.</returns>
+	public static CPolar ProperMotion(CPolar position, double muAlpha, double muDelta){ return MEphemerides.ProperMotion(position, muAlpha, muDelta, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ProperMotion(CPolar, double, double, double)
 	/// <summary>
-	/// Liefert die um die Eigenbewegung korrigierte Position zur äquatorialen Position und julianischer Tageszahl.
+	/// Liefert die um die Eigenbewegung korrigierte äquatoriale Position zur äquatorialen Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
 	/// <param name="muAlpha">Eigenbewegung in Rektaszension.</param>
 	/// <param name="muDelta">Eigenbewegung in Deklination.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	/// <returns>Um die Eigenbewegung korrigierte Position zur äquatorialen Position und julianischer Tageszahl.</returns>
+	/// <returns>Um die Eigenbewegung korrigierte äquatorialen Position zur äquatorialen Position und zur julianischernTageszahl.</returns>
 	public static CPolar ProperMotion(CPolar position, double muAlpha, double muDelta, double jd)
 	{
 		// Lokale Felder einrichten und Eigenbewegung anwenden
 		double alpha = position.Longitude;
 		double delta = position.Latitude;
-		MEphemerides.ProperMotion(ref alpha, ref delta, muAlpha, muDelta, jd);
+		(alpha, delta) = MEphemerides.ProperMotion(alpha, delta, muAlpha, muDelta, jd);
 		return new CPolar(alpha, delta, 1.0);
 	}
 
@@ -943,36 +804,31 @@ public static partial class MEphemerides
 		return new CPolar(alpha, delta, 1.0);
 	}
 
-	// MEphemerides.ProperMotion(ref double, ref double, double, double)
+	// MEphemerides.ProperMotion(double, double, double, double)
 	/// <summary>
-	/// Wendet die Eigenbewegung auf die äquatoriale Position zur aktuellen Systemzeit an.
+	/// Liefert die um die Eigenbewegung korrgierte äquatoriale Position zur äquatorialen Position und zur aktuellen Systemzei.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="muAlpha">Eigenbewegung in Rektaszention.</param>
 	/// <param name="muDelta">Eigenbewegung in Deklination.</param>
-	public static void ProperMotion(ref double alpha, ref double delta, double muAlpha, double muDelta)
-	{
-		// Lokalen Felder einrichten und Eigenbewegung anwenden
-		double jd = DateTime.Now.ToJdn();
-		MEphemerides.ProperMotion(ref alpha, ref delta, muAlpha, muDelta, jd);
-	}
+	public static (double alpha, double delta) ProperMotion(double alpha, double delta, double muAlpha, double muDelta){ return MEphemerides.ProperMotion(alpha, delta, muAlpha, muDelta, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.ProperMotion(ref double, ref double, double, double, double)
+	// MEphemerides.ProperMotion(double, double, double, double, double)
 	/// <summary>
-	/// Wendet die Eigenbewegung auf die äquatoriale Position zur julianischen Tageszahl an.
+	/// Liefert die um die Eigenbewegung korrigierte äquatorialen zur äquatoriale Position und zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <param name="muAlpha">Eigenbewegung in Rektaszention.</param>
 	/// <param name="muDelta">Eigenbewegung in Deklination.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
-	public static void ProperMotion(ref double alpha, ref double delta, double muAlpha, double muDelta, double jd)
+	/// <returns>Liefert die um die Eigenbewegung korrigierte äquatorialen zur äquatoriale Position und zur julianischen Tageszahl.</returns>
+	public static (double alpha, double delta) ProperMotion(double alpha, double delta, double muAlpha, double muDelta, double jd)
 	{
-		// Lokalen Felder und Eigenbewegung anwenden
+		// Rückgabe
 		double t = (jd - MCalendar.Jdn20000101) / 365.25;
-		alpha += t * MMath.ToRad(15.0 * muAlpha / 3600.0);
-		delta += t * MMath.ToRad(muDelta / 3600.0);
+		return(alpha + t * MMath.ToRad(15.0 * muAlpha / 3600.0), delta + t * MMath.ToRad(muDelta / 3600.0));
 	}
 
 	// MEphemerides.ProperMotion(ref double, ref double, double, double, double, double)
@@ -1038,45 +894,45 @@ public static partial class MEphemerides
 		throw new NotImplementedException("Methode ist nicht implementiert.");
 	}
 
-	// MEphemerides.Rise(IObservable, CPolar)
+	// MEphemerides.Rise(IEcliptical, CPolar)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Obversanden am geographischen Ort zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Obversanden am geographischen Ort zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Rise(IObservable item, CPolar position){ return MEphemerides.Rise(item, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(IEcliptical ecliptical, CPolar position){ return MEphemerides.Rise(ecliptical, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Rise(IObservable, CPolar, double)
+	// MEphemerides.Rise(IEcliptical, CPolar, double)
 	/// <summary>
-	/// Liefert den Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.
+	/// Liefert den Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="position">Geographische Position.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Rise(IObservable item, CPolar position, double jd){ return MEphemerides.Rise(item, position.Longitude, position.Latitude, jd); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(IEcliptical ecliptical, CPolar position, double jd){ return MEphemerides.Rise(ecliptical, position.Longitude, position.Latitude, jd); }
 
-	// MJupiter.Rise(IObservable, double, double)
+	// MEphmerides.Rise(IEcliptical, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Observanden am geographischen Ort und zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Observanden am geographischen Ort und zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Rise(IObservable item, double lambda, double phi){ return MEphemerides.Rise(item, lambda, phi, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Rise(IEcliptical ecliptical, double lambda, double phi){ return MEphemerides.Rise(ecliptical, lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Rise(IObservable, double, double, double, double)
+	// MEphemerides.Rise(IEcliptical, double, double, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Observanden am geographischen Ort zum julianischen Tagesdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Planeten am geographischen Ort zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
 	/// <returns>Ereigniskennung, die julianische Tageszahl des Aufgangs und die Morgenweite zum Observanden am geographischen Ort zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Rise(IObservable item, double lambda, double phi, double jd)
+	public static (EEventType type, double? jd, double? azimuth) Rise(IEcliptical ecliptical, double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -1092,22 +948,22 @@ public static partial class MEphemerides
 		double cosP = MMath.Cos(phi);                     // Breitencosinus
 
 		// Position für nachfolgenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn + 1.0);
-		b = item.Beta  (EPrecision.Low, jdn + 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn + 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn + 1.0);
 		double aP = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn + 1.0);
 		double dP = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn + 1.0);
 
 		// Position für gegebenen Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn);
-		b = item.Beta  (EPrecision.Low, jdn);
+		l = ecliptical.Longitude(EPrecision.Low, jdn);
+		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
 		if(MMath.Abs(aP - a0) > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn - 1.0);
-		b = item.Beta  (EPrecision.Low, jdn - 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
 		if(MMath.Abs(a0 - aM) > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
@@ -1211,45 +1067,45 @@ public static partial class MEphemerides
 		throw new NotImplementedException("Methode ist nicht implementiert.");
 	}
 
-	// MEphemerides.Set(IObservable, CPolar)
+	// MEphemerides.Set(IEcliptical, CPolar)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observandenam geograpischen Ort und zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geograpischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="position">Geographisches Position.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observandenam geograpischen Ort und zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Set(IObservable item, CPolar position){ return MEphemerides.Set(item, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geograpischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(IEcliptical ecliptical, CPolar position){ return MEphemerides.Set(ecliptical, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Set(IObservable, CPolar, double)
+	// MEphemerides.Set(IEcliptical, CPolar, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observanden am geographischen Ort und zum julianischen Tagesdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="position">Geographisches Position.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite am geographischen Ort und zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Set(IObservable item, CPolar position, double jd){ return MEphemerides.Set(item, position.Longitude, position.Latitude, jd); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(IEcliptical ecliptical, CPolar position, double jd){ return MEphemerides.Set(ecliptical, position.Longitude, position.Latitude, jd); }
 
-	// MEphemerides.Set(IObservable, double, double)
+	// MEphemerides.Set(IEcliptical, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observanden am geographischen Ort zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observanden am geographischen Ort zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Set(IObservable item, double lambda, double phi){ return MEphemerides.Set(item, lambda, phi, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(IEcliptical ecliptical, double lambda, double phi){ return MEphemerides.Set(ecliptical, lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Set(IObservable, double, double, double)
+	// MEphemerides.Set(IEcliptical, double, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observanden am geographischen Ort und zum julianischen Tagesdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Observanden am geographischen Ort und zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? azimuth) Set(IObservable item, double lambda, double phi, double jd)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Untergangs und die Abendweite zum Planeten am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? azimuth) Set(IEcliptical ecliptical, double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn  = MMath.Floor(jd - 0.5) + 0.5;        // Tageszahl um Mitternacht
@@ -1265,22 +1121,22 @@ public static partial class MEphemerides
 		double cosP = MMath.Cos(phi);                     // Breitencosinus
 
 		// Position für nachfolgenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn + 1.0);
-		b = item.Beta  (EPrecision.Low, jdn + 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn + 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn + 1.0);
 		double aP = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd + 1.0);
 		double dP = MEphemerides.ToDelta(l, b, EObliquity.Mean, jd + 1.0);
 
 		// Position für gegebenen Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn);
-		b = item.Beta  (EPrecision.Low, jdn);
+		l = ecliptical.Longitude(EPrecision.Low, jdn);
+		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
 		if(MMath.Abs(aP - a0) > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn - 1.0);
-		b = item.Beta  (EPrecision.Low, jdn - 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd - 1.0);
 		if(MMath.Abs(a0 - aM) > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
@@ -1327,12 +1183,7 @@ public static partial class MEphemerides
 	/// <param name="position">Ekliptikale Position.</param>
 	/// <param name="obliquity">Kennung der Ekliptikschiefe.</param>
 	/// <returns>(Mittlere bzw. scheinbare) Rektaszension der geozentrisch-ekliptikalen Position zum Äquinoktium J2000.</returns>
-	public static double ToAlpha(CPolar position, EObliquity obliquity)
-	{
-		// Lokale Felder einrichten und Rektaszension berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToAlpha(position.Longitude, position.Latitude, obliquity, jd);
-	}
+	public static double ToAlpha(CPolar position, EObliquity obliquity){ return MEphemerides.ToAlpha(position.Longitude, position.Latitude, obliquity, MCalendar.Jdn20000101); }
 
 	// MEpemerides.ToAlpha(CPolar, EObliquity, double)
 	/// <summary>
@@ -1352,12 +1203,7 @@ public static partial class MEphemerides
 	/// <param name="beta">Ekliptikale Breite.</param>
 	/// <param name="obliquity">Kennung der Ekliptikschiefe.</param>
 	/// <returns>(Mittlere bzw. scheinbare) Rektaszension der geozentrisch-ekliptikalen Position zum Äquinoktium J2000.</returns>
-	public static double ToAlpha(double lambda, double beta, EObliquity obliquity)
-	{
-		// Lokale Felder einrichten und Rektaszension berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToAlpha(lambda, beta, obliquity, jd);
-	}
+	public static double ToAlpha(double lambda, double beta, EObliquity obliquity){ return MEphemerides.ToAlpha(lambda, beta, obliquity, MCalendar.Jdn20000101); }
 
 	// MEphemerides.ToAlpha(double, double, EObliquity, double)
 	/// <summary>
@@ -1414,12 +1260,7 @@ public static partial class MEphemerides
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
 	/// <returns>Ekliptikale Breite zur (scheinbaren) geozentrisch-äquatorialen Position und zum Äquinoktium J2000.</returns>
-	public static double ToBeta(CPolar position)
-	{
-		// Lokale Felder einrichten und Breite berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToBeta(position.Longitude, position.Latitude, jd);
-	}
+	public static double ToBeta(CPolar position){ return MEphemerides.ToBeta(position.Longitude, position.Latitude, MCalendar.Jdn20000101); }
 
 	// MEphemerides.ToBeta(CPolar, double)
 	/// <summary>
@@ -1437,12 +1278,7 @@ public static partial class MEphemerides
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <returns>Ekliptikale Breite zur (scheinbaren) geozentrisch-äquatorialen Position und zum Äquinoktium J2000.</returns>
-	public static double ToBeta(double alpha, double delta)
-	{
-		// Lokalen Felder einrichten und Breite berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ToBeta(alpha, delta, jd);
-	}
+	public static double ToBeta(double alpha, double delta){ return MEphemerides.ToBeta(alpha, delta, MCalendar.Jdn20000101); }
 
 	// MEphemerides.ToBeta(double, double, double)
 	/// <summary>
@@ -1470,12 +1306,7 @@ public static partial class MEphemerides
 	/// <param name="position">Ekliptikale Position.</param>
 	/// <param name="obliquity">Kennung der Ekliptikschiefe.</param>
 	/// <returns>(Mittlere bzw. scheinbare) Deklination der geozentrisch-ekliptikalen Position zum Äquinoktium J2000.</returns>
-	public static double ToDelta(CPolar position, EObliquity obliquity)
-	{
-		// Lokale Felder einrichten und Deklination berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToDelta(position.Longitude, position.Latitude, obliquity, jd);
-	}
+	public static double ToDelta(CPolar position, EObliquity obliquity){ return MEphemerides.ToDelta(position.Longitude, position.Latitude, obliquity, MCalendar.Jdn20000101); }
 
 	// MEpemerides.ToDelta(CPolar, EObliquity, double)
 	/// <summary>
@@ -1495,12 +1326,7 @@ public static partial class MEphemerides
 	/// <param name="beta">Ekliptikale Breite.</param>
 	/// <param name="obliquity">Kennung der Ekliptikschiefe.</param>
 	/// <returns>(Mittlere bzw. scheinbare) Deklination der geozentrisch-ekliptikalen Position zum Äquinoktium J2000.</returns>
-	public static double ToDelta(double lambda, double beta, EObliquity obliquity)
-	{
-		// Lokale Felder einrichten und Deklination berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToDelta(lambda, beta, obliquity, jd);
-	}
+	public static double ToDelta(double lambda, double beta, EObliquity obliquity){ return MEphemerides.ToDelta(lambda, beta, obliquity, MCalendar.Jdn20000101); }
 
 	// MEphemerides.ToDelta(double, double, EObliquity, double)
 	/// <summary>
@@ -1583,11 +1409,7 @@ public static partial class MEphemerides
 	/// <param name="delta">Deklination.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <returns></returns>
-	public static double ToHeight(double localHourAngle, double delta, double phi)
-	{
-		// RÜckgabe
-		return MMath.ArcSin(MMath.Sin(phi) * MMath.Sin(delta) + MMath.Cos(phi) * MMath.Cos(delta) * MMath.Cos(localHourAngle));
-	}
+	public static double ToHeight(double localHourAngle, double delta, double phi){ return MMath.ArcSin(MMath.Sin(phi) * MMath.Sin(delta) + MMath.Cos(phi) * MMath.Cos(delta) * MMath.Cos(localHourAngle)); 	}
 
 	// MEphemerides.ToLambda(CPolar)
 	/// <summary>
@@ -1595,12 +1417,7 @@ public static partial class MEphemerides
 	/// </summary>
 	/// <param name="position">Äquatoriale Position.</param>
 	/// <returns>Ekliptikale Länge zur (scheinbaren) geozentrisch-äquatorialen Position und zum Äquinoktium J2000.</returns>
-	public static double ToLambda(CPolar position)
-	{
-		// Lokale Felder einrichten und Breite berechnen
-		double jd = MCalendar.Jdn20000101;
-		return MEphemerides.ToLambda(position.Longitude, position.Latitude, jd);
-	}
+	public static double ToLambda(CPolar position){ return MEphemerides.ToLambda(position.Longitude, position.Latitude, MCalendar.Jdn20000101); }
 
 	// MEphemerides.ToLambda(CPolar, double)
 	/// <summary>
@@ -1618,12 +1435,7 @@ public static partial class MEphemerides
 	/// <param name="alpha">Rektaszension.</param>
 	/// <param name="delta">Deklination.</param>
 	/// <returns>Ekliptikale Länge zur (scheinbaren) geozentrisch-äquatorialen Position und zum Äquinoktium J2000.</returns>
-	public static double ToLambda(double alpha, double delta)
-	{
-		// Lokale Felder einrichten und Breite berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MEphemerides.ToLambda(alpha, delta, jd);
-	}
+	public static double ToLambda(double alpha, double delta){ return MEphemerides.ToLambda(alpha, delta, DateTime.Now.ToJdn()); }
 
 	// MEphemerides.ToLambda(double, double, double)
 	/// <summary>
@@ -1662,13 +1474,13 @@ public static partial class MEphemerides
 	/// <returns>(Mittlere) Sonnenzeit zur (mittleren) Sternzeit.</returns>
 	public static double ToSolarTime(double sideralTime){ return 1.00273790935 * sideralTime; }
 
-	// MEphemerides.ToZodiac(double)
+	// MEphemerides.ToStringZodiac(double)
 	/// <summary>
 	/// Liefert die ekliptikale Länge in Tierkreisnotation.
 	/// </summary>
 	/// <param name="lambda">Ekliptikale Länge.</param>
 	/// <returns>Ekliptikale Länge in Tierkreisnotation.</returns>
-	public static string ToZodiac(double lambda)
+	public static string ToStringZodiac(double lambda)
 	{
 		// Lokale Felder einrichten
 		double        lng = MMath.ToDeg(lambda);
@@ -1756,45 +1568,45 @@ public static partial class MEphemerides
 		return(EEventType.Normal, jd + m, MEphemerides.ToHeight(0.0, delta, phi));
 	}
 
-	// MEphemerides.Transit(IObservable, CPolar)
+	// MEphemerides.Transit(IEcliptical, CPolar)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Observand.</param>
 	/// <param name="position">Geographische Position.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? height) Transit(IObservable item, CPolar position){ return MEphemerides.Transit(item, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(IEcliptical ecliptical, CPolar position){ return MEphemerides.Transit(ecliptical, position.Longitude, position.Latitude, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Transit(IObservable, CPolar, double)
+	// MEphemerides.Transit(IEcliptical, CPolar, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum julianischen Tagesdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="position">Geographische Position.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? height) Transit(IObservable item, CPolar position, double jd){ return MEphemerides.Transit(item, position.Longitude, position.Latitude, jd); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(IEcliptical ecliptical, CPolar position, double jd){ return MEphemerides.Transit(ecliptical, position.Longitude, position.Latitude, jd); }
 
-	// MEphemerides.Transit(IObservable, double, double)
+	// MEphemerides.Transit(IEcliptical, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum aktuellen Systemdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum aktuellen Systemdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum aktuellen Systemdatum.</returns>
-	public static (EEventType type, double? jd, double? height) Transit(IObservable item, double lambda, double phi){ return MEphemerides.Transit(item, lambda, phi, DateTime.Now.ToJdn()); }
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum aktuellen Systemdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(IEcliptical ecliptical, double lambda, double phi){ return MEphemerides.Transit(ecliptical, lambda, phi, DateTime.Now.ToJdn()); }
 
-	// MEphemerides.Transit(IObservable, double, double, double)
+	// MEphemerides.Transit(IEcliptical, double, double, double)
 	/// <summary>
-	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum julianischen Tagesdatum.
+	/// Liefert die Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum julianischen Tagesdatum.
 	/// </summary>
-	/// <param name="item">Observand.</param>
+	/// <param name="ecliptical">Planet.</param>
 	/// <param name="lambda">Geographische Länge.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <param name="jd">Julianisches Tagesdatum.</param>
-	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Observanden am geographischen Ort und zum julianischen Tagesdatum.</returns>
-	public static (EEventType type, double? jd, double? height) Transit(IObservable item, double lambda, double phi, double jd)
+	/// <returns>Ereigniskennung, die julianische Tageszahl des Meridiandurchgangs und die horizontale Höhe zum Planeten am geographischen Ort und zum julianischen Tagesdatum.</returns>
+	public static (EEventType type, double? jd, double? height) Transit(IEcliptical ecliptical, double lambda, double phi, double jd)
 	{
 		// Lokale Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5; // Tageszahl um Mitternacht
@@ -1804,22 +1616,22 @@ public static partial class MEphemerides
 		double dm  = 1.0;                         // Korrekturglied
 
 		// Position für nachfolgenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn + 1.0);
-		b = item.Beta  (EPrecision.Low, jdn + 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn + 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn + 1.0);
 		double aP = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn + 1.0);
 		double dP = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn + 1.0);
 
 		// Position für gegebenen Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn);
-		b = item.Beta  (EPrecision.Low, jdn);
+		l = ecliptical.Longitude(EPrecision.Low, jdn);
+		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
 		if(MMath.Abs(aP - a0) > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
-		l = item.Lambda(EPrecision.Low, jdn - 1.0);
-		b = item.Beta  (EPrecision.Low, jdn - 1.0);
+		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
+		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
 		if(MMath.Abs(a0 - aM) > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;

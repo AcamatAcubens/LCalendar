@@ -20,6 +20,76 @@ public static partial class MEarth
 	/// <returns>Dauer des anomalistischen Jahres.</returns>
 	public static double AnomalisticYear(){ return 365.25964; }
 
+	// MEarth.AppendEvent(List<CEvent>, double, double)
+	/// <summary>
+	/// Fügt die erdbezogenen Eregnisse zum Zeitraum an die Liste an.
+	/// </summary>
+	/// <param name="list">Liste.</param>
+	/// <param name="jdMin">Beginn des Zeitraums.</param>
+	/// <param name="jdMax">Ende des Zeitraums.</param>
+	public static void AppendEvent(List<CEvent> list, double jdMin, double jdMax)
+	{
+		// Lokale Felder
+		double jdn = 0.0;
+		int    r   = 0;
+
+		// -------- //
+		// Aphelion //
+		// -------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MEarth.Aphelion(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Erde: Durchgang durch das Aphel"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break; 
+		}
+
+		// ---------- //
+		// Perihelion //
+		// ---------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MEarth.Perihelion(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verabeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Erde: Durchgang durch das Perihel"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+	}
+
 	// MEarth.Aphelion()
 	/// <summary>
 	/// Liefert die julianische Tageszahl des nächsten Durchgangs durch das Aphel nach der aktuellen Systemzeit.

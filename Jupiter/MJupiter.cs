@@ -373,7 +373,7 @@ public static partial class MJupiter
 		// ----------------------- //
 
 		// Aberation und Nutation anwenden
-		MEphemerides.AberrationEcliptical(ref lG, ref bG, jdn);
+		(lG, bG) = MEphemerides.AberrationEcliptical(lG, bG, jdn);
 		lG += MEphemerides.NutationInLongitude(jdn);
 		bG += MEphemerides.NutationInObliquity(jdn);
 

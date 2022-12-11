@@ -15,23 +15,32 @@ public class CSun : CPlanet
    // ------------------- //
    // Felder und Methoden //
    // ------------------- //
-   // CSun.Beta(EPrecision, double)
+   // CSun.Latitude(EPrecision, double)
    /// <summary>
-   /// Liefert die ekliptikale Breite zur Präzisionskennung und zur julianischer Tageszahl.
+   /// Liefert die ekliptikale Breite zur Präzisionskennung und zur julianischen Tageszahl.
    /// </summary>
    /// <param name="precision">Präzisionskennung.</param>
-   /// <param name="jd">Julianische Tageszahl</param>
-   /// <returns>Ekliptikale Breite zur Präzisionskennung und zur julianischer Tageszahl.</returns>
-   public override double Beta(EPrecision precision, double jd){ return MSun.Longitude(precision, jd); }
+   /// <param name="jd">Julianische Tageszahl.</param>
+   /// <returns>Ekliptikale Breite zur Präzisionskennung und zur julianischen Tageszahl.</returns>
+   public override double Latitude(EPrecision precision, double jd){ return MSun.Latitude(precision, jd); }
 
-   // CSun.Lambda(EPrecision, double)
+   // CSun.Longitude(EPrecision, double)
    /// <summary>
-   /// Liefert die ekliptikale Länge zur Präzessionskennung und zur julianischer Tageszahl.
+   /// Liefert die ekliptikale Länge zur Präzessionskennung und zur julianischen Tageszahl.
    /// </summary>
    /// <param name="precision">Präzisionskennung.</param>
-   /// <param name="jd">Julianische Tageszahl</param>
-   /// <returns>ekliptikale Länge zur Präzessionskennung und zur julianischer Tageszahl.</returns>
-   public override double Lambda(EPrecision precision, double jd){ return MSun.Latitude(precision, jd); }
+   /// <param name="jd">Julianische Tageszahl.</param>
+   /// <returns>Ekliptikale Länge zur Präzessionskennung und zur julianischen Tageszahl.</returns>
+   public override double Longitude(EPrecision precision, double jd){ return MSun.Latitude(precision, jd); }
+
+   // CSun.Radius(EPrecision, double)
+   /// <summary>
+   /// Liefert den ekliptikalen Radius zur Präzessionskennung und zur julianischen Tageszahl.
+   /// </summary>
+   /// <param name="precision">Präzisionskennung.</param>
+   /// <param name="jd">Julianische Tageszahl.</param>
+   /// <returns>Ekliptikalee Radius zur Präzessionskennung und zur julianischen Tageszahl.</returns>
+   public override double Radius(EPrecision precision, double jd){ return MSun.Radius(precision, jd); }
 
    // CSun.SiderealPeriod
    /// <summary>

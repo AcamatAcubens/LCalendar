@@ -105,7 +105,7 @@ public static class MCalendar
 	/// </summary>
 	public const double EpochYazdegerd   = 1952062.5;
 
-	// MCalendar.MCalendar.Jdn20000101
+	// MCalendar.Jdn20000101
 	/// <summary>
 	/// Julianische Tageszahl zum 01.01.2000 12:00.
 	/// </summary>
@@ -125,12 +125,7 @@ public static class MCalendar
 	/// Liefert den Jahrhundertbruchteil zur aktuellen Systemzeit.
 	/// </summary>
 	/// <returns>Jahrhundertbruchteil zur aktuellen Systemzeit.</returns>
-	public static double CenturyFragment()
-	{
-		// Lokalen Felder einrichten und Jahrhundertbruchteil berechnen
-		double jd = DateTime.Now.ToJdn();
-		return MCalendar.CenturyFragment(jd);
-	}
+	public static double CenturyFragment(){ return MCalendar.CenturyFragment(DateTime.Now.ToJdn()); }
 
 	// MCalendar.CenturyFragment(double)
 	/// <summary>

@@ -2,6 +2,7 @@
 using Acamat.LMath;
 using Acamat.LMath.Geometry;
 using System;
+using System.Globalization;
 
 namespace Acamat.LCalendar;
 
@@ -22,6 +23,302 @@ public static partial class MMoon
 	/// </summary>
 	/// <returns> Dauer des anomalistischen Monats.</returns>
 	public static double AnomalisticMonth(){ return 27.55455; }
+
+	// MMoon.AppendEvent(List<CEvent>, double, double)
+	/// <summary>
+	/// Fügt die mondbezogenen Eregnisse zum Zeitraum an die Liste an.
+	/// </summary>
+	/// <param name="list">Liste.</param>
+	/// <param name="jdMin">Beginn des Zeitraums.</param>
+	/// <param name="jdMax">Ende des Zeitraums.</param>
+	public static void AppendEvent(List<CEvent> list, double jdMin, double jdMax)
+	{
+		// Lokale Felder
+		double       jdn = 0.0;
+		double       d   = 0.0;
+		int          r   = 0;
+		EEclipseType t;
+
+		// ------ //
+		// Apogee //
+		// ------ //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, d) = MMoon.Apogee(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Durchgang durch das Apogäum – Horizontparallaxe: {0}", d.ToString("N3", new CultureInfo("de-DE")))));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------------- //
+		// AscendingNode //
+		// ------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächste Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMoon.AscendingNode(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Mond: Durchgang durch den aufsteigenden Knoten"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// -------------- //
+		// DescendingNode //
+		// -------------- //
+
+		// Berechnunsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächsts Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMoon.DescendingNode(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Mond: Durchgang durch den absteigenden Knoten"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------------ //
+		// FirstQuarter //
+		// ------------ //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMoon.FirstQuarter(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Mond: Erstes Viertel"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// -------- //
+		// FullMoon //
+		// -------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, t) = MMoon.FullMoon(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+		
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Vollmond – Finsternisabschätzung: {0}", t.ToString())));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// -------------------------- //
+		// GreatesNorthernDeclination //
+		// -------------------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, d) = MMoon.GreatestNorthernDeclination(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Nördliche Mondwende – Deklination: {0}", d.ToString("N3", new CultureInfo("de-DE")))));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// --------------------------- //
+		// GreatestSouthernDeclination //
+		// --------------------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, d) = MMoon.GreatestSouthernDeclination(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+			
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Südliche Mondwende – Deklination: {0}", d.ToString("N3", new CultureInfo("de-DE")))));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ----------- //
+		// LastQuarter //
+		// ----------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MMoon.LastQuarter(jdn);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignusse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Mond: Letztes Viertel"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------- //
+		// NewMoon //
+		// ------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, t) = MMoon.NewMoon(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Neumond – Finsternisabschätzung: {0}", t.ToString())));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ------- //
+		// Perigee //
+		// ------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			(jdn, d) = MMoon.Perigee(jdn);
+			r        = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, string.Format("Mond: Durchgang durch das Perigäum – Horizontparallaxe: {0}", d.ToString("N3", new CultureInfo("de-DE")))));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+	}
 
 	// MMoon.Apogee()
 	/// <summary>
@@ -272,7 +569,6 @@ public static partial class MMoon
 	// MMoon.FirstQuarter(double)               » MMoon.Phase.cs
 	// MMoon.FullMoon()                         » MMoon.Phase.cs
 	// MMoon.FullMoon(double)                   » MMoon.Phase.cs
-	// MMoon.FullMoon(double, ref EEclipseType) » MMoon.Phase.cs
 
 	// MMoon.GreatestNorthernDeclination()
 	/// <summary>
@@ -607,9 +903,8 @@ public static partial class MMoon
 		throw new NotImplementedException("Die Methode ist für diese Genauigkeitskennung nicht implementiert.");
 	}
 
-	// MMoon.NewMoon()                     » MMoon.Phase.cs
-	// MMoon.NewMoon(double)               » MMoon.Phase.cs
-	// MMoon.NewMoon(double, EEclipseType) » MMoon.Phase.cs
+	// MMoon.NewMoon()       » MMoon.Phase.cs
+	// MMoon.NewMoon(double) » MMoon.Phase.cs
 
 	// MMoon.Perigee()
 	/// <summary>

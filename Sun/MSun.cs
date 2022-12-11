@@ -13,6 +13,137 @@ public static partial class MSun
 	// ------------------- //
 	// Felder und Methoden //
 	// ------------------- //
+	// MSun.AppendEvent(List<CEvent>, double, double)
+	/// <summary>
+	/// Fügt die sonnenbezogenen Eregnisse zum Zeitraum an die Liste an.
+	/// </summary>
+	/// <param name="list">Liste.</param>
+	/// <param name="jdMin">Beginn des Zeitraums.</param>
+	/// <param name="jdMax">Ende des Zeitraums.</param>
+	public static void AppendEvent(List<CEvent> list, double jdMin, double jdMax)
+	{
+		// Lokale Felder
+		double jdn = 0.0;
+		int    r   = 0;
+		int    y   = 0;
+
+		// --------------- //
+		// EquinoxOfAutumn //
+		// --------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		y   = MCalendar.GregorianYear(jdn);
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MSun.EquinoxOfAutumn(y++);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Sonne: Herbstäquinoktium"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// --------------- //
+		// EquinoxOfSpring //
+		// --------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		y   = MCalendar.GregorianYear(jdn);
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MSun.EquinoxOfSpring(y++);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+			
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Sonne: Frühlingsäquinoktium"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ---------------- //
+		// SolsticeOfSummer //
+		// ---------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		y   = MCalendar.GregorianYear(jdn);
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MSun.SolsticeOfSummer(y++);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verabeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Sonne: Sommersonnenwende"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+
+		// ---------------- //
+		// SolsticeOfWinter //
+		// ---------------- //
+
+		// Berechnungsschleife
+		jdn = jdMin;
+		y   = MCalendar.GregorianYear(jdn);
+		while(true)
+		{
+			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
+			jdn = MSun.SolsticeOfWinter(y++);
+			r   = jdn.CompareToInterval(jdMin, jdMax);
+
+			// Ereignisse vor dem Intervall verarbeiten
+			if(r == -1)
+				continue;
+
+			// Ereignisse im Intervall verarbeiten
+			if(r == 0)
+			{
+				// Ereignis an Liste anfügen und zum nächsten Durchlauf springen
+				list.Add(new(jdn, "Sonne: Wintersonnenwende"));
+				continue;
+			}
+
+			// Ereignis liegt nach dem Intervall --> Abbruch
+			break;
+		}
+	}
+
 	// MSun.Dawn(CPolar)
 	/// <summary>
 	/// Liefert die Ereigniskennung und die julianische Tageszahl der bürgerlichen Morgendämmerung am geographischen Ort und zum aktuellen Systemdatum.
