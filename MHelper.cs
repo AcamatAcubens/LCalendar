@@ -1,6 +1,5 @@
 using Acamat.LCore;
 using System;
-
 namespace Acamat.LCalendar;
 
 /// <summary>

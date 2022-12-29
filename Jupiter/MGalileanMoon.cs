@@ -54,36 +54,36 @@ public static class MGalileanMoon
 		// ---------- //
 
 		// Mittlere Längen berechnen
-		m_ML1 = MMath.ToRad(MMod.Mod(106.077187 + 203.48895579033 * m_d, 360.0));
-		m_ML2 = MMath.ToRad(MMod.Mod(175.731615 + 101.37472473479 * m_d, 360.0));
-		m_ML3 = MMath.ToRad(MMod.Mod(120.558829 +  50.31760920702 * m_d, 360.0));
-		m_ML4 = MMath.ToRad(MMod.Mod( 84.444587 +  21.57107117668 * m_d, 360.0));
+		m_ML1 = MMath.ToRad((106.077187 + 203.48895579033 * m_d).Mod(360.0));
+		m_ML2 = MMath.ToRad((175.731615 + 101.37472473479 * m_d).Mod(360.0));
+		m_ML3 = MMath.ToRad((120.558829 +  50.31760920702 * m_d).Mod(360.0));
+		m_ML4 = MMath.ToRad(( 84.444587 +  21.57107117668 * m_d).Mod(360.0));
 
 		// Perijovenlängen berechnen
-		m_LP1 = MMath.ToRad(MMod.Mod( 97.088086 +   0.16138586144 * m_d, 360.0));
-		m_LP2 = MMath.ToRad(MMod.Mod(154.866335 +   0.04726306609 * m_d, 360.0));
-		m_LP3 = MMath.ToRad(MMod.Mod(188.184037 +   0.00712733949 * m_d, 360.0));
-		m_LP4 = MMath.ToRad(MMod.Mod(335.286807 +   0.00183999637 * m_d, 360.0));
+		m_LP1 = MMath.ToRad(( 97.088086 +   0.16138586144 * m_d).Mod(360.0));
+		m_LP2 = MMath.ToRad((154.866335 +   0.04726306609 * m_d).Mod(360.0));
+		m_LP3 = MMath.ToRad((188.184037 +   0.00712733949 * m_d).Mod(360.0));
+		m_LP4 = MMath.ToRad((335.286807 +   0.00183999637 * m_d).Mod(360.0));
 
 		// Knotenlängen berechnen
-		m_LO1 = MMath.ToRad(MMod.Mod(312.334566 -   0.13279385940 * m_d, 360.0));
-		m_LO2 = MMath.ToRad(MMod.Mod(100.441116 -   0.03263063731 * m_d, 360.0));
-		m_LO3 = MMath.ToRad(MMod.Mod(119.194241 -   0.00717703155 * m_d, 360.0));
-		m_LO4 = MMath.ToRad(MMod.Mod(322.618633 -   0.00175933880 * m_d, 360.0));
+		m_LO1 = MMath.ToRad((312.334566 -   0.13279385940 * m_d).Mod(360.0));
+		m_LO2 = MMath.ToRad((100.441116 -   0.03263063731 * m_d).Mod(360.0));
+		m_LO3 = MMath.ToRad((119.194241 -   0.00717703155 * m_d).Mod(360.0));
+		m_LO4 = MMath.ToRad((322.618633 -   0.00175933880 * m_d).Mod(360.0));
 
 		// Korrektur der Jupiterlänge berechnen
 		m_G0  = 0.33033 * MMath.Sin(MMath.ToRad(163.679 + 0.0010512 * m_d));
 		m_G0 += 0.03439 * MMath.Sin(MMath.ToRad( 34.486 - 0.0161731 * m_d));
 
 		// Phase der freien Libration berechnen
-		m_Phi = MMath.ToRad(MMod.Mod(199.676608 + 0.17379190461 * m_d, 360.0));
+		m_Phi = MMath.ToRad((199.676608 + 0.17379190461 * m_d).Mod(360.0));
 
 		// Knotenlänge des Jupiteräquator berechnen
-		m_Psi = MMath.ToRad(MMod.Mod(316.518203 + 0.00000208362 * m_d, 360.0));
+		m_Psi = MMath.ToRad((316.518203 + 0.00000208362 * m_d).Mod(360.0));
 
 		// Mittlere Anomalien berechnen
-		m_G1  = MMath.ToRad(MMod.Mod( 30.237557 + 0.08309257010 * m_d + m_G0, 360.0));
-		m_G2  = MMath.ToRad(MMod.Mod( 31.978528 + 0.03345973390 * m_d,        360.0));
+		m_G1  = MMath.ToRad(( 30.237557 + 0.08309257010 * m_d + m_G0).Mod(360.0));
+		m_G2  = MMath.ToRad(( 31.978528 + 0.03345973390 * m_d       ).Mod(360.0));
 
 		// Länge des Perihels berechnen
 		m_Pi  = MMath.ToRad(13.469942);

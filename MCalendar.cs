@@ -143,7 +143,7 @@ public static class MCalendar
 	/// <param name="weekDay">Kennung zum Wochentag.</param>
 	/// <param name="n">Ordinalzahl.</param>
 	/// <returns>Julianische Tageszahl des n-ten Wochentages nach der julianischen Tageszahl.</returns>
-	public static double DayAfter(double jd, EWeekDay weekDay, int n){ return jd - MMod.Mod(MCalendar.DayOfWeek(jd) - weekDay, 7.0) + 7.0 * n; }
+	public static double DayAfter(double jd, EWeekDay weekDay, int n){ return jd - (double)(MCalendar.DayOfWeek(jd) - weekDay).Mod(7) + 7 * n; }
 
 	// MCalendar.DayBefore(double, EWeekDay, int)
 	/// <summary>
@@ -153,7 +153,7 @@ public static class MCalendar
 	/// <param name="weekDay">Kennung zum Wochentag.</param>
 	/// <param name="n">Ordinalzahl.</param>
 	/// <returns>Julianische Tageszahl des n-ten Wochentages vor der julianischen Tageszahl.</returns>
-	public static double DayBefore(double jd, EWeekDay weekDay, int n){ return jd + MMod.Mod(weekDay - MCalendar.DayOfWeek(jd), 7.0) - 7.0 * n; }
+	public static double DayBefore(double jd, EWeekDay weekDay, int n){ return jd + (double)(weekDay - MCalendar.DayOfWeek(jd)).Mod(7) - 7 * n; }
 
 	// MCalendar.DayNearest(double, EWeekDayList)
 	/// <summary>
@@ -188,7 +188,7 @@ public static class MCalendar
 	/// <param name="weekDay">Kennung des Wochentags.</param>
 	/// <param name="n">Anzahl.</param>
 	/// <returns>Julianische Tageszahl des n-ten Wochentages zur oder nach dem julianischen Datum.</returns>
-	public static double DayOnOrAfter(double jd, EWeekDay weekDay, int n){ return jd + MMod.Mod(weekDay - MCalendar.DayOfWeek(jd), 7.0) + 7.0 * (n - 1); }
+	public static double DayOnOrAfter(double jd, EWeekDay weekDay, int n){ return jd + (double)(weekDay - ((int)MCalendar.DayOfWeek(jd)).Mod(7) + 7 * (n - 1)); }
 
 	// MCalendar.DayOnOrBefore(double, EWeekDayList, int)
 	/// <summary>
@@ -198,7 +198,7 @@ public static class MCalendar
 	/// <param name="weekDay">Kennung des Wochentags.</param>
 	/// <param name="n">Anzahl.</param>
 	/// <returns>Julianische Tageszahl des n-ten Wochentages zur oder vor dem julianischen Datum.</returns>
-	public static double DayOnOrBefore(double jd, EWeekDay weekDay, int n){ return jd - MMod.Mod(MCalendar.DayOfWeek(jd) - weekDay, 7.0) - 7.0 * (n - 1); }
+	public static double DayOnOrBefore(double jd, EWeekDay weekDay, int n){ return jd - (double)((int)MCalendar.DayOfWeek(jd) - (int)weekDay).Mod(7) - 7 * (n - 1); }
 
 	// MCalendar.DaysElapsed(double)
 	/// <summary>
@@ -833,12 +833,12 @@ public static class MCalendar
 		// Lokale Felder einrichten
 		double D0   = jd - MCalendar.EpochGregorian;
 		double N400 = MMath.Floor(D0 / 146097.0);
-		double D1   = MMod .Mod  (D0,  146097.0);
-		double N100 = MMath.Floor(D1 /  36524.0);
-		double D2   = MMod .Mod  (D1,   36524.0);
-		double N4   = MMath.Floor(D2 /   1461.0);
-		double D3   = MMod .Mod  (D2,    1461.0);
-		double N1   = MMath.Floor(D3 /    365.0);
+		double D1   =             D0.Mod(146097.0);
+		double N100 = MMath.Floor(D1 /    36524.0);
+		double D2   =             D1.Mod( 36524.0);
+		double N4   = MMath.Floor(D2 /     1461.0);
+		double D3   =             D2.Mod(  1461.0);
+		double N1   = MMath.Floor(D3 /      365.0);
 
 		// Jahreszahl berechnen
 		return (int)(400.0 * N400 + 100.0 * N100 + 4.0 * N4 + N1 + ((N100 == 4.0 || N1 == 4.0) ? 0.0 : 1.0));
@@ -874,7 +874,7 @@ public static class MCalendar
 		int    D = 29 * (int)M + (int)MMath.Floor(P / 25920.0);
 
 		// Anzahl berechnen
-		return D + ((int)MMod.Mod(3.0 * (double)(D + 1), 7.0) < 3 ? 1 : 0);
+		return D + 3 * (D + 1).Mod(7) < 3 ? 1 : 0;
 	}
 
 	// MCalendar.HebrewDaysInYear(int)
@@ -943,7 +943,7 @@ public static class MCalendar
 			case 12:
 				return MCalendar.IsLeapYearHebrew(year) ? 30 : 29;
 		}
-		throw new InvalidArgumentException("Ungültiger jüdischer Monat.");
+		throw new ArgumentException("Ungültiger jüdischer Monat.");
 	}
 
 	// MCalendar.HebrewLastMonthOfYear(int)
@@ -1034,7 +1034,7 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="year">Koptische Jahreszahl.</param>
 	/// <returns>TRUE, falls das koptische Jahr ein Schaltjahr ist.</returns>
-	public static bool IsLeapYearCoptic(int year){ return MMod.Mod(year, 4.0) == 3.0; }
+	public static bool IsLeapYearCoptic(int year){ return year.Mod(4) == 3; }
 
 	// MCalendar.IsLeapYearEthiopic(int)
 	/// <summary>
@@ -1042,7 +1042,7 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="year">Äthiopische Jahreszahl.</param>
 	/// <returns>TRUE, falls das äthiopische Jahr ein Schaltjahr ist.</returns>
-	public static bool IsLeapYearEthiopic(int year){ return MMod.Mod(year, 4.0) == 3.0; }
+	public static bool IsLeapYearEthiopic(int year){ return year.Mod(4) == 3; }
 
 	// MCalendar.IsLeapYearHebrew(int)
 	/// <summary>
@@ -1050,7 +1050,7 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="year">Jüdische Jahreszahl.</param>
 	/// <returns>TRUE, falls das jüdische Jahr ein Schaltjahr ist.</returns>
-	public static bool IsLeapYearHebrew(int year){ return MMod.Mod((7.0 * year + 1.0), 19.0) < 7.0; }
+	public static bool IsLeapYearHebrew(int year){ return (7.0 * year + 1.0).Mod(19.0) < 7; }
 
 	// MCalendar.IsLeapYearIslamic(int)
 	/// <summary>
@@ -1058,7 +1058,7 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="year">Islamische Jahreszahl.</param>
 	/// <returns>TRUE, falls das islamische Jahr ein Schaltjahr ist.</returns>
-	public static bool IsLeapYearIslamic(int year){ return MMod.Mod(14.0 + 11.0 * (double)year, 30.0) < 11.0; }
+	public static bool IsLeapYearIslamic(int year){ return (14.0 + 11.0 * (double)year).Mod(30.0) < 11.0; }
 
 	// MCalendar.IsLeapYearJulian(int)
 	/// <summary>
@@ -1066,7 +1066,7 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="year">Julianische Jahreszahl.</param>
 	/// <returns>TRUE, falls das julianische Jahr ein Schaltjahr ist.</returns>
-	public static bool IsLeapYearJulian(int year){ return (year > 0) ? MMod.Mod((double)year, 4.0) == 0.0 : MMod.Mod((double)year, 4.0) == 3.0; }
+	public static bool IsLeapYearJulian(int year){ return (year > 0) ? year.Mod(4) == 0 : year.Mod(4) == 3; }
 
 	// MCalendar.IsoCalendarWeek(double)
 	/// <summary>
@@ -1137,7 +1137,7 @@ public static class MCalendar
 		}
 
 		// Ausnahme auslösen
-		throw new InvalidArgumentException(string.Format("Die Monatszahl '{0}' ist ungültig.", month));
+		throw new ArgumentException(string.Format("Die Monatszahl '{0}' ist ungültig.", month));
 	}
 
 	// MCalendar.NewYear(int)
@@ -1153,7 +1153,7 @@ public static class MCalendar
 	/// Liefert das armenischen Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Armenisches Datum zum heutigen Tag.</returns>
-	public static CDate ToArmenian(){ return MCalendar.ToArmenian(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToArmenian(){ return MCalendar.ToArmenian(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToArmenian(double)
 	/// <summary>
@@ -1165,9 +1165,11 @@ public static class MCalendar
 	{
 		// Lokale Felder einrichten
 		int N = (int)MMath.Floor(jd - MCalendar.EpochArmenian);
-		int Y = (int)MMath.Floor(N / 365.0) + 1;
-		int M = (int)MMath.Floor(MMod.Mod(N, 365.0) / 30.0) + 1;
+		int Y = (int)MMath.Floor((double)N / 365.0) + 1;
+		int M = (int)MMath.Floor(((double)N).Mod(365.0) / 30.0) + 1;
 		int D = N - 365 * (Y - 1) - 30 * (M - 1) + 1;
+
+
 
 		// Rückgabe
 		return new(Y, M, D);
@@ -1178,7 +1180,7 @@ public static class MCalendar
 	/// Liefert das koptische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Koptisches Datum zum heutigen Tag.</returns>
-	public static CDate ToCoptic(){ return MCalendar.ToCoptic(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToCoptic(){ return MCalendar.ToCoptic(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToCoptic(double)
 	/// <summary>
@@ -1246,7 +1248,7 @@ public static class MCalendar
 	/// Liefert das ägyptische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Ägyptisches Datum zum heutigen Tag.</returns>
-	public static CDate ToEgytian(){ return MCalendar.ToEgytian(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToEgytian(){ return MCalendar.ToEgytian(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToEgytian(double)
 	/// <summary>
@@ -1258,8 +1260,8 @@ public static class MCalendar
 	{
 		// Lokale Felder einrichten
 		int N = (int)MMath.Floor(jd - MCalendar.EpochEgyptian);
-		int Y = (int)MMath.Floor(N / 365.0) + 1;
-		int M = (int)MMath.Floor(MMod.Mod(N, 365.0) / 30.0) + 1;
+		int Y = (int)MMath.Floor((double)N / 365.0) + 1;
+		int M = (int)MMath.Floor(((double)N).Mod(365.0) / 30.0) + 1;
 		int D = N - 365 * (Y - 1) - 30 * (M - 1) + 1;
 
 		// Rückgabe
@@ -1271,7 +1273,7 @@ public static class MCalendar
 	/// Liefert das äthiopische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Äthiopisches Datum zum heutigen Tag.</returns>
-	public static CDate ToEthiopic(){ return MCalendar.ToEthiopic(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToEthiopic(){ return MCalendar.ToEthiopic(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToEthiopic(double)
 	/// <summary>
@@ -1295,7 +1297,7 @@ public static class MCalendar
 	/// Liefert das gregorianische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Gregorianisches Datum zum heutigen Tag.</returns>
-	public static CDate ToGregorian(){ return MCalendar.ToGregorian(MCalendar.FromGregorian(new CDate(DateTime.Today)));	}
+	public static CDate ToGregorian(){ return MCalendar.ToGregorian(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToGregorian(double)
 	/// <summary>
@@ -1325,7 +1327,7 @@ public static class MCalendar
 	/// Liefert das jüdische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Jüdisches Datum zum heutigen Tag.</returns>
-	public static CDate ToHebrew(){ return MCalendar.ToHebrew(MCalendar.FromGregorian(new CDate(DateTime.Today)));	}
+	public static CDate ToHebrew(){ return MCalendar.ToHebrew(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToHebrew(double)
 	/// <summary>
@@ -1354,7 +1356,7 @@ public static class MCalendar
 	/// Liefert das islamische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Islamisches Datum zum heutigen Tag.</returns>
-	public static CDate ToIslamic(){ return MCalendar.ToIslamic(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToIslamic(){ return MCalendar.ToIslamic(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToIslamic(double)
 	/// <summary>
@@ -1380,14 +1382,14 @@ public static class MCalendar
 	/// </summary>
 	/// <param name="value">Datum.</param>
 	/// <returns>Julianische Tageszahl zum Datum.</returns>
-	public static double ToJdn(this DateOnly value){ return MCalendar.FromGregorian(value.Year, value.Month, value.Day); }
+	public static double ToJdn(this DateOnly item){ return MCalendar.FromGregorian(item.Year, item.Month, item.Day); }
 
 	// MCalendar.ToJulian()
 	/// <summary>
 	/// Liefert die julianische Tageszahl zum heutigen Tag.
 	/// </summary>
 	/// <returns>Julianische Tageszahl zum heutigen Tag.</returns>
-	public static CDate ToJulian(){ return MCalendar.ToJulian(MCalendar.FromGregorian(new CDate(DateTime.Today)));	}
+	public static CDate ToJulian(){ return MCalendar.ToJulian(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly())));	}
 
 	// MCalendar.ToJulian(double)
 	/// <summary>
@@ -1415,18 +1417,18 @@ public static class MCalendar
 
 	// MCalendar.ToTime(double)
 	/// <summary>
-	/// Liefert die Zeit zur julianischen Tageszahl.
+	/// Liefert das TimeOnly zur julianischen Tageszahl.
 	/// </summary>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Zeit zur julianischen Tageszahl..</returns>
 	public static TimeOnly ToTime(double jd)
 	{
 		// Lokale Felder einrichten
-		double P = MMod.Mod((jd - 0.5).Round(0) * (double)Dbl_SecondsPerDay, (double)Dbl_SecondsPerDay);
+		double P = ((jd - 0.5).Round() * Dbl_SecondsPerDay).Mod(Dbl_SecondsPerDay);
 		int    H = (int)(MMath.Floor(P / 3600.0));
-		P        = MMod.Mod(P, 3600.0);
+		P        = P.Mod(3600.0);
 		int    M = (int)(MMath.Floor(P / 60.0));
-		int    S = (int)(MMod .Mod(P, 60.0));
+		int    S = (int)P.Mod(60.0);
 
 		// Rückgabe
 		return new(H, M, S);
@@ -1437,7 +1439,7 @@ public static class MCalendar
 	/// Liefert das yazdegerdische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Yazdegerdisches Datum zum heutigen Tag.</returns>
-	public static CDate ToYazdegerd(){ return MCalendar.ToYazdegerd(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToYazdegerd(){ return MCalendar.ToYazdegerd(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToYazdegerd(double)
 	/// <summary>
@@ -1449,8 +1451,8 @@ public static class MCalendar
 	{
 		// Lokale Felder einrichten
 		int N = (int)MMath.Floor(jd - MCalendar.EpochYazdegerd);
-		int Y = (int)MMath.Floor(N / 365.0) + 1;
-		int M = (int)MMath.Floor(MMod.Mod(N, 365.0) / 30.0) + 1;
+		int Y = (int)MMath.Floor((double)N / 365.0) + 1;
+		int M = (int)MMath.Floor(((double)N).Mod(365.0) / 30.0) + 1;
 		int D = N - 365 * (Y - 1) - 30 * (Y - 1) + 1;
 
 		// Rückgabe
@@ -1462,7 +1464,7 @@ public static class MCalendar
 	/// Liefert das zoroastrische Datum zum heutigen Tag.
 	/// </summary>
 	/// <returns>Zoroastrisches Datum zum heutigen Tag.</returns>
-	public static CDate ToZoroastrian(){ return MCalendar.ToZoroastrian(MCalendar.FromGregorian(new CDate(DateTime.Today))); }
+	public static CDate ToZoroastrian(){ return MCalendar.ToZoroastrian(MCalendar.FromGregorian(new CDate(DateTime.Today.ToDateOnly()))); }
 
 	// MCalendar.ToZoroastrian(double)
 	/// <summary>
@@ -1474,8 +1476,8 @@ public static class MCalendar
 	{
 		// Lokale Felder einrichten
 		int N = (int)MMath.Floor(jd - MCalendar.EpochZoroastrian);
-		int Y = (int)MMath.Floor(N / 365.0) + 1;
-		int M = (int)MMath.Floor(MMod.Mod(N, 365.0) / 30.0) + 1;
+		int Y = (int)MMath.Floor((double)N / 365.0) + 1;
+		int M = (int)MMath.Floor(((double)N).Mod(365.0) / 30.0) + 1;
 		int D = N - 365 * (Y - 1) - 30 * (M - 1) + 1;
 
 		// Rückgabe

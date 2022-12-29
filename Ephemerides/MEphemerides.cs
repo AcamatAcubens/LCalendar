@@ -210,7 +210,7 @@ public static partial class MEphemerides
 	/// <param name="positionA">Position A.</param>
 	/// <param name="positionB">Position B.</param>
 	/// <returns>Winkelabstand und den Positionswinel zweier äquatorialer Positionen.</returns>
-	public static (double distance, double angle) AngularSeparation(CPolar positionA, CPolar positionB){ return MEphemerides.AngularSeparation(positionA.Longitude, positionA.Latitude, positionB.Longitude, positionB.Latitude); }
+	public static (double distance, double theta) AngularSeparation(CPolar positionA, CPolar positionB){ return MEphemerides.AngularSeparation(positionA.Longitude, positionA.Latitude, positionB.Longitude, positionB.Latitude); }
 
 	// MEphemerides.AngularSeparation(double, double, double, double)
 	/// <summary>
@@ -221,10 +221,10 @@ public static partial class MEphemerides
 	/// <param name="alphaB">Rektaszension zur Position B.</param>
 	/// <param name="deltaB">Deklination zur Position B.</param>
 	/// <returns>Winkelabstand und den Positionswinkel zweier äquatorialer Positionen.</returns>
-	public static (double distance, double angle) AngularSeparation(double alphaA, double deltaA, double alphaB, double deltaB)
+	public static (double distance, double theta) AngularSeparation(double alphaA, double deltaA, double alphaB, double deltaB)
 	{
 		// Lokalen Felder einrichten
-		// TODO: MEphemerides.AngularSeparation(double, double, double, double, ref double): Verwendung der Winkelwandelungsfunktionen prüfen.
+		// TODO: MEphemerides.AngularSeparation(double, double, double, double): Verwendung der Winkelwandelungsfunktionen prüfen.
 		double cosdA = MMath.Cos(alphaB - alphaA);
 		double sindA = MMath.Sin(alphaB - alphaA);
 		double cosD1 = MMath.Cos(deltaA);
@@ -310,13 +310,13 @@ public static partial class MEphemerides
 
 		// Hilfsfelder einrichten
 		double t  = (jd - MCalendar.Jdn20000101) / 365250.0;
-		double l0 = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 280.4664567, 360007.6982779, 0.03032028, 1/49931, -1/15300, -1/2000000)), MMath.Pi2);
+		double l0 = (MMath.ToRad(MMath.Polynome(t, 280.4664567, 360007.6982779, 0.03032028, 1/49931, -1/15300, -1/2000000))).Mod(MMath.Pi2);
 		if(l0 < 0.0) l0 += MMath.Pi2;
 
 		// Werte für Nutation berechnen
 		double p   = MEphemerides.NutationInLongitude(jd);
 		double eps = MEphemerides.ObliquityTrue(jd);
-		double e   = MMod.Mod(l0 - 0.000099803 - a + p * MMath.Cos(eps), MMath.Pi2);
+		double e   = (l0 - 0.000099803 - a + p * MMath.Cos(eps)).Mod(MMath.Pi2);
 
 		// Winkel normalisieren
 		if(e < 0.0) e += MMath.Pi2;
@@ -368,7 +368,7 @@ public static partial class MEphemerides
 		double th0 = 360.0 * MMath.Polynome(t0, 24110.548410, 8640184.812866, 0.093104, -0.000006) / MCalendar.SecondsPerDay;
 
 		// Rückgabe
-		return MMath.ToRad(MMod.Mod(th0 + 1.00273790935 * 360.0 * (jd - jd0), 360.0));
+		return MMath.ToRad((th0 + 1.00273790935 * 360.0 * (jd - jd0)).Mod(360.0));
 	}
 
 	// MEphemerides.HeightOfEcliptic(CPolar)
@@ -484,7 +484,7 @@ public static partial class MEphemerides
 	{
 		// Lokalen Felder einrichten und Winkel berechnen
 		double t   = MEphemerides.Gmst(jd);
-		double lha = MMod.Mod(t - lambda - alpha, MMath.Pi2);
+		double lha = (t - lambda - alpha).Mod(MMath.Pi2);
 
 		// Winkel normalisieren
 		if(lha < 0.0) lha += MMath.Pi2;
@@ -981,7 +981,7 @@ public static partial class MEphemerides
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m  = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
+		double m  = ((a0 + lambda - t0 - H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1154,7 +1154,7 @@ public static partial class MEphemerides
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
+		double m = ((a0 + lambda - t0 + H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -1483,10 +1483,10 @@ public static partial class MEphemerides
 	public static string ToStringZodiac(double lambda)
 	{
 		// Lokale Felder einrichten
-		double        lng = MMath.ToDeg(lambda);
-		int           sng = (int)MMath.Int(lng / 30.0) + 1;
-		int           dgr = (int)MMod .Mod(lng , 30.0);
-		int           mnt = (int)MMath.Round(MMod.Mod(lng * 60.0, 60.0));
+		double        lmb = MMath.ToDeg(lambda);
+		int           sng = (int) MMath.Int(lmb / 30.0) + 1;
+		int           dgr = (int) lmb.Mod(30.0).Round();
+		int           mnt = (int)(lmb * 60.0).Mod(60.0).Round();
 		StringBuilder rtn = new StringBuilder();
 
 		// Überlauf verarbeiten
@@ -1497,20 +1497,22 @@ public static partial class MEphemerides
 		// Nach Tierkreiszeichen unterscheiden
 		switch(sng)
 		{
-			case  1: rtn.AppendFormat("{0:00}ARI{1:00}", dgr, mnt); break;
-			case  2: rtn.AppendFormat("{0:00}TAU{1:00}", dgr, mnt); break;
-			case  3: rtn.AppendFormat("{0:00}GEM{1:00}", dgr, mnt); break;
-			case  4: rtn.AppendFormat("{0:00}CNC{1:00}", dgr, mnt); break;
-			case  5: rtn.AppendFormat("{0:00}LEO{1:00}", dgr, mnt); break;
-			case  6: rtn.AppendFormat("{0:00}VIR{1:00}", dgr, mnt); break;
-			case  7: rtn.AppendFormat("{0:00}LIB{1:00}", dgr, mnt); break;
-			case  8: rtn.AppendFormat("{0:00}SCO{1:00}", dgr, mnt); break;
-			case  9: rtn.AppendFormat("{0:00}SGR{1:00}", dgr, mnt); break;
-			case 10: rtn.AppendFormat("{0:00}CAP{1:00}", dgr, mnt); break;
-			case 11: rtn.AppendFormat("{0:00}AQR{1:00}", dgr, mnt); break;
-			case 12: rtn.AppendFormat("{0:00}PSC{1:00}", dgr, mnt); break;
+			case  1: return rtn.AppendFormat("{0:00}ARI{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  2: return rtn.AppendFormat("{0:00}TAU{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  3: return rtn.AppendFormat("{0:00}GEM{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  4: return rtn.AppendFormat("{0:00}CNC{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  5: return rtn.AppendFormat("{0:00}LEO{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  6: return rtn.AppendFormat("{0:00}VIR{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  7: return rtn.AppendFormat("{0:00}LIB{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  8: return rtn.AppendFormat("{0:00}SCO{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case  9: return rtn.AppendFormat("{0:00}SGR{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case 10: return rtn.AppendFormat("{0:00}CAP{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case 11: return rtn.AppendFormat("{0:00}AQR{1:00}", dgr.ToString(), mnt.ToString()).ToString();
+			case 12: return rtn.AppendFormat("{0:00}PSC{1:00}", dgr.ToString(), mnt.ToString()).ToString();
 		}
-		return rtn.ToString();
+
+		// Ausnahme auslösen
+		throw new UnexpectedCodePathException();
 	}
 
 	// MEphemerides.Transit(CPolar, CPolar)
@@ -1558,7 +1560,7 @@ public static partial class MEphemerides
 		// Lokalen Felder einrichten
 		double jdn = MMath.Floor(jd - 0.5) + 0.5;
 		double t0  = MEphemerides.Gmst(jdn);
-		double m   = MMath.Div((alpha + lambda - t0) / MMath.Pi2);
+		double m   = ((alpha + lambda - t0) / MMath.Pi2).Div();
 
 		// Kein Ereignis verarbeiten
 		if(m < 0.0 | m >= 1.0)
@@ -1643,14 +1645,14 @@ public static partial class MEphemerides
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m  = MMath.Div((aP + lambda - t0) / MMath.Pi2);
+		double m  = (aP + lambda - t0 / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);
-			dm = MMath.Div((a + lambda - t0 - 6.300388093 * m) / MMath.Pi2);
+			dm = ((a + lambda - t0 - 6.300388093 * m) / MMath.Pi2).Div();
 			if(MMath.Abs(dm) > 0.5)
 				dm -= MMath.Sgn(dm);
 			m += dm;

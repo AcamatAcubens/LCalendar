@@ -38,7 +38,7 @@ public static partial class MMoon
 	{
 		// Lokale Felder einrichten
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		double l = MMod.Mod(218.32 + 481267.883 * t, 360.0);
+		double l = (218.32 + 481267.883 * t).Mod(360.0);
 
 		// Terme aufsummieren
 		l +=  6.29 * MMath.Sin(MMath.ToRad(134.9 + 477198.85 * t));
@@ -47,7 +47,7 @@ public static partial class MMoon
 		l +=  0.21 * MMath.Sin(MMath.ToRad(269.9 + 954397.70 * t));
 		l += -0.19 * MMath.Sin(MMath.ToRad(357.5 +  35999.05 * t));
 		l += -0.11 * MMath.Sin(MMath.ToRad(186.6 + 966404.05 * t));
-		return MMath.ToRad(MMod.Mod(l, 360.0));
+		return MMath.ToRad(l.Mod(360.0));
 	}
 
 	// MMoon.LongitudeMedium(double)
@@ -61,16 +61,16 @@ public static partial class MMoon
 		// Lokale Felder einrichten
 		double t  = (jd - MCalendar.Jdn20000101) / 36525.0;
 		double dl = 0.0;
-		double l  = MMath.ToRad(MMod.Mod(MMath.Polynome(t, 218.3164477, 481267.88123421, -0.0015786, 1/  538841, -1/ 65194000), 360.0));
-		double d  = MMath.ToRad(MMod.Mod(MMath.Polynome(t, 297.8501921, 445267.1114034 , -0.0018819, 1/  545868, -1/113065000), 360.0));
-		double s  = MMath.ToRad(MMod.Mod(MMath.Polynome(t, 357.5291092,  35999.0502909 , -0.0001536, 1/24490000              ), 360.0));
-		double m  = MMath.ToRad(MMod.Mod(MMath.Polynome(t, 134.9633964, 477198.8675055 ,  0.0087414, 1/   69699, -1/ 14712000), 360.0));
-		double f  = MMath.ToRad(MMod.Mod(MMath.Polynome(t,  93.2720950, 483202.0175233 , -0.0036539, 1/ 3526000,  1/863310000), 360.0));
+		double l  = MMath.ToRad(MMath.Polynome(t, 218.3164477, 481267.88123421, -0.0015786, 1/  538841, -1/ 65194000).Mod(360.0));
+		double d  = MMath.ToRad(MMath.Polynome(t, 297.8501921, 445267.1114034 , -0.0018819, 1/  545868, -1/113065000).Mod(360.0));
+		double s  = MMath.ToRad(MMath.Polynome(t, 357.5291092,  35999.0502909 , -0.0001536, 1/24490000              ).Mod(360.0));
+		double m  = MMath.ToRad(MMath.Polynome(t, 134.9633964, 477198.8675055 ,  0.0087414, 1/   69699, -1/ 14712000).Mod(360.0));
+		double f  = MMath.ToRad(MMath.Polynome(t,  93.2720950, 483202.0175233 , -0.0036539, 1/ 3526000,  1/863310000).Mod(360.0));
 
 		// Störungen durch Planeten Jupiter, Venus und Erde
-		double a1 = MMath.ToRad(MMod.Mod(119.75 +    131.849 * t, 360.0));
-		double a2 = MMath.ToRad(MMod.Mod( 53.09 + 479264.290 * t, 360.0));
-		double a3 = MMath.ToRad(MMod.Mod(313.45 + 481266.848 * t, 360.0));
+		double a1 = MMath.ToRad((119.75 +    131.849 * t).Mod(360.0));
+		double a2 = MMath.ToRad(( 53.09 + 479264.290 * t).Mod(360.0));
+		double a3 = MMath.ToRad((313.45 + 481266.848 * t).Mod(360.0));
 
 		// Terme für Extentrizität
 		double e0 = 1.0;
@@ -144,7 +144,7 @@ public static partial class MMoon
 		dl +=  318 * MMath.Sin(a2);
 
 		// Terme anwenden und Länge normalisieren
-		return MMath.ToRad(MMod.Mod(l + dl / 1000000.0, 360.0));
+		return MMath.ToRad((l + dl / 1000000.0).Mod(360.0));
 	}
 
 	// MMoon.RadiusLow(double)

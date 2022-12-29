@@ -43,10 +43,10 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451550.09766 + 29.530588861 * k, 0.0, 0.00015437, -0.000000150, 0.00000000073);
 			double e1 = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
 			double e2 = e1 * e1;
-			double m  = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              )), MMath.Pi2);
-			double a  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058)), MMath.Pi2);
-			double f  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011)), MMath.Pi2);
-			double o  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              )), MMath.Pi2);
+			double m  = (MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              ))).Mod(MMath.Pi2);
+			double a  = (MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058))).Mod(MMath.Pi2);
+			double f  = (MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011))).Mod(MMath.Pi2);
+			double o  = (MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              ))).Mod(MMath.Pi2);
 			double h  = 0.0;
 
 			// Korrektur berechnen
@@ -140,10 +140,10 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451550.09766 + 29.530588861 * k, 0.0, 0.00015437, -0.000000150, 0.00000000073);
 			double e1 = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
 			double e2 = e1 * e1;
-			double m  = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              )), MMath.Pi2);
-			double a  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058)), MMath.Pi2);
-			double f  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011)), MMath.Pi2);
-			double o  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              )), MMath.Pi2);
+			double m  = (MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              ))).Mod(MMath.Pi2);
+			double a  = (MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058))).Mod(MMath.Pi2);
+			double f  = (MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011))).Mod(MMath.Pi2);
+			double o  = (MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              ))).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen
@@ -237,10 +237,10 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451550.09766 + 29.530588861 * k, 0.0, 0.00015437, -0.000000150, 0.00000000073);
 			double e1 = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
 			double e2 = e1 * e1;
-			double m  = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              )), MMath.Pi2);
-			double a  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058)), MMath.Pi2);
-			double f  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011)), MMath.Pi2);
-			double o  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              )), MMath.Pi2);
+			double m  = (MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              ))).Mod(MMath.Pi2);
+			double a  = (MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058))).Mod(MMath.Pi2);
+			double f  = (MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011))).Mod(MMath.Pi2);
+			double o  = (MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              ))).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen
@@ -334,10 +334,10 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451550.09766 + 29.530588861 * k, 0.0, 0.00015437, -0.000000150, 0.00000000073);
 			double e1 = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
 			double e2 = e1 * e1;
-			double m  = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              )), MMath.Pi2);
-			double a  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058)), MMath.Pi2);
-			double f  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011)), MMath.Pi2);
-			double o  = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              )), MMath.Pi2);
+			double m  = (MMath.ToRad(MMath.Polynome(t,   2.5534 +  29.10535670 * k, 0.0, -0.0000014, -0.00000011              ))).Mod(MMath.Pi2);
+			double a  = (MMath.ToRad(MMath.Polynome(t, 201.5643 + 385.81693528 * k, 0.0,  0.0107582,  0.00001238, -0.000000058))).Mod(MMath.Pi2);
+			double f  = (MMath.ToRad(MMath.Polynome(t, 160.7108 + 390.67050284 * k, 0.0, -0.0016118, -0.00000227,  0.000000011))).Mod(MMath.Pi2);
+			double o  = (MMath.ToRad(MMath.Polynome(t, 124.7746 -   1.56375588 * k, 0.0,  0.0020672,  0.00000215              ))).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen

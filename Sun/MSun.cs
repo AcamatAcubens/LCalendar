@@ -38,7 +38,7 @@ public static partial class MSun
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MSun.EquinoxOfAutumn(y++);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -67,7 +67,7 @@ public static partial class MSun
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MSun.EquinoxOfSpring(y++);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -96,7 +96,7 @@ public static partial class MSun
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MSun.SolsticeOfSummer(y++);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verabeiten
 			if(r == -1)
@@ -125,7 +125,7 @@ public static partial class MSun
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MSun.SolsticeOfWinter(y++);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -233,7 +233,7 @@ public static partial class MSun
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m = MMath.Div((a0 + lambda - t0 - H) / MMath.Pi2);
+		double m = ((a0 + lambda - t0 - H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -344,7 +344,7 @@ public static partial class MSun
 
 		// Sternzeit und Stundenwinkel zum gegebenen Zeitpunkt bestimmen
 		double t0 = MEphemerides.Gmst(jdn);
-		double m  = MMath.Div((a0 + lambda - t0 + H) / MMath.Pi2);
+		double m  = ((a0 + lambda - t0 + H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
 		while(MMath.Abs(dm) >= 0.0001)
@@ -470,7 +470,7 @@ public static partial class MSun
 	/// <param name="value">Genauigkeitskennung.</param>
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Geozentrisch-ekliptikale Länge zur julianischen Tageszahl.</returns>
-	public static double Longitude(EPrecision value, double jd){ return MMod.Mod(MMath.Pi + MEarth.Longitude(value, jd), MMath.Pi2); }
+	public static double Longitude(EPrecision value, double jd){ return (MMath.Pi + MEarth.Longitude(value, jd)).Mod(MMath.Pi2); }
 
 	// MSun.T27C(double)
 	/// <summary>

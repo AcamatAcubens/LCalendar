@@ -34,11 +34,11 @@ public static partial class MEphemerides
 	{
 		// Lokale Felder einrichten
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		double d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 297.85036, 445267.111480, -0.0019142,  1/189474)), MMath.Pi2);
-		double s = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 357.52772,  35999.050340, -0.0001603, -1/300000)), MMath.Pi2);
-		double m = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 134.96298, 477198.867398,  0.0086972,  1/ 56250)), MMath.Pi2);
-		double f = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  93.27191, 483202.017538, -0.0036825,  1/327270)), MMath.Pi2);
-		double o = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 125.04452,  -1934.136261,  0.0020708,  1/450000)), MMath.Pi2);
+		double d = MMath.ToRad(MMath.Polynome(t, 297.85036, 445267.111480, -0.0019142,  1/189474).Mod(MMath.Pi2));
+		double s = MMath.ToRad(MMath.Polynome(t, 357.52772,  35999.050340, -0.0001603, -1/300000).Mod(MMath.Pi2));
+		double m = MMath.ToRad(MMath.Polynome(t, 134.96298, 477198.867398,  0.0086972,  1/ 56250).Mod(MMath.Pi2));
+		double f = MMath.ToRad(MMath.Polynome(t,  93.27191, 483202.017538, -0.0036825,  1/327270).Mod(MMath.Pi2));
+		double o = MMath.ToRad(MMath.Polynome(t, 125.04452,  -1934.136261,  0.0020708,  1/450000).Mod(MMath.Pi2));
 		double p = 0.0;
 
 		// Korrektur berechnen und anwenden
@@ -130,11 +130,11 @@ public static partial class MEphemerides
 	{
 		// Lokale Felder einrichten
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		double d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 297.85036, 445267.111480, -0.0019142,  1/189474)), MMath.Pi2);
-		double s = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 357.52772,  35999.050340, -0.0001603, -1/300000)), MMath.Pi2);
-		double m = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 134.96298, 477198.867398,  0.0086972,  1/ 56250)), MMath.Pi2);
-		double f = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  93.27191, 483202.017538, -0.0036825,  1/327270)), MMath.Pi2);
-		double o = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 125.04452,  -1934.136261,  0.0020708,  1/450000)), MMath.Pi2);
+		double d = MMath.ToRad(MMath.Polynome(t, 297.85036, 445267.111480, -0.0019142,  1/189474).Mod(MMath.Pi2));
+		double s = MMath.ToRad(MMath.Polynome(t, 357.52772,  35999.050340, -0.0001603, -1/300000).Mod(MMath.Pi2));
+		double m = MMath.ToRad(MMath.Polynome(t, 134.96298, 477198.867398,  0.0086972,  1/ 56250).Mod(MMath.Pi2));
+		double f = MMath.ToRad(MMath.Polynome(t,  93.27191, 483202.017538, -0.0036825,  1/327270).Mod(MMath.Pi2));
+		double o = MMath.ToRad(MMath.Polynome(t, 125.04452,  -1934.136261,  0.0020708,  1/450000).Mod(MMath.Pi2));
 		double e = 0.0;
 
 		// Korrektur berechnen und anwenden

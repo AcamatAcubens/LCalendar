@@ -49,7 +49,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, d) = MMoon.Apogee(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -77,7 +77,7 @@ public static partial class MMoon
 		{
 			// Nächste Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMoon.AscendingNode(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -105,7 +105,7 @@ public static partial class MMoon
 		{
 			// Nächsts Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMoon.DescendingNode(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -133,7 +133,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMoon.FirstQuarter(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -161,7 +161,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, t) = MMoon.FullMoon(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -189,7 +189,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, d) = MMoon.GreatestNorthernDeclination(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -217,7 +217,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, d) = MMoon.GreatestSouthernDeclination(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -245,7 +245,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMoon.LastQuarter(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -273,7 +273,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, t) = MMoon.NewMoon(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -301,7 +301,7 @@ public static partial class MMoon
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			(jdn, d) = MMoon.Perigee(jdn);
-			r        = jdn.CompareToInterval(jdMin, jdMax);
+			r        = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -354,9 +354,9 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451534.6698 + 27.55454989 * k, 0.0, -0.0006691, -0.000001098, 0.0000000052);
 
 			// Hilfsfelder einrichten
-			d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 171.9179 + 335.9106046 * k, 0.0, -0.0100383, -0.00001156, 0.000000055)), MMath.Pi2);
-			m = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 347.3477 +  27.1577721 * k, 0.0, -0.0008130, -0.00000100             )), MMath.Pi2);
-			f = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 316.6109 + 364.5287911 * k, 0.0, -0.0125053, -0.00001480             )), MMath.Pi2);
+			d = (MMath.ToRad(MMath.Polynome(t, 171.9179 + 335.9106046 * k, 0.0, -0.0100383, -0.00001156, 0.000000055))).Mod(MMath.Pi2);
+			m = (MMath.ToRad(MMath.Polynome(t, 347.3477 +  27.1577721 * k, 0.0, -0.0008130, -0.00000100             ))).Mod(MMath.Pi2);
+			f = (MMath.ToRad(MMath.Polynome(t, 316.6109 + 364.5287911 * k, 0.0, -0.0125053, -0.00001480             ))).Mod(MMath.Pi2);
 
 			// ---------------------- //
 			// Ereigniszeit berechnen //
@@ -455,13 +455,13 @@ public static partial class MMoon
 
 			// Näherung berechnen und Hilfsfelder einrichten
 			j = MMath.Polynome(t, 2451565.1619 + 27.212220817 * k, 0.0, 0.0002762, 0.000000021, -0.000000000088);
-			double e = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
-			double d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 183.6380 + 331.73735682 * k, 0.0, 0.0014852, 0.000002090, -0.000000010)), MMath.Pi2);
-			double m = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  17.4006 +  26.82037250 * k, 0.0, 0.0001186, 0.000000060              )), MMath.Pi2);
-			double a = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  38.3776 + 355.52747313 * k, 0.0, 0.0123499, 0.000014627, -0.000000069)), MMath.Pi2);
-			double o = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 123.9767 -   1.44098956 * k, 0.0, 0.0020608, 0.000002140, -0.000000016)), MMath.Pi2);
-			double v = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 299.75, 132.85, -0.009173)), MMath.Pi2);
-			double p = MMod.Mod(MMath.ToRad(o + 272.75 - 2.3 * t), MMath.Pi2);
+			double e =  MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
+			double d = (MMath.ToRad(MMath.Polynome(t, 183.6380 + 331.73735682 * k, 0.0, 0.0014852, 0.000002090, -0.000000010))).Mod(MMath.Pi2);
+			double m = (MMath.ToRad(MMath.Polynome(t,  17.4006 +  26.82037250 * k, 0.0, 0.0001186, 0.000000060              ))).Mod(MMath.Pi2);
+			double a = (MMath.ToRad(MMath.Polynome(t,  38.3776 + 355.52747313 * k, 0.0, 0.0123499, 0.000014627, -0.000000069))).Mod(MMath.Pi2);
+			double o = (MMath.ToRad(MMath.Polynome(t, 123.9767 -   1.44098956 * k, 0.0, 0.0020608, 0.000002140, -0.000000016))).Mod(MMath.Pi2);
+			double v = (MMath.ToRad(MMath.Polynome(t, 299.75, 132.85, -0.009173))).Mod(MMath.Pi2);
+			double p = (MMath.ToRad(o + 272.75 - 2.3 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -522,12 +522,12 @@ public static partial class MMoon
 			// Näherung berechnen und Hilfsfelder einrichten
 			j = MMath.Polynome(t, 2451565.1619 + 27.212220817 * k, 0.0, 0.0002762, 0.000000021, -0.000000000088);
 			double e = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
-			double d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 183.6380 + 331.73735682 * k, 0.0, 0.0014852, 0.000002090, -0.000000010)), MMath.Pi2);
-			double m = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  17.4006 +  26.82037250 * k, 0.0, 0.0001186, 0.000000060              )), MMath.Pi2);
-			double a = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  38.3776 + 355.52747313 * k, 0.0, 0.0123499, 0.000014627, -0.000000069)), MMath.Pi2);
-			double o = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 123.9767 -   1.44098956 * k, 0.0, 0.0020608, 0.000002140, -0.000000016)), MMath.Pi2);
-			double v = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 299.75, 132.85, -0.009173)), MMath.Pi2);
-			double p = MMod.Mod(MMath.ToRad(o + 272.75 - 2.3 * t), MMath.Pi2);
+			double d = (MMath.ToRad(MMath.Polynome(t, 183.6380 + 331.73735682 * k, 0.0, 0.0014852, 0.000002090, -0.000000010))).Mod(MMath.Pi2);
+			double m = (MMath.ToRad(MMath.Polynome(t,  17.4006 +  26.82037250 * k, 0.0, 0.0001186, 0.000000060              ))).Mod(MMath.Pi2);
+			double a = (MMath.ToRad(MMath.Polynome(t,  38.3776 + 355.52747313 * k, 0.0, 0.0123499, 0.000014627, -0.000000069))).Mod(MMath.Pi2);
+			double o = (MMath.ToRad(MMath.Polynome(t, 123.9767 -   1.44098956 * k, 0.0, 0.0020608, 0.000002140, -0.000000016))).Mod(MMath.Pi2);
+			double v = (MMath.ToRad(MMath.Polynome(t, 299.75, 132.85, -0.009173))).Mod(MMath.Pi2);
+			double p = (MMath.ToRad(o + 272.75 - 2.3 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -608,10 +608,10 @@ public static partial class MMoon
 
 			// Hilfsfelder einrichten
 			e = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
-			d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 152.2029 + 333.0705546 * k, 0.0, -0.0004214,  0.00000011)), MMath.Pi2);
-			m = MMod.Mod(MMath.ToRad(MMath.Polynome(t,  14.8591 +  26.9281592 * k, 0.0, -0.0000355, -0.00000010)), MMath.Pi2);
-			a = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   4.6881 + 356.9562794 * k, 0.0,  0.0103066,  0.00001251)), MMath.Pi2);
-			f = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 325.8867 +   1.4467807 * k, 0.0, -0.0020690, -0.00000215)), MMath.Pi2);
+			d = (MMath.ToRad(MMath.Polynome(t, 152.2029 + 333.0705546 * k, 0.0, -0.0004214,  0.00000011))).Mod(MMath.Pi2);
+			m = (MMath.ToRad(MMath.Polynome(t,  14.8591 +  26.9281592 * k, 0.0, -0.0000355, -0.00000010))).Mod(MMath.Pi2);
+			a = (MMath.ToRad(MMath.Polynome(t,   4.6881 + 356.9562794 * k, 0.0,  0.0103066,  0.00001251))).Mod(MMath.Pi2);
+			f = (MMath.ToRad(MMath.Polynome(t, 325.8867 +   1.4467807 * k, 0.0, -0.0020690, -0.00000215))).Mod(MMath.Pi2);
 
 			// ---------------------- //
 			// Ereigniszeit berechnen //
@@ -750,10 +750,10 @@ public static partial class MMoon
 
 			// Hilfsfelder einrichten
 			e = MMath.Polynome(t, 1.0, -0.002516, -0.0000074);
-			d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 345.6676 + 333.0705546 * k, 0.0, -0.0004214,  0.00000011)), MMath.Pi2);
-			m = MMod.Mod(MMath.ToRad(MMath.Polynome(t,   1.3851 +  26.9281592 * k, 0.0, -0.0000355, -0.00000010)), MMath.Pi2);
-			a = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 186.2100 + 356.9562794 * k, 0.0,  0.0103066,  0.00001251)), MMath.Pi2);
-			f = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 145.1633 +   1.4467807 * k, 0.0, -0.0020690, -0.00000215)), MMath.Pi2);
+			d = (MMath.ToRad(MMath.Polynome(t, 345.6676 + 333.0705546 * k, 0.0, -0.0004214,  0.00000011))).Mod(MMath.Pi2);
+			m = (MMath.ToRad(MMath.Polynome(t,   1.3851 +  26.9281592 * k, 0.0, -0.0000355, -0.00000010))).Mod(MMath.Pi2);
+			a = (MMath.ToRad(MMath.Polynome(t, 186.2100 + 356.9562794 * k, 0.0,  0.0103066,  0.00001251))).Mod(MMath.Pi2);
+			f = (MMath.ToRad(MMath.Polynome(t, 145.1633 +   1.4467807 * k, 0.0, -0.0020690, -0.00000215))).Mod(MMath.Pi2);
 
 			// ---------------------- //
 			// Ereigniszeit berechnen //
@@ -940,9 +940,9 @@ public static partial class MMoon
 			j = MMath.Polynome(t, 2451534.6698 + 27.55454989 * k, 0.0, -0.0006691, -0.000001098, 0.0000000052);
 
 			// Hilfsfelder einrichten
-			d = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 171.9179 + 335.9106046 * k, 0.0, -0.0100383, -0.00001156, 0.000000055)), MMath.Pi2);
-			m = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 347.3477 +  27.1577721 * k, 0.0, -0.0008130, -0.00000100             )), MMath.Pi2);
-			f = MMod.Mod(MMath.ToRad(MMath.Polynome(t, 316.6109 + 364.5287911 * k, 0.0, -0.0125053, -0.00001480             )), MMath.Pi2);
+			d = (MMath.ToRad(MMath.Polynome(t, 171.9179 + 335.9106046 * k, 0.0, -0.0100383, -0.00001156, 0.000000055))).Mod(MMath.Pi2);
+			m = (MMath.ToRad(MMath.Polynome(t, 347.3477 +  27.1577721 * k, 0.0, -0.0008130, -0.00000100             ))).Mod(MMath.Pi2);
+			f = (MMath.ToRad(MMath.Polynome(t, 316.6109 + 364.5287911 * k, 0.0, -0.0125053, -0.00001480             ))).Mod(MMath.Pi2);
 
 			// ---------------------- //
 			// Ereigniszeit berechnen //

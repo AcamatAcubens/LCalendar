@@ -68,9 +68,9 @@ public static partial class MJupiter
 			j  = 2451671.186 + k * 398.884046;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(121.8980 + k * 33.140229), MMath.Pi2);
+			double m = (MMath.ToRad(121.8980 + k * 33.140229)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(82.74 + 40.76 * t), MMath.Pi2);
+			double a = (MMath.ToRad(82.74 + 40.76 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -194,7 +194,7 @@ public static partial class MJupiter
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly(double jd){ return MMod.Mod(MJupiter.MeanLongitude(jd) + MJupiter.LongitudeOfPerihelion(jd), 360.0); }
+	public static double MeanAnomaly(double jd){ return (MJupiter.MeanLongitude(jd) + MJupiter.LongitudeOfPerihelion(jd)).Mod(360.0); }
 
 	// MJupiter.MeanLongitude()
 	/// <summary>
@@ -215,7 +215,7 @@ public static partial class MJupiter
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 34.351519, 3036.3027748, 0.00023330, 0.000000037), 360.0);
+		return (MMath.Polynome(t, 34.351519, 3036.3027748, 0.00023330, 0.000000037)).Mod(360.0);
 	}
 
 	// MJupiter.Opposition()
@@ -245,9 +245,9 @@ public static partial class MJupiter
 			j  = 2451870.628 + k * 398.884046;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(318.4681 + k * 33.140229), MMath.Pi2);
+			double m = (MMath.ToRad(318.4681 + k * 33.140229)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(82.74 + 40.76 * t), MMath.Pi2);
+			double a = (MMath.ToRad(82.74 + 40.76 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -418,9 +418,9 @@ public static partial class MJupiter
 			j  = 2451870.628 + k * 398.884046;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(318.4681 + k * 33.140229), MMath.Pi2);
+			double m = (MMath.ToRad(318.4681 + k * 33.140229)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(82.74 + 40.76 * t), MMath.Pi2);
+			double a = (MMath.ToRad(82.74 + 40.76 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -466,9 +466,9 @@ public static partial class MJupiter
 			j  = 2451870.628 + k * 398.884046;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(318.4681 + k * 33.140229), MMath.Pi2);
+			double m = (MMath.ToRad(318.4681 + k * 33.140229)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(82.74 + 40.76 * t), MMath.Pi2);
+			double a = (MMath.ToRad(82.74 + 40.76 * t)).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden

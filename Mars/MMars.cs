@@ -71,7 +71,7 @@ public partial class MMars
 			j  = 2451707.414 + k * 779.936104;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(157.6047 + k * 48.705244), MMath.Pi2);
+			double m = (MMath.ToRad(157.6047 + k * 48.705244)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -198,7 +198,7 @@ public partial class MMars
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly(double jd){ return MMod.Mod(MMars.MeanLongitude(jd) + MMars.LongitudeOfPerihelion(jd), 360.0); }
+	public static double MeanAnomaly(double jd){ return (MMars.MeanLongitude(jd) + MMars.LongitudeOfPerihelion(jd)).Mod(360.0); }
 
 	// MMars.MeanLongitude()
 	/// <summary>
@@ -219,7 +219,7 @@ public partial class MMars
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 355.433000, 19141.6964471, 0.00031052, 0.000000016), 360.0);
+		return (MMath.Polynome(t, 355.433000, 19141.6964471, 0.00031052, 0.000000016)).Mod(360.0);
 	}
 
 	// MMars.Opposition()
@@ -249,7 +249,7 @@ public partial class MMars
 			j  = 2452097.382 + k * 779.936104;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(181.9573 + k * 48.705244), MMath.Pi2);
+			double m = (MMath.ToRad(181.9573 + k * 48.705244)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -423,7 +423,7 @@ public partial class MMars
 			j  = 2452097.382 + k * 779.936104;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(181.9573 + k * 48.705244), MMath.Pi2);
+			double m = (MMath.ToRad(181.9573 + k * 48.705244)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -472,7 +472,7 @@ public partial class MMars
 			j  = 2452097.382 + k * 779.936104;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(181.9573 + k * 48.705244), MMath.Pi2);
+			double m = (MMath.ToRad(181.9573 + k * 48.705244)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 

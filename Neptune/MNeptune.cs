@@ -71,10 +71,10 @@ public partial class MNeptune
 			j  = 2451569.379 + k * 367.486703;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(21.5569 + k * 2.194998), MMath.Pi2);
+			double m = MMath.ToRad(21.5569 + k * 2.194998).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(207.83 +   8.51 * t), MMath.Pi2);
-			double b = MMod.Mod(MMath.ToRad(276.74 + 209.98 * t), MMath.Pi2);
+			double a = MMath.ToRad(207.83 +   8.51 * t).Mod(MMath.Pi2);
+			double b = MMath.ToRad(276.74 + 209.98 * t).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden
@@ -196,7 +196,7 @@ public partial class MNeptune
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Mittlere Anomalie der mittleren Planetenbahn zur julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly(double jd){ return MMod.Mod(MNeptune.MeanLongitude(jd) + MNeptune.LongitudeOfPerihelion(jd), 360.0); }
+	public static double MeanAnomaly(double jd){ return (MNeptune.MeanLongitude(jd) + MNeptune.LongitudeOfPerihelion(jd)).Mod(360.0); }
 
 	// MNeptune.MeanLongitude()
 	/// <summary>
@@ -217,7 +217,7 @@ public partial class MNeptune
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 304.348665, 219.8833092, 0.00030882, 0.000000018), 360.0);
+		return MMath.Polynome(t, 304.348665, 219.8833092, 0.00030882, 0.000000018).Mod(360.0);
 	}
 
 	// MNeptune.Opposition()
@@ -247,10 +247,10 @@ public partial class MNeptune
 			j  = 2451753.122 + k * 367.486703;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(202.6544 + k * 2.194998), MMath.Pi2);
+			double m = MMath.ToRad(202.6544 + k * 2.194998).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
-			double a = MMod.Mod(MMath.ToRad(207.83 +   8.51 * t), MMath.Pi2);
-			double b = MMod.Mod(MMath.ToRad(276.74 + 209.98 * t), MMath.Pi2);
+			double a = MMath.ToRad(207.83 +   8.51 * t).Mod(MMath.Pi2);
+			double b = MMath.ToRad(276.74 + 209.98 * t).Mod(MMath.Pi2);
 			double h;
 
 			// Korrektur berechnen und anwenden

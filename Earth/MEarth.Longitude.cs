@@ -1109,6 +1109,6 @@ public static partial class MEarth
 		double l5 = MEarth.L5(value, t);
 
 		// Länge berechnen
-		return MMod.Mod(MMath.Polynome(t, l0, l1, l2, l3, l4, l5), MMath.Pi2);
+		return MMath.Polynome(t, l0, l1, l2, l3, l4, l5).Mod(MMath.Pi2);
 	}
 }

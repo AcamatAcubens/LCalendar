@@ -37,7 +37,7 @@ public static partial class MMercury
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMercury.Aphelion(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall bearbeiten
 			if(r == -1)
@@ -65,7 +65,7 @@ public static partial class MMercury
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMercury.ConjunctionInferior(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall bearbeiten
 			if(r == -1)
@@ -93,7 +93,7 @@ public static partial class MMercury
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MMercury.ConjunctionSuperior(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall bearbeiten
 			if(r == -1)
@@ -170,7 +170,7 @@ public static partial class MMercury
 			j  = 2451612.023 + k * 115.8774771;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(63.5867 + k * 114.2088742), MMath.Pi2);
+			double m = MMath.ToRad(63.5867 + k * 114.2088742).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -219,7 +219,7 @@ public static partial class MMercury
 			j  = 2451554.084 + k * 115.8774771;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(6.4822 + k * 114.2088742), MMath.Pi2);
+			double m = MMath.ToRad(6.4822 + k * 114.2088742).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -296,7 +296,7 @@ public static partial class MMercury
 			j  = 2451612.023 + k * 115.8774771;
 			
 			// Hilfsfelder berechnen
-			m = MMod.Mod(MMath.ToRad(63.5867 + k * 114.2088742), MMath.Pi2);
+			m = (MMath.ToRad(63.5867 + k * 114.2088742)).Mod(MMath.Pi2);
 			t = (j - MCalendar.Jdn20000101) / 36525.0;
 
 			// Korrektur berechnen und anwenden
@@ -371,7 +371,7 @@ public static partial class MMercury
 			j  = 2451612.023 + k * 115.8774771;
 
 			// Hilfsfelder berechnen
-			m = MMod.Mod(MMath.ToRad(63.5867 + k * 114.2088742), MMath.Pi2);
+			m = (MMath.ToRad(63.5867 + k * 114.2088742)).Mod(MMath.Pi2);
 			t = (j - MCalendar.Jdn20000101) / 36525.0;
 
 			// Korrektur berechnen und anwenden
@@ -499,7 +499,7 @@ public static partial class MMercury
 	public static double MeanAnomaly(double jd)
 	{
 		// Rückgabe
-		return MMod.Mod(MMercury.MeanLongitude(jd) + MMercury.LongitudeOfPerihelion(jd), 360.0);
+		return (MMercury.MeanLongitude(jd) + MMercury.LongitudeOfPerihelion(jd)).Mod(360.0);
 	}
 
 	// MMercury.MeanLongitude()
@@ -521,7 +521,7 @@ public static partial class MMercury
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 252.250906, 149474.0722491, 0.0003035, 0.000000018), 360.0);
+		return (MMath.Polynome(t, 252.250906, 149474.0722491, 0.0003035, 0.000000018)).Mod(360.0);
 	}
 
 	// MMercury.Perihelion()
@@ -678,7 +678,7 @@ public static partial class MMercury
 			j  = 2451612.023 + k * 115.8774771;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(63.5867 + k * 114.2088742), MMath.Pi2);
+			double m = (MMath.ToRad(63.5867 + k * 114.2088742)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -727,7 +727,7 @@ public static partial class MMercury
 			j  = 2451612.023 + k * 115.8774771;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(63.5867 + k * 114.2088742), MMath.Pi2);
+			double m = (MMath.ToRad(63.5867 + k * 114.2088742)).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 

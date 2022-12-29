@@ -71,7 +71,7 @@ public partial class MVenus
 			j  = 2451996.706 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(82.7311 + k * 215.513058), MMath.Pi2);
+			double m = MMath.ToRad(82.7311 + k * 215.513058).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -116,7 +116,7 @@ public partial class MVenus
 			j  = 2451704.746 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(154.9745 + k * 215.513058), MMath.Pi2);
+			double m = MMath.ToRad(154.9745 + k * 215.513058).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -189,7 +189,7 @@ public partial class MVenus
 			j  = 2451996.706 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			m = MMod.Mod(MMath.ToRad(82.7311 + k * 215.513058), MMath.Pi2);
+			m = MMath.ToRad(82.7311 + k * 215.513058).Mod(MMath.Pi2);
 			t = (j - MCalendar.Jdn20000101) / 36525.0;
 
 			// Korrektur berechnen und anwenden
@@ -255,7 +255,7 @@ public partial class MVenus
 			j  = 2451996.706 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			m = MMod.Mod(MMath.ToRad(82.7311 + k * 215.513058), MMath.Pi2);
+			m = MMath.ToRad(82.7311 + k * 215.513058).Mod(MMath.Pi2);
 			t = (j - MCalendar.Jdn20000101) / 36525.0;
 
 			// Korrektur berechnen und anwenden
@@ -370,7 +370,7 @@ public partial class MVenus
 	/// <param name="jd">Julianische Tageszahl.</param>
 	/// <returns>Mittlere Anomlie der mittleren Planetenbahn zur julianischen Tageszahl.</returns>
 	/// <remarks>Die Winkelangabe erfolgt in Gradmaß.</remarks>
-	public static double MeanAnomaly(double jd){ return MMod.Mod(MVenus.MeanLongitude(jd) + MVenus.LongitudeOfPerihelion(jd), 360.0); }
+	public static double MeanAnomaly(double jd){ return (MVenus.MeanLongitude(jd) + MVenus.LongitudeOfPerihelion(jd)).Mod(360.0); }
 
 	// MVenus.MeanLongitude()
 	/// <summary>
@@ -391,7 +391,7 @@ public partial class MVenus
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 181.979801, 58519.2130302, 0.00031014, 0.000000015), 360.0);
+		return MMath.Polynome(t, 181.979801, 58519.2130302, 0.00031014, 0.000000015).Mod(360.0);
 	}
 
 	// MVenus.Perihelion()
@@ -547,7 +547,7 @@ public partial class MVenus
 			j  = 2451996.706 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(82.7311 + k * 215.513058), MMath.Pi2);
+			double m = MMath.ToRad(82.7311 + k * 215.513058).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 
@@ -592,7 +592,7 @@ public partial class MVenus
 			j  = 2451996.706 + k * 583.921361;
 
 			// Hilfsfelder berechnen
-			double m = MMod.Mod(MMath.ToRad(82.7311 + k * 215.513058), MMath.Pi2);
+			double m = MMath.ToRad(82.7311 + k * 215.513058).Mod(MMath.Pi2);
 			double t = (j - MCalendar.Jdn20000101) / 36525.0;
 			double h;
 

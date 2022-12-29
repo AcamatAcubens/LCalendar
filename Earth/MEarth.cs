@@ -43,7 +43,7 @@ public static partial class MEarth
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MEarth.Aphelion(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -71,7 +71,7 @@ public static partial class MEarth
 		{
 			// Nächstes Ereignis berechnen und Lage im Intervall bestimmen
 			jdn = MEarth.Perihelion(jdn);
-			r   = jdn.CompareToInterval(jdMin, jdMax);
+			r   = jdn.CompareTo(jdMin, jdMax);
 
 			// Ereignisse vor dem Intervall verarbeiten
 			if(r == -1)
@@ -157,7 +157,7 @@ public static partial class MEarth
 
 		// Winkel berechnen und liefern
 		if(d == 0.0) return 0.0;
-		return MMod.Mod(MMath.ArcTan(MMath.Sin(lamdaA - lamdaB), d), MMath.Pi2);
+		return MMath.ArcTan(MMath.Sin(lamdaA - lamdaB), d).Mod(MMath.Pi2);
 	}
 
 	// MEarth.Distance(CPolar, CPolar)
@@ -356,7 +356,7 @@ public static partial class MEarth
 	public static double MeanAnomaly(double jd)
 	{
 		// Rückgabe
-		return MMod.Mod(MEarth.MeanLongitude(jd) + MEarth.LongitudeOfPerihelion(jd), 360.0);
+		return MEarth.MeanLongitude(jd) + MEarth.LongitudeOfPerihelion(jd).Mod(360.0);
 	}
 
 	// MEarth.MeanLongitude()
@@ -383,7 +383,7 @@ public static partial class MEarth
 	{
 		// Lokale Felder einrichten und Länge berechnen
 		double t = (jd - MCalendar.Jdn20000101) / 36525.0;
-		return MMod.Mod(MMath.Polynome(t, 100.466457, 36000.7698278, 0.00030322, 0.000000020), 360.0);
+		return MMath.Polynome(t, 100.466457, 36000.7698278, 0.00030322, 0.000000020).Mod(360.0);
 	}
 
 	// MEarth.ParallelOfLatitude(double)
