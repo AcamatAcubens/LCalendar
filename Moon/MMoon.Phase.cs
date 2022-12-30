@@ -194,7 +194,7 @@ public static partial class MMoon
 		}
 
 		// Ekliptikale Breite berechnen und Finsterniseinschätzung bestimmen
-		double  b = MMath.Abs(MMoon.Latitude(EPrecision.Medium, j));
+		double  b = (MMoon.Latitude(EPrecision.Medium, j)).Abs();
 		if(b < 0.006351) et = EEclipseType.MoonTotalDefinite;
 		if(b < 0.009376) et = EEclipseType.MoonTotalPotential;
 		if(b < 0.015533) et = EEclipseType.MoonPartialDefinite;
@@ -388,7 +388,7 @@ public static partial class MMoon
 		}
 
 		// Ekliptikale Breite berechnen und Finsternisabschätzung bestimmen
-		double  b = MMath.Abs(MMoon.Latitude(EPrecision.Medium, j));
+		double b = (MMoon.Latitude(EPrecision.Medium, j)).Abs();
 		if(b < 0.015223) et = EEclipseType.SunCentralDefinite;
 		if(b < 0.018210) et = EEclipseType.SunCentralPotential;
 		if(b < 0.024595) et = EEclipseType.SunPartialDefinite;

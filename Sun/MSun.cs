@@ -210,20 +210,20 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0)
+		if((aP - a0).Abs() > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jd);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0)
+		if((a0 - aM).Abs() > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0)
+		if((cosH).Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = MMath.ArcCos(cosH);
 
@@ -236,7 +236,7 @@ public static partial class MSun
 		double m = ((a0 + lambda - t0 - H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
-		while(MMath.Abs(dm) >= 0.0001)
+		while(dm.Abs() >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);
@@ -321,20 +321,20 @@ public static partial class MSun
 		// Position für gegebenen Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0)
+		if((aP - a0).Abs() > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn);
 
 		// Position für vorhergehenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn + 1.0);
 		double aM = MEphemerides.ToAlpha(l, 0.0, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0)
+		if((a0 - aM).Abs() > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0)
+		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = MMath.ArcCos(cosH);
 
@@ -347,7 +347,7 @@ public static partial class MSun
 		double m  = ((a0 + lambda - t0 + H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
-		while(MMath.Abs(dm) >= 0.0001)
+		while(dm.Abs() >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);

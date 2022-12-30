@@ -360,8 +360,8 @@ public static partial class MJupiter
 
 			// Geozentrische Position berechnen und Abbruchbedinungen verarbeiten
 			tmp = MEphemerides.ToGeocentric(lH, bH, rH, jdn, ref lG, ref bG, ref rG, EPrecision.High);
-			if(MMath.Abs(tau - tmp) < 0.00005) break; // Ausreichende Genauigkeit sicherstellen
-			if(tau != 0.0 && tmp >= tau)       break; // Abbruch bei Schwingung sicherstellen
+			if((tau - tmp).Abs() < 0.00005) break; // Ausreichende Genauigkeit sicherstellen
+			if(tau != 0.0 && tmp >= tau)    break; // Abbruch bei Schwingung sicherstellen
 
 			// Wert anwenden und nächsten Iterationsschritt vorbereiten
 			jdn += tmp;

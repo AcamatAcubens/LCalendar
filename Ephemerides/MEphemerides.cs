@@ -4,19 +4,6 @@ using Acamat.LMath.Geometry;
 using System;
 using System.Text;
 
-// HeliacalRise
-// HeliacalSet
-// HeliacalConjunction
-// HeliacalOpposition
-// IsCirumpolar
-//    δ + ϕ ≥ 90°
-
-// Aus Planetenmodule einlagern:
-// · CPolar PositionEcliptical(EPrecision value)
-// · CPolar PositionEcliptical(EPrecision value, double jd)
-// · CPolar PositionEquatorial()
-// · CPolar PositionEquatorial(double)
-
 namespace Acamat.LCalendar;
 
 /// <summary>
@@ -957,7 +944,7 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn);
 		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0)
+		if((aP - a0).Abs() > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
@@ -965,13 +952,13 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
 		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0)
+		if((a0 - aM).Abs() > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0)
+		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
@@ -984,7 +971,7 @@ public static partial class MEphemerides
 		double m  = ((a0 + lambda - t0 - H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
-		while(MMath.Abs(dm) >= 0.0001)
+		while(dm.Abs() >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a   = MMath.Bessel(m, aM, a0, aP);
@@ -1130,7 +1117,7 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn);
 		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0)
+		if((aP - a0).Abs() > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
@@ -1138,13 +1125,13 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
 		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jd - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0)
+		if((a0 - aM).Abs() > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jd - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
-		if(MMath.Abs(cosH) > 1.0)
+		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
 		H = MMath.ArcCos(cosH);
 
@@ -1157,7 +1144,7 @@ public static partial class MEphemerides
 		double m = ((a0 + lambda - t0 + H) / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
-		while(MMath.Abs(dm) >= 0.0001)
+		while(dm.Abs() >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);
@@ -1627,7 +1614,7 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn);
 		b = ecliptical.Latitude (EPrecision.Low, jdn);
 		double a0 = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn);
-		if(MMath.Abs(aP - a0) > 1.0)
+		if((aP - a0).Abs() > 1.0)
 			a0 += MMath.Sgn(aP - a0) * MMath.Pi2;
 		double d0 = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn);
 
@@ -1635,7 +1622,7 @@ public static partial class MEphemerides
 		l = ecliptical.Longitude(EPrecision.Low, jdn - 1.0);
 		b = ecliptical.Latitude (EPrecision.Low, jdn - 1.0);
 		double aM = MEphemerides.ToAlpha(l, b, EObliquity.Mean, jdn - 1.0);
-		if(MMath.Abs(a0 - aM) > 1.0)
+		if((a0 - aM).Abs() > 1.0)
 			aM += MMath.Sgn(a0 - aM) * MMath.Pi2;
 		double dM = MEphemerides.ToDelta(l, b, EObliquity.Mean, jdn - 1.0);
 
@@ -1648,12 +1635,12 @@ public static partial class MEphemerides
 		double m  = (aP + lambda - t0 / MMath.Pi2).Div();
 
 		// Ereigniszeit iterieren
-		while(MMath.Abs(dm) >= 0.0001)
+		while(dm.Abs() >= 0.0001)
 		{
 			// Iteration durchführen und nächsten Iterationsschritt vorbereiten
 			a  = MMath.Bessel(m, aM, a0, aP);
 			dm = ((a + lambda - t0 - 6.300388093 * m) / MMath.Pi2).Div();
-			if(MMath.Abs(dm) > 0.5)
+			if(dm.Abs() > 0.5)
 				dm -= MMath.Sgn(dm);
 			m += dm;
 		}
