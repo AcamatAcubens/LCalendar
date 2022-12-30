@@ -673,7 +673,7 @@ public static partial class MEphemerides
 		double c = cosX * sinB + sinX * cosB * sinL;
 
 		// Rückgabe
-		return(z + y - MMath.ArcTan(a, b), MMath.ArcSin(c));
+		return(z + y - MMath.ArcTan(a, b), c.ArcSin());
 	}
 
 	// MEphemerides.PrecessionEquatorial(CPolar)
@@ -740,7 +740,7 @@ public static partial class MEphemerides
 		double c = sinZ * cosD * cosA + cosZ * sinD;
 
 		// Rückgabe
-		return(MMath.ArcTan(a, b) + y, MMath.ArcSin(c));
+		return(MMath.ArcTan(a, b) + y, c.ArcSin());
 	}
 
 	// MEphemerides.ProperMotion(CPolar, double, double)
@@ -977,7 +977,7 @@ public static partial class MEphemerides
 			a   = MMath.Bessel(m, aM, a0, aP);
 			d   = MMath.Bessel(m, dM, d0, dP);
 			H   = t0 + 6.300388093 * m - lambda - a;
-			h   = MMath.ArcSin(sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H));
+			h   = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
 			dm  = (h - h0) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
 			m  += dm;
 		}
@@ -1150,7 +1150,7 @@ public static partial class MEphemerides
 			a  = MMath.Bessel(m, aM, a0, aP);
 			d  = MMath.Bessel(m, dM, d0, dP);
 			H  = t0 + 6.300388093 * m - lambda - a;
-			h  = MMath.ArcSin(sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H));
+			h  = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
 			dm = (h - h0) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
 			m += dm;
 		}
@@ -1283,7 +1283,7 @@ public static partial class MEphemerides
 		else eps = MEphemerides.ObliquityTrue(jd);
 
 		// Breite berechnen
-		return MMath.ArcSin(MMath.Sin(delta) * MMath.Cos(eps) - MMath.Cos(delta) * MMath.Sin(eps) * MMath.Sin(alpha));
+		return (MMath.Sin(delta) * MMath.Cos(eps) - MMath.Cos(delta) * MMath.Sin(eps) * MMath.Sin(alpha)).ArcSin();
 	}
 
 	// MEphemerides.ToDelta(CPolar, EObliquity)
@@ -1332,7 +1332,7 @@ public static partial class MEphemerides
 		else eps = obliquity == EObliquity.Mean ? MEphemerides.ObliquityMean(jd) : MEphemerides.ObliquityTrue(jd);
 
 		// Deklination berechnen
-		double t = MMath.ArcSin(MMath.Sin(beta) * MMath.Cos(eps) + MMath.Cos(beta) * MMath.Sin(eps) * MMath.Sin(lambda));
+		double t = (MMath.Sin(beta) * MMath.Cos(eps) + MMath.Cos(beta) * MMath.Sin(eps) * MMath.Sin(lambda)).ArcSin();
 		return t;
 	}
 
@@ -1396,7 +1396,7 @@ public static partial class MEphemerides
 	/// <param name="delta">Deklination.</param>
 	/// <param name="phi">Geographische Breite.</param>
 	/// <returns></returns>
-	public static double ToHeight(double localHourAngle, double delta, double phi){ return MMath.ArcSin(MMath.Sin(phi) * MMath.Sin(delta) + MMath.Cos(phi) * MMath.Cos(delta) * MMath.Cos(localHourAngle)); 	}
+	public static double ToHeight(double localHourAngle, double delta, double phi){ return (MMath.Sin(phi) * MMath.Sin(delta) + MMath.Cos(phi) * MMath.Cos(delta) * MMath.Cos(localHourAngle)).ArcSin(); }
 
 	// MEphemerides.ToLambda(CPolar)
 	/// <summary>

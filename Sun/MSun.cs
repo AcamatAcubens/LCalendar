@@ -242,7 +242,7 @@ public static partial class MSun
 			a  = MMath.Bessel(m, aM, a0, aP);
 			d  = MMath.Bessel(m, dM, d0, dP);
 			H  = t0 + 6.300388093 * m - lambda - a;
-			h  = MMath.ArcSin(sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H));
+			h  = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
 			dm = (h - height) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
 			m += dm;
 		}
@@ -353,7 +353,7 @@ public static partial class MSun
 			a  = MMath.Bessel(m, aM, a0, aP);
 			d  = MMath.Bessel(m, dM, d0, dP);
 			H  = t0 + 6.300388093 * m - lambda - a;
-			h  = MMath.ArcSin(sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H));
+			h  = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
 			dm = (h - height) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
 			m  += dm;
 		}
