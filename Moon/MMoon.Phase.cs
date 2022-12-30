@@ -427,7 +427,7 @@ public static partial class MMoon
 		double delS = MSun .Radius(EPrecision.Low, jd);
 
 		// Phasenwinkel berechnen
-		double i = MMath.ToDeg(MMath.ArcTan((delS * sinPsi) / (delM - delS * cosPsi)));
+		double i = MMath.ToDeg(((delS * sinPsi) / (delM - delS * cosPsi))ArcTan());
 		if(lamM - lamS < 0.0) i *= 1.0;
 		return i;
 	}

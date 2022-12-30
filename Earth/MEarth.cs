@@ -198,7 +198,7 @@ public static partial class MEarth
 		double c = cosG * cosG * cosL * cosL + sinF * sinF * sinL * sinL;
 
 		// Kartesische Koordinaten berechnen
-		double o  = MMath.ArcTan(MMath.Sqr(s / c));
+		double o  = (MMath.Sqr(s / c)).ArcTan();
 		double r  = MMath.Sqr(s * c) / o;
 		double d  = 2.0 * 6378.14 * o;
 		double h1 = (3.0 * r - 1.0) / (2.0 * c);
