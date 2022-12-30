@@ -225,7 +225,7 @@ public static partial class MSun
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
 		if((cosH).Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
-		H = MMath.ArcCos(cosH);
+		H = cosH.ArcCos();
 
 		// -------------//
 		// Ereigniszeit //
@@ -336,7 +336,7 @@ public static partial class MSun
 		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
 		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
-		H = MMath.ArcCos(cosH);
+		H = cosH.ArcCos();
 
 		// ------------------- //
 		// Ereigniszeit nähern //

@@ -399,7 +399,7 @@ public static partial class MEphemerides
 		double eps = MEphemerides.ObliquityMean(jd);
 
 		// Winkel berechnen
-		return MMath.ArcCos(MMath.Cos(eps) * MMath.Sin(phi) - MMath.Sin(eps) * MMath.Cos(phi) * MMath.Sin(lha));
+		return (MMath.Cos(eps) * MMath.Sin(phi) - MMath.Sin(eps) * MMath.Cos(phi) * MMath.Sin(lha)).ArcCos();
 	}
 
 	// MEphemerides.Last(double, double)
@@ -960,7 +960,7 @@ public static partial class MEphemerides
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
 		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
-		H = MMath.ArcCos(cosH);
+		H = cosH.ArcCos();
 
 		// ------------------- //
 		// Ereigniszeit nähern //
@@ -1005,7 +1005,7 @@ public static partial class MEphemerides
 
 		// Tagesbogen berechnen
 		if(y == 0.0) return 0.0;
-		return 0.997269571 * MMath.ArcCos(x / y);
+		return 0.997269571 * (x / y).ArcCos();
 	}
 
 	// MEphemerides.Set(CPolar, CPolar)
@@ -1133,7 +1133,7 @@ public static partial class MEphemerides
 		double cosH = (MMath.Sin(h0) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
 		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null, null);
-		H = MMath.ArcCos(cosH);
+		H = cosH.ArcCos();
 
 		// ------------------- //
 		// Ereigniszeit nähern //

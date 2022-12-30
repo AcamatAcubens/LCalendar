@@ -420,7 +420,7 @@ public static partial class MMoon
 
 		// Geozentrische Elongation berechnen
 		double cosPsi = MMath.Cos(betM) * MMath.Cos(lamM - lamS);
-		double sinPsi = MMath.Sin(MMath.ArcCos(cosPsi));
+		double sinPsi = MMath.Sin(cosPsi.ArcCos());
 
 		// Radii berechnen
 		double delM = MMoon.Radius(EPrecision.Low, jd);
