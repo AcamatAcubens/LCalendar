@@ -187,7 +187,7 @@ public static partial class MEphemerides
 	{
 		// Lokalen Felder einrichten und Winkel berechnen
 		double c = MMath.Sqr(1.0 - MMath.Pow(MMath.Tan(delta) * MMath.Tan(phi), 2.0));
-		return MMath.ArcTan(c * MMath.Cos(delta), MMath.Tan(phi));
+		return (c * MMath.Cos(delta)).ArcTan(MMath.Tan(phi));
 	}
 
 	// MEphemerides.AngularSeparation(CPolar, CPolar)
@@ -226,7 +226,7 @@ public static partial class MEphemerides
 		double z = sinD1 * sinD2 + cosD1 * cosD2 * cosdA;
 
 		// Rückgabe
-		return(MMath.ArcTan(MMath.Sqr(x * x + y * y), z), MMath.ArcTan(MMath.Sin(alphaA - alphaB), cosD2 * tanD1 - sinD2 * MMath.Cos(alphaA - alphaB)));
+		return((MMath.Sqr(x * x + y * y)).ArcTan(z), (MMath.Sin(alphaA - alphaB)).ArcTan(cosD2 * tanD1 - sinD2 * MMath.Cos(alphaA - alphaB)));
 	}
 
 	// MEphemerids.ApparentPosition(CPolar)
@@ -519,7 +519,7 @@ public static partial class MEphemerides
 		double eps = MEphemerides.ObliquityMean(jd);
 
 		// Winkel berechnen
-		return MMath.ArcTan(-MMath.Cos(lha), MMath.Sin(eps) * MMath.Tan(phi) + MMath.Cos(eps) * MMath.Sin(lha));
+		return -MMath.Cos(lha).ArcTan(MMath.Sin(eps) * MMath.Tan(phi) + MMath.Cos(eps) * MMath.Sin(lha));
 	}
 
 	// MEphemerides.NutationInLongitude()       --> MEphemerides.Nutation.cs
@@ -606,7 +606,7 @@ public static partial class MEphemerides
 	{
 		// Lokalen Felder einrichten und Winkel berechnen
 		double lha = MEphemerides.LocalHourAngle(alpha, lambda, jd);
-		return MMath.ArcTan(MMath.Sin(lha), MMath.Tan(phi) * MMath.Cos(delta) - MMath.Sin(delta) * MMath.Cos(lha));
+		return MMath.Sin(lha).ArcTan(MMath.Tan(phi) * MMath.Cos(delta) - MMath.Sin(delta) * MMath.Cos(lha));
 	}
 
 	// MEphemerides.PrecessionEcliptical(CPolar)
@@ -673,7 +673,7 @@ public static partial class MEphemerides
 		double c = cosX * sinB + sinX * cosB * sinL;
 
 		// Rückgabe
-		return(z + y - MMath.ArcTan(a, b), c.ArcSin());
+		return(z + y - a.ArcTan(b), c.ArcSin());
 	}
 
 	// MEphemerides.PrecessionEquatorial(CPolar)
@@ -740,7 +740,7 @@ public static partial class MEphemerides
 		double c = sinZ * cosD * cosA + cosZ * sinD;
 
 		// Rückgabe
-		return(MMath.ArcTan(a, b) + y, c.ArcSin());
+		return(a.ArcTan(b) + y, c.ArcSin());
 	}
 
 	// MEphemerides.ProperMotion(CPolar, double, double)
@@ -1213,7 +1213,7 @@ public static partial class MEphemerides
 		else eps = obliquity == EObliquity.Mean ? MEphemerides.ObliquityMean(jd) : MEphemerides.ObliquityTrue(jd);
 
 		// Rektaszension berechnen
-		double t = MMath.ArcTan(MMath.Sin(lambda) * MMath.Cos(eps) - MMath.Tan(beta) * MMath.Sin(eps), MMath.Cos(lambda));
+		double t = (MMath.Sin(lambda) * MMath.Cos(eps) - MMath.Tan(beta) * MMath.Sin(eps)).ArcTan(MMath.Cos(lambda));
 		if(t < 0.0) t += MMath.Pi2;
 		return t;
 	}
@@ -1236,7 +1236,7 @@ public static partial class MEphemerides
 		if(h == MMath.Rad270) return h;
 
 		// Horizontalen Azimut berechnen
-		double t = MMath.ArcTan(MMath.Sin(localHourAngle), h) - MMath.Pi;
+		double t = MMath.Sin(localHourAngle).ArcTan(h) - MMath.Pi;
 		if(t < 0.0) t += MMath.Pi2;
 		return t;
 	}
@@ -1382,8 +1382,8 @@ public static partial class MEphemerides
 		double z = radiusHeliocentric * MMath.Sin(betaHeliocentric)                                 - r * MMath.Sin(b)               ;
 
 		// Polarkoordianten und Lichtlaufzeit bestimmen
-		lambdaGeocentric = MMath.ArcTan(y, x);
-		betaGeocentric   = MMath.ArcTan(z, MMath.Sqr(x * x + y * y));
+		lambdaGeocentric = y.ArcTan(x);
+		betaGeocentric   = z.ArcTan(MMath.Sqr(x * x + y * y));
 		radiusGeocentric = MMath.Sqr(x * x + y * y + z * z);
 		return 0.0057755183 * radiusGeocentric;
 	}
@@ -1444,7 +1444,7 @@ public static partial class MEphemerides
 		if(alpha == MMath.Rad270) return -eps;
 		
 		// Länge berechnen
-		return MMath.ArcTan(MMath.Sin(alpha) * MMath.Cos(eps) + MMath.Tan(delta) * MMath.Sin(eps), MMath.Cos(alpha));
+		return (MMath.Sin(alpha) * MMath.Cos(eps) + MMath.Tan(delta) * MMath.Sin(eps)).ArcTan(MMath.Cos(alpha));
 	}
 
 	// MEphemerides.ToSideralTime(double)

@@ -157,7 +157,7 @@ public static partial class MEarth
 
 		// Winkel berechnen und liefern
 		if(d == 0.0) return 0.0;
-		return MMath.ArcTan(MMath.Sin(lamdaA - lamdaB), d).Mod(MMath.Pi2);
+		return MMath.Sin(lamdaA - lamdaB).ArcTan(d).Mod(MMath.Pi2);
 	}
 
 	// MEarth.Distance(CPolar, CPolar)
