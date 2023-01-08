@@ -80,12 +80,12 @@ public partial class MUranus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t, -0.0859,  0.0003          );
 			h += MMath.Polynome(t, -3.8179, -0.0148,  0.00003) * MMath.Sin(      m);
-			h += MMath.Polynome(t,  5.1228, -0.0105, -0.00002) * MMath.Cos(      m);
+			h += MMath.Polynome(t,  5.1228, -0.0105, -0.00002) * (      m).Cos();
 			h += MMath.Polynome(t, -0.0803,  0.0011          ) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t, -0.1905, -0.0006          ) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t, -0.1905, -0.0006          ) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,  0.0088,  0.0001          ) * MMath.Sin(3.0 * m);
-			h +=                    0.8850                     * MMath.Cos(      a);
-			h +=                    0.2153                     * MMath.Cos(      b);
+			h +=                    0.8850                     * (      a).Cos();
+			h +=                    0.2153                     * (      b).Cos();
 			j += h;
 		}
 		return j;
@@ -257,12 +257,12 @@ public partial class MUranus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t,  0.0844, -0.0006          );
 			h += MMath.Polynome(t, -0.1048,  0.0246          ) * MMath.Sin(      m);
-			h += MMath.Polynome(t, -5.1221,  0.0104,  0.00003) * MMath.Cos(      m);
+			h += MMath.Polynome(t, -5.1221,  0.0104,  0.00003) * (      m).Cos();
 			h += MMath.Polynome(t, -0.1428,  0.0005          ) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t, -0.0148, -0.0013          ) * MMath.Cos(2.0 * m);
-			h +=                    0.0055                     * MMath.Cos(3.0 * m);
-			h +=                    0.8850                     * MMath.Cos(      a);
-			h +=                    0.2153                     * MMath.Cos(      b);
+			h += MMath.Polynome(t, -0.0148, -0.0013          ) * (2.0 * m).Cos();
+			h +=                    0.0055                     * (3.0 * m).Cos();
+			h +=                    0.8850                     * (      a).Cos();
+			h +=                    0.2153                     * (      b).Cos();
 			j += h;
 		}
 		return j;

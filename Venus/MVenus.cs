@@ -78,11 +78,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t, -0.0096,  0.0002, -0.00001);
 			h += MMath.Polynome(t,  2.0009, -0.0033, -0.00001) * MMath.Sin(      m);
-			h += MMath.Polynome(t,  0.5980, -0.0104,  0.00001) * MMath.Cos(      m);
+			h += MMath.Polynome(t,  0.5980, -0.0104,  0.00001) * (      m).Cos();
 			h += MMath.Polynome(t,  0.0967, -0.0018, -0.00003) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t,  0.0913,  0.0019, -0.00002) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t,  0.0913,  0.0019, -0.00002) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,  0.0046, -0.0002          ) * MMath.Sin(3.0 * m);
-			h += MMath.Polynome(t,  0.0079,  0.0001          ) * MMath.Cos(3.0 * m);
+			h += MMath.Polynome(t,  0.0079,  0.0001          ) * (3.0 * m).Cos();
 			j += h;
 		}
 		return j;
@@ -123,11 +123,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t,  0.0099, -0.0002, -0.00001);
 			h += MMath.Polynome(t,  4.1991, -0.0121, -0.00003) * MMath.Sin(      m);
-			h += MMath.Polynome(t, -0.6095,  0.0102, -0.00002) * MMath.Cos(      m);
+			h += MMath.Polynome(t, -0.6095,  0.0102, -0.00002) * (      m).Cos();
 			h += MMath.Polynome(t,  0.2500, -0.0028, -0.00003) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t,  0.0063,  0.0025, -0.00002) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t,  0.0063,  0.0025, -0.00002) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,  0.0232, -0.0005, -0.00001) * MMath.Sin(3.0 * m);
-			h += MMath.Polynome(t,  0.0031,  0.0004          ) * MMath.Cos(3.0 * m);
+			h += MMath.Polynome(t,  0.0031,  0.0004          ) * (3.0 * m).Cos();
 			j += h;
 		}
 		return j;
@@ -195,11 +195,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t, -70.7600,  0.0002, -0.00001);
 			h += MMath.Polynome(t,   1.0282, -0.0010, -0.00001) * MMath.Sin(      m);
-			h += MMath.Polynome(t,   0.2761, -0.0060          ) * MMath.Cos(      m);
+			h += MMath.Polynome(t,   0.2761, -0.0060          ) * (      m).Cos();
 			h += MMath.Polynome(t,  -0.0438, -0.0023,  0.00002) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t,   0.1660, -0.0037, -0.00004) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t,   0.1660, -0.0037, -0.00004) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,   0.0036,  0.0001          ) * MMath.Sin(3.0 * m);
-			h += MMath.Polynome(t,  -0.0011,  0.0000,  0.00001) * MMath.Cos(3.0 * m);
+			h += MMath.Polynome(t,  -0.0011,  0.0000,  0.00001) * (3.0 * m).Cos();
 			j += h;
 		}
 
@@ -210,9 +210,9 @@ public partial class MVenus
 		// Elongationswinkel berechnen
 		h  = MMath.Polynome(t, 46.3173,  0.0001);
 		h += MMath.Polynome(t,  0.6916, -0.0024) * MMath.Sin(      m);
-		h += MMath.Polynome(t,  0.6676, -0.0045) * MMath.Cos(      m);
+		h += MMath.Polynome(t,  0.6676, -0.0045) * (      m).Cos();
 		h += MMath.Polynome(t,  0.0309, -0.0002) * MMath.Sin(2.0 * m);
-		h += MMath.Polynome(t,  0.0036, -0.0001) * MMath.Cos(2.0 * m);
+		h += MMath.Polynome(t,  0.0036, -0.0001) * (2.0 * m).Cos();
 
 		// Rückgabe
 		return(j, h);
@@ -261,11 +261,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t, 70.7462,  0.0000, -0.00001);
 			h += MMath.Polynome(t,  1.1218, -0.0025, -0.00001) * MMath.Sin(      m);
-			h += MMath.Polynome(t,  0.4538, -0.0066          ) * MMath.Cos(      m);
+			h += MMath.Polynome(t,  0.4538, -0.0066          ) * (      m).Cos();
 			h += MMath.Polynome(t,  0.1320,  0.0020, -0.00003) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t, -0.0702,  0.0022,  0.00004) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t, -0.0702,  0.0022,  0.00004) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,  0.0062, -0.0001          ) * MMath.Sin(3.0 * m);
-			h += MMath.Polynome(t,  0.0015,  0.0000, -0.00001) * MMath.Cos(3.0 * m);
+			h += MMath.Polynome(t,  0.0015,  0.0000, -0.00001) * (3.0 * m).Cos();
 			j += h;
 		}
 
@@ -276,9 +276,9 @@ public partial class MVenus
 		// Elongationswinkel berechnen
 		h  =                   46.3245;
 		h += MMath.Polynome(t, -0.5366, -0.0003,  0.00001) * MMath.Sin(      m);
-		h += MMath.Polynome(t,  0.3097,  0.0016, -0.00001) * MMath.Cos(      m);
+		h += MMath.Polynome(t,  0.3097,  0.0016, -0.00001) * (      m).Cos();
 		h +=                   -0.0163                     * MMath.Sin(2.0 * m);
-		h += MMath.Polynome(t, -0.0075,  0.0001          ) * MMath.Cos(2.0 * m);
+		h += MMath.Polynome(t, -0.0075,  0.0001          ) * (2.0 * m).Cos();
 
 		// Rückgabe
 		return(j, h);
@@ -554,11 +554,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t, 21.0623,  0.0000, -0.00001);
 			h += MMath.Polynome(t,  1.9913, -0.0040, -0.00001) * MMath.Sin(      m);
-			h += MMath.Polynome(t, -0.0407, -0.0077          ) * MMath.Cos(      m);
+			h += MMath.Polynome(t, -0.0407, -0.0077          ) * (      m).Cos();
 			h += MMath.Polynome(t,  0.1351, -0.0009, -0.00004) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t,  0.0303,  0.0019          ) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t,  0.0303,  0.0019          ) * (2.0 * m).Cos();
 			h += MMath.Polynome(t,  0.0089, -0.0002          ) * MMath.Sin(3.0 * m);
-			h += MMath.Polynome(t,  0.0043,  0.0001          ) * MMath.Cos(3.0 * m);
+			h += MMath.Polynome(t,  0.0043,  0.0001          ) * (3.0 * m).Cos();
 			j += h;
 		}
 		return j;
@@ -599,11 +599,11 @@ public partial class MVenus
 			// Korrektur berechnen und anwenden
 			h  = MMath.Polynome(t,-21.0672,  0.0002, -0.00001);
 			h += MMath.Polynome(t,  1.9396, -0.0029, -0.00001) * MMath.Sin(      m);
-			h += MMath.Polynome(t,  1.0727, -0.0102          ) * MMath.Cos(      m);
+			h += MMath.Polynome(t,  1.0727, -0.0102          ) * (      m).Cos();
 			h += MMath.Polynome(t,  0.0404, -0.0023, -0.00001) * MMath.Sin(2.0 * m);
-			h += MMath.Polynome(t,  0.1305, -0.0004, -0.00003) * MMath.Cos(2.0 * m);
+			h += MMath.Polynome(t,  0.1305, -0.0004, -0.00003) * (2.0 * m).Cos();
 			h += MMath.Polynome(t, -0.0007, -0.0002          ) * MMath.Sin(3.0 * m);
-			h +=                    0.0098                     * MMath.Cos(3.0 * m);
+			h +=                    0.0098                     * (3.0 * m).Cos();
 			j += h;
 		}
 		return j;

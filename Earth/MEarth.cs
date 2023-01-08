@@ -153,7 +153,7 @@ public static partial class MEarth
 	public static double Direction(double lamdaA, double phiA, double lamdaB, double phiB)
 	{
 		// Lokale Felder einrichten
-		double d = MMath.Cos(phiA) * MMath.Tan(phiB) - MMath.Sin(phiA) * MMath.Cos(lamdaA - lamdaB);
+		double d = phiA.Cos() * MMath.Tan(phiB) - MMath.Sin(phiA) * (lamdaA - lamdaB).Cos();
 
 		// Winkel berechnen und liefern
 		if(d == 0.0) return 0.0;
@@ -189,9 +189,9 @@ public static partial class MEarth
 		double sinF = MMath.Sin(f);
 		double sinG = MMath.Sin(g);
 		double sinL = MMath.Sin(l);
-		double cosF = MMath.Cos(f);
-		double cosG = MMath.Cos(g);
-		double cosL = MMath.Cos(l);
+		double cosF = f.Cos();
+		double cosG = g.Cos();
+		double cosL = l.Cos();
 
 		// Koeffizienten berechnen
 		double s = sinG * sinG * cosL * cosL + cosF * cosF * sinL * sinL;
@@ -217,7 +217,7 @@ public static partial class MEarth
 	public static double DistanceFromCenter(double phi)
 	{
 		// Rückgabe
-		return 6378.14 * (0.9983271 + 0.0016764 * MMath.Cos(2.0 * phi) - 0.0000035 * MMath.Cos(4.0 * phi));
+		return 6378.14 * (0.9983271 + 0.0016764 * (2.0 * phi).Cos() - 0.0000035 * (4.0 * phi).Cos());
 	}
 
 	// MEarth.DraconicYear()
@@ -396,7 +396,7 @@ public static partial class MEarth
 	{
 		// Lokale Felder einrichten
 		double e = 0.081819221;
-		double n = 6378.14 * MMath.Cos(phi);
+		double n = 6378.14 * phi.Cos();
 		double h = e * MMath.Sin(phi);
 		double d = MMath.Sqr(1.0 - h * h);
 

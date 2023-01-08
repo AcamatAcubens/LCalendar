@@ -1,5 +1,9 @@
 # ToDo
 
+## ENationalHoliday
+[Siehe](https://de.wikipedia.org/wiki/Liste_von_Nationalfeiertagen)
+
+
 ## MCalendar
 
 `public static double ToJdn(this DateOnly item)`  
@@ -29,3 +33,20 @@ Siehe: Jean Meeus – Astronomical Algorithms – Chapter 17 – Angular Separat
 [Dokumentation](https://handwiki.org/wiki/Astronomy:Angular_distance)  
 Verwendung der Winkelwandelungsfunktionen prüfen.  
 Verlagerung nach Acamat.LMath.
+
+## MGregorianHoliday
+
+· Überladungsline für die oster-bezogenen Feiertage mit einem Osterdatum
+· Überladungsline für die advent-bezogenen Feiertage mit einem Weihnachtsdatum
+
+`public static double NewYear(int year)`  
+Liefert Neujahr. Ist der 01.01. des Kalenderjahres.
+
+`public static double Epiphany(int year)`  
+Liefert Heilige Drei Könige. Ist der 06.01. des Kalenderjahres.
+
+`public static double FridayThe13th(double d)`  
+Liefert den nächsten Freitag, den 13.
+
+`public static double WorkersDay(int year)`  
+Liefert den Maifeiertag. Ist der 01.05. des Kalenderjahres.

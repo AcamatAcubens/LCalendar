@@ -200,7 +200,7 @@ public static partial class MSun
 		double h    = 0.0;                         //
 		double H    = 0.0;                         //
 		double sinP = MMath.Sin(phi);              // Breitensinus
-		double cosP = MMath.Cos(phi);              // Breitencosinus
+		double cosP = phi.Cos();                   // Breitencosinus
 
 		// Position für nachfolgenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn + 1.0);
@@ -222,7 +222,7 @@ public static partial class MSun
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
-		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
+		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * dP.Cos());
 		if((cosH).Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = cosH.ArcCos();
@@ -242,8 +242,8 @@ public static partial class MSun
 			a  = MMath.Bessel(m, aM, a0, aP);
 			d  = MMath.Bessel(m, dM, d0, dP);
 			H  = t0 + 6.300388093 * m - lambda - a;
-			h  = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
-			dm = (h - height) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
+			h  = (sinP * MMath.Sin(d) + cosP * d.Cos() * H.Cos()).ArcSin();
+			dm = (h - height) / (MMath.Pi2 * d.Cos() * cosP * MMath.Sin(H));
 			m += dm;
 		}
 
@@ -311,7 +311,7 @@ public static partial class MSun
 		double h    = 0.0;                         //
 		double H    = 0.0;                         //
 		double sinP = MMath.Sin(phi);              // Breitensinus
-		double cosP = MMath.Cos(phi);              // Breitencosinus
+		double cosP = phi.Cos();                   // Breitencosinus
 
 		// Position für nachfolgenden Tag berechnen
 		l = MSun.Longitude(EPrecision.Low, jdn + 1.0);
@@ -333,7 +333,7 @@ public static partial class MSun
 		double dM = MEphemerides.ToDelta(l, 0.0, EObliquity.Mean, jdn - 1.0);
 
 		// Stundenwinkel berechnen und prüfen
-		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * MMath.Cos(dP));
+		double cosH = (MMath.Sin(height) - sinP * MMath.Sin(dP)) / (cosP * dP.Cos());
 		if(cosH.Abs() > 1.0)
 			return(cosH < 1.0 ? EEventType.AlwaysAboveHorizon : EEventType.AlwaysBeneathHorizon, null);
 		H = cosH.ArcCos();
@@ -353,8 +353,8 @@ public static partial class MSun
 			a  = MMath.Bessel(m, aM, a0, aP);
 			d  = MMath.Bessel(m, dM, d0, dP);
 			H  = t0 + 6.300388093 * m - lambda - a;
-			h  = (sinP * MMath.Sin(d) + cosP * MMath.Cos(d) * MMath.Cos(H)).ArcSin();
-			dm = (h - height) / (MMath.Pi2 * MMath.Cos(d) * cosP * MMath.Sin(H));
+			h  = (sinP * MMath.Sin(d) + cosP * d.Cos() * H.Cos()).ArcSin();
+			dm = (h - height) / (MMath.Pi2 * d.Cos() * cosP * MMath.Sin(H));
 			m  += dm;
 		}
 
@@ -483,34 +483,34 @@ public static partial class MSun
 		// Lokale Felder einrichten
 		double t  = (jd - MCalendar.Jdn20000101) / 36525.0;
 		double w  = MMath.ToRad(35999.373 * t - 2.47);
-		double dL = 1.0 + 0.0334 * MMath.Cos(w) + 0.0007 * MMath.Cos(2.0 * w);
+		double dL = 1.0 + 0.0334 * w.Cos() + 0.0007 * (2.0 * w).Cos();
 		double s  = 0.0;
 
 		// Korrektur berechnen und anwenden
-		s += 485.0 * MMath.Cos(MMath.ToRad(324.96 +   1934.136 * t));
-		s += 203.0 * MMath.Cos(MMath.ToRad(337.23 +  32964.467 * t));
-		s += 199.0 * MMath.Cos(MMath.ToRad(342.08 +     20.186 * t));
-		s += 182.0 * MMath.Cos(MMath.ToRad( 27.85 + 445267.112 * t));
-		s += 156.0 * MMath.Cos(MMath.ToRad( 73.14 +  45036.886 * t));
-		s += 136.0 * MMath.Cos(MMath.ToRad(171.52 +  22518.443 * t));
-		s +=  77.0 * MMath.Cos(MMath.ToRad(222.54 +  65928.934 * t));
-		s +=  74.0 * MMath.Cos(MMath.ToRad(296.72 +   3034.906 * t));
-		s +=  70.0 * MMath.Cos(MMath.ToRad(243.58 +   9037.513 * t));
-		s +=  58.0 * MMath.Cos(MMath.ToRad(119.81 +  33718.147 * t));
-		s +=  52.0 * MMath.Cos(MMath.ToRad(297.17 +    150.678 * t));
-		s +=  50.0 * MMath.Cos(MMath.ToRad( 21.02 +   2281.226 * t));
-		s +=  45.0 * MMath.Cos(MMath.ToRad(247.54 +  29929.562 * t));
-		s +=  44.0 * MMath.Cos(MMath.ToRad(325.15 +  31555.956 * t));
-		s +=  29.0 * MMath.Cos(MMath.ToRad( 60.93 +   4443.417 * t));
-		s +=  18.0 * MMath.Cos(MMath.ToRad(155.12 +  67555.328 * t));
-		s +=  17.0 * MMath.Cos(MMath.ToRad(288.79 +   4562.452 * t));
-		s +=  16.0 * MMath.Cos(MMath.ToRad(198.04 +  62894.029 * t));
-		s +=  14.0 * MMath.Cos(MMath.ToRad(199.76 +  31436.921 * t));
-		s +=  12.0 * MMath.Cos(MMath.ToRad( 95.39 +  14577.848 * t));
-		s +=  12.0 * MMath.Cos(MMath.ToRad(287.11 +  31931.756 * t));
-		s +=  12.0 * MMath.Cos(MMath.ToRad(320.81 +  34777.259 * t));
-		s +=   9.0 * MMath.Cos(MMath.ToRad(227.73 +   1222.114 * t));
-		s +=   8.0 * MMath.Cos(MMath.ToRad( 15.45 +  16859.074 * t));
+		s += 485.0 * (MMath.ToRad(324.96 +   1934.136 * t)).Cos();
+		s += 203.0 * (MMath.ToRad(337.23 +  32964.467 * t)).Cos();
+		s += 199.0 * (MMath.ToRad(342.08 +     20.186 * t)).Cos();
+		s += 182.0 * (MMath.ToRad( 27.85 + 445267.112 * t)).Cos();
+		s += 156.0 * (MMath.ToRad( 73.14 +  45036.886 * t)).Cos();
+		s += 136.0 * (MMath.ToRad(171.52 +  22518.443 * t)).Cos();
+		s +=  77.0 * (MMath.ToRad(222.54 +  65928.934 * t)).Cos();
+		s +=  74.0 * (MMath.ToRad(296.72 +   3034.906 * t)).Cos();
+		s +=  70.0 * (MMath.ToRad(243.58 +   9037.513 * t)).Cos();
+		s +=  58.0 * (MMath.ToRad(119.81 +  33718.147 * t)).Cos();
+		s +=  52.0 * (MMath.ToRad(297.17 +    150.678 * t)).Cos();
+		s +=  50.0 * (MMath.ToRad( 21.02 +   2281.226 * t)).Cos();
+		s +=  45.0 * (MMath.ToRad(247.54 +  29929.562 * t)).Cos();
+		s +=  44.0 * (MMath.ToRad(325.15 +  31555.956 * t)).Cos();
+		s +=  29.0 * (MMath.ToRad( 60.93 +   4443.417 * t)).Cos();
+		s +=  18.0 * (MMath.ToRad(155.12 +  67555.328 * t)).Cos();
+		s +=  17.0 * (MMath.ToRad(288.79 +   4562.452 * t)).Cos();
+		s +=  16.0 * (MMath.ToRad(198.04 +  62894.029 * t)).Cos();
+		s +=  14.0 * (MMath.ToRad(199.76 +  31436.921 * t)).Cos();
+		s +=  12.0 * (MMath.ToRad( 95.39 +  14577.848 * t)).Cos();
+		s +=  12.0 * (MMath.ToRad(287.11 +  31931.756 * t)).Cos();
+		s +=  12.0 * (MMath.ToRad(320.81 +  34777.259 * t)).Cos();
+		s +=   9.0 * (MMath.ToRad(227.73 +   1222.114 * t)).Cos();
+		s +=   8.0 * (MMath.ToRad( 15.45 +  16859.074 * t)).Cos();
 		return 0.00001 * s / dL;
 	}
 

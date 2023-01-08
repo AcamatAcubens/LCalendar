@@ -78,11 +78,11 @@ public static partial class MMoon
 
 			// Viertelkorrektur berechnen
 			h +=  0.00306;
-			h += -0.00038 * e1 * MMath.Cos(m);
-			h +=  0.00026      * MMath.Cos(a);
-			h += -0.00002      * MMath.Cos(a - m);
-			h +=  0.00002      * MMath.Cos(a + m);
-			h +=  0.00002      * MMath.Cos(2.0 * f);
+			h += -0.00038 * e1 * m.Cos();
+			h +=  0.00026      * a.Cos();
+			h += -0.00002      * (a - m).Cos();
+			h +=  0.00002      * (a + m).Cos();
+			h +=  0.00002      * (2.0 * f).Cos();
 
 			// Störungen durch Planeten berechnen
 			h += 0.000325 * MMath.Sin(MMath.ToRad(299.77 +  0.107408 * k - 0.009173 * t * t));
@@ -272,11 +272,11 @@ public static partial class MMoon
 
 			// Viertelkorrektur berechnen
 			h -=  0.00306;
-			h -= -0.00038 * e1 * MMath.Cos(m);
-			h -=  0.00026      * MMath.Cos(a);
-			h -= -0.00002      * MMath.Cos(a - m);
-			h -=  0.00002      * MMath.Cos(a + m);
-			h -=  0.00002      * MMath.Cos(2.0 * f);
+			h -= -0.00038 * e1 * m.Cos();
+			h -=  0.00026      * a.Cos();
+			h -= -0.00002      * (a - m).Cos();
+			h -=  0.00002      * (a + m).Cos();
+			h -=  0.00002      * (2.0 * f).Cos();
 
 			// Störungen durch Planeten berechnen
 			h += 0.000325 * MMath.Sin(MMath.ToRad(299.77 +  0.107408 * k - 0.009173 * t * t));
@@ -419,7 +419,7 @@ public static partial class MMoon
 		double lamS = MSun .Longitude(EPrecision.Low, jd);
 
 		// Geozentrische Elongation berechnen
-		double cosPsi = MMath.Cos(betM) * MMath.Cos(lamM - lamS);
+		double cosPsi = betM.Cos() * (lamM - lamS).Cos();
 		double sinPsi = MMath.Sin(cosPsi.ArcCos());
 
 		// Radii berechnen

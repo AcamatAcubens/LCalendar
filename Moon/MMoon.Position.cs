@@ -160,10 +160,10 @@ public static partial class MMoon
 		double p = 0.9508;
 
 		// Terme aufsummieren
-		p += 0.0518 * MMath.Cos(MMath.ToRad(134.9 + 477198.85 * t));
-		p += 0.0095 * MMath.Cos(MMath.ToRad(259.2 - 413335.38 * t));
-		p += 0.0078 * MMath.Cos(MMath.ToRad(235.7 + 890534.23 * t));
-		p += 0.0028 * MMath.Cos(MMath.ToRad(269.9 + 954397.70 * t));
+		p += 0.0518 * (MMath.ToRad(134.9 + 477198.85 * t)).Cos();
+		p += 0.0095 * (MMath.ToRad(259.2 - 413335.38 * t)).Cos();
+		p += 0.0078 * (MMath.ToRad(235.7 + 890534.23 * t)).Cos();
+		p += 0.0028 * (MMath.ToRad(269.9 + 954397.70 * t)).Cos();
 		return (1.0 / MMath.Sin(MMath.ToRad(p))) * (6378.140 / 149597870.700);
 	}
 }
